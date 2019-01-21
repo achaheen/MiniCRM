@@ -1,14 +1,16 @@
-$topnav-background-color: #222;
+$topnav-background-color: #0e416b;
 :host {
     .navbar {
-        background-color: $topnav-background-color;
+        background: linear-gradient(to right, #0e416b, #1f68ad);
+      box-shadow: 0px 2px 11px grey;
+        height: 65px;
         .navbar-brand {
             color: #fff;
         }
         .nav-item > a {
-            color: #999;
+            color: #fff;
             &:hover {
-                color: #fff;
+                color: #d0d0d0;
             }
         }
     }
@@ -35,4 +37,9 @@ $topnav-background-color: #222;
             }
         }
     }
+
+  .header-logo{
+
+
+  }
 }

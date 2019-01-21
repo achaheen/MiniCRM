@@ -1,11 +1,12 @@
-$topnav-background-color: #222;
+$topnav-background-color: #178dd9;
 .sidebar {
+  box-shadow: 2px 0px 8px grey;
     border-radius: 0;
     position: fixed;
     z-index: 1000;
-    top: 56px;
+    top: 65px;
     left: 235px;
-    width: 235px;
+    width: 185px;
     margin-left: -235px;
     margin-bottom: 48px;
     border: none;
@@ -27,7 +28,7 @@ $topnav-background-color: #222;
             background: $topnav-background-color;
             border: 0;
             border-radius: 0;
-            color: #999;
+            color: #fff;
             text-decoration: none;
             .fa {
                 margin-right: 10px;
@@ -131,8 +132,9 @@ $topnav-background-color: #222;
 }
 @media screen and (max-width: 992px) {
     .sidebar {
-        top: 54px;
+        top: 65px;
         left: 0px;
+
     }
 }
 @media print {
@@ -161,13 +163,14 @@ $topnav-background-color: #222;
 }
 
 .toggle-button {
+  box-shadow: 2px 0px 8px grey;
     position: fixed;
-    width: 236px;
+    width: 185px;
     cursor: pointer;
     padding: 12px;
     bottom: 0;
-    color: #999;
-    background: #212529;
+    color: #fff;
+    background: #0e416b;
     i {
         font-size: 23px;
     }
