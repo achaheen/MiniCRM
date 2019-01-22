@@ -23,7 +23,6 @@
     "@angular/platform-browser": "7.0.2",
     "@angular/platform-browser-dynamic": "7.0.2",
     "@angular/router": "7.0.2",
-    "@auth0/angular-jwt": "^2.1.0",
     "@ng-bootstrap/ng-bootstrap": "4.0.0",
     "@ngx-translate/core": "11.0.0",
     "@ngx-translate/http-loader": "4.0.0",

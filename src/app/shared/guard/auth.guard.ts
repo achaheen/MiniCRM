@@ -1,20 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {BasicAuthGuard} from "./basic-auth-guard";
+import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable()
-export class AuthGuard extends BasicAuthGuard {
-  constructor(router: Router, jwtHelper: JwtHelperService) {
-    super(router, jwtHelper);
-  }
+export class AuthGuard implements CanActivate {
+    constructor(private router: Router) {}
 
-  canActivate() {
-    if (this.isLoggedIn()) {
-      return true;
+    canActivate() {
+        if (localStorage.getItem('isLoggedin')) {
+            return true;
+        }
+
+        this.router.navigate(['/login']);
+        return false;
     }
-
-    this.router.navigate(['/login']);
-    return false;
-  }
 }
