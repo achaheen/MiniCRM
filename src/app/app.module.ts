@@ -30,6 +30,7 @@ export const createTranslateLoader = (http: HttpClient) => {
  * @returns {string}
  */
 export function tokenGetter() {
+  console.log('validating token');
   return localStorage.getItem(environment.tokenName);
 }
 
@@ -50,7 +51,9 @@ export function tokenGetter() {
       config: {
         tokenGetter: tokenGetter,
         throwNoTokenError: false,
-        skipWhenExpired: true,
+        whitelistedDomains: ['localhost:8080'],
+        skipWhenExpired: true
+
       }
     }),
     AppRoutingModule
