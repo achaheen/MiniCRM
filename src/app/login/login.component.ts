@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       console.log(`user logged in successfully ${JSON.stringify(data)}`);
       const response = data as AuthResponse;
-
       localStorage.setItem(environment.tokenName, response.token);
       localStorage.setItem(environment.currentUser, JSON.stringify(response.user));
       localStorage.setItem(environment.authorities, JSON.stringify(response.user.authorities));
@@ -52,6 +51,7 @@ export class LoginComponent implements OnInit {
     }, error1 => {
       this.loading = false;
       // auth failed show some errors to user
+      console.log('Auth failed!');
     });
   }
 }
