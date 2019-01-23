@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserHolder} from "../model/user-holder";
 import {Observable} from "rxjs/internal/Observable";
+import {User} from "../model/user";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class UsersService {
   }
 
   all() {
-    return this.httpClient.get(this.baseURL + "all");
+    return this.httpClient.get<User[]>(this.baseURL + "all");
   }
 
   validate(username: string) {

@@ -9,9 +9,9 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
-import {NgTableComponent} from './ng-table/ng-table.component';
 import {JwtModule} from "@auth0/angular-jwt";
 import {environment} from "../environments/environment";
+
 
 // AoT requires an exported function for factories
 export const createTranslateLoader = (http: HttpClient) => {
@@ -58,7 +58,7 @@ export function tokenGetter() {
     }),
     AppRoutingModule
   ],
-  declarations: [AppComponent, NgTableComponent],
+  declarations: [AppComponent],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
