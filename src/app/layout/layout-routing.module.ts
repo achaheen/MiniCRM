@@ -16,7 +16,10 @@ const routes: Routes = [
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-            { path: 'users', loadChildren: './users/users.module#UsersModule' }
+            { path: 'users', loadChildren: './users/users.module#UsersModule' },
+            { path: 'roles', loadChildren: './roles/roles.module#RolesModule' },
+            { path: 'groups', loadChildren: './groups/groups.module#GroupsModule' }
+
                    ]
     }
 ];
