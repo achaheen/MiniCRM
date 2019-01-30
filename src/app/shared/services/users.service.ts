@@ -2,8 +2,11 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserHolder} from "../model/user-holder";
-import {Observable} from "rxjs/internal/Observable";
 import {User} from "../model/user";
+import {catchError} from "rxjs/operators";
+import {Observable, of} from "rxjs";
+import {Group} from "../model/group";
+import {Role} from "../model/role";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +20,7 @@ export class UsersService {
   }
 
    activeUsers()  {
-    return this.httpClient.get(this.baseURL + "active");
+    return this.httpClient.get<User[]>(this.baseURL + "active");
   }
 
   all() {
@@ -29,7 +32,7 @@ export class UsersService {
   }
 
   getUserRoles(userId: number) {
-    return this.httpClient.get(this.baseURL + "roles/" + userId);
+    return this.httpClient.get<Role[]>(this.baseURL + "roles/" + userId);
   }
 
   getUserPreferences(userId: number) {
@@ -41,7 +44,7 @@ export class UsersService {
   }
 
   getUserGroups(userId: number) {
-    return this.httpClient.get(this.baseURL + "groups/" + userId);
+    return this.httpClient.get<Group[]>(this.baseURL + "groups/" + userId);
   }
 
   enableUser(userId: number) {
@@ -53,9 +56,11 @@ export class UsersService {
   }
 
   create(userHolder: UserHolder) {
-    return this.httpClient.post(this.baseURL + "create", userHolder);
+    return this.httpClient.post<User>(this.baseURL + "create", userHolder);
   }
   edit(userHolder: UserHolder) {
-    return this.httpClient.post(this.baseURL + "edit", userHolder);
+    return this.httpClient.post<User>(this.baseURL + "edit", userHolder);
   }
+
+
 }

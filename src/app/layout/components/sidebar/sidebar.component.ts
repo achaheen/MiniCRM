@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
+
     constructor(private translate: TranslateService, public router: Router) {
         this.translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa', 'de']);
         this.translate.setDefaultLang('en');
@@ -34,7 +35,7 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.isActive = false;
-        this.collapsed = false;
+        this.collapsed = true;
         this.showMenu = '';
         this.pushRightClass = 'push-right';
     }

@@ -1,30 +1,39 @@
-<h3>Users Module</h3>
 
-<p-table #dt [value]="users" [paginator]="true" [rows]="10" selectionMode="single" [globalFilterFields]="['userID','firstName','lastName','staffID','department']">
+<p-toast [style]="{marginTop: '35px'}"></p-toast>
 
-  <ng-template pTemplate="caption">
-    <div style="text-align: right">
+
+<p-blockUI [blocked]="blocked"></p-blockUI>
+
+<p-table #dt [value]="users" [paginator]="true" class="dt-selection"
+         [rows]="8" selectionMode="single"
+         [(selection)]="selectedUser"
+         dataKey="userID"
+         [globalFilterFields]="['userID','firstName','lastName','staffID','department']">
+
+  <ng-template pTemplate="caption"  class="rounded-top">
+
+    <div style="text-align: right" >
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+      <input type="text" pInputText size="50" placeholder=" Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">
     </div>
   </ng-template>
 
-  <ng-template pTemplate="header">
+   <ng-template pTemplate="header">
     <tr>
-      <th *ngFor="let col of cols">
+      <th *ngFor="let col of cols" [pSortableColumn]="col.field">
         {{col.header}}
+        <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
       </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-user>
-    <tr>
-      <td *ngFor="let col of cols">
-
+    <tr [pSelectableRow]="user">
+      <td *ngFor="let col of cols" >
         <div *ngIf="col.field ==='creationDate'">
           {{user[col.field] | date}}
         </div>
 
-        <div *ngIf="col.field !='creationDate'">
+        <div *ngIf="col.field !='creationDate'" class="{{col.field === 'enabled' ? ( user['enabled'] === true ? 'Active' : 'notActive') : ''}}">
           {{user[col.field]}}
         </div>
       </td>
@@ -32,6 +41,101 @@
   </ng-template>
 </p-table>
 
-<br/>
 
-<button pButton type="button" label="Primary" class="ui-button-rounded"></button>
+<p-dialog #editDialog header="{{this.dialogType != 'New' ? 'Update User' : 'Create New User'}}" [(visible)]="display" [style]="{width: '900px'}" *ngIf="selectedUser != null" dismissableMask="true">
+  <p-header [title]="">
+        {{this.disableForEdit}}
+  </p-header>
+
+
+<form [formGroup]="this.userForm" (ngSubmit)="onSubmit()">
+<table class="formTB">
+  <tr><td colspan="6">
+
+    <p-message severity="error" text="userID is required" *ngIf="!userForm.controls['userID'].valid&&userForm.controls['userID'].dirty"></p-message>
+    <p-message severity="error" text="staffID is required" *ngIf="!userForm.controls['staffID'].valid&&userForm.controls['staffID'].dirty"></p-message>
+<!--    <p-message severity="error" text="title is required" *ngIf="!userForm.controls['title'].valid&&userForm.controls['title'].dirty"></p-message>-->
+    <p-message severity="error" text="firstName is required" *ngIf="!userForm.controls['firstName'].valid&&userForm.controls['firstName'].dirty"></p-message>
+    <!--<p-message severity="error" text="department is required" *ngIf="!userForm.controls['department'].valid&&userForm.controls['department'].dirty"></p-message>-->
+    <p-message severity="error" text="userType is required" *ngIf="!userForm.controls['userType'].valid&&userForm.controls['userType'].dirty"></p-message>
+  <!--  <p-message severity="error" text="Enabled is required" *ngIf="!userForm.controls['enabled'].valid&&userForm.controls['enabled'].dirty"></p-message>-->
+    <p-message severity="error" text="email is required" *ngIf="!userForm.controls['email'].valid&&userForm.controls['email'].dirty"></p-message>
+    <p-message severity="error" text="password is required" *ngIf="!userForm.controls['password'].valid&&userForm.controls['password'].dirty"></p-message>
+
+  </td></tr>
+  <tr>
+    <td class="grid-label">User ID </td>
+    <td class="grid-input"><input id="userID" type="text" pInputText name="userID"  [attr.disabled]="this.disableForEdit ? '' : null" formControlName="userID" placeholder="Required"></td>
+    <td class="grid-label">Staff No</td>
+    <td class="grid-input"><input id="staffID" type="text"  pInputText name="staffID" [attr.disabled]="this.disableForEdit ? '' : null" formControlName="staffID" placeholder="Required"></td>
+    <td class="grid-label">Title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="grid-input"><input id="title" type="text"  pInputText name="title" [attr.disabled]="this.disableForEdit ? '' : null"  formControlName="title"></td>
+  </tr>
+
+  <tr>
+    <td class="grid-label">First Name</td>
+    <td class="grid-input"><input id="firstName" type="text" size="20" pInputText name="firstName" formControlName="firstName" placeholder="Required"></td>
+    <td class="grid-label">Last Name </td>
+    <td class="grid-input"><input id="lastName" type="text" size="20" pInputText name="lastName" formControlName="lastName" placeholder="Required"></td>
+    <td class="grid-label">E-Mail &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+    <td class="grid-input"><input id="email" type="text" size="20" pInputText name="email" formControlName="email" placeholder="Required"></td>
+  </tr>
+
+  <tr>
+    <td class="grid-label">Department</td>
+    <td class="grid-input"><input id="department" type="text" size="20" pInputText name="department" formControlName="department"></td>
+     <td class="grid-label">UserType </td>
+      <td class="grid-input">
+      <div style="float: left;padding-right: 15px;"> <p-radioButton name="groupname" value="ldap"  (onClick)="togglePassword()" [disabled]="this.disableForEdit" formControlName="userType" placeholder="Required" ></p-radioButton> &nbsp; Ldap</div>
+      <div style="float: left;padding-right: 15px;"> <p-radioButton name="groupname" value="system" (onClick)="togglePassword()" [disabled]="this.disableForEdit" formControlName="userType" placeholder="Required" ></p-radioButton> &nbsp; System</div>
+    </td>
+    <td class="grid-label">Enabled</td>
+    <td class="grid-input"><p-checkbox binary="true" name="enabled" formControlName="enabled"  placeholder="Required" ></p-checkbox></td>
+
+  </tr>
+  <tr>
+
+
+    <td class="grid-label" [hidden]="disablePassword">Password</td>
+    <td class="grid-input"> <input type="password" pPassword [hidden]="disablePassword"  formControlName="password" placeholder="******" /></td>
+
+
+  </tr>
+
+
+</table>
+
+  <p-fieldset legend="User Roles And Groups" >
+  <table>
+  <tr>
+    <td class="grid-label">User Roles</td>
+    <td colspan="4">
+      <p-listbox id="rolesListBox" [options]="userRoles" [(ngModel)]="selectedUserRoles" multiple="multiple" filter="filter" checkbox="checkbox" optionLabel="role" [ngModelOptions]="{standalone: true}">
+      </p-listbox>
+    </td>
+
+    <td class="grid-label">User Groups</td>
+    <td colspan="4">
+      <p-listbox id="groupsListBox" [options]="userGroups" [(ngModel)]="selectedUserGroups" multiple="multiple" filter="filter" checkbox="checkbox" optionLabel="groupName" [ngModelOptions]="{standalone: true}">
+      </p-listbox>
+    </td>
+  </tr>
+  </table>
+  </p-fieldset>
+
+  <div style="float: right">
+        <button type="submit" pButton icon="{{this.dialogType != 'New' ? 'pi pi-pencil' : 'pi pi-user-plus'}}" class="ui-button-rounded"  label="{{this.dialogType != 'New' ? 'Update User' : 'Add User'}}"  [disabled]="!this.userForm.valid"></button>
+    </div>
+  </form>
+
+</p-dialog>
+
+
+<p-panel class="btnPanel no_style">
+<button type="button" (click)="showDialog('New')"
+        pButton icon="pi pi-user-plus" class="ui-button-rounded" label="Create User"></button>
+
+<button type="button" (click)="showDialog('Edit')" [disabled]="(selectedUser=== null || selectedUser.userID === undefined)? true : false"
+        pButton icon="pi pi-pencil" class="ui-button-rounded" label="Edit User"></button>
+
+</p-panel>

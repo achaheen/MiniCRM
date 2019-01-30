@@ -10,3 +10,89 @@
         display: none !important;
     }
 }
+
+body .ui-button{
+  margin: 10px 5px !important;
+}
+
+body .ui-table .ui-table-caption {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+}
+.ui-table .ui-paginator-bottom{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+}
+.no_style .ui-panel-titlebar, .no_style .ui-panel-content{
+  border: none !important;
+ // padding: initial !important;
+  background-color: initial !important;
+  color: initial !important;
+  border-top-left-radius: initial !important;
+  border-top-right-radius: initial !important;
+  border-bottom-left-radius: initial !important;
+  border-bottom-right-radius: initial !important;
+}
+
+
+.grid-input {
+  line-height: 15px;
+  margin-right:5px;
+}
+.grid-label{
+  margin-top: 3px;
+  font-weight: 600;
+  padding: 0PX 18PX 0PX 17PX;
+}
+
+.p-grid{
+  margin-bottom: 6px !important;
+  margin-top: auto !important;
+}
+
+.dt-selection tr.ui-state-highlight{
+
+  background-color: #dae8ff !important;
+  color: #000000 !important;
+}
+
+.formTB{
+  border-collapse:separate;
+  border-spacing: 0 1em;
+}
+
+
+.Active{
+
+}
+
+.notActive {
+  color: #e02365;
+  font-weight: bold;
+}
+
+/*
+#rolesListBox :after , #rolesListBox :before{
+  content: none;
+}
+*/
+
+div.ui-listbox{
+  width: 265px !important;
+  height: 160px !important;
+}
+
+.ui-fieldset legend{
+
+  width: auto !important;
+}
+
+
+body .ui-message.ui-message-error{
+
+  width: 281px;
+}

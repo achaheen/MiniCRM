@@ -8,9 +8,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  collapedSideBar: boolean;
+  collapedSideBar: boolean = true;
 
   constructor() {
+
   }
 
   ngOnInit() {

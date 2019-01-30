@@ -17,7 +17,7 @@ export interface User {
   staffID?: string;
   systemUser?: boolean;
   title?: string;
-  userID?: string;
+  userID?: number;
   authorities?: Permissions[];
   preferences?: Userpreferences;
 

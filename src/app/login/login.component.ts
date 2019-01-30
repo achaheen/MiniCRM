@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(environment.currentUser, JSON.stringify(response.user));
       localStorage.setItem(environment.authorities, JSON.stringify(response.user.authorities));
 
-      this.router.navigate(['blank-page']);
+      this.router.navigate(['users']);
     }, error1 => {
       this.loading = false;
       // auth failed show some errors to user
