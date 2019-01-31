@@ -63,6 +63,7 @@ body .ui-table .ui-table-caption {
 .formTB{
   border-collapse:separate;
   border-spacing: 0 1em;
+  margin-bottom: -20px;
 }
 
 
@@ -95,4 +96,10 @@ div.ui-listbox{
 body .ui-message.ui-message-error{
 
   width: 281px;
+}
+
+legend{
+
+  font-size: initial;
+  font-weight: 800;
 }
