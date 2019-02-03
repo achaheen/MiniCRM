@@ -1,6 +1,4 @@
 <p>
-  {{this.ticketFilters[0].status}} : {{this.ticketFilters[0].createdBy}}
-
   <p-table #dt [value]="ticketList" [paginator]="true" class="dt-selection"
            [rows]="8" selectionMode="single"
            [(selection)]="selectedTicket"
@@ -26,13 +24,19 @@
     <ng-template pTemplate="body" let-ticket>
       <tr [pSelectableRow]="ticket">
         <td *ngFor="let col of cols" >
-          <div *ngIf="col.field ==='escalationCalDate'">
+
+          <div *ngIf="col.field ==='creationDate' || col.field ==='escalationCalDate'">
             {{ticket[col.field] | date}}
           </div>
 
-          <div *ngIf="col.field !='escalationCalDate'">
+          <div *ngIf="col.field !='creationDate' && col.field !='escalationCalDate' && col.field !='topic'">
             {{ticket[col.field]}}
           </div>
+
+          <div *ngIf="col.field ==='topic'">
+            {{ticket[col.field].englishLabel}}
+          </div>
+
         </td>
       </tr>
     </ng-template>

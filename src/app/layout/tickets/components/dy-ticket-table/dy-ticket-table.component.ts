@@ -18,30 +18,21 @@ export class DyTicketTableComponent implements OnInit {
 
 //Global Variables
   cols: any[];
-  @Input() ticketFilters: SearchTicketsContainer;
+//  @Input() ticketFilters: SearchTicketsContainer;
   ticketForm : FormGroup;
   ticketsResult: SearchTicketsResult;
-  ticketList: Ticket[];
+  @Input() ticketList: Ticket[];
   selectedTicket: Ticket;
 //End Global Variables
 
 // Class Init
   ngOnInit() {
-  this.getTicketList()
+//  this.getTicketList()
   this.initDataTable();
   this.initFormBuilder();
   }
 
 
-
-  getTicketList(){
-   this.ticketsService.getTicketsByFilter(this.ticketFilters).subscribe(
-      result => {
-        this.ticketsResult =  result;
-        this.ticketList = result.content;
-      }
-    );
-  }
 
   initDataTable(){
     this.cols = [
@@ -51,6 +42,8 @@ export class DyTicketTableComponent implements OnInit {
       { field: 'subject', header: 'Subject' },
       { field: 'ticketType', header: 'Ticket Type' },
       { field: 'assignedTo', header: 'Assigned To' },
+      { field: 'creationDate', header: 'Creation Date' },
+
       { field: 'escalationCalDate', header: 'Escalation Date' },
       { field: 'crossedMainSLA', header: 'Crossed Main SLA' },
       { field: 'lastSLA', header: 'Last SLA' }];

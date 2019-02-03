@@ -1,27 +1,30 @@
-<p-tabView>
+<p-tabView (onChange)="handleChange($event)">
 
   <p-tabPanel header="All Tickets">
-    <app-dy-ticket-table [ticketFilters]="openTicketFilter"></app-dy-ticket-table>
+    <app-dy-ticket-table [ticketList]="ticketList"></app-dy-ticket-table>
   </p-tabPanel>
+
   <p-tabPanel header="Assigned Tickets">
     <ng-template pTemplate="content">
-      <app-dy-ticket-table [ticketFilters]="assignedTicketFilter"></app-dy-ticket-table>
+      <app-dy-ticket-table [ticketList]="ticketList"></app-dy-ticket-table>
     </ng-template>
   </p-tabPanel>
-  <p-tabPanel header="Opened Tickets">
-    <app-dy-ticket-table [ticketFilters]="openTicketFilter"></app-dy-ticket-table>
-  </p-tabPanel>
-  <p-tabPanel header="Work On Progress Tickets">
-    <ng-template pTemplate="content">
-      <app-dy-ticket-table [ticketFilters]="wordOnProgressTicketFilter"></app-dy-ticket-table>
-    </ng-template>
-  </p-tabPanel>
-  <p-tabPanel header="Closed Tickets">
-    <ng-template pTemplate="content">
-      <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>
-    </ng-template>
-  </p-tabPanel>
-  <p-tabPanel header="Advanced Search">
+   <p-tabPanel header="Opened Tickets">
+     <ng-template pTemplate="content">
+     <app-dy-ticket-table [ticketList]="ticketList"></app-dy-ticket-table>
+     </ng-template>
+   </p-tabPanel>
+   <p-tabPanel header="Work On Progress Tickets">
+     <ng-template pTemplate="content">
+       <app-dy-ticket-table [ticketList]="ticketList"></app-dy-ticket-table>
+     </ng-template>
+   </p-tabPanel>
+   <p-tabPanel header="Closed Tickets">
+     <ng-template pTemplate="content">
+       <app-dy-ticket-table [ticketList]="ticketList"></app-dy-ticket-table>
+     </ng-template>
+   </p-tabPanel>
+   <p-tabPanel header="Advanced Search">
     <ng-template pTemplate="content">
      <!-- <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>-->
     </ng-template>
