@@ -3,8 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {UserHolder} from "../model/user-holder";
 import {User} from "../model/user";
-import {catchError} from "rxjs/operators";
-import {Observable, of} from "rxjs";
 import {Group} from "../model/group";
 import {Role} from "../model/role";
 

@@ -14,7 +14,7 @@
 
     <div style="text-align: right" >
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-      <input type="text" pInputText size="50" placeholder=" Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">
+      <input type="text" pInputText size="50" placeholder=" Global SearchTicketsContainer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">
     </div>
   </ng-template>
 
@@ -83,7 +83,7 @@
 
   <tr>
     <td class="grid-label">Department</td>
-    <td class="grid-input"><input id="department" type="text" size="20" pInputText name="department" formControlName="department"></td>
+    <td class="grid-input"><input id="department" type="text" size="20" pInputText name="department" formControlName="department" ></td>
      <td class="grid-label">UserType </td>
       <td class="grid-input">
       <div style="float: left;padding-right: 15px;"> <p-radioButton name="groupname" value="ldap"  (onClick)="togglePassword()" [disabled]="this.disableForEdit" formControlName="userType" placeholder="Required" ></p-radioButton> &nbsp; Ldap</div>
