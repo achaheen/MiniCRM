@@ -16,7 +16,8 @@ import { DyTicketTableComponent } from './components/dy-ticket-table/dy-ticket-t
 import {TableModule} from "primeng/table";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
-
+import {AccordionModule} from 'primeng/accordion';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   declarations: [TicketsComponent, DyTicketTableComponent],
   imports: [
@@ -40,7 +41,9 @@ import {ToastModule} from "primeng/toast";
     MultiSelectModule,
     ListboxModule,
     FieldsetModule,
-    PasswordModule
+    PasswordModule,
+    AccordionModule,
+    DropdownModule
   ]
 })
 export class TicketsModule { }

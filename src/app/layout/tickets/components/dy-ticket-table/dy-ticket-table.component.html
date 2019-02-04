@@ -1,28 +1,43 @@
 <p>
-  <p-table #dt [value]="ticketList" [paginator]="true" class="dt-selection"
-           [rows]="8" selectionMode="single"
+
+  <p-table #dt [value]="ticketList" [paginator]="true" class="dt-selection" selectionMode="single"
+           [rows]="10"
            [(selection)]="selectedTicket"
-           dataKey="userID"
-           [globalFilterFields]="['id','topic','currentStatus','subject','ticketType']">
+           [lazy]="true"
+           (onLazyLoad)="loadCarsLazy($event)"
+           [totalRecords]="totalRecords"
+           dataKey="id">
 
-    <ng-template pTemplate="caption"  class="rounded-top">
+    <!--<ng-template pTemplate="caption"  class="rounded-top">-->
 
-      <div style="text-align: right" >
-        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-        <input type="text" pInputText size="50" placeholder=" Global SearchTicketsContainer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">
-      </div>
-    </ng-template>
+      <!--<div style="text-align: right" >-->
+        <!--<i class="fa fa-search" style="margin:4px 4px 0 0"></i>-->
+        <!--<input type="text" pInputText size="50" placeholder=" Global SearchTicketsContainer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">-->
+      <!--</div>-->
+    <!--</ng-template>-->
 
     <ng-template pTemplate="header">
       <tr>
-        <th *ngFor="let col of cols" [pSortableColumn]="col.field">
-          {{col.header}}
-          <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        <!--<th style="width: 50px;"></th>-->
+
+        <th *ngFor="let col of sortCols" [pSortableColumn]="col.field" >
+
+          <div class="col-header"> {{col.header}}</div>
+          <div  *ngIf="col.header != 'Main Categ' && col.header != 'Sub Categ'" >
+              <p-sortIcon aria-disabled="true" [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+          </div>
         </th>
+
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-ticket>
+    <ng-template pTemplate="body" let-ticket let-expanded="expanded">
       <tr [pSelectableRow]="ticket">
+       <!-- <td>
+          <a href="#" [pRowToggler]="ticket">
+            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+          </a>
+        </td>
+-->
         <td *ngFor="let col of cols" >
 
           <div *ngIf="col.field ==='creationDate' || col.field ==='escalationCalDate'">
@@ -37,9 +52,24 @@
             {{ticket[col.field].englishLabel}}
           </div>
 
+          <div *ngIf="col.field ==='mainCategory'">
+            {{ticket['topic'].subCategory.mainCategory.englishLabel}}
+          </div>
+          <div *ngIf="col.field ==='subCategory'">
+            {{ticket['topic'].subCategory.englishLabel}}
+          </div>
         </td>
       </tr>
     </ng-template>
+
+   <!-- <ng-template pTemplate="rowexpansion" let-ticket let-columns="cols">
+    <tr>
+      <td [attr.colspan]="cols.length + 1">
+          Test
+      </td>
+
+    </tr>
+    </ng-template>-->
   </p-table>
 
 

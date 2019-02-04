@@ -38,6 +38,22 @@ body .ui-table .ui-table-caption {
   border-bottom-right-radius: initial !important;
 }
 
+.ui-accordion-header .ng-tns-c5-0{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+}
+
+.ui-accordion-content{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -webkit-border-bottom-right-radius: 10px;
+
+
+}
+
 
 .grid-input {
   line-height: 15px;
@@ -48,7 +64,6 @@ body .ui-table .ui-table-caption {
   font-weight: 600;
   padding: 0PX 18PX 0PX 17PX;
 }
-
 .p-grid{
   margin-bottom: 6px !important;
   margin-top: auto !important;
@@ -102,4 +117,31 @@ legend{
 
   font-size: initial;
   font-weight: 800;
+}
+
+.minWidth{
+
+  min-width: 100px;
+}
+
+body .ui-dropdown{
+  min-width: 200px;
+}
+
+
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a {
+  border: 1px solid #007ad9;
+  color: #ffffff;
+  background-color: #007ad9;
+}
+
+body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:hover a {
+  background-color: #27a0ff;
+  border: 1px solid #27a0ff;
+  color: #ffffff;
+}
+
+.col-header{
+
+  float: left;
 }
