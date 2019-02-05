@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchTicketsContainer} from "../../shared/model/searchTicketsContainer";
-import {TicketsService} from "../../shared/services/tickets.service";
-import {Ticket} from "../../shared/model/ticket";
-import {SearchTicketsResult} from "../../shared/model/searchTicketsResult";
-import {MainCategory} from "../../shared/model/mainCategory";
-import {Subcategory} from "../../shared/model/subcategory";
-import {Topic} from "../../shared/model/topic";
-import {MainCategoryService} from "../../shared/services/main-category.service";
-import {SubCategoryService} from "../../shared/services/sub-category.service";
-import {TopicService} from "../../shared/services/topic.service";
-import {LazyLoadEvent} from "primeng/api";
-import {TabView} from "primeng/primeng";
+import {SearchTicketsContainer} from '../../shared/model/searchTicketsContainer';
+import {TicketsService} from '../../shared/services/tickets.service';
+import {Ticket} from '../../shared/model/ticket';
+import {SearchTicketsResult} from '../../shared/model/searchTicketsResult';
+import {MainCategory} from '../../shared/model/mainCategory';
+import {Subcategory} from '../../shared/model/subcategory';
+import {Topic} from '../../shared/model/topic';
+import {MainCategoryService} from '../../shared/services/main-category.service';
+import {SubCategoryService} from '../../shared/services/sub-category.service';
+import {TopicService} from '../../shared/services/topic.service';
+import {TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-tickets',
@@ -40,45 +40,15 @@ export class TicketsComponent implements OnInit {
 
   items: any[];
 
-  constructor(private ticketService:TicketsService,private mainCategoryService:MainCategoryService,private subCategoryService:SubCategoryService,private topicService : TopicService) {}
+  constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
+  }
 
   ngOnInit() {
     this.getTicketList(this.openTicketFilter);
     this.listAllMainCategories();
 
 
-/*
-    <p-tabPanel header="Assigned Tickets">
-      <ng-template pTemplate="content">
-           <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="assignedTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
-      </ng-template>
-      </p-tabPanel>
-      <p-tabPanel header="Opened Tickets">
-      <ng-template pTemplate="content">
-    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="openTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
-      </ng-template>
-      </p-tabPanel>
-      <p-tabPanel header="Work On Progress Tickets">
-      <ng-template pTemplate="content">
-    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="wordOnProgressTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
-      </ng-template>
-      </p-tabPanel>
-      <p-tabPanel header="Closed Tickets">
-      <ng-template pTemplate="content">
-    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="closedTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
-      </ng-template>
-      </p-tabPanel>
-
-      <p-tabPanel header="Advanced Search">
-      <ng-template pTemplate="content">
-    <!-- <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>-->
-      </ng-template>
-      </p-tabPanel>
-      </p-tabView>
-
-    */
-
-    this.items = [
+   this.items = [
       { header: 'All Tickets',
         content:'Tab 2 Content',
         closable : false,

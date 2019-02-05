@@ -2,16 +2,16 @@
   <p-accordionTab header="Tickets Categories" [selected]="true">
     <table>
       <tr>
-        <td class="grid-label">Main Category</td>
+        <td class="grid-label">{{'MainCat'|translate}}</td>
         <td class="grid-input " >
           <p-dropdown class="minWidth" (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
           </p-dropdown>
         </td>
-        <td class="grid-label">Sub Catogory</td>
+        <td class="grid-label">{{'SubCat'|translate}}</td>
         <td class="grid-input minWidth">
           <p-dropdown class="minWidth" (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
         </td>
-        <td class="grid-label">Topic</td>
+        <td class="grid-label">{{'Topic'|translate}}</td>
         <td class="grid-input minWidth">
           <p-dropdown class="minWidth" [options]="topics" [(ngModel)]="selectedTopic" optionLabel="englishLabel"></p-dropdown>
         </td>

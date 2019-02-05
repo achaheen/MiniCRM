@@ -8,6 +8,10 @@ export const environment = {
   tokenName: 'access_token',
   currentUser: 'currentUser',
   authorities: 'authorities',
+  ticketTypeList: 'ticketTypeList',
+  ticketStatusList: 'ticketStatusList',
+  ticketPriorityList: 'ticketPriorityList',
+  ticketActionsList: 'ticketActionsList',
   language: 'lang'
 };
 
