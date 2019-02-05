@@ -35,9 +35,9 @@ export class DyTicketTableComponent implements OnInit {
   constructor(private fb: FormBuilder,private messageServie: MessageService, private ticketsService: TicketsService) { }
 
 
- @Output() eventEmitter:EventEmitter<SearchTicketsContainer> = new EventEmitter();
+ @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
 
-//Global Variables
+
   cols: any[];
   sortCols: any[];
   @Input() ticketFilters: SearchTicketsContainer;
@@ -46,7 +46,7 @@ export class DyTicketTableComponent implements OnInit {
   ticketForm : FormGroup;
  // @Input() ticketsResult: SearchTicketsResult = {};
   selectedTicket: Ticket;
-//End Global Variables
+
 
 // Class Init
   ngOnInit() {
@@ -104,13 +104,7 @@ export class DyTicketTableComponent implements OnInit {
     this.ticketFilters.sorting = sortField;
 
     this.eventEmitter.emit(this.ticketFilters);
-     //in a real application, make a remote request to load data using state metadata from event
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-    //imitate db connection over a network
+    
 
   }
 

@@ -30,7 +30,6 @@ export const createTranslateLoader = (http: HttpClient) => {
  * @returns {string}
  */
 export function tokenGetter() {
-  console.log('validating token');
   return localStorage.getItem(environment.tokenName);
 }
 

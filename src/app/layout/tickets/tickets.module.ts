@@ -19,9 +19,10 @@ import {ToastModule} from 'primeng/toast';
 import {AccordionModule} from 'primeng/accordion';
 import {DropdownModule} from 'primeng/dropdown';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import { ViewTicketComponent } from './components/view-ticket/view-ticket.component';
 
 @NgModule({
-  declarations: [TicketsComponent, DyTicketTableComponent],
+  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
@@ -46,7 +47,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     PasswordModule,
     AccordionModule, TranslateModule,
     DropdownModule
-  ], providers: [TranslateService]
+  ]
 })
 export class TicketsModule {
 }
