@@ -1,5 +1,5 @@
-import {Userpreferences} from "./userpreferences";
-import {Permissions} from "./permissions";
+import {Userpreferences} from './userpreferences';
+import {Permissions} from './permissions';
 
 export interface User {
   createdBy?: string;
@@ -17,7 +17,8 @@ export interface User {
   staffID?: string;
   systemUser?: boolean;
   title?: string;
-  userID?: number;
+  userID?: string;
+
   authorities?: Permissions[];
   preferences?: Userpreferences;
 

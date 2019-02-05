@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SearchTicketsContainer} from '../../shared/model/searchTicketsContainer';
 import {TicketsService} from '../../shared/services/tickets.service';
 import {Ticket} from '../../shared/model/ticket';
@@ -10,7 +10,8 @@ import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
-import {tick} from "@angular/core/testing";
+import {User} from '../../shared/model/user';
+import {environment} from '../../../environments/environment';
 
 
 @Component({
@@ -19,11 +20,11 @@ import {tick} from "@angular/core/testing";
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-  defaultPageSize = 10;
-  openTicketFilter: SearchTicketsContainer = {'status': [1], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  assignedTicketFilter: SearchTicketsContainer = {'status': [7], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
+  defaultPageSize = 20;
+  openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
+  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
+  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
+  assignedTicketFilter: SearchTicketsContainer = {'assignedTo': [this.getCurrentUserID()], 'size': this.defaultPageSize, page: 0};
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult
@@ -35,10 +36,11 @@ export class TicketsComponent implements OnInit {
   topics: Topic[];
   selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
+
   items: any[];
   selectedTab:number = 0;
   selectedTicket:Ticket;
-  constructor(private changeDetectionRef: ChangeDetectorRef, private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
+  constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -222,6 +224,11 @@ export class TicketsComponent implements OnInit {
     console.log("selectedTab : " + this.selectedTab);
   }
 
+
+  getCurrentUserID(): string {
+    const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
+    return user.userID;
+  }
 }
 
 
