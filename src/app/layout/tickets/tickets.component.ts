@@ -10,6 +10,8 @@ import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
+import {User} from '../../shared/model/user';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-tickets',
@@ -18,10 +20,10 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class TicketsComponent implements OnInit {
   defaultPageSize = 20;
-  openTicketFilter: SearchTicketsContainer = {'status': [1], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
-  assignedTicketFilter: SearchTicketsContainer = {'status': [7], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
+  openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
+  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
+  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
+  assignedTicketFilter: SearchTicketsContainer = {'assignedTo': [this.getCurrentUserID()], 'size': this.defaultPageSize, page: 0};
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult
@@ -160,6 +162,11 @@ export class TicketsComponent implements OnInit {
 
   openTicketForView() {
 
+  }
+
+  getCurrentUserID(): string {
+    const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
+    return user.userID;
   }
 }
 

@@ -20,7 +20,7 @@ export interface SearchTicketsContainer {
   types?:number[];
   status?:number[];
   customerAccounts?:number[];
-  assignedTo?:string[];
+  assignedTo?: string[] ;
   crossedMainSla?:boolean;
   language?:number[];
   priority?:number[];
