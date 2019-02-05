@@ -13,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
 
+
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
@@ -36,18 +37,60 @@ export class TicketsComponent implements OnInit {
   selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
 
+  items: any[];
+
   constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
   }
 
   ngOnInit() {
     this.getTicketList(this.openTicketFilter);
-
     this.listAllMainCategories();
+
+
+   this.items = [
+      { header: 'All Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Assigned Tickets',
+        content:'Tab 1 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.assignedTicketFilter},
+
+      { header: 'Opened Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Work On Progress Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Closed Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Advanced Search',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:null}
+
+      ]
+
   }
 
 
-  updateTopicList() {
-    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
+  updateTopicList(){
+    if(this.selectedSubCategory != null && this.selectedSubCategory.id != null){
 
       this.topicService.authorized(this.selectedSubCategory.id).subscribe(
         result => {
@@ -160,8 +203,12 @@ export class TicketsComponent implements OnInit {
     this.getTicketList(this.selectedFilter);
   }
 
-  openTicketForView() {
 
+
+  openTicketForView(){
+    this.items.push({header: 'Dynamic Tab',content:'Dynamic Tab Content', closable : true,
+      type:'dynamic',
+      ticketFilter:null})
   }
 
   getCurrentUserID(): string {
