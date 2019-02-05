@@ -38,12 +38,85 @@ export class TicketsComponent implements OnInit {
   selectedTopic:Topic;
   selectedFilter:SearchTicketsContainer = this.openTicketFilter;
 
+  items: any[];
+
   constructor(private ticketService:TicketsService,private mainCategoryService:MainCategoryService,private subCategoryService:SubCategoryService,private topicService : TopicService) {}
 
   ngOnInit() {
     this.getTicketList(this.openTicketFilter);
-
     this.listAllMainCategories();
+
+
+/*
+    <p-tabPanel header="Assigned Tickets">
+      <ng-template pTemplate="content">
+           <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="assignedTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
+      </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Opened Tickets">
+      <ng-template pTemplate="content">
+    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="openTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
+      </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Work On Progress Tickets">
+      <ng-template pTemplate="content">
+    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="wordOnProgressTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
+      </ng-template>
+      </p-tabPanel>
+      <p-tabPanel header="Closed Tickets">
+      <ng-template pTemplate="content">
+    <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="closedTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
+      </ng-template>
+      </p-tabPanel>
+
+      <p-tabPanel header="Advanced Search">
+      <ng-template pTemplate="content">
+    <!-- <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>-->
+      </ng-template>
+      </p-tabPanel>
+      </p-tabView>
+
+    */
+
+    this.items = [
+      { header: 'All Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Assigned Tickets',
+        content:'Tab 1 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.assignedTicketFilter},
+
+      { header: 'Opened Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Work On Progress Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Closed Tickets',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:this.openTicketFilter},
+
+      { header: 'Advanced Search',
+        content:'Tab 2 Content',
+        closable : false,
+        type:'static',
+        ticketFilter:null}
+
+      ]
+
   }
 
 
@@ -164,7 +237,9 @@ applyGlobalFilter(){
 
 
   openTicketForView(){
-
+    this.items.push({header: 'Dynamic Tab',content:'Dynamic Tab Content', closable : true,
+      type:'dynamic',
+      ticketFilter:null})
   }
 }
 

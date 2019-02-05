@@ -23,13 +23,13 @@
   </p-accordionTab>
 </p-accordion>
 
+<!--
 <p-tabView (onChange)="handleChange($event)" id="ticketsTabsView">
 
   <p-tabPanel header="All Tickets">
     <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="openTicketFilter" [totalRecords]="totalRecords"
                          (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
   </p-tabPanel>
-
 
   <p-tabPanel header="Assigned Tickets">
     <ng-template pTemplate="content">
@@ -38,7 +38,7 @@
   </p-tabPanel>
    <p-tabPanel header="Opened Tickets">
      <ng-template pTemplate="content">
-     <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="openTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
+      <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="openTicketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
      </ng-template>
    </p-tabPanel>
    <p-tabPanel header="Work On Progress Tickets">
@@ -54,8 +54,25 @@
 
    <p-tabPanel header="Advanced Search">
     <ng-template pTemplate="content">
-     <!-- <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>-->
+     &lt;!&ndash; <app-dy-ticket-table [ticketFilters]="closedTicketFilter"></app-dy-ticket-table>&ndash;&gt;
     </ng-template>
+  </p-tabPanel>
+</p-tabView>
+-->
+
+
+
+
+
+<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView">
+  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="item.type !='static' || i == 0" [closable]="item.closable" >
+
+    <div *ngIf="item.ticketFilter != null">
+    <ng-template pTemplate="content">
+       <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
+    </ng-template>
+    </div>
+
   </p-tabPanel>
 </p-tabView>
 
@@ -65,9 +82,9 @@
 
   <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded" label="Open Ticket"></button>
 
-<!--
-  <button type="button"  [disabled]="(selectedTicket=== null || selectedTicket.id === undefined)? true : false"
-          pButton icon="pi pi-pencil" class="ui-button-rounded" label="Edit User"></button>
--->
+  <!--
+    <button type="button"  [disabled]="(selectedTicket=== null || selectedTicket.id === undefined)? true : false"
+            pButton icon="pi pi-pencil" class="ui-button-rounded" label="Edit User"></button>
+  -->
 
 </p-panel>
