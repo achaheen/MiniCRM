@@ -1,0 +1,72 @@
+<p-table #dt [value]="permissionsList" class="dt-selection"
+         [rows]="50"
+         dataKey="id">
+  <ng-template pTemplate="header">
+    <tr>
+      <!--<th style="width: 50px;"></th>-->
+
+      <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+
+        <div class="col-header"> {{col.header|translate}}</div>
+
+        <p-sortIcon *ngIf=" !(col.disableSort!==null && col.disableSort!==undefined && col.disableSort==true)"
+                    aria-disabled="true" [field]="col.field" ariaLabel="Activate to sort"
+                    ariaLabelDesc="Activate to sort in descending order"
+                    ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+      </th>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-perm let-expanded="expanded">
+    <tr [pSelectableRow]="perm">
+      <td *ngFor="let col of cols">
+        <ng-template [ngIf]="col.format!==null && col.format==true"
+                     [ngIfElse]="unformatted">
+          <ng-container [ngSwitch]="col.formatType">
+            <ng-container *ngSwitchCase="'date'">
+              {{perm[col.field] | date}}
+            </ng-container>
+            <ng-container *ngSwitchCase="'checkbox'">
+              <p-checkbox [(ngModel)]="perm[col.field]" binary="true" label=""></p-checkbox>
+            </ng-container>
+          </ng-container>
+
+        </ng-template>
+        <ng-template #unformatted>
+          <ng-template [ngIf]="col.composed!=null && col.composed==true" [ngIfElse]="normal">
+            <ng-container *ngIf="col.field ==='topicId'">
+              {{perm[col.field].englishLabel}}
+            </ng-container>
+            <ng-container *ngIf="col.field ==='userName'">
+              <ng-container *ngIf="perm['user']!==null">
+                {{perm['user'].firstName + ' ' + perm['user'].lastName}}
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="col.field ==='userID'">
+              <ng-container *ngIf="perm['user']!==null">
+                {{perm['user'].userID}}
+              </ng-container>
+            </ng-container>
+            <ng-container *ngIf="col.field ==='group'">
+              <ng-container *ngIf="perm['group']!==null">
+                {{perm['group'].groupName}}
+              </ng-container>
+
+            </ng-container>
+            <ng-container *ngIf="col.field ==='mainCat'">
+              {{perm['topicId'].subCategory.mainCategory.englishLabel}}
+            </ng-container>
+            <ng-container *ngIf="col.field ==='subCat'">
+              {{perm['topicId'].subCategory.englishLabel}}
+            </ng-container>
+          </ng-template>
+          <ng-template #normal>
+            {{perm[col.field]}}
+          </ng-template>
+        </ng-template>
+
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>

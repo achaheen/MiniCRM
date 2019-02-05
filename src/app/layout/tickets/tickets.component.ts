@@ -87,11 +87,8 @@ export class TicketsComponent implements OnInit {
       ]
 
   }
-
-
   updateTopicList(){
     if(this.selectedSubCategory != null && this.selectedSubCategory.id != null){
-
       this.topicService.authorized(this.selectedSubCategory.id).subscribe(
         result => {
           const mainCat: Topic = {};
