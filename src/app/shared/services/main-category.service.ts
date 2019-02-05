@@ -1,19 +1,27 @@
-import { Injectable } from '@angular/core';
-import {environment} from "../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {MainCategory} from "../model/mainCategory";
+import {Injectable} from '@angular/core';
+import {environment} from '../../../environments/environment';
+import {HttpClient} from '@angular/common/http';
+import {MainCategory} from '../model/mainCategory';
+import {BasicHttpService} from './basicHttp.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MainCategoryService {
+export class MainCategoryService extends BasicHttpService {
 
-  private baseURL: string = environment.apiUrl + "categories/";
-  constructor(private httpClient: HttpClient) {
+
+  constructor(httpClient: HttpClient) {
+    super(httpClient);
+    this.baseURL = environment.apiUrl + 'categories/';
   }
 
   all() {
-    return this.httpClient.get<MainCategory[]>(this.baseURL + "all");
+    return this.httpClient.get<MainCategory[]>(this.baseURL + 'all');
   }
+  active() {
 
+  }
+  authorized() {
+    return this.httpClient.get<MainCategory[]>(this.baseURL + 'authorized');
+  }
 }

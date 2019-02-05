@@ -2,9 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {routerTransition} from '../router.animations';
-import {AuthenticationService} from "../shared/services/authentication.service";
-import {AuthResponse} from "../shared/model/auth-response";
-import {environment} from "../../environments/environment";
+import {AuthenticationService} from '../shared/services/authentication.service';
+import {AuthResponse} from '../shared/model/auth-response';
+import {environment} from '../../environments/environment';
+import {TicketExtras} from '../shared/model/TicketExtras';
 
 @Component({
   selector: 'app-login',
@@ -47,7 +48,14 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(environment.currentUser, JSON.stringify(response.user));
       localStorage.setItem(environment.authorities, JSON.stringify(response.user.authorities));
 
-      this.router.navigate(['users']);
+      const ticketExtras: TicketExtras = response.ticketExtras;
+      if (ticketExtras !== undefined) {
+        localStorage.setItem(environment.ticketPriorityList, JSON.stringify(ticketExtras.ticketPriorityList));
+        localStorage.setItem(environment.ticketStatusList, JSON.stringify(ticketExtras.ticketStatusList));
+        localStorage.setItem(environment.ticketTypeList, JSON.stringify(ticketExtras.tickettypesList));
+        localStorage.setItem(environment.ticketActionsList, JSON.stringify(ticketExtras.ticketactionsList));
+      }
+      this.router.navigate(['dashboard']);
     }, error1 => {
       this.loading = false;
       // auth failed show some errors to user

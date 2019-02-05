@@ -1,0 +1,21 @@
+{
+    "Dashboard": "Dashboard",
+
+    "Menu": "القائمة",
+
+    "Language": "اللغة",
+    "English": "English",
+
+    "Search" : "البحث",
+    "Settings" : "الإعدادات",
+    "Profile" : "الملف الشخصي",
+    "Inbox" : "صندوق الوارد",
+    "Log Out" : "تسجيل الخروج",
+    "Collapse Sidebar" : "عرض القائمة الجانبية",
+    "Full Name": "الإسم كاملا",
+    "Email": "البريد الإلكتروني",
+    "Password": "كلمة السر",
+    "Repeat Password": "تأكيد كلمة السر",
+    "Register": "التسجيل",
+    "Log in": "تسجيل الدخول"
+}
