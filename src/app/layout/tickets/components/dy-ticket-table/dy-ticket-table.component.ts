@@ -9,8 +9,6 @@ import { trigger,state,style,transition,animate } from '@angular/animations';
 import {SearchTicketsSorting} from "../../../../shared/model/searchTicketsSorting";
 
 
-
-
 @Component({
   selector: 'app-dy-ticket-table',
   templateUrl: './dy-ticket-table.component.html',
@@ -36,6 +34,7 @@ export class DyTicketTableComponent implements OnInit {
 
 
  @Output() eventEmitter:EventEmitter<SearchTicketsContainer> = new EventEmitter();
+ @Output() selectTicketEmitter:EventEmitter<Ticket> = new EventEmitter();
 
 //Global Variables
   cols: any[];
@@ -95,6 +94,11 @@ export class DyTicketTableComponent implements OnInit {
   }
 
 
+    setSelectedTicket(event) {
+      console.log("TicketID=" +  this.selectedTicket.id)
+      this.selectTicketEmitter.emit(this.selectedTicket);
+  }
+
   loadCarsLazy(event: LazyLoadEvent) {
     console.log(JSON.stringify(event))
 
@@ -111,7 +115,6 @@ export class DyTicketTableComponent implements OnInit {
     //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
     //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
     //imitate db connection over a network
-
   }
 
 }

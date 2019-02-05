@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {SearchTicketsContainer} from '../../shared/model/searchTicketsContainer';
 import {TicketsService} from '../../shared/services/tickets.service';
 import {Ticket} from '../../shared/model/ticket';
@@ -10,6 +10,7 @@ import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
+import {tick} from "@angular/core/testing";
 
 
 @Component({
@@ -18,7 +19,7 @@ import {TranslateService} from '@ngx-translate/core';
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-  defaultPageSize = 20;
+  defaultPageSize = 10;
   openTicketFilter: SearchTicketsContainer = {'status': [1], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
   closedTicketFilter: SearchTicketsContainer = {'status': [3], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
   wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
@@ -34,10 +35,10 @@ export class TicketsComponent implements OnInit {
   topics: Topic[];
   selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
-
   items: any[];
-
-  constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
+  selectedTab:number = 0;
+  selectedTicket:Ticket;
+  constructor(private changeDetectionRef: ChangeDetectorRef, private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -202,12 +203,25 @@ export class TicketsComponent implements OnInit {
   }
 
 
+  setSelectedTicket(ticket:Ticket){
+  console.log("hiiiiiiiiiiii")
+    this.selectedTicket = ticket;
 
-  openTicketForView(){
-    this.items.push({header: 'Dynamic Tab',content:'Dynamic Tab Content', closable : true,
+  }
+  openTicketForView(event:Event){
+      this.items.push({header: 'Dynamic Tab',content:'Dynamic Tab Content', closable : true,
       type:'dynamic',
       ticketFilter:null})
+      setTimeout(() => {
+        this.activeIndexChange();
+      }, 0);
   }
+
+  activeIndexChange(){
+    this.selectedTab = this.items.length-1;
+    console.log("selectedTab : " + this.selectedTab);
+  }
+
 }
 
 

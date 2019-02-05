@@ -64,14 +64,17 @@
 
 
 
-<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView">
-  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="item.type !='static' || i == 0" [closable]="item.closable" >
+<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" dynamic="true" >
+  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="i ==0" [closable]="item.closable">
 
-    <div *ngIf="item.ticketFilter != null">
     <ng-template pTemplate="content">
-       <app-dy-ticket-table [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords" (eventEmitter)="getTicketList($event)"> </app-dy-ticket-table>
+       <app-dy-ticket-table *ngIf="item.ticketFilter!=null" [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"  (eventEmitter)="getTicketList($event)" > </app-dy-ticket-table>
+
+      <DIV *ngIf="item.ticketFilter===null" (selectTicketEmitter) = "setSelectedTicket($event)" >
+          {{ ((this.selectedTicket == null || this.selectedTicket == 'undefined')? test : this.selectedTicket.id)}}
+      </DIV>
+
     </ng-template>
-    </div>
 
   </p-tabPanel>
 </p-tabView>

@@ -5,6 +5,7 @@
            [(selection)]="selectedTicket"
            [lazy]="true"
            (onLazyLoad)="loadCarsLazy($event)"
+           (onRowSelect)="setSelectedTicket($event)"
            [totalRecords]="totalRecords"
            dataKey="id">
 
