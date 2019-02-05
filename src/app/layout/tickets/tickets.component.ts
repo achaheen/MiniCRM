@@ -11,25 +11,21 @@ import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
 
-
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-
-  openTicketFilter: SearchTicketsContainer = {'status': [1], 'createdBy': ['admin'], 'size': 10, page: 0};
-  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'createdBy': ['admin'], 'size': 10, page: 0};
-  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'createdBy': ['admin'], 'size': 10, page: 0};
-  assignedTicketFilter: SearchTicketsContainer = {'status': [7], 'createdBy': ['admin'], 'size': 10, page: 0};
-
+  defaultPageSize = 20;
+  openTicketFilter: SearchTicketsContainer = {'status': [1], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
+  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
+  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
+  assignedTicketFilter: SearchTicketsContainer = {'status': [7], 'createdBy': ['admin'], 'size': this.defaultPageSize, page: 0};
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult
     : SearchTicketsResult;
-
-
   mainCategories: MainCategory[];
   selectedMainCategory: MainCategory;
   subCategories: Subcategory[];
@@ -161,7 +157,6 @@ export class TicketsComponent implements OnInit {
     }
     this.getTicketList(this.selectedFilter);
   }
-
 
   openTicketForView() {
 
