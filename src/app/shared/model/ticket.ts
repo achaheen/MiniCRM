@@ -4,6 +4,7 @@ import {Ticketdata} from "./Ticketdata";
 import {Escalationhistory} from "./escalationhistory";
 import {SmsHistory} from "./smsHistory";
 import {TicketExtData} from "./ticketExtData";
+import {TicketHistroy} from "./ticketHistroy";
 
 export interface Ticket {
 
@@ -45,6 +46,11 @@ export interface Ticket {
 
  deleted?:boolean;
 
+  createdBy: string;
+  modificationDate?: Date;
+  modifiedBy?: string;
+  creationDate: number;
+
  ticketdataList?:Ticketdata[];
 
  escalationhistoryList?:Escalationhistory[];
@@ -52,5 +58,13 @@ export interface Ticket {
  smsHistoryList?:SmsHistory[];
  
  ticketExtData?:TicketExtData[];
-  
+ ticketHistoryList?:TicketHistroy[];
+
+
+  statusLabel?:string;
+  typeLabel?:string;
+  chanelLabel?:string;
+  priorityLabel?:string;
+
+
 }

@@ -141,6 +141,30 @@ body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:
   color: #ffffff;
 }
 
+
+.formTB .ui-accordion .ui-accordion-header a {
+  border: 1px solid #007ad9;
+  color: #000000;
+  background-color: #dedede;
+}
+
+
+.formTB .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a{
+
+  border: 1px solid #007ad9;
+  color: #000000;
+  background-color: #f3f3f3;
+  text-underline: none;
+}
+
+.formTB .ui-accordion .ui-accordion-header a .ui-accordion-toggle-icon {
+  color: #000000;
+}
+
+.formTB .ui-accordion .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a .ui-accordion-toggle-icon {
+  color: #000000;
+}
+
 .col-header{
 
   float: left;
@@ -149,4 +173,48 @@ body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:
 .dynamic{
 
   background: red;
+}
+
+.formTB .ui-state-disabled, body .ui-widget:disabled {
+   opacity: 0.9;
+  filter: alpha(opacity=90);
+}
+
+.formTB textarea{
+  width: 100%;
+  height: 80px;
+}
+.formTB hr{
+  margin: 0px;
+}
+.ui-table .ui-table-tbody > tr > td{
+  //padding: 0px 10px !important;
+}
+
+
+
+//.ui-table table, .ui-table table
+//{  table-layout:auto !important;
+//}
+//.ui-table-tablewrapper {
+//  width: auto!important;
+//}
+//
+//.ui-table-resizable {
+//  padding-bottom: 1px;
+//  /* overflow: auto; */
+//  width: auto !important;
+//}
+
+.ui-table .ui-table-tbody > tr, .ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tfoot > tr > td{
+  max-width: 300px !important;
+  font-size: 12px;
+  padding: 0px 5px !important;
+  padding-left: 4px !important;
+  color: black;
+  text-transform: capitalize;
+  white-space: nowrap;
+  //overflow: hidden;
+  //text-overflow: ellipsis !important;
+  //border-width: 1px;
 }

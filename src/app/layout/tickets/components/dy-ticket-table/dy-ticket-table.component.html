@@ -6,22 +6,16 @@
            [lazy]="true"
            (onLazyLoad)="loadCarsLazy($event)"
            (onRowSelect)="setSelectedTicket($event)"
+           (onRowUnselect)="setSelectedTicket($event)"
            [totalRecords]="totalRecords"
+           [resizableColumns]="true" columnResizeMode="expand"
+           [responsive]="true"
            dataKey="id">
-
-    <!--<ng-template pTemplate="caption"  class="rounded-top">-->
-
-      <!--<div style="text-align: right" >-->
-        <!--<i class="fa fa-search" style="margin:4px 4px 0 0"></i>-->
-        <!--<input type="text" pInputText size="50" placeholder=" Global SearchTicketsContainer" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto" class="rounded">-->
-      <!--</div>-->
-    <!--</ng-template>-->
 
     <ng-template pTemplate="header">
       <tr>
-        <!--<th style="width: 50px;"></th>-->
 
-        <th *ngFor="let col of sortCols" [pSortableColumn]="col.field" >
+        <th *ngFor="let col of sortCols" [pSortableColumn]="col.field"  pResizableColumn >
 
           <div class="col-header"> {{col.header}}</div>
           <div  *ngIf="col.header != 'Main Categ' && col.header != 'Sub Categ'" >
@@ -33,19 +27,13 @@
     </ng-template>
     <ng-template pTemplate="body" let-ticket let-expanded="expanded">
       <tr [pSelectableRow]="ticket">
-       <!-- <td>
-          <a href="#" [pRowToggler]="ticket">
-            <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
-          </a>
-        </td>
--->
-        <td *ngFor="let col of cols" >
+        <td *ngFor="let col of cols" class="ui-resizable-column">
 
           <div *ngIf="col.field ==='creationDate' || col.field ==='escalationCalDate'">
-            {{ticket[col.field] | date}}
+            {{ticket[col.field] | date:'medium'}}
           </div>
 
-          <div *ngIf="col.field !='creationDate' && col.field !='escalationCalDate' && col.field !='topic'">
+          <div *ngIf="col.field !='creationDate' && col.field !='escalationCalDate' && col.field !='topic' && col.field !='currentStatus' && col.field !='ticketType'" >
             {{ticket[col.field]}}
           </div>
 
@@ -56,22 +44,24 @@
           <div *ngIf="col.field ==='mainCategory'">
             {{ticket['topic'].subCategory.mainCategory.englishLabel}}
           </div>
+
           <div *ngIf="col.field ==='subCategory'">
             {{ticket['topic'].subCategory.englishLabel}}
           </div>
+
+          <div *ngIf="col.field ==='currentStatus'">
+            {{utils.findStatus(ticket['currentStatus'])}}
+          </div>
+
+          <div *ngIf="col.field ==='ticketType'">
+            {{utils.findType(ticket['ticketType'])}}
+          </div>
+
+
         </td>
       </tr>
     </ng-template>
-
-   <!-- <ng-template pTemplate="rowexpansion" let-ticket let-columns="cols">
-    <tr>
-      <td [attr.colspan]="cols.length + 1">
-          Test
-      </td>
-
-    </tr>
-    </ng-template>-->
-  </p-table>
+ </p-table>
 
 
 </p>

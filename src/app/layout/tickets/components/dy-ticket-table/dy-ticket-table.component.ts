@@ -7,6 +7,7 @@ import {SearchTicketsResult} from "../../../../shared/model/searchTicketsResult"
 import {Ticket} from "../../../../shared/model/ticket";
 import { trigger,state,style,transition,animate } from '@angular/animations';
 import {SearchTicketsSorting} from "../../../../shared/model/searchTicketsSorting";
+import {UtilsService} from "../../../../shared/services/utils.service";
 
 
 @Component({
@@ -30,11 +31,11 @@ import {SearchTicketsSorting} from "../../../../shared/model/searchTicketsSortin
 })
 export class DyTicketTableComponent implements OnInit {
 
-  constructor(private fb: FormBuilder,private messageServie: MessageService, private ticketsService: TicketsService) { }
+  constructor(private utils:UtilsService ,private fb: FormBuilder,private messageServie: MessageService, private ticketsService: TicketsService) { }
 
 
  @Output() eventEmitter:EventEmitter<SearchTicketsContainer> = new EventEmitter();
- @Output() selectTicketEmitter:EventEmitter<Ticket> = new EventEmitter();
+ @Output() selectTicketEmitter:EventEmitter<number> = new EventEmitter();
 
 //Global Variables
   cols: any[];
@@ -95,8 +96,9 @@ export class DyTicketTableComponent implements OnInit {
 
 
     setSelectedTicket(event) {
-      console.log("TicketID=" +  this.selectedTicket.id)
-      this.selectTicketEmitter.emit(this.selectedTicket);
+
+      console.log("TicketID=" +  (this.selectedTicket ==null ? null : this.selectedTicket.id))
+      this.selectTicketEmitter.emit((this.selectedTicket ==null ? null : this.selectedTicket.id));
   }
 
   loadCarsLazy(event: LazyLoadEvent) {
@@ -108,7 +110,6 @@ export class DyTicketTableComponent implements OnInit {
     this.ticketFilters.sorting = sortField;
 
     this.eventEmitter.emit(this.ticketFilters);
-
 
   }
 

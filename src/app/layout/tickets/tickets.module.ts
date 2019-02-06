@@ -20,7 +20,7 @@ import {AccordionModule} from 'primeng/accordion';
 import {DropdownModule} from 'primeng/dropdown';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { ViewTicketComponent } from './components/view-ticket/view-ticket.component';
-
+import {InputTextareaModule} from 'primeng/inputtextarea';
 @NgModule({
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent],
   imports: [
@@ -46,7 +46,8 @@ import { ViewTicketComponent } from './components/view-ticket/view-ticket.compon
     FieldsetModule,
     PasswordModule,
     AccordionModule, TranslateModule,
-    DropdownModule
+    DropdownModule,
+    InputTextareaModule
   ]
 })
 export class TicketsModule {

@@ -12,6 +12,7 @@ import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
+import {Status} from "../../shared/model/status";
 
 
 @Component({
@@ -20,7 +21,7 @@ import {environment} from '../../../environments/environment';
   styleUrls: ['./tickets.component.scss']
 })
 export class TicketsComponent implements OnInit {
-  defaultPageSize = 20;
+  defaultPageSize = 10;
   openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
   closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
   wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
@@ -39,14 +40,15 @@ export class TicketsComponent implements OnInit {
 
   items: any[];
   selectedTab:number = 0;
-  selectedTicket:Ticket;
+  selectedTicketId:number;
+  disableViewTicketBTN:boolean = true;
   constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
   }
 
   ngOnInit() {
+
     this.getTicketList(this.openTicketFilter);
     this.listAllMainCategories();
-
 
    this.items = [
       { header: 'All Tickets',
@@ -102,7 +104,6 @@ export class TicketsComponent implements OnInit {
           this.topics.unshift(mainCat);
         }
       );
-
     } else {
       this.topics = [];
     }
@@ -161,7 +162,6 @@ export class TicketsComponent implements OnInit {
     this.getTicketList(this.selectedFilter);
   }
 
-
   getTicketList(ticketFilters: SearchTicketsContainer) {
     this.ticketService.getTicketsByFilter(ticketFilters).subscribe(
       result => {
@@ -172,15 +172,11 @@ export class TicketsComponent implements OnInit {
     );
   }
 
-
   catchEvent(filter: SearchTicketsContainer) {
     this.getTicketList(filter);
   }
 
-
   applyGlobalFilter() {
-
-
     if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
       const mainCategory = this.selectedMainCategory.id;
       this.selectedFilter.mainCats = [mainCategory];
@@ -204,31 +200,53 @@ export class TicketsComponent implements OnInit {
     this.getTicketList(this.selectedFilter);
   }
 
+  setSelectedTicket(ticketID:number){
 
-  setSelectedTicket(ticket:Ticket){
-  console.log("hiiiiiiiiiiii")
-    this.selectedTicket = ticket;
+    this.selectedTicketId= ticketID;
+    if (this.selectedTicketId != null ){
+      this.disableViewTicketBTN = false;
+    } else{
+      this.disableViewTicketBTN = true;
+    }
 
   }
+
   openTicketForView(event:Event){
-      this.items.push({header: 'Dynamic Tab',content:'Dynamic Tab Content', closable : true,
+    //check id the ticket is already opened
+    //if opened -> activate its tab
+    let itemAlreadyFound:boolean = false;
+    let itemIndex:number = 0;
+
+    for(let i:number = 0 ;i<=this.items.length-1 ; i++ ){
+      console.log(this.items[i].header)
+      if (this.items[i].header == this.selectedTicketId){
+         itemAlreadyFound = true;
+         itemIndex= i;
+        break;
+      }
+    }
+
+    if(!itemAlreadyFound){
+      this.items.push({header: this.selectedTicketId ,content:'Dynamic Tab Content', closable : true,
       type:'dynamic',
       ticketFilter:null})
       setTimeout(() => {
         this.activeIndexChange();
       }, 0);
+    }else{
+      this.selectedTab = itemIndex
+    }
   }
 
   activeIndexChange(){
     this.selectedTab = this.items.length-1;
-    console.log("selectedTab : " + this.selectedTab);
   }
-
 
   getCurrentUserID(): string {
     const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
     return user.userID;
   }
-}
+
+ }
 
 
