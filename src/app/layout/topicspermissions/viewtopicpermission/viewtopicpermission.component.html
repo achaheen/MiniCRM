@@ -1,11 +1,15 @@
 <p-table #dt [value]="permissionsList" class="dt-selection"
          [rows]="50"
+         [columns]="cols"
+         [(selection)]="selectedPermissionsList"
          dataKey="id">
-  <ng-template pTemplate="header">
+  <ng-template pTemplate="header" let-columns>
     <tr>
       <!--<th style="width: 50px;"></th>-->
-
-      <th *ngFor="let col of cols" [pSortableColumn]="col.field">
+      <th style="width: 3em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
 
         <div class="col-header"> {{col.header|translate}}</div>
 
@@ -17,9 +21,12 @@
 
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-perm let-expanded="expanded">
+  <ng-template pTemplate="body" let-perm let-columns="columns" let-expanded="expanded">
     <tr [pSelectableRow]="perm">
-      <td *ngFor="let col of cols">
+      <td>
+        <p-tableCheckbox [value]="perm"></p-tableCheckbox>
+      </td>
+      <td *ngFor="let col of columns">
         <ng-template [ngIf]="col.format!==null && col.format==true"
                      [ngIfElse]="unformatted">
           <ng-container [ngSwitch]="col.formatType">

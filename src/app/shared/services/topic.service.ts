@@ -19,6 +19,9 @@ export class TopicService extends BasicHttpService {
   all() {
     return this.httpClient.get<Topic[]>(this.baseURL + 'all');
   }
+  active(subcat) {
+    return this.httpClient.get<Topic[]>(this.baseURL + 'active/'+subcat);
+  }
 
   authorized(parent) {
     if (parent === undefined || parent == null || parent === '') {

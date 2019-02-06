@@ -1,10 +1,13 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {ViewtopicpermissionComponent} from './viewtopicpermission/viewtopicpermission.component';
+import {ListtopicpermissionsComponent} from './listtopicpermissions/listtopicpermissions.component';
+import {CreatetopicpermissionComponent} from './createtopicpermission/createtopicpermission.component';
 
 const routes: Routes = [
   {
-    path: 'view', component: ViewtopicpermissionComponent
+    path: 'list', component: ListtopicpermissionsComponent
+  }, {
+    path: 'create', component: CreatetopicpermissionComponent
   }
 ];
 

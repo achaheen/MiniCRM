@@ -21,9 +21,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {BrowserModule} from '@angular/platform-browser';
 import { ListtopicpermissionsComponent } from './listtopicpermissions/listtopicpermissions.component';
+import { CreatetopicpermissionComponent } from './createtopicpermission/createtopicpermission.component';
 
 @NgModule({
-  declarations: [ViewtopicpermissionComponent, ListtopicpermissionsComponent],
+  declarations: [ViewtopicpermissionComponent, ListtopicpermissionsComponent, CreatetopicpermissionComponent],
   imports: [
     CommonModule,
     TopicspermissionsRoutingModule, TranslateModule, TableModule,

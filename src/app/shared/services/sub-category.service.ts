@@ -20,7 +20,9 @@ export class SubCategoryService extends BasicHttpService {
   all() {
     return this.httpClient.get<Subcategory[]>(this.baseURL + 'all');
   }
-
+  active(mainCat) {
+    return this.httpClient.get<Subcategory[]>(this.baseURL + 'active/'+mainCat);
+  }
 
   authorized(parent) {
     if (parent === undefined || parent == null || parent === '') {

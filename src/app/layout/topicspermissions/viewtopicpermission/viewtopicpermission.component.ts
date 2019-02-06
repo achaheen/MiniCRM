@@ -12,7 +12,7 @@ export class ViewtopicpermissionComponent implements OnInit {
 
   @Input() permissionsList: Array<TopicsPermissions>;
   cols: Tablecols[];
-
+  selectedPermissionsList: Array<TopicsPermissions>;
 
   constructor(private topicPermissionService: TopicPermissionsService) {
     this.cols = [
@@ -45,11 +45,7 @@ export class ViewtopicpermissionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.topicPermissionService.getTopicPermissions(3).subscribe(value => {
-      this.permissionsList = value as TopicsPermissions[];
-    }, error1 => {
-      console.log(error1);
-    });
+
   }
 
 }
