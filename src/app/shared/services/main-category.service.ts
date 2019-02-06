@@ -18,9 +18,12 @@ export class MainCategoryService extends BasicHttpService {
   all() {
     return this.httpClient.get<MainCategory[]>(this.baseURL + 'all');
   }
+
   active() {
+    return this.httpClient.get<MainCategory[]>(this.baseURL + 'active');
 
   }
+
   authorized() {
     return this.httpClient.get<MainCategory[]>(this.baseURL + 'authorized');
   }

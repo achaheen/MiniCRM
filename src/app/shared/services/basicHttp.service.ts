@@ -15,10 +15,6 @@ export abstract class BasicHttpService {
 
   }
 
-  active() {
-
-  }
-
   edit() {
 
   }

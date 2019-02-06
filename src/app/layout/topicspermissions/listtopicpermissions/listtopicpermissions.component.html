@@ -1,0 +1,92 @@
+<p-panel>
+  <p-header>
+    topics permissions
+  </p-header>
+
+
+  <p-fieldset legend="Filters" [toggleable]="true">
+    <table>
+      <tr>
+        <td class="grid-input ">
+          <p-radioButton name="toggleFilter" value="mainCat" [(ngModel)]="filterType"></p-radioButton>
+
+        </td>
+        <td class="grid-label">{{'viewTopicFilters'|translate}}</td>
+
+        <ng-container *ngIf="filterType==='mainCat'">
+          <td class="grid-label">{{'MainCat'|translate}}</td>
+          <td class="grid-input ">
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()" [options]="mainCategories"
+                        [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+            </p-dropdown>
+          </td>
+          <td class="grid-label">{{'SubCat'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()" [options]="subCategories"
+                        [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
+          </td>
+          <td class="grid-label">{{'Topic'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown class="minWidth" appendTo="body" [options]="topics" [(ngModel)]="selectedTopic"
+                        optionLabel="englishLabel"></p-dropdown>
+          </td>
+
+        </ng-container>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td class="grid-input ">
+          <p-radioButton name="toggleFilter" value="users" [(ngModel)]="filterType"
+                         (onClick)="basicUserSelection.getActiveUsers()"></p-radioButton>
+
+        </td>
+        <td class="grid-label">{{'viewUsersFilters'|translate}}</td>
+
+        <ng-container *ngIf="filterType==='users'">
+          <td class="grid-label">{{'selectUsers'|translate}}</td>
+          <td class="grid-input ">
+            <p-dropdown optionLabel="firstName" [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
+                        [style]="{'width':'150px'}">
+            </p-dropdown>
+          </td>
+
+
+        </ng-container>
+      </tr>
+    </table>
+    <table>
+      <tr>
+        <td class="grid-input ">
+          <p-radioButton name="toggleFilter" value="groups" [(ngModel)]="filterType"
+                         (onClick)="basicGroupSelection.getActiveGroups()"></p-radioButton>
+
+        </td>
+        <td class="grid-label">{{'viewGroupsFilters'|translate}}</td>
+
+        <ng-container *ngIf="filterType==='groups'">
+          <td class="grid-label">{{'selectGroups'|translate}}</td>
+          <td class="grid-input ">
+            <p-dropdown optionLabel="groupName" [(ngModel)]="selectedGroup" [options]="basicGroupSelection.activeGroups"
+                        [style]="{'width':'150px'}">
+            </p-dropdown>
+          </td>
+
+
+        </ng-container>
+      </tr>
+    </table>
+    <p-button [label]="'apply'|translate" (onClick)="applyFilter()"></p-button>
+  </p-fieldset>
+
+  <app-viewtopicpermission *ngIf="permissionsList!=null && permissionsList.length>0"
+                           [permissionsList]="permissionsList"></app-viewtopicpermission>
+
+  <p-footer>
+    <p-button [label]="'modifyPermBTN'|translate" (onClick)="updatePermissions()"
+              [disabled]="viewPermComponent==null||viewPermComponent.selectedPermissionsList==null ||viewPermComponent.selectedPermissionsList.length<=0"
+    ></p-button>
+    <p-button [label]="'deletePermBTN'|translate" (onClick)="deletePermissions()"
+              [disabled]="viewPermComponent==null||viewPermComponent.selectedPermissionsList==null ||viewPermComponent.selectedPermissionsList.length<=0"></p-button>
+  </p-footer>
+</p-panel>
