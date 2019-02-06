@@ -1,56 +1,56 @@
-import {Topic} from "./topic";
-import {CustomerAccounts} from "./customerAccounts";
-import {Ticketdata} from "./Ticketdata";
-import {Escalationhistory} from "./escalationhistory";
-import {SmsHistory} from "./smsHistory";
-import {TicketExtData} from "./ticketExtData";
+import {Topic} from './topic';
+import {CustomerAccounts} from './customerAccounts';
+import {Ticketdata} from './Ticketdata';
+import {Escalationhistory} from './escalationhistory';
+import {SmsHistory} from './smsHistory';
+import {TicketExtData} from './ticketExtData';
 
 export interface Ticket {
 
- id?: number;
+  id?: number;
 
- topic?: Topic;
+  topic?: Topic;
 
- originalTopic?:Topic;
+  originalTopic?: Topic;
 
- currentStatus?:number;
+  currentStatus?: number;
 
- crossedMainSLA?:boolean;
+  crossedMainSLA?: boolean;
 
- customerAccount?:CustomerAccounts;
+  customerAccount?: CustomerAccounts;
 
- sourceChannel?:number;
+  sourceChannel?: number;
 
- subject?:string;
+  subject?: string;
 
- ticketType?:number;
+  ticketType?: number;
 
- details?:string;
+  details?: string;
 
- assignedTo?:string;
+  assignedTo?: string;
 
- escalationCalDate?:Date;
+  escalationCalDate?: Date;
 
- lastSLA?:number;
+  lastSLA?: number;
 
- language?:number;
+  language?: number;
 
- priority?:number;
+  priority?: number;
 
- lastTicketData?:number;
+  lastTicketData?: number;
 
- solved?:boolean;
+  solved?: boolean;
 
- closed?:boolean;
+  closed?: boolean;
 
- deleted?:boolean;
+  deleted?: boolean;
 
- ticketdataList?:Ticketdata[];
+  ticketdataList?: Ticketdata[];
 
- escalationhistoryList?:Escalationhistory[];
+  escalationhistoryList?: Escalationhistory[];
 
- smsHistoryList?:SmsHistory[];
- 
- ticketExtData?:TicketExtData[];
-  
+  smsHistoryList?: SmsHistory[];
+
+  ticketExtData?: TicketExtData[];
+
 }
