@@ -1,0 +1,46 @@
+<p-panel>
+  <p-header>
+    create topics permissions
+  </p-header>
+
+
+  <p-fieldset legend="Select Category/SubCategory/Topic" [toggleable]="true">
+    <table>
+      <tr>
+        <td class="grid-input ">
+
+
+        </td>
+        <td class="grid-label">{{'viewTopicFilters'|translate}}</td>
+
+        <ng-container>
+          <td class="grid-label">{{'MainCat'|translate}}</td>
+          <td class="grid-input ">
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()" [options]="mainCategories"
+                        [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+            </p-dropdown>
+          </td>
+          <td class="grid-label">{{'SubCat'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()" [options]="subCategories"
+                        [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
+          </td>
+          <td class="grid-label">{{'Topic'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown class="minWidth" appendTo="body" [options]="topics" [(ngModel)]="selectedTopic"
+                        optionLabel="englishLabel"></p-dropdown>
+          </td>
+
+        </ng-container>
+      </tr>
+    </table>
+
+
+    <p-button [label]="'apply'|translate" (onClick)="prepare()"></p-button>
+  </p-fieldset>
+
+
+  <p-footer>
+    <p-button [label]="'modifyPermBTN'|translate" (onClick)="create()"></p-button>
+  </p-footer>
+</p-panel>
