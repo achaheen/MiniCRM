@@ -23,14 +23,13 @@
   </p-accordionTab>
 </p-accordion>
 
-<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" dynamic="true" >
+<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" dynamic="true" (onClose)="handleClose($event)">
+
   <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="i ==0" [closable]="item.closable">
 
     <ng-template pTemplate="content">
        <app-dy-ticket-table *ngIf="item.ticketFilter!=null" [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"  (selectTicketEmitter)="setSelectedTicket($event)"  (eventEmitter)="getTicketList($event)" > </app-dy-ticket-table>
-
-        <app-view-ticket *ngIf="item.ticketFilter == null && item.type != 'static'" [ticketID]="this.selectedTicketId">   </app-view-ticket>
-
+       <app-view-ticket *ngIf="item.ticketFilter == null && item.type != 'static'" [ticketID]="this.selectedTicketId">   </app-view-ticket>
     </ng-template>
 
   </p-tabPanel>

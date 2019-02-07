@@ -20,7 +20,6 @@ export class UtilsService {
     this.actionList= JSON.parse(localStorage.getItem(environment.ticketActionsList)) as Action[]
     this.typesList=  JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[]
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[]
-
   }
 
   findStatus(id:number){

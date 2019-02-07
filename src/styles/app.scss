@@ -206,7 +206,7 @@ body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:
 //  width: auto !important;
 //}
 
-.ui-table .ui-table-tbody > tr, .ui-table .ui-table-thead > tr > th, .ui-table .ui-table-tfoot > tr > td{
+.ui-table .ui-table-tbody > tr, .ui-table .ui-table-tfoot > tr > td{
   max-width: 300px !important;
   font-size: 12px;
   padding: 0px 5px !important;
@@ -214,7 +214,7 @@ body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:
   color: black;
   text-transform: capitalize;
   white-space: nowrap;
-  //overflow: hidden;
-  //text-overflow: ellipsis !important;
-  //border-width: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis !important;
+  border-width: 1px;
 }
