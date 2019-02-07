@@ -15,11 +15,11 @@
 
           <td class="grid-label">{{'selectUsers'|translate}}</td>
           <td class="grid-input ">
-            <p-multiSelect optionLabel="firstName" [(ngModel)]="selectedUsers"
-                           (onClick)="basicUserSelection.getActiveUsers();this.selectedGroups = [];"
+            <p-dropdown optionLabel="firstName" [(ngModel)]="selectedUser"
+                           (onClick)="basicUserSelection.getActiveUsers();this.selectedGroup = null;"
                            [options]="basicUserSelection.activeUsers"
                            [style]="{'width':'150px'}">
-            </p-multiSelect>
+            </p-dropdown>
           </td>
         </ng-container>
 
@@ -36,11 +36,11 @@
 
           <td class="grid-label">{{'selectGroups'|translate}}</td>
           <td class="grid-input ">
-            <p-multiSelect optionLabel="groupName" [(ngModel)]="selectedGroups"
-                           (onClick)="basicGroupSelection.getActiveGroups();this.selectedUsers=[];"
+            <p-dropdown optionLabel="groupName" [(ngModel)]="selectedGroup"
+                           (onClick)="basicGroupSelection.getActiveGroups();this.selectedUser=null;"
                            [options]="basicGroupSelection.activeGroups"
                            [style]="{'width':'150px'}">
-            </p-multiSelect>
+            </p-dropdown>
           </td>
         </ng-container>
       </tr>
@@ -76,7 +76,10 @@
     <p-button [disabled]="selectedMainCategory==null ||selectedMainCategory.id==null" [label]="'Prepare'|translate"
               (onClick)="prepare()"></p-button>
   </p-fieldset>
+
+  <app-viewtopicpermission *ngIf="topicsPermissions!=null && topicsPermissions.length>0"
+                           [permissionsList]="topicsPermissions"></app-viewtopicpermission>
   <p-footer>
-    <p-button [label]="'modifyPermBTN'|translate" (onClick)="create()"></p-button>
+    <p-button [label]="'createPermBTN'|translate" (onClick)="create()"></p-button>
   </p-footer>
 </p-panel>

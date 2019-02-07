@@ -15,13 +15,18 @@ export class TopicPermissionsService {
   }
 
   create(permissions) {
-    return this.httpClient.post<ResponseCode>(this.baseURL + 'create', permissions);
+    return this.httpClient.post<TopicsPermissions[]>(this.baseURL + 'create', permissions);
+  }
+
+  prepare(request) {
+    return this.httpClient.post<TopicsPermissions[]>(this.baseURL + 'topics/prepareList', request);
   }
 
   modify(permissions) {
-    return this.httpClient.post<ResponseCode>(this.baseURL + 'edit', permissions);
+    return this.httpClient.post<TopicsPermissions[]>(this.baseURL + 'edit', permissions);
   }
-  delete(permissions){
+
+  delete(permissions) {
     return this.httpClient.post<ResponseCode>(this.baseURL + 'delete', permissions);
 
   }
@@ -33,9 +38,11 @@ export class TopicPermissionsService {
   getSubCatPermissions(subcat) {
     return this.httpClient.get<TopicsPermissions[]>(this.baseURL + 'subCat/' + subcat);
   }
+
   getMainCatPermissions(maincat) {
     return this.httpClient.get<TopicsPermissions[]>(this.baseURL + 'mainCat/' + maincat);
   }
+
   getUserPermissions(id) {
     return this.httpClient.get<TopicsPermissions[]>(this.baseURL + 'users/' + id);
   }

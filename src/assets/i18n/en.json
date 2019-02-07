@@ -67,6 +67,7 @@
   "selectGroups": "Select Groups",
   "createByUsers": "Create By Users",
   "createByGroups": "Create By Groups",
+  "createPermBTN": "Create Permissions",
   "modifyPermBTN": "Modify Permissions",
   "deletePermBTN": "Delete Permissions",
   "createBTN": "create",
