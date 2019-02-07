@@ -1,5 +1,5 @@
 <p-accordion>
-  <p-accordionTab header="Tickets Categories" [selected]="true">
+  <p-accordionTab header="{{'TicketsCategories' | translate}}" [selected]="true">
     <table>
       <tr>
         <td class="grid-label">{{'MainCat'|translate}}</td>
@@ -23,13 +23,14 @@
   </p-accordionTab>
 </p-accordion>
 
-<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" dynamic="true" (onClose)="handleClose($event)">
+<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" (onClose)="handleClose($event)">
 
   <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="i ==0" [closable]="item.closable">
 
     <ng-template pTemplate="content">
-       <app-dy-ticket-table *ngIf="item.ticketFilter!=null" [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"  (selectTicketEmitter)="setSelectedTicket($event)"  (eventEmitter)="getTicketList($event)" > </app-dy-ticket-table>
-       <app-view-ticket *ngIf="item.ticketFilter == null && item.type != 'static'" [ticketID]="this.selectedTicketId">   </app-view-ticket>
+       <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"  (selectTicketEmitter)="setSelectedTicket($event)"  (eventEmitter)="getTicketList($event)" > </app-dy-ticket-table>
+       <app-view-ticket *ngIf="item.type == 'viewTicket'" [ticketID]="this.selectedTicketId">   </app-view-ticket>
+      <app-create-ticket *ngIf="item.type == 'NewTicket'"></app-create-ticket>
     </ng-template>
 
   </p-tabPanel>
@@ -38,6 +39,10 @@
 
 
 <p-panel class="btnPanel no_style">
-  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded" label="Open Ticket" [disabled]="disableViewTicketBTN"> </button>
+
+  <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded" label="{{'CreateTicket' | translate}}" [disabled]="disableCreateTicketBTN"> </button>
+  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded" label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"> </button>
+  <button type="button" pButton icon="fa fa-pencil-square-o" (click)="openTicketForEdit()" class="ui-button-rounded" label="{{'EditTicket' | translate}}" [disabled]="disableEditTicketBTN"> </button>
+
 </p-panel>
 

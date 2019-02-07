@@ -5,6 +5,8 @@ import {Action} from '../model/action';
 import {Type} from '../model/type';
 import {Priority} from '../model/priority';
 import {LabelEnabled} from '../model/label-enabled';
+import {MainCategory} from "../model/mainCategory";
+import {Topic} from "../model/topic";
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +17,7 @@ export class UtilsService {
   actionList: Action[];
   typesList: Type[];
   priorityList: Priority[];
+
 
   constructor() {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
@@ -57,6 +60,6 @@ export class UtilsService {
 
     }
     return '';
-
   }
+
 }

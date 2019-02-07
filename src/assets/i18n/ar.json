@@ -17,5 +17,34 @@
     "Password": "كلمة السر",
     "Repeat Password": "تأكيد كلمة السر",
     "Register": "التسجيل",
-    "Log in": "تسجيل الدخول"
+    "Log in": "تسجيل الدخول",
+    "TicketsCategories" : "أقسام التزاكر",
+
+
+  "TicketID" : "رقم التزكرة",
+  "MainCat": "Main Category",
+  "SubCat": "Sub Category",
+  "Topic": "Topic",
+  "Status": "Status",
+  "Subject": "Subject",
+  "TicketType": "Ticket Type",
+  "Channel": "Channel",
+  "Priority": "Priority",
+  "Details": "Details",
+  "CustomerBasic": "Customer Basic",
+  "CustomerName" : "Customer Name",
+  "CustomerMobile": "Customer Mobile",
+  "CustomerSegment": "Customer Segment",
+  "OriginalMainCategory" : "Original Main Category",
+  "OriginalSubCategory": "Original Sub Category",
+  "OriginalTopic":"Original Topic",
+  "TicketHistory": "Ticket History",
+  "HistoryDate": "History Date",
+  "Action": "Action",
+  "DoneBy": "Done By",
+  "OldStatus": "Old Status",
+  "NewStatus": "New Status",
+  "OldTopic": "Old Topic",
+  "NewTopic": "New Topic"
+
 }
