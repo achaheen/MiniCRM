@@ -16,18 +16,21 @@
         <ng-container *ngIf="filterType==='mainCat'">
           <td class="grid-label">{{'MainCat'|translate}}</td>
           <td class="grid-input ">
-            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()" [options]="mainCategories"
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory();applyFilter()"
+                        [options]="mainCategories"
                         [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
             </p-dropdown>
           </td>
           <td class="grid-label">{{'SubCat'|translate}}</td>
           <td class="grid-input minWidth">
-            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()" [options]="subCategories"
+            <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList();applyFilter()"
+                        [options]="subCategories"
                         [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
           </td>
           <td class="grid-label">{{'Topic'|translate}}</td>
           <td class="grid-input minWidth">
             <p-dropdown class="minWidth" appendTo="body" [options]="topics" [(ngModel)]="selectedTopic"
+                        (onChange)="applyFilter()"
                         optionLabel="englishLabel"></p-dropdown>
           </td>
 
@@ -38,7 +41,7 @@
       <tr>
         <td class="grid-input ">
           <p-radioButton name="toggleFilter" value="users" [(ngModel)]="filterType"
-                         (onClick)="basicUserSelection.getActiveUsers()"></p-radioButton>
+                         (onClick)="basicUserSelection.getActiveUsers();this.permissionsList=null"></p-radioButton>
 
         </td>
         <td class="grid-label">{{'viewUsersFilters'|translate}}</td>
@@ -49,8 +52,9 @@
             <p-dropdown
               placeholder="{{'selectUsers'|translate}}"
               optionLabel="firstName"
-                        [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
-                        [style]="{'width':'150px'}">
+              (onChange)="applyFilter()"
+              [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
+              [style]="{'width':'150px'}">
             </p-dropdown>
           </td>
 
@@ -62,7 +66,7 @@
       <tr>
         <td class="grid-input ">
           <p-radioButton name="toggleFilter" value="groups" [(ngModel)]="filterType"
-                         (onClick)="basicGroupSelection.getActiveGroups()"></p-radioButton>
+                         (onClick)="basicGroupSelection.getActiveGroups();this.permissionsList=null"></p-radioButton>
 
         </td>
         <td class="grid-label">{{'viewGroupsFilters'|translate}}</td>
@@ -72,8 +76,9 @@
           <td class="grid-input ">
             <p-dropdown
               placeholder="{{'selectGroups'|translate}}"
+              (onChange)="applyFilter()"
               optionLabel="groupName" [(ngModel)]="selectedGroup" [options]="basicGroupSelection.activeGroups"
-                        [style]="{'width':'150px'}">
+              [style]="{'width':'150px'}">
             </p-dropdown>
           </td>
 
@@ -81,7 +86,7 @@
         </ng-container>
       </tr>
     </table>
-    <p-button [label]="'apply'|translate" (onClick)="applyFilter()"></p-button>
+    <!--p-button [label]="'apply'|translate" (onClick)="applyFilter()"></p-button-->
   </p-fieldset>
 
   <app-viewtopicpermission *ngIf="permissionsList!=null && permissionsList.length>0"
@@ -92,6 +97,11 @@
               [disabled]="viewPermComponent==null||viewPermComponent.selectedPermissionsList==null ||viewPermComponent.selectedPermissionsList.length<=0"
     ></p-button>
     <p-button [label]="'deletePermBTN'|translate" (onClick)="deletePermissions()"
+
               [disabled]="viewPermComponent==null||viewPermComponent.selectedPermissionsList==null ||viewPermComponent.selectedPermissionsList.length<=0"></p-button>
+
+    <p-button [label]="'createPermBTN'|translate" [routerLink]="['/tp/create']"
+              [routerLinkActive]="['router-link-active']"></p-button>
+
   </p-footer>
 </p-panel>

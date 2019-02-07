@@ -45,8 +45,19 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
     this.basicUserSelection.getActiveUsers();
   }
 
+  enablePrepareBTN(): boolean {
+    if (this.selectedMainCategory != null && (this.selectedUser != null || this.selectedGroup != null)) {
+      return true;
+    }
+
+    return false;
+  }
+
   prepare() {
 
+    if (!this.enablePrepareBTN()) {
+      return;
+    }
 
     // old
     this.topicsPermissions = [];
@@ -69,18 +80,17 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
 
   createPermObjects(topics: Topic[]) {
     // console.log(`creating topics ${JSON.stringify(topics)}`);
-    if (this.selectedUser != null) {
-      this.topicsPermService.prepare({}).subscribe(value => {
-        value.forEach(item => {
-          if (item.assigne == null) {
-            item.assigne = this.selectedUser.id;
-            item.user = this.selectedUser;
-            item.group = null;
-          }
-        });
-
-      });
+    let request: any = {};
+    if (this.selectedGroup != null) {
+      request = {'topicList': topics, 'assigne': this.selectedGroup.id, 'type': 'group'};
+    } else {
+      request = {'topicList': topics, 'assigne': this.selectedUser.id, 'type': 'user'};
     }
+
+    this.topicsPermService.prepare(request).subscribe(value => {
+      this.topicsPermissions = value;
+    });
+
 
     /**
      * old
@@ -92,38 +102,6 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
     console.log(`topics permissions ${JSON.stringify(this.topicsPermissions)}`);
   }
 
-  createUserTopicsPerm(topics: Topic[]) {
-    console.log(`Selected Users ${JSON.stringify(this.selectedUser)}`);
-    topics.forEach(topic => {
-
-      let tp: TopicsPermissions = {
-        id: null,
-        type: 'user',
-        assigne: this.selectedUser.id,
-        topicId: topic,
-        user: this.selectedUser,
-        group: null
-      };
-      this.topicsPermissions.unshift(tp);
-
-    });
-  }
-
-  createGroupTopicsPerm(topics: Topic[]) {
-    topics.forEach(topic => {
-
-      let tp: TopicsPermissions = {
-        id: null,
-        type: 'group',
-        assigne: this.selectedGroup.id,
-        topicId: topic,
-        group: this.selectedGroup,
-        user: null
-      };
-      this.topicsPermissions.unshift(tp);
-
-    });
-  }
 
   create() {
     if (this.topicsPermissions != null && this.topicsPermissions.length > 0) {
@@ -134,7 +112,6 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
         console.log(JSON.stringify(error1));
       });
     }
-
   }
 
 }
