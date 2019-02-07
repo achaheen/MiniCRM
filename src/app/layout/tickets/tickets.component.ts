@@ -205,7 +205,6 @@ export class TicketsComponent implements OnInit {
     } else{
       this.disableViewTicketBTN = true;
     }
-
   }
 
   openTicketForView(event:Event){
@@ -229,10 +228,12 @@ export class TicketsComponent implements OnInit {
       ticketFilter:null})
       setTimeout(() => {
         this.activeIndexChange();
-      }, 0);
+      }, 10);
     }else{
       this.selectedTab = itemIndex
     }
+
+    console.log(JSON.stringify(this.items));
   }
 
   activeIndexChange(){
@@ -244,6 +245,10 @@ export class TicketsComponent implements OnInit {
     return user.userID;
   }
 
+  handleClose(event){
+    this.items.splice(event['index'] , 1);
+    this.selectedTab = 0;
+  }
  }
 
 
