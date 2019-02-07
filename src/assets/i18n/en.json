@@ -68,6 +68,13 @@
   "viewGroupsFilters": "Filter By Groups",
   "selectUsers": "Select Users",
   "selectGroups": "Select Groups",
+  "createByUsers": "Create By Users",
+  "createByGroups": "Create By Groups",
   "modifyPermBTN": "Modify Permissions",
-  "deletePermBTN": "Delete Permissions"
+  "deletePermBTN": "Delete Permissions",
+  "createBTN": "create",
+  "prepareBTN": "Prepare",
+  "selectMainCatLabel": "Select Main Category",
+  "selectSubCatLabel": "Select Sub Category",
+  "selectTopicLabel": "Select Topic"
 }

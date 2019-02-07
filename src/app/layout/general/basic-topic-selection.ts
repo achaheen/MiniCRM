@@ -4,12 +4,13 @@ import {Topic} from '../../shared/model/topic';
 import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
+import {UtilsService} from '../../shared/services/utils.service';
 
 export class BasicTopicSelection {
 
   constructor(public topicService: TopicService
     , public subCategoryService: SubCategoryService,
-              public mainCatService: MainCategoryService) {
+              public mainCatService: MainCategoryService, public utils: UtilsService) {
   }
 
   protected mainCategories: MainCategory[] = [];
@@ -23,11 +24,9 @@ export class BasicTopicSelection {
     if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
       this.topicService.active(this.selectedSubCategory.id).subscribe(
         result => {
-          const mainCat: Topic = {};
-          mainCat.englishLabel = 'Select Topic';
-          mainCat.id = null;
+          const topic: Topic = {id: null, arabicLabel: 'Select Topic', englishLabel: 'Select Topic'};
           this.topics = result;
-          this.topics.unshift(mainCat);
+          this.topics.unshift(topic);
         }
       );
 
@@ -42,7 +41,7 @@ export class BasicTopicSelection {
       this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
         result => {
           this.subCategories = result;
-          const subcategory: Subcategory = {englishLabel: '', id: null};
+          const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'Select Sub Category', id: null};
           this.subCategories.unshift(subcategory);
         }
       );
@@ -57,9 +56,7 @@ export class BasicTopicSelection {
   public listAllMainCategories() {
     this.mainCatService.active().subscribe(
       result => {
-        const mainCat: MainCategory = {};
-        mainCat.englishLabel = 'Select Main Category';
-        mainCat.id = null;
+        const mainCat: MainCategory = {id: null, arabicLabel: 'Select Main Category', englishLabel: 'Select Main Category'};
         this.mainCategories = result;
         this.mainCategories.unshift(mainCat);
       }

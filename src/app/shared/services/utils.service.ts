@@ -46,6 +46,7 @@ export class UtilsService {
 
   printLocLabel(labelObj: LabelEnabled): string {
     if (labelObj !== undefined && labelObj !== null) {
+      console.log('printing ' + JSON.stringify(labelObj));
       const lang: string = localStorage.getItem(environment.language);
 
       if (lang === null || lang === '' || lang === 'en') {

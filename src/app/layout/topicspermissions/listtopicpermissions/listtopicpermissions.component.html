@@ -44,9 +44,12 @@
         <td class="grid-label">{{'viewUsersFilters'|translate}}</td>
 
         <ng-container *ngIf="filterType==='users'">
-          <td class="grid-label">{{'selectUsers'|translate}}</td>
+
           <td class="grid-input ">
-            <p-dropdown optionLabel="firstName" [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
+            <p-dropdown
+              placeholder="{{'selectUsers'|translate}}"
+              optionLabel="firstName"
+                        [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
                         [style]="{'width':'150px'}">
             </p-dropdown>
           </td>
@@ -65,9 +68,11 @@
         <td class="grid-label">{{'viewGroupsFilters'|translate}}</td>
 
         <ng-container *ngIf="filterType==='groups'">
-          <td class="grid-label">{{'selectGroups'|translate}}</td>
+
           <td class="grid-input ">
-            <p-dropdown optionLabel="groupName" [(ngModel)]="selectedGroup" [options]="basicGroupSelection.activeGroups"
+            <p-dropdown
+              placeholder="{{'selectGroups'|translate}}"
+              optionLabel="groupName" [(ngModel)]="selectedGroup" [options]="basicGroupSelection.activeGroups"
                         [style]="{'width':'150px'}">
             </p-dropdown>
           </td>

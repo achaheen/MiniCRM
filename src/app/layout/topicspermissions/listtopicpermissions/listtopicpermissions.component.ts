@@ -13,6 +13,7 @@ import {SelectItem} from 'primeng/api';
 import {BasicTopicSelection} from '../../general/basic-topic-selection';
 import {BasicUserSelection} from '../../general/basic-user-selection';
 import {BasicGroupSelections} from '../../general/basic-group-selections';
+import {UtilsService} from '../../../shared/services/utils.service';
 
 @Component({
   selector: 'app-listtopicpermissions',
@@ -32,8 +33,8 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
 
   constructor(private topicPermissionService: TopicPermissionsService, public topicService: TopicService
     , public subCategoryService: SubCategoryService, public mainCatService: MainCategoryService, private  userServices: UsersService
-    , private groupServices: GroupsService) {
-    super(topicService, subCategoryService, mainCatService);
+    , private groupServices: GroupsService, public utils: UtilsService) {
+    super(topicService, subCategoryService, mainCatService, utils);
     this.basicUserSelection = new BasicUserSelection(this.userServices);
     this.basicGroupSelection = new BasicGroupSelections(this.groupServices);
   }
