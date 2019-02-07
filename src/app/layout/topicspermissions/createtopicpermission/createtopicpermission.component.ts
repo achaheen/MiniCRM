@@ -23,13 +23,13 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
   selectType: string = 'Users';
   basicUserSelection: BasicUserSelection;
   basicGroupSelection: BasicGroupSelections;
-  selectedUsers: User[] = [];
-  selectedGroups: Group[] = [];
+  selectedUser: User;
+  selectedGroup: Group;
   topicsPermissions: TopicsPermissions[];
 
   constructor(mainCatService: MainCategoryService, subCatService: SubCategoryService
     , topicService: TopicService, topicPermissionService: TopicPermissionsService, utils: UtilsService
-    , private  groupServices: GroupsService, private userServices: UsersService) {
+    , private  groupServices: GroupsService, private userServices: UsersService, private  topicsPermService: TopicPermissionsService) {
     super(topicService, subCatService, mainCatService, utils);
 
     this.basicGroupSelection = new BasicGroupSelections(groupServices);
@@ -47,17 +47,19 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
 
   prepare() {
 
+
+    // old
     this.topicsPermissions = [];
-    if (this.selectedUsers.length > 0 || this.selectedGroups.length > 0) {
+    if (this.selectedUser != null || this.selectedGroup != null) {
       let topics: Topic[] = [];
-      if (this.selectedTopic != null || this.selectedTopic.id == null) {
+      if (this.selectedTopic != null && this.selectedTopic.id != null) {
         topics = [this.selectedTopic];
         this.createPermObjects(topics);
-      } else if (this.selectedSubCategory != null) {
+      } else if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
         this.topicService.active(this.selectedSubCategory.id).subscribe(value => {
           this.createPermObjects(value);
         });
-      } else if (this.selectedMainCategory != null) {
+      } else if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
         this.topicService.activeByMainCat(this.selectedMainCategory.id).subscribe(value => {
           this.createPermObjects(value);
         });
@@ -66,34 +68,72 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
   }
 
   createPermObjects(topics: Topic[]) {
-    if (this.selectedUsers.length > 0) {
+    // console.log(`creating topics ${JSON.stringify(topics)}`);
+    if (this.selectedUser != null) {
+      this.topicsPermService.prepare({}).subscribe(value => {
+        value.forEach(item => {
+          if (item.assigne == null) {
+            item.assigne = this.selectedUser.id;
+            item.user = this.selectedUser;
+            item.group = null;
+          }
+        });
+
+      });
+    }
+
+    /**
+     * old
+     if (this.selectedUsers.length > 0) {
       this.createUserTopicsPerm(topics);
     } else if (this.selectedGroups.length > 0) {
       this.createGroupTopicsPerm(topics);
-    }
+    }*/
+    console.log(`topics permissions ${JSON.stringify(this.topicsPermissions)}`);
   }
 
   createUserTopicsPerm(topics: Topic[]) {
+    console.log(`Selected Users ${JSON.stringify(this.selectedUser)}`);
+    topics.forEach(topic => {
 
-    this.topics.forEach(topic => {
-      this.selectedUsers.forEach(u => {
-        let tp: TopicsPermissions = {id: null, type: 'user', assigne: u.id, topicId: topic};
-        this.topicsPermissions.push(tp);
-      });
+      let tp: TopicsPermissions = {
+        id: null,
+        type: 'user',
+        assigne: this.selectedUser.id,
+        topicId: topic,
+        user: this.selectedUser,
+        group: null
+      };
+      this.topicsPermissions.unshift(tp);
+
     });
   }
 
   createGroupTopicsPerm(topics: Topic[]) {
+    topics.forEach(topic => {
 
-    this.topics.forEach(topic => {
-      this.selectedGroups.forEach(g => {
-        let tp: TopicsPermissions = {id: null, type: 'group', assigne: g.id, topicId: topic};
-        this.topicsPermissions.push(tp);
-      });
+      let tp: TopicsPermissions = {
+        id: null,
+        type: 'group',
+        assigne: this.selectedGroup.id,
+        topicId: topic,
+        group: this.selectedGroup,
+        user: null
+      };
+      this.topicsPermissions.unshift(tp);
+
     });
   }
 
   create() {
+    if (this.topicsPermissions != null && this.topicsPermissions.length > 0) {
+      this.topicsPermService.create(this.topicsPermissions).subscribe(value => {
+        console.log('Success');
+        this.topicsPermissions = value;
+      }, error1 => {
+        console.log(JSON.stringify(error1));
+      });
+    }
 
   }
 

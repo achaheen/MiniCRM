@@ -25,7 +25,7 @@ export class TopicService extends BasicHttpService {
   }
 
   activeByMainCat(mainCat) {
-    return this.httpClient.get<Topic[]>(this.baseURL + 'active/mainCat' + mainCat);
+    return this.httpClient.get<Topic[]>(this.baseURL + 'active/mainCat/' + mainCat);
   }
 
 

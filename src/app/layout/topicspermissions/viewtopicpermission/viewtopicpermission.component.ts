@@ -14,6 +14,7 @@ export class ViewtopicpermissionComponent implements OnInit {
   cols: Tablecols[];
   selectedPermissionsList: Array<TopicsPermissions>;
 
+
   constructor(private topicPermissionService: TopicPermissionsService) {
     this.cols = [
       {'field': 'id', 'header': 'id'},
@@ -24,7 +25,7 @@ export class ViewtopicpermissionComponent implements OnInit {
       {'field': 'userID', 'header': 'User ID', composed: true},
       {'field': 'group', 'header': 'GroupName', composed: true},
       {'field': 'createdBy', 'header': 'createdBy'},
-      {'field': 'creationDate', 'header': 'creationDate',format:true,formatType:'date'},
+      {'field': 'creationDate', 'header': 'creationDate', format: true, formatType: 'date'},
       {'field': 'assigne', 'header': 'assigne'},
       {'field': 'type', 'header': 'type'},
       {'field': 'admin', 'header': 'admin', format: true, formatType: 'checkbox'},
