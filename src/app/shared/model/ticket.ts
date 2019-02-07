@@ -46,10 +46,10 @@ export interface Ticket {
 
  deleted?:boolean;
 
-  createdBy: string;
+  createdBy?: string;
   modificationDate?: Date;
   modifiedBy?: string;
-  creationDate: number;
+  creationDate?: number;
 
  ticketdataList?:Ticketdata[];
 

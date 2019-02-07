@@ -1,0 +1,82 @@
+<p-toast [style]="{marginTop: '35px'}"></p-toast>
+
+<!--<p-blockUI [blocked]="blocked"></p-blockUI>-->
+
+<form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()">
+<table *ngIf="ticket">
+  <tr>
+    <td class="grid-label">{{'TicketID' | translate}}</td>
+    <td class="grid-input"><input id="userID" type="text" pInputText name="userID" formControlName="TicketID"></td>
+
+    <td class="grid-label">{{'MainCat' | translate}}</td>
+    <td class="grid-input">
+      <p-dropdown class="minWidth" (onChange)="updateSubCategory()" [options]="mainCategoriesList" [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
+                  optionLabel="englishLabel"></p-dropdown>
+    </td>
+
+    <td class="grid-label">{{'SubCat' | translate}}</td>
+    <td class="grid-input">
+      <p-dropdown class="minWidth" (onChange)="updateTopicList()" [options]="subCategoriesList" [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
+                   optionLabel="englishLabel"></p-dropdown>
+    </td>
+
+    <td class="grid-label">{{'Topic' | translate}}</td>
+    <td class="grid-input">
+      <p-dropdown class="minWidth" [options]="topicsList" [(ngModel)]="selectedTopic" [ngModelOptions]="{standalone: true}"
+                  optionLabel="englishLabel"></p-dropdown>
+  </tr>
+
+  <tr>
+    <td class="grid-label">{{'Subject' | translate}}</td>
+    <td class="grid-input"><input id="subject" type="text" pInputText name="subject" formControlName="Subject"></td>
+
+    <td class="grid-label">{{'TicketType' | translate}}</td>
+    <td class="grid-input">
+      <p-dropdown class="minWidth" [options]="utils.typesList" formControlName="TicketType"
+                  optionLabel="englishLabel"></p-dropdown>
+    </td>
+    <td class="grid-label">{{'Channel' | translate}}</td>
+    <td class="grid-input"><input id="channel" type="text" pInputText name="channel"
+                                  formControlName="Channel"></td>
+
+    <td class="grid-label">{{'Priority' | translate}}</td>
+    <td class="grid-input">
+      <p-dropdown class="minWidth" [options]="utils.priorityList" formControlName="Priority"
+                  optionLabel="priority"></p-dropdown>
+     </td>
+  </tr>
+
+  <tr>
+    <td class="grid-label">{{'Details' | translate}}</td>
+    <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+                                                 formControlName="Details"> </textarea></td>
+  </tr>
+
+  <tr>
+    <td colspan="8">
+      <hr/>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="grid-label">{{'CustomerBasic' | translate}}</td>
+    <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                  formControlName="CustomerBasic"></td>
+    <td class="grid-label">{{'CustomerName' | translate}}</td>
+    <td class="grid-input"><input id="customerName" type="text" pInputText name="customerName"
+                                  formControlName="CustomerNameEn"></td>
+    <td class="grid-label">{{'CustomerMobile' | translate}}</td>
+    <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                  formControlName="CustomerMobile"></td>
+    <td class="grid-label">{{'CustomerSegment' | translate}}</td>
+    <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+                                  formControlName="CustomerSegment"></td>
+  </tr>
+
+
+</table>
+  <div >
+    <button type="submit" pButton icon="pi pi-user-plus" class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid"></button>
+  </div>
+</form>
+

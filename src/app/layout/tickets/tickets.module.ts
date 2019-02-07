@@ -21,8 +21,9 @@ import {DropdownModule} from 'primeng/dropdown';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { ViewTicketComponent } from './components/view-ticket/view-ticket.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 @NgModule({
-  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent],
+  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,

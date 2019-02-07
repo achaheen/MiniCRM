@@ -175,7 +175,7 @@ body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active:
   background: red;
 }
 
-.formTB .ui-state-disabled, body .ui-widget:disabled {
+.formTB .ui-state-disabled, .formTB .ui-widget:disabled {
    opacity: 0.9;
   filter: alpha(opacity=90);
 }

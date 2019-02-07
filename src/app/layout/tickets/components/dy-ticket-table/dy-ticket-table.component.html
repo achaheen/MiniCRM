@@ -15,7 +15,7 @@
 
     <ng-template pTemplate="header">
       <tr>
-
+        <th style="width: 43px;"></th>
         <th *ngFor="let col of sortCols" [pSortableColumn]="col.field"  pResizableColumn >
 
           <div class="col-header"> {{col.header}}</div>
@@ -28,6 +28,9 @@
     </ng-template>
     <ng-template pTemplate="body" let-ticket let-expanded="expanded">
       <tr [pSelectableRow]="ticket">
+        <td>
+          <p-tableRadioButton [value]="ticket"></p-tableRadioButton>
+        </td>
         <td *ngFor="let col of cols" class="ui-resizable-column">
 
           <div *ngIf="col.field ==='creationDate' || col.field ==='escalationCalDate'">
