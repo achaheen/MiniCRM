@@ -1,13 +1,13 @@
-import {BasicModelWithIDInt} from "./basicModelWithIDInt";
+import {BasicModelWithIDInt} from './basicModelWithIDInt';
 
-export interface Status extends BasicModelWithIDInt{
+export interface Status extends BasicModelWithIDInt {
 
 
-  listOrder?:number;
-  enabled?:boolean;
-  enableSLA?:boolean;
-  displayOnTicketEdit?:boolean;
-  arabicLabel?:string;
-  englishLabel?:string;
+  listOrder?: number;
+  enabled?: boolean;
+  enableSLA?: boolean;
+  displayOnTicketEdit?: boolean;
+  arabicLabel?: string;
+  englishLabel?: string;
 
 }

@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Subcategory} from '../model/subcategory';
 import {BasicHttpService} from './basicHttp.service';
+import {MainCategory} from '../model/mainCategory';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,13 @@ export class SubCategoryService extends BasicHttpService {
   all() {
     return this.httpClient.get<Subcategory[]>(this.baseURL + 'all');
   }
+
   active(mainCat) {
-    return this.httpClient.get<Subcategory[]>(this.baseURL + 'active/'+mainCat);
+    return this.httpClient.get<Subcategory[]>(this.baseURL + 'active/' + mainCat);
+  }
+
+  allByMainCat(mainCat) {
+    return this.httpClient.get<Subcategory[]>(this.baseURL + 'all/' + mainCat);
   }
 
   authorized(parent) {
@@ -30,6 +36,10 @@ export class SubCategoryService extends BasicHttpService {
     } else {
       return this.httpClient.get<Subcategory[]>(this.baseURL + `authorized/${parent}`);
     }
+  }
+
+  changeStatus(subCat, newStatus) {
+    return this.httpClient.get<Subcategory[]>(this.baseURL + `change/${subCat}/${newStatus}`);
   }
 
 }

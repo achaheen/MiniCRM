@@ -5,7 +5,7 @@ import {CreatetopicpermissionComponent} from './createtopicpermission/createtopi
 
 const routes: Routes = [
   {
-    path: 'list', component: ListtopicpermissionsComponent
+    path: '', component: ListtopicpermissionsComponent
   }, {
     path: 'create', component: CreatetopicpermissionComponent
   }

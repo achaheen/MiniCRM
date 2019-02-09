@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
-import {Role} from "../model/role";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Role} from '../model/role';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,13 @@ import {Role} from "../model/role";
 
 export class RolesService {
 
-  private baseURL: string = environment.apiUrl + "roles/";
+  private baseURL: string = environment.apiUrl + 'roles/';
 
   constructor(private httpClient: HttpClient) {
   }
 
   all() {
-    return this.httpClient.get<Role[]>(this.baseURL + "all");
+    return this.httpClient.get<Role[]>(this.baseURL + 'all');
   }
 
 }

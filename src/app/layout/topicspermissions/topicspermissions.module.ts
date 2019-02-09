@@ -5,7 +5,7 @@ import {TopicspermissionsRoutingModule} from './topicspermissions-routing.module
 import {ViewtopicpermissionComponent} from './viewtopicpermission/viewtopicpermission.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {TableModule} from 'primeng/table';
-import {TicketsRoutingModule} from '../tickets/tickets-routing.module';
+
 import {
   AccordionModule,
   BlockUIModule,
@@ -19,9 +19,9 @@ import {
 } from 'primeng/primeng';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
-import {BrowserModule} from '@angular/platform-browser';
-import { ListtopicpermissionsComponent } from './listtopicpermissions/listtopicpermissions.component';
-import { CreatetopicpermissionComponent } from './createtopicpermission/createtopicpermission.component';
+import {ListtopicpermissionsComponent} from './listtopicpermissions/listtopicpermissions.component';
+import {CreatetopicpermissionComponent} from './createtopicpermission/createtopicpermission.component';
+
 
 @NgModule({
   declarations: [ViewtopicpermissionComponent, ListtopicpermissionsComponent, CreatetopicpermissionComponent],

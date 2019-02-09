@@ -1,10 +1,10 @@
-import {BasicModelWithIDInt} from "./basicModelWithIDInt";
-import {Topic} from "./topic";
+import {BasicModelWithIDInt} from './basicModelWithIDInt';
+import {Topic} from './topic';
 
-export interface UserTopic extends BasicModelWithIDInt{
+export interface UserTopic extends BasicModelWithIDInt {
 
-  userID?:string;
-  status?:number;
-  topicID?:Topic;
-  
+  userID?: string;
+  status?: number;
+  topicID?: Topic;
+
 }

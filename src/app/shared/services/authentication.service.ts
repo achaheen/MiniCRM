@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
 
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthenticationService {
 
   authenticate(username: string, password: string) {
     const authCred = {username: username, password: password};
-    const apiURL = environment.apiUrl + "auth";
+    const apiURL = environment.apiUrl + 'auth';
     return this.httpClient.post(apiURL, authCred);
   }
 }

@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
-import {UtilsService} from "../../../../shared/services/utils.service";
-import {MessageService} from "primeng/api";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {MainCategory} from "../../../../shared/model/mainCategory";
-import {Subcategory} from "../../../../shared/model/subcategory";
-import {Topic} from "../../../../shared/model/topic";
-import {MainCategoryService} from "../../../../shared/services/main-category.service";
-import {SubCategoryService} from "../../../../shared/services/sub-category.service";
-import {TopicService} from "../../../../shared/services/topic.service";
-import {Type} from "../../../../shared/model/type";
-import {Priority} from "../../../../shared/model/priority";
-import {CustomerAccounts} from "../../../../shared/model/customerAccounts";
+import {UtilsService} from '../../../../shared/services/utils.service';
+import {MessageService} from 'primeng/api';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MainCategory} from '../../../../shared/model/mainCategory';
+import {Subcategory} from '../../../../shared/model/subcategory';
+import {Topic} from '../../../../shared/model/topic';
+import {MainCategoryService} from '../../../../shared/services/main-category.service';
+import {SubCategoryService} from '../../../../shared/services/sub-category.service';
+import {TopicService} from '../../../../shared/services/topic.service';
+import {Type} from '../../../../shared/model/type';
+import {Priority} from '../../../../shared/model/priority';
+import {CustomerAccounts} from '../../../../shared/model/customerAccounts';
 
 @Component({
   selector: 'app-create-ticket',
@@ -23,8 +23,8 @@ import {CustomerAccounts} from "../../../../shared/model/customerAccounts";
 export class CreateTicketComponent implements OnInit {
 
   ticket: Ticket = {};
-  blocked:boolean = true;
-  ticketForm : FormGroup;
+  blocked = true;
+  ticketForm: FormGroup;
   mainCategoriesList: MainCategory[];
   subCategoriesList: Subcategory[];
   topicsList: Topic[];
@@ -36,12 +36,12 @@ export class CreateTicketComponent implements OnInit {
   selectedSubCategory: Subcategory;
   selectedTopic: Topic;
 
-  constructor(private utils:UtilsService,
+  constructor(private utils: UtilsService,
               private ticketHttp: TicketsService,
-              private messageService:MessageService,
+              private messageService: MessageService,
               private mainCategoryService: MainCategoryService,
               private subCategoryService: SubCategoryService,
-              private topicService:TopicService,
+              private topicService: TopicService,
               private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -49,11 +49,11 @@ export class CreateTicketComponent implements OnInit {
       this.initValueLists();
   }
 
-  initValueLists(){
+  initValueLists() {
     this.listAllMainCategories();
   }
 
-  initTicketForm(){
+  initTicketForm() {
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl('',  Validators.required ),
       'MainCategory': new FormControl('', Validators.required),
@@ -63,7 +63,7 @@ export class CreateTicketComponent implements OnInit {
       'TicketType': new FormControl(''),
       'Channel': new FormControl('', Validators.required),
       'Priority': new FormControl(''),
-      'Details': new FormControl('', Validators.compose([Validators.required,Validators.email] )),
+      'Details': new FormControl('', Validators.compose([Validators.required, Validators.email] )),
       'CustomerBasic': new FormControl('', Validators.required),
       'CustomerNameEn': new FormControl(''),
       'CustomerNameAr': new FormControl(''),
@@ -76,8 +76,8 @@ export class CreateTicketComponent implements OnInit {
   }
 
 
-  updateTopicList(){
-    if(this.selectedSubCategory != null && this.selectedSubCategory.id != null){
+  updateTopicList() {
+    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
       this.topicService.active(this.selectedSubCategory.id).subscribe(
         result => {
           const mainCat: Topic = {};
@@ -121,7 +121,7 @@ export class CreateTicketComponent implements OnInit {
     );
   }
 
-  bindFormToTicket(){
+  bindFormToTicket() {
 
       this.ticket.id = this.ticketForm.value.TicketID;
       this.ticket.topic = this.selectedTopic;
@@ -137,9 +137,9 @@ export class CreateTicketComponent implements OnInit {
       customerAccount.customerNameEn = this.ticketForm.value.CustomerNameEn;
       customerAccount.customerNameAR = this.ticketForm.value.CustomerNameAr;
       customerAccount.branchName = this.ticketForm.value.CustomerBranch;
-      customerAccount.mobile= this.ticketForm.value.CustomerMobile;
-      customerAccount.email= this.ticketForm.value.CustomerEmail;
-      customerAccount.segment= this.ticketForm.value.CustomerSegment;
+      customerAccount.mobile = this.ticketForm.value.CustomerMobile;
+      customerAccount.email = this.ticketForm.value.CustomerEmail;
+      customerAccount.segment = this.ticketForm.value.CustomerSegment;
 
       this.ticket.customerAccount = customerAccount;
 
@@ -148,12 +148,12 @@ export class CreateTicketComponent implements OnInit {
   }
 
   SaveTicket() {
-    console.log("Start Save Ticket");
-    var self = this;
+    console.log('Start Save Ticket');
+    let self = this;
     this.bindFormToTicket();
 
 
-    console.log("End Save Ticket");
+    console.log('End Save Ticket');
 
   }
 

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
-import {UtilsService} from "../../../../shared/services/utils.service";
+import {UtilsService} from '../../../../shared/services/utils.service';
 
 @Component({
   selector: 'app-view-ticket',
@@ -13,7 +13,7 @@ export class ViewTicketComponent implements OnInit {
   @Input() ticketID: number;
 
   ticket: Ticket;
-  constructor(private utils:UtilsService, private ticketHttp: TicketsService) {
+  constructor(private utils: UtilsService, private ticketHttp: TicketsService) {
 
   }
 

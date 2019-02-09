@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
-import {JwtHelperService} from "@auth0/angular-jwt";
-import {BasicAuthGuard} from "./basic-auth-guard";
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {BasicAuthGuard} from './basic-auth-guard';
 
 @Injectable()
 export class AuthGuard extends BasicAuthGuard {

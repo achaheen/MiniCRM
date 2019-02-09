@@ -20,7 +20,7 @@ import {Topic} from '../../../shared/model/topic';
   styleUrls: ['./createtopicpermission.component.scss']
 })
 export class CreatetopicpermissionComponent extends BasicTopicSelection implements OnInit {
-  selectType: string = 'Users';
+  selectType = 'Users';
   basicUserSelection: BasicUserSelection;
   basicGroupSelection: BasicGroupSelections;
   selectedUser: User;

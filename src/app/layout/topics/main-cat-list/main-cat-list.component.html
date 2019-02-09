@@ -1,0 +1,46 @@
+<ng-container *ngIf="!enableCreateEditMode">
+  <p-table #dt [value]="mainCatList"
+           selectionMode="single"
+           [rows]="10"
+           [columns]="mainCatCols"
+           [(selection)]="selectedMainCat"
+           [paginator]="true"
+           [resizableColumns]="true" columnResizeMode="expand"
+           [responsive]="true"
+           dataKey="id">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3em"></th>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr>
+        <td>
+          <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+        </td>
+        <td *ngFor="let col of columns">
+          {{rowData[col.field]}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-panel class="btnPanel no_style">
+
+    <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
+            class="ui-button-rounded"
+            label="{{'createBTN' | translate}}"></button>
+    <button type="button" pButton *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" icon="fa fa-folder-open-o"
+            (click)="enableCreateEditMode=true" class="ui-button-rounded"
+            label="{{'modifyBTN' | translate}}"></button>
+    <button type="button" *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" pButton icon="fa fa-pencil-square-o"
+            (click)="changeStatus()" class="ui-button-rounded"
+
+            label="{{(this.selectedMainCat.enabled)?'disableBTN':'enableBTN' | translate}}"></button>
+
+  </p-panel>
+</ng-container>
+<app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"   [item]="selectedMainCat"></app-create-main-cat>

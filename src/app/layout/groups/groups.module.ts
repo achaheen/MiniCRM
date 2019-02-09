@@ -4,11 +4,11 @@ import { CommonModule } from '@angular/common';
 import { GroupsRoutingModule } from './groups-routing.module';
 import { GroupsComponent } from './groups.component';
 
-import {TableModule} from "primeng/table";
-import {ButtonModule} from "primeng/button";
-import {DialogModule} from "primeng/dialog";
-import {BlockUIModule} from "primeng/blockui";
-import {PanelModule} from "primeng/panel";
+import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {DialogModule} from 'primeng/dialog';
+import {BlockUIModule} from 'primeng/blockui';
+import {PanelModule} from 'primeng/panel';
 import {
   CheckboxModule,
   DataGridModule, FieldsetModule,
@@ -16,10 +16,10 @@ import {
   MessageModule, MultiSelectModule, PasswordModule,
   RadioButtonModule,
   TriStateCheckboxModule
-} from "primeng/primeng";
+} from 'primeng/primeng';
 
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {ToastModule} from "primeng/toast";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ToastModule} from 'primeng/toast';
 
 @NgModule({
   declarations: [GroupsComponent],

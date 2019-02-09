@@ -26,7 +26,7 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
   permissionsList: Array<TopicsPermissions>;
   selectedUser: User;
   selectedGroup: Group;
-  filterType: string = 'mainCat';
+  filterType = 'mainCat';
   basicUserSelection: BasicUserSelection;
 
   basicGroupSelection: BasicGroupSelections;

@@ -15,10 +15,10 @@ export abstract class BasicHttpService {
 
   }
 
-  edit() {
+  edit(request) {
 
   }
 
-  delete() {
+  delete(request) {
   }
 }

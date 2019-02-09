@@ -9,8 +9,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
-import {JwtModule} from "@auth0/angular-jwt";
-import {environment} from "../environments/environment";
+import {JwtModule} from '@auth0/angular-jwt';
+import {environment} from '../environments/environment';
 
 
 // AoT requires an exported function for factories

@@ -20,7 +20,8 @@ const routes: Routes = [
       {path: 'roles', loadChildren: './roles/roles.module#RolesModule'},
       {path: 'groups', loadChildren: './groups/groups.module#GroupsModule'},
       {path: 'tickets', loadChildren: './tickets/tickets.module#TicketsModule'},
-      {path: 'tp', loadChildren: './topicspermissions/topicspermissions.module#TopicspermissionsModule'}
+      {path: 'tp', loadChildren: './topicspermissions/topicspermissions.module#TopicspermissionsModule'},
+      {path: 'mc', loadChildren: './topics/topics.module#TopicsModule'}
     ]
   }
 ];

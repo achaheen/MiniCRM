@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {User} from "../../../shared/model/user";
-import {environment} from "../../../../environments/environment";
+import {User} from '../../../shared/model/user';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
     const browserLang = this.translate.getBrowserLang();
     this.translate.use(browserLang.match(/en|ar/) ? browserLang : 'en');
 
-    let user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
+    const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
     this.username = user.firstName + ' ' + user.lastName;
     this.router.events.subscribe(val => {
       if (

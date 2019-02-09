@@ -12,7 +12,7 @@ import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
-import {Status} from "../../shared/model/status";
+import {Status} from '../../shared/model/status';
 
 
 @Component({
@@ -38,11 +38,11 @@ export class TicketsComponent implements OnInit {
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
 
   items: any[];
-  selectedTab:number = 0;
-  selectedTicketId:number;
-  disableViewTicketBTN:boolean = true;
-  disableEditTicketBTN:boolean = true;
-  disableCreateTicketBTN:boolean = false;
+  selectedTab = 0;
+  selectedTicketId: number;
+  disableViewTicketBTN = true;
+  disableEditTicketBTN = true;
+  disableCreateTicketBTN = false;
   constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
   }
 
@@ -53,46 +53,46 @@ export class TicketsComponent implements OnInit {
 
    this.items = [
       { header: 'All Tickets',
-        content:'Tab 2 Content',
+        content: 'Tab 2 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:this.openTicketFilter},
+        type: 'filters',
+        ticketFilter: this.openTicketFilter},
 
       { header: 'Assigned Tickets',
-        content:'Tab 1 Content',
+        content: 'Tab 1 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:this.assignedTicketFilter},
+        type: 'filters',
+        ticketFilter: this.assignedTicketFilter},
 
       { header: 'Opened Tickets',
-        content:'Tab 2 Content',
+        content: 'Tab 2 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:this.openTicketFilter},
+        type: 'filters',
+        ticketFilter: this.openTicketFilter},
 
       { header: 'Work On Progress Tickets',
-        content:'Tab 2 Content',
+        content: 'Tab 2 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:this.openTicketFilter},
+        type: 'filters',
+        ticketFilter: this.openTicketFilter},
 
       { header: 'Closed Tickets',
-        content:'Tab 2 Content',
+        content: 'Tab 2 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:this.openTicketFilter},
+        type: 'filters',
+        ticketFilter: this.openTicketFilter},
 
       { header: 'Advanced Search',
-        content:'Tab 2 Content',
+        content: 'Tab 2 Content',
         closable : false,
-        type:'filters',
-        ticketFilter:null}
+        type: 'filters',
+        ticketFilter: null}
 
-      ]
+      ];
 
   }
-  updateTopicList(){
-    if(this.selectedSubCategory != null && this.selectedSubCategory.id != null){
+  updateTopicList() {
+    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
       this.topicService.authorized(this.selectedSubCategory.id).subscribe(
         result => {
           const mainCat: Topic = {};
@@ -198,20 +198,20 @@ export class TicketsComponent implements OnInit {
     this.getTicketList(this.selectedFilter);
   }
 
-  setSelectedTicket(ticketID:number){
+  setSelectedTicket(ticketID: number) {
 
-    this.selectedTicketId= ticketID;
-    if (this.selectedTicketId != null ){
+    this.selectedTicketId = ticketID;
+    if (this.selectedTicketId != null ) {
       this.disableViewTicketBTN = false;
       this.disableEditTicketBTN = false;
-    } else{
+    } else {
       this.disableViewTicketBTN = true;
       this.disableEditTicketBTN = true;
     }
   }
 
-  activeIndexChange(){
-    this.selectedTab = this.items.length-1;
+  activeIndexChange() {
+    this.selectedTab = this.items.length - 1;
   }
 
   getCurrentUserID(): string {
@@ -219,93 +219,93 @@ export class TicketsComponent implements OnInit {
     return user.userID;
   }
 
-  handleClose(event){
+  handleClose(event) {
     this.items.splice(event['index'] , 1);
     this.selectedTab = 0;
   }
 
 
-  openTicketForView(event:Event){
-    //check id the ticket is already opened
-    //if opened -> activate its tab
-    let itemAlreadyFound:boolean = false;
-    let itemIndex:number = 0;
+  openTicketForView(event: Event) {
+    // check id the ticket is already opened
+    // if opened -> activate its tab
+    let itemAlreadyFound = false;
+    let itemIndex = 0;
 
-    for(let i:number = 0 ;i<=this.items.length-1 ; i++ ){
-      console.log(this.items[i].header)
-      if (this.items[i].header == this.selectedTicketId){
+    for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
+      console.log(this.items[i].header);
+      if (this.items[i].header == this.selectedTicketId) {
          itemAlreadyFound = true;
-         itemIndex= i;
+         itemIndex = i;
         break;
       }
     }
 
-    if(!itemAlreadyFound){
-      this.items.push({header: this.selectedTicketId ,content:'Dynamic Tab Content', closable : true,
-      type:'viewTicket',
-      ticketFilter:null})
+    if (!itemAlreadyFound) {
+      this.items.push({header: this.selectedTicketId , content: 'Dynamic Tab Content', closable : true,
+      type: 'viewTicket',
+      ticketFilter: null});
       setTimeout(() => {
         this.activeIndexChange();
       }, 10);
-    }else{
-      this.selectedTab = itemIndex
+    } else {
+      this.selectedTab = itemIndex;
     }
 }
 
 
-  openTicketForEdit(){
+  openTicketForEdit() {
 
-    //check id the ticket is already opened
-    //if opened -> activate its tab
-    let itemAlreadyFound:boolean = false;
-    let itemIndex:number = 0;
+    // check id the ticket is already opened
+    // if opened -> activate its tab
+    let itemAlreadyFound = false;
+    let itemIndex = 0;
 
-    for(let i:number = 0 ;i<=this.items.length-1 ; i++ ){
-      console.log(this.items[i].header)
-      if (this.items[i].header == this.selectedTicketId){
+    for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
+      console.log(this.items[i].header);
+      if (this.items[i].header == this.selectedTicketId) {
         itemAlreadyFound = true;
-        itemIndex= i;
+        itemIndex = i;
         break;
       }
     }
 
-    if(!itemAlreadyFound){
-      this.items.push({header: this.selectedTicketId ,content:'Dynamic Tab Content', closable : true,
-        type:'viewTicket',
-        ticketFilter:null})
+    if (!itemAlreadyFound) {
+      this.items.push({header: this.selectedTicketId , content: 'Dynamic Tab Content', closable : true,
+        type: 'viewTicket',
+        ticketFilter: null});
       setTimeout(() => {
         this.activeIndexChange();
       }, 10);
-    }else{
-      this.selectedTab = itemIndex
+    } else {
+      this.selectedTab = itemIndex;
     }
 
   }
-   createNewTicket(){
+   createNewTicket() {
 
-     //check id the ticket is already opened
-     //if opened -> activate its tab
-     let itemAlreadyFound:boolean = false;
-     let itemIndex:number = 0;
+     // check id the ticket is already opened
+     // if opened -> activate its tab
+     let itemAlreadyFound = false;
+     let itemIndex = 0;
 
-     for(let i:number = 0 ;i<=this.items.length-1 ; i++ ){
-       console.log(this.items[i].header)
-       if (this.items[i].header == "New Ticket"){
+     for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
+       console.log(this.items[i].header);
+       if (this.items[i].header == 'New Ticket') {
          itemAlreadyFound = true;
-         itemIndex= i;
+         itemIndex = i;
          break;
        }
      }
 
-     if(!itemAlreadyFound){
-     this.items.push({header: "New Ticket" ,content:'Dynamic Tab Content', closable : true,
-       type:'NewTicket',
-       ticketFilter:null})
+     if (!itemAlreadyFound) {
+     this.items.push({header: 'New Ticket' , content: 'Dynamic Tab Content', closable : true,
+       type: 'NewTicket',
+       ticketFilter: null});
          setTimeout(() => {
        this.activeIndexChange();
      }, 10);
-     }else{
-       this.selectedTab = itemIndex
+     } else {
+       this.selectedTab = itemIndex;
      }
   }
  }

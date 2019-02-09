@@ -19,6 +19,18 @@ export class MainCategoryService extends BasicHttpService {
     return this.httpClient.get<MainCategory[]>(this.baseURL + 'all');
   }
 
+  create(request) {
+    return this.httpClient.post<MainCategory[]>(this.baseURL + 'create', request);
+  }
+
+  edit(request) {
+    return this.httpClient.post<MainCategory[]>(this.baseURL + 'edit', request);
+  }
+
+  delete(request) {
+    return this.httpClient.post<MainCategory[]>(this.baseURL + 'delete', request);
+  }
+
   active() {
     return this.httpClient.get<MainCategory[]>(this.baseURL + 'active');
 
@@ -26,5 +38,9 @@ export class MainCategoryService extends BasicHttpService {
 
   authorized() {
     return this.httpClient.get<MainCategory[]>(this.baseURL + 'authorized');
+  }
+
+  changeStatus(mainCat, newStatus) {
+    return this.httpClient.get<MainCategory[]>(this.baseURL + `change/${mainCat}/${newStatus}`);
   }
 }
