@@ -41,5 +41,11 @@ export class SubCategoryService extends BasicHttpService {
   changeStatus(subCat, newStatus) {
     return this.httpClient.get<Subcategory[]>(this.baseURL + `change/${subCat}/${newStatus}`);
   }
+  edit(request) {
+    return this.httpClient.post<Subcategory[]>(this.baseURL + `edit`, request);
+  }
+  create(request) {
+    return this.httpClient.post<Subcategory[]>(this.baseURL + `create`, request);
+  }
 
 }

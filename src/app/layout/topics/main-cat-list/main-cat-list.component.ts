@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {UtilsService} from '../../../shared/services/utils.service';
 import {MainCategory} from '../../../shared/model/mainCategory';
@@ -47,5 +47,6 @@ export class MainCatListComponent implements OnInit {
       this.enableCreateEditMode = false;
     }
   }
+
 
 }

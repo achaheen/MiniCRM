@@ -5,6 +5,7 @@ import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {UtilsService} from '../../shared/services/utils.service';
+import {Input} from '@angular/core';
 
 export class BasicTopicSelection {
 
@@ -13,12 +14,12 @@ export class BasicTopicSelection {
               public mainCatService: MainCategoryService, public utils: UtilsService) {
   }
 
-  protected mainCategories: MainCategory[] = [];
-  protected selectedMainCategory: MainCategory;
-  protected subCategories: Subcategory[] = [];
-  protected selectedSubCategory: Subcategory;
-  protected topics: Topic[] = [];
-  protected selectedTopic: Topic;
+  @Input() protected mainCategories: MainCategory[] = [];
+  @Input() protected selectedMainCategory: MainCategory;
+  @Input() protected subCategories: Subcategory[] = [];
+  @Input() protected selectedSubCategory: Subcategory;
+  @Input() protected topics: Topic[] = [];
+  @Input() protected selectedTopic: Topic;
 
   public updateTopicList() {
     if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {

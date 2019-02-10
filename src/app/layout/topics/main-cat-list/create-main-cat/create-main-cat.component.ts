@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MainCategory} from '../../../../shared/model/mainCategory';
 import {MainCategoryService} from '../../../../shared/services/main-category.service';
 
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-create-main-cat',
@@ -11,15 +12,13 @@ import {MainCategoryService} from '../../../../shared/services/main-category.ser
 export class CreateMainCatComponent implements OnInit {
 
   @Input() item: MainCategory = {};
-
-
   @Output() event: EventEmitter<Object> = new EventEmitter();
+  @Input() parent: any;
 
-  constructor(private mainCatService: MainCategoryService) {
+  constructor(private mainCatService: MainCategoryService, private location: Location) {
   }
 
   ngOnInit() {
-
     if (this.item == null) {
       this.item = {};
     }
@@ -40,4 +39,5 @@ export class CreateMainCatComponent implements OnInit {
   fireEvent(value) {
     this.event.emit(value);
   }
+
 }
