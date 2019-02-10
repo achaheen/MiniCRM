@@ -115,5 +115,21 @@
   "totalSummary": "Total number of elements {{param}}",
   "mainCatWizard": "Main Category Wizard",
   "subCatWizard": "Sub Category Wizard",
-  "topicWizard": "Topic Wizard"
+  "topicWizard": "Topic Wizard",
+
+  "Validate-MainCategory":"MainCategory is not valid ",
+  "Validate-SubCategory":"SubCategory is not valid ",
+  "Validate-Topic":"Topic is not valid ",
+  "Validate-Subject":"Subject is not valid ",
+  "Validate-TicketType":"TicketType is not valid ",
+  "Validate-Channel":"Channel is not valid ",
+  "Validate-Priority":"Priority is not valid ",
+  "Validate-Details":"Details is not valid ",
+  "Validate-CustomerBasic":"CustomerBasic is not valid ",
+  "Validate-CustomerNameEn":"CustomerNameEn is not valid ",
+  "Validate-CustomerNameAr":"CustomerNameAr is not valid ",
+  "Validate-CustomerMobile":"CustomerMobile is not valid ",
+  "Validate-CustomerSegment":"CustomerSegment is not valid ",
+  "Validate-CustomerBranch":"CustomerBranch is not valid ",
+  "Validate-CustomerEmail":"CustomerEmail is not valid "
 }

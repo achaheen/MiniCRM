@@ -3,37 +3,55 @@
 <!--<p-blockUI [blocked]="blocked"></p-blockUI>-->
 
 <form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()">
-<table *ngIf="ticket">
+<table class="ticketFormTb" *ngIf="ticket">
+
+  <tr><td colspan="8">
+
+    <p-message severity="error" text="{{'Validate-MainCategory' | translate}}" *ngIf="!ticketForm.controls['MainCategory'].valid&&ticketForm.controls['MainCategory'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-SubCategory' | translate}}" *ngIf="!ticketForm.controls['SubCategory'].valid&&ticketForm.controls['SubCategory'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-Topic' | translate}}" *ngIf="!ticketForm.controls['Topic'].valid&&ticketForm.controls['Topic'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-Subject' | translate}}" *ngIf="!ticketForm.controls['Subject'].valid&&ticketForm.controls['Subject'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-TicketType' | translate}}" *ngIf="!ticketForm.controls['TicketType'].valid&&ticketForm.controls['TicketType'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-Channel' | translate}}" *ngIf="!ticketForm.controls['Channel'].valid&&ticketForm.controls['Channel'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-Priority' | translate}}" *ngIf="!ticketForm.controls['Priority'].valid&&ticketForm.controls['Priority'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-Details' | translate}}" *ngIf="!ticketForm.controls['Details'].valid&&ticketForm.controls['Details'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerBasic' | translate}}" *ngIf="!ticketForm.controls['CustomerBasic'].valid&&ticketForm.controls['CustomerBasic'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerNameEn' | translate}}" *ngIf="!ticketForm.controls['CustomerNameEn'].valid&&ticketForm.controls['CustomerNameEn'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerNameAr' | translate}}" *ngIf="!ticketForm.controls['CustomerNameAr'].valid&&ticketForm.controls['CustomerNameAr'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerMobile' | translate}}" *ngIf="!ticketForm.controls['CustomerMobile'].valid&&ticketForm.controls['CustomerMobile'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerSegment' | translate}}" *ngIf="!ticketForm.controls['CustomerSegment'].valid&&ticketForm.controls['CustomerSegment'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerBranch' | translate}}" *ngIf="!ticketForm.controls['CustomerBranch'].valid&&ticketForm.controls['CustomerBranch'].dirty"></p-message>
+    <p-message severity="error" text="{{'Validate-CustomerEmail' | translate}}" *ngIf="!ticketForm.controls['CustomerEmail'].valid&&ticketForm.controls['CustomerEmail'].dirty"></p-message>
+
+  </td></tr>
+  
   <tr>
     <td class="grid-label">{{'TicketID' | translate}}</td>
-    <td class="grid-input"><input id="userID" type="text" pInputText name="userID" formControlName="TicketID"></td>
+    <td class="grid-input"><input id="userID" type="text" pInputText name="userID" formControlName="TicketID" [attr.disabled]="true"></td>
 
     <td class="grid-label">{{'MainCat' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown class="minWidth" (onChange)="updateSubCategory()" [options]="mainCategoriesList" [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
+      <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategoriesList" [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
                   optionLabel="englishLabel"></p-dropdown>
     </td>
 
     <td class="grid-label">{{'SubCat' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown class="minWidth" (onChange)="updateTopicList()" [options]="subCategoriesList" [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
+      <p-dropdown  (onChange)="updateTopicList()" [options]="subCategoriesList" [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
                    optionLabel="englishLabel"></p-dropdown>
     </td>
 
     <td class="grid-label">{{'Topic' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown class="minWidth" [options]="topicsList" [(ngModel)]="selectedTopic" [ngModelOptions]="{standalone: true}"
+      <p-dropdown [options]="topicsList" (onChange)="onChangeTopic()" [(ngModel)]="selectedTopic" [ngModelOptions]="{standalone: true}"
                   optionLabel="englishLabel"></p-dropdown>
   </tr>
 
   <tr>
-    <td class="grid-label">{{'Subject' | translate}}</td>
-    <td class="grid-input"><input id="subject" type="text" pInputText name="subject" formControlName="Subject"></td>
-
     <td class="grid-label">{{'TicketType' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown class="minWidth" [options]="utils.typesList" formControlName="TicketType"
-                  optionLabel="englishLabel"></p-dropdown>
+      <p-dropdown [options]="utils.typesList"  formControlName="TicketType"
+                  optionLabel="englishLabel" ></p-dropdown>
     </td>
     <td class="grid-label">{{'Channel' | translate}}</td>
     <td class="grid-input"><input id="channel" type="text" pInputText name="channel"
@@ -41,11 +59,18 @@
 
     <td class="grid-label">{{'Priority' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown class="minWidth" [options]="utils.priorityList" formControlName="Priority"
+      <p-dropdown [options]="utils.priorityList" formControlName="Priority"
                   optionLabel="priority"></p-dropdown>
      </td>
   </tr>
 
+  <tr>
+
+    <td class="grid-label">{{'Subject' | translate}}</td>
+    <td class="grid-input" colspan="3" ><input  style="width: 100%"id="subject" type="text" pInputText name="subject" formControlName="Subject"></td>
+
+
+  </tr>
   <tr>
     <td class="grid-label">{{'Details' | translate}}</td>
     <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
@@ -57,26 +82,59 @@
       <hr/>
     </td>
   </tr>
-
   <tr>
     <td class="grid-label">{{'CustomerBasic' | translate}}</td>
     <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
                                   formControlName="CustomerBasic"></td>
     <td class="grid-label">{{'CustomerName' | translate}}</td>
-    <td class="grid-input"><input id="customerName" type="text" pInputText name="customerName"
+    <td class="grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
                                   formControlName="CustomerNameEn"></td>
+
+    <td class="grid-label">{{'CustomerName' | translate}}</td>
+    <td class="grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
+                                  formControlName="CustomerNameAr"></td>
+
     <td class="grid-label">{{'CustomerMobile' | translate}}</td>
     <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
                                   formControlName="CustomerMobile"></td>
+  </tr>
+  <tr>
+    <td class="grid-label">{{'CustomerEmail' | translate}}</td>
+    <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                  formControlName="CustomerEmail"></td>
+
     <td class="grid-label">{{'CustomerSegment' | translate}}</td>
     <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
                                   formControlName="CustomerSegment"></td>
+
+    <td class="grid-label">{{'CustomerBranch' | translate}}</td>
+    <td class="grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
+                                  formControlName="CustomerBranch"></td>
+
   </tr>
+  <tr>
+    <td colspan="8">
+      <hr/>
+    </td>
+  </tr>
+  <tr>
+    <td class="grid-label">Attachments</td>
+    <td class="grid-input" colspan="7">
 
+      <p-fileUpload name="files" [url]="getUploadURL()"  multiple="multiple" >
+        <ng-template pTemplate="content">
+          <!--<ul *ngIf="uploadedFiles.length">-->
+            <!--<li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>-->
+          <!--</ul>-->
+        </ng-template>
 
+      </p-fileUpload>
+    </td>
+
+  </tr>
 </table>
-  <div >
-    <button type="submit" pButton icon="pi pi-user-plus" class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid"></button>
+  <div style="text-align: right;">
+    <button type="submit" pButton icon="pi pi-user-plus"  class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid"></button>
   </div>
 </form>
 

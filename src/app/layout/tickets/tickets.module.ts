@@ -22,6 +22,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import { ViewTicketComponent } from './components/view-ticket/view-ticket.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
+import {FileUploadModule} from 'primeng/fileupload'
 @NgModule({
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent],
   imports: [
@@ -48,7 +49,8 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
     PasswordModule,
     AccordionModule, TranslateModule,
     DropdownModule,
-    InputTextareaModule
+    InputTextareaModule,
+    FileUploadModule
   ]
 })
 export class TicketsModule {
