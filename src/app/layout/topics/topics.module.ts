@@ -22,9 +22,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {TranslateModule} from '@ngx-translate/core';
 import { CreateMainCatComponent } from './main-cat-list/create-main-cat/create-main-cat.component';
+import { CreateSubCatComponent } from './sub-cat-list/create-sub-cat/create-sub-cat.component';
 
 @NgModule({
-  declarations: [TopicsListComponent, MainCatListComponent, SubCatListComponent, CreateMainCatComponent],
+  declarations: [TopicsListComponent, MainCatListComponent, SubCatListComponent, CreateMainCatComponent, CreateSubCatComponent],
   imports: [
     CommonModule,
     TopicsRoutingModule,

@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Subcategory} from '../../../shared/model/subcategory';
 import {SubCategoryService} from '../../../shared/services/sub-category.service';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {BasicTopicSelection} from '../../general/basic-topic-selection';
 import {TopicService} from '../../../shared/services/topic.service';
-import {main} from '@angular/compiler-cli/src/main';
 import {UtilsService} from '../../../shared/services/utils.service';
 
 @Component({
@@ -19,8 +17,6 @@ export class SubCatListComponent extends BasicTopicSelection implements OnInit {
   constructor(public  subCatService: SubCategoryService, public  mainCatService: MainCategoryService
     , public topicService: TopicService, public utils: UtilsService) {
     super(topicService, subCatService, mainCatService, utils);
-
-
     this.subCatCols = [
       {field: 'id', header: 'ID'},
       {field: 'mainCategory', header: 'Main Category'},
@@ -47,6 +43,7 @@ export class SubCatListComponent extends BasicTopicSelection implements OnInit {
   handleCreateEditEvent(event) {
     if (event != null) {
       this.subCategories = event;
+      this.selectedSubCategory = null;
       this.selectedMainCategory = null;
       this.enableCreateEditMode = false;
     }

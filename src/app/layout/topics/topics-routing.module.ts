@@ -7,7 +7,7 @@ const routes: Routes = [{
   path: '', component: MainCatListComponent
 },
   {
-    path: 'subCats', component: SubCatListComponent
+    path: 'sc', component: SubCatListComponent
   }];
 
 @NgModule({

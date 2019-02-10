@@ -1,10 +1,4 @@
-<td class="grid-label">{{'MainCat'|translate}}</td>
-<td class="grid-input ">
-  <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
-              [options]="mainCategories"
-              [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
-  </p-dropdown>
-</td>
+
 <!--div>
 
   <td class="grid-label">{{'SubCat'|translate}}</td>
@@ -21,6 +15,13 @@
   </td>
 </div-->
 <ng-container *ngIf="!enableCreateEditMode">
+  <td class="grid-label">{{'MainCat'|translate}}</td>
+  <td class="grid-input ">
+    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
+                [options]="mainCategories"
+                [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+    </p-dropdown>
+  </td>
   <p-table #dt [value]="subCategories"
            selectionMode="single"
            [rows]="10"
@@ -70,9 +71,11 @@
             icon="fa fa-pencil-square-o"
             (click)="changeStatus()" class="ui-button-rounded"
 
-            label="{{(this.selectedSubCategory.enabled)?'disableBTN':'enableBTN' | translate}}"></button>
+            label="{{ 'changeStatusBTN' | translate}}"></button>
 
   </p-panel>
 </ng-container>
-<app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
-                     [item]="selectedSubCategory"></app-create-main-cat>
+<app-create-sub-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
+                    [mainCategories]="mainCategories"
+                    [parent]="this"
+                    [item]="selectedSubCategory"></app-create-sub-cat>

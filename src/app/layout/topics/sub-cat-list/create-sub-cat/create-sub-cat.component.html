@@ -1,7 +1,14 @@
 <p-panel>
   <p-header>
-    {{'mainCatWizard'|translate}}
+    {{'subCatWizard'|translate}}
   </p-header>
+  <h5>{{'MainCat'|translate}}</h5>
+  <div class="grid-input">
+    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
+                [options]="mainCategories"
+                [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+    </p-dropdown>
+  </div>
   <h5 class="first">{{'arabicLabel'|translate}}</h5>
   <input id="arabicLabel" type="text" size="150" pInputText [(ngModel)]="item.arabicLabel">
   <h5 class="first">{{'englishLabel'|translate}}</h5>
@@ -14,7 +21,7 @@
     <button type="button"
             [disabled]="!(item!=null && item.arabicLabel!=null &&
             item.englishLabel!=null && item.arabicLabel.length>0
-            && item.englishLabel.length>0)" pButton
+            && item.englishLabel.length>0 && selectedMainCategory!=null&& selectedMainCategory.id!=null)" pButton
             (click)="execute()"
             label="{{'doneBTN' | translate}}"></button>
     <button type="button"

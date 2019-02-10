@@ -74,6 +74,8 @@
   "disableBTN": "Disable",
   "enableBTN": "Enable",
   "editBTN": "Edit",
+  "doneBTN": "Done",
+  "backBTN": "Back",
   "changeStatusBTN": "Change Status",
   "modifyBTN": "edit",
   "prepareBTN": "Prepare",

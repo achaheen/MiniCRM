@@ -38,9 +38,8 @@
             label="{{'modifyBTN' | translate}}"></button>
     <button type="button" *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" pButton icon="fa fa-pencil-square-o"
             (click)="changeStatus()" class="ui-button-rounded"
-
-            label="{{(this.selectedMainCat.enabled)?'disableBTN':'enableBTN' | translate}}"></button>
+            label="{{'changeStatusBTN' | translate}}"></button>
 
   </p-panel>
 </ng-container>
-<app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"   [item]="selectedMainCat"></app-create-main-cat>
+<app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)" [parent]="this"  [item]="selectedMainCat"></app-create-main-cat>
