@@ -13,8 +13,9 @@ import {TopicService} from '../../../../shared/services/topic.service';
 import {Type} from '../../../../shared/model/type';
 import {Priority} from '../../../../shared/model/priority';
 import {CustomerAccounts} from '../../../../shared/model/customerAccounts';
-import {TicketHolder} from "../../../../shared/model/ticketHolder";
-import {environment} from "../../../../../environments/environment";
+import {TicketHolder} from '../../../../shared/model/ticketHolder';
+import {FileUploadService} from '../../../../shared/services/file-upload.service';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-create-ticket',
@@ -24,7 +25,7 @@ import {environment} from "../../../../../environments/environment";
 })
 export class CreateTicketComponent implements OnInit {
 
-
+  uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
   blocked = true;
@@ -41,6 +42,7 @@ export class CreateTicketComponent implements OnInit {
   selectedTopic: Topic;
 
   uploadedFiles: any[] = [];
+  attachments: any[] = [];
 
   constructor(public utils: UtilsService,
               private ticketHttp: TicketsService,
@@ -48,7 +50,7 @@ export class CreateTicketComponent implements OnInit {
               private mainCategoryService: MainCategoryService,
               private subCategoryService: SubCategoryService,
               private topicService: TopicService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder, private fileUploadService: FileUploadService) {
   }
 
   ngOnInit() {
@@ -71,7 +73,7 @@ export class CreateTicketComponent implements OnInit {
       'Channel': new FormControl('', Validators.required),
       'Priority': new FormControl(''),
       'Details': new FormControl('', Validators.required),
-      'CustomerBasic': new FormControl('', Validators.compose([Validators.required, Validators.pattern('/^[A-Za-z]+$/')])),
+      'CustomerBasic': new FormControl('', Validators.compose([Validators.pattern('/^[A-Za-z]+$/')])),
       'CustomerNameEn': new FormControl('', Validators.required),
       'CustomerNameAr': new FormControl('', Validators.required),
       'CustomerMobile': new FormControl('', Validators.compose([Validators.required, Validators.pattern('[05][0-9]{9}')])),
@@ -87,7 +89,7 @@ export class CreateTicketComponent implements OnInit {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       this.ticketForm.controls.Topic.setValue(this.selectedTopic);
       this.ticketForm.controls.Topic.updateValueAndValidity();
-      console.log("Selected Topic : " + this.selectedTopic.englishLabel);
+      console.log('Selected Topic : ' + this.selectedTopic.englishLabel);
     }
   }
 
@@ -175,7 +177,7 @@ export class CreateTicketComponent implements OnInit {
 
 
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => function () {
-        this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'})
+        this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
       },
       error => {
         // can't create Ticket
@@ -189,18 +191,29 @@ export class CreateTicketComponent implements OnInit {
 
   }
 
-  uploadAttachment(event) {
+  onUploadFiles(event) {
 
-    for (let file of event.files) {
+    event.files.forEach(file => {
       this.uploadedFiles.push(file);
-    }
-
+      console.log(JSON.stringify(this.uploadedFiles));
+    });
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 
   }
 
-  getUploadURL(): string {
-    return environment.apiUrl + "/upload/uploadMultipleFiles";
+  customUploader(events, uploadElement) {
+    this.fileUploadService.uploadFiles(events.files).subscribe(value => {
+      events.files.forEach(file => {
+        this.uploadedFiles.push(file);
+        console.log(JSON.stringify(this.uploadedFiles));
+      });
+      this.attachments.push(value);
+      events.files = [];
+      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+      console.log('attachments ' + this.attachments);
+      uploadElement.clear();
+    }, error1 => {
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
+    });
   }
-
 }
