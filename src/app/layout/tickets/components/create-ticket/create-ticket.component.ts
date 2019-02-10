@@ -71,7 +71,7 @@ export class CreateTicketComponent implements OnInit {
       'Channel': new FormControl('', Validators.required),
       'Priority': new FormControl(''),
       'Details': new FormControl('', Validators.required),
-      'CustomerBasic': new FormControl('', Validators.compose([Validators.required, Validators.pattern('/^[A-Za-z]+$/')])),
+      'CustomerBasic': new FormControl('', Validators.required),
       'CustomerNameEn': new FormControl('', Validators.required),
       'CustomerNameAr': new FormControl('', Validators.required),
       'CustomerMobile': new FormControl('', Validators.compose([Validators.required, Validators.pattern('[05][0-9]{9}')])),
