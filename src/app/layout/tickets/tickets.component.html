@@ -1,19 +1,19 @@
 <p-accordion>
   <p-accordionTab header="{{'TicketsCategories' | translate}}" [selected]="true">
-    <table>
+    <table class="minWidth">
       <tr>
         <td class="grid-label">{{'MainCat'|translate}}</td>
         <td class="grid-input " >
-          <p-dropdown class="minWidth" (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
           </p-dropdown>
         </td>
         <td class="grid-label">{{'SubCat'|translate}}</td>
         <td class="grid-input minWidth">
-          <p-dropdown class="minWidth" (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
+          <p-dropdown (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
         </td>
         <td class="grid-label">{{'Topic'|translate}}</td>
         <td class="grid-input minWidth">
-          <p-dropdown class="minWidth" [options]="topics" [(ngModel)]="selectedTopic" optionLabel="englishLabel"></p-dropdown>
+          <p-dropdown [options]="topics" [(ngModel)]="selectedTopic" optionLabel="englishLabel"></p-dropdown>
         </td>
         <td colspan="2" style="padding: 0px 40px">
           <p-button label="Apply" (onClick)="applyGlobalFilter()"></p-button>
