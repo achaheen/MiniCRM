@@ -22,9 +22,12 @@ export class UtilsService {
 
   constructor(public translateService: TranslateService) {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
+    //this.statusList.unshift({'id':null,'englishLabel':'Select Ticket Type'})
     this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as Action[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];
+    this.typesList .unshift({'typeID':null,'englishLabel':'Select Ticket Type'});
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[];
+    this.priorityList.unshift({'priorityValue':null,'priority':'Select Priority'})
 
   }
 
