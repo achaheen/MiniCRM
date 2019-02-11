@@ -122,20 +122,26 @@
     <td class="grid-label">Attachments</td>
     <td class="grid-input" colspan="7">
 
-      <p-fileUpload name="files" [url]="uploadURL"  multiple="multiple" >
-        <ng-template pTemplate="content">
-          <!--<ul *ngIf="uploadedFiles.length">-->
-            <!--<li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>-->
-          <!--</ul>-->
-        </ng-template>
 
+      <p-fileUpload name="files" #uploadFile  multiple="multiple"
+                    (onUpload)="onUploadFiles($event)"
+                    auto="true"
+                    (uploadHandler)="customUploader($event,uploadFile)"
+                    customUpload="true"
+                    accept=".csv,.xml,.tsv,.xlsx,.pdf" maxFileSize="1000000">
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size * 0.000001}} bytes</li>
+          </ul>
+        </ng-template>
       </p-fileUpload>
+
     </td>
 
   </tr>
 </table>
   <div style="text-align: right;">
-    <button type="submit" pButton icon="pi pi-user-plus"  class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid || lockAfterSave"></button>
+    <button type="submit" pButton icon="pi pi-user-plus"  class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid"></button>
     <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'ResetTicket' | translate}}" (click)="reset()"></button>
 
   </div>

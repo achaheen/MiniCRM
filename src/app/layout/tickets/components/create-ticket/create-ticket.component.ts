@@ -99,7 +99,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
 
   bindFormToTicket() {
 
-    //  this.ticket.id = this.ticketForm.value.TicketID;
     this.ticket.topic = this.selectedTopic;
     this.ticket.subject = this.ticketForm.value.Subject;
     this.ticket.ticketType = this.ticketForm.value.TicketType.typeID;
@@ -123,6 +122,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
 
+    this.ticketHolder.attachments = this.attachments;
   }
 
   reset(){
@@ -144,7 +144,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     console.log('Start Save Ticket');
     let self = this;
     this.bindFormToTicket();
-
 
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
