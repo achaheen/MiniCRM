@@ -13,8 +13,10 @@ import {TopicService} from '../../../../shared/services/topic.service';
 import {Type} from '../../../../shared/model/type';
 import {Priority} from '../../../../shared/model/priority';
 import {CustomerAccounts} from '../../../../shared/model/customerAccounts';
-import {TicketHolder} from "../../../../shared/model/ticketHolder";
-import {environment} from "../../../../../environments/environment";
+import {TicketHolder} from '../../../../shared/model/ticketHolder';
+import {FileUploadService} from '../../../../shared/services/file-upload.service';
+import {environment} from '../../../../../environments/environment';
+import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 
 @Component({
   selector: 'app-create-ticket',
@@ -22,16 +24,14 @@ import {environment} from "../../../../../environments/environment";
   styleUrls: ['./create-ticket.component.scss'],
   providers: [MessageService]
 })
-export class CreateTicketComponent implements OnInit {
+export class CreateTicketComponent extends BasicTopicSelection implements OnInit {
 
-
+  uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
   blocked = true;
   ticketForm: FormGroup;
-  mainCategoriesList: MainCategory[];
-  subCategoriesList: Subcategory[];
-  topicsList: Topic[];
+
   ticketTypeList: Type[];
   // channelList: Channel[];
   priorityList: Priority[];
@@ -41,16 +41,20 @@ export class CreateTicketComponent implements OnInit {
   selectedTopic: Topic;
 
   uploadedFiles: any[] = [];
+  attachments: any[] = [];
 
   lockAfterSave:boolean = false;
 
   constructor(public utils: UtilsService,
-              private ticketHttp: TicketsService,
-              private messageService: MessageService,
-              private mainCategoryService: MainCategoryService,
-              private subCategoryService: SubCategoryService,
-              private topicService: TopicService,
-              private fb: FormBuilder) {
+              public ticketHttp: TicketsService,
+              public messageService: MessageService,
+              public mainCategoryService: MainCategoryService,
+              public subCategoryService: SubCategoryService,
+              public topicService: TopicService,
+              public fb: FormBuilder, public fileUploadService: FileUploadService) {
+    super(topicService, subCategoryService, mainCategoryService, utils);
+    this.enableAdminSelection = false;
+    this.authroizedTopicsRequest = {permissions: ['create']};
   }
 
   ngOnInit() {
@@ -89,57 +93,8 @@ export class CreateTicketComponent implements OnInit {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       this.ticketForm.controls.Topic.setValue(this.selectedTopic);
       this.ticketForm.controls.Topic.updateValueAndValidity();
-      console.log("Selected Topic : " + this.selectedTopic.englishLabel);
+      console.log('Selected Topic : ' + this.selectedTopic.englishLabel);
     }
-  }
-
-  updateTopicList() {
-    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
-
-      this.ticketForm.controls.SubCategory.setValue(this.selectedSubCategory);
-
-      this.topicService.active(this.selectedSubCategory.id).subscribe(
-        result => {
-          const mainCat: Topic = {};
-          mainCat.englishLabel = 'Select Topic';
-          mainCat.id = null;
-          this.topicsList = result;
-          this.topicsList.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topicsList = [];
-    }
-  }
-
-  updateSubCategory() {
-    if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
-      this.ticketForm.controls.MainCategory.setValue(this.selectedMainCategory);
-      this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
-        result => {
-          this.subCategoriesList = result;
-          const mainCat: Subcategory = {};
-          mainCat.englishLabel = 'Select Sub Category';
-          mainCat.id = null;
-          this.subCategoriesList.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topicsList = [];
-      this.subCategoriesList = [];
-    }
-  }
-
-  listAllMainCategories() {
-    this.mainCategoryService.all().subscribe(
-      result => {
-        const mainCat: MainCategory = {};
-        mainCat.englishLabel = 'Select Main Category';
-        mainCat.id = null;
-        this.mainCategoriesList = result;
-        this.mainCategoriesList.unshift(mainCat);
-      }
-    );
   }
 
   bindFormToTicket() {
@@ -171,14 +126,17 @@ export class CreateTicketComponent implements OnInit {
   }
 
   reset(){
-    this.lockAfterSave = false;
-    // this.ticketHolder = {};
-    // this.ticket = {};
-    // this.selectedMainCategory={};
-    // this.selectedSubCategory={};
-    // this.selectedTopic={};
-    this.ticketForm.reset();
     console.log("Reset Ticket")
+     this.lockAfterSave = false;
+     this.ticketHolder = {};
+     this.ticket = {};
+     this.selectedMainCategory={};
+     this.subCategories = [];
+     this.selectedSubCategory={};
+     this.topics = [];
+     this.selectedTopic={};
+     this.ticketForm.reset();
+     this.ticketForm.updateValueAndValidity();
 
   }
 
@@ -189,7 +147,7 @@ export class CreateTicketComponent implements OnInit {
 
 
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
-        this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'})
+        this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
         this.lockAfterSave = true;
       },
       error => {
@@ -204,18 +162,29 @@ export class CreateTicketComponent implements OnInit {
 
   }
 
-  uploadAttachment(event) {
+  onUploadFiles(event) {
 
-    for (let file of event.files) {
+    event.files.forEach(file => {
       this.uploadedFiles.push(file);
-    }
-
+      console.log(JSON.stringify(this.uploadedFiles));
+    });
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 
   }
 
-  getUploadURL(): string {
-    return environment.apiUrl + "/upload/uploadMultipleFiles";
+  customUploader(events, uploadElement) {
+    this.fileUploadService.uploadFiles(events.files).subscribe(value => {
+      events.files.forEach(file => {
+        this.uploadedFiles.push(file);
+        console.log(JSON.stringify(this.uploadedFiles));
+      });
+      this.attachments.push(value);
+      events.files = [];
+      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+      console.log('attachments ' + this.attachments);
+      uploadElement.clear();
+    }, error1 => {
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
+    });
   }
-
 }

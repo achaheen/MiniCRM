@@ -13,6 +13,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
 import {Status} from '../../shared/model/status';
+import {BasicTopicSelection} from '../general/basic-topic-selection';
 
 
 @Component({
@@ -20,7 +21,7 @@ import {Status} from '../../shared/model/status';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent extends BasicTopicSelection implements OnInit {
   defaultPageSize = 10;
   openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
   closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
@@ -43,7 +44,13 @@ export class TicketsComponent implements OnInit {
   disableViewTicketBTN = true;
   disableEditTicketBTN = true;
   disableCreateTicketBTN = false;
-  constructor(private ticketService: TicketsService, private mainCategoryService: MainCategoryService, private subCategoryService: SubCategoryService, private topicService: TopicService, private  translate: TranslateService) {
+
+  constructor(public ticketService: TicketsService, public mainCategoryService: MainCategoryService,
+              public subCategoryService: SubCategoryService, public topicService: TopicService,
+              public  translate: TranslateService) {
+    super(topicService, subCategoryService, mainCategoryService, null);
+
+    this.enableAdminSelection = false;
   }
 
   ngOnInit() {
@@ -51,90 +58,57 @@ export class TicketsComponent implements OnInit {
     this.getTicketList(this.openTicketFilter);
     this.listAllMainCategories();
 
-   this.items = [
-      { header: 'All Tickets',
+    this.items = [
+      {
+        header: 'All Tickets',
         content: 'Tab 2 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter},
+        ticketFilter: this.openTicketFilter
+      },
 
-      { header: 'Assigned Tickets',
+      {
+        header: 'Assigned Tickets',
         content: 'Tab 1 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: this.assignedTicketFilter},
+        ticketFilter: this.assignedTicketFilter
+      },
 
-      { header: 'Opened Tickets',
+      {
+        header: 'Opened Tickets',
         content: 'Tab 2 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter},
+        ticketFilter: this.openTicketFilter
+      },
 
-      { header: 'Work On Progress Tickets',
+      {
+        header: 'Work On Progress Tickets',
         content: 'Tab 2 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter},
+        ticketFilter: this.openTicketFilter
+      },
 
-      { header: 'Closed Tickets',
+      {
+        header: 'Closed Tickets',
         content: 'Tab 2 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter},
+        ticketFilter: this.openTicketFilter
+      },
 
-      { header: 'Advanced Search',
+      {
+        header: 'Advanced Search',
         content: 'Tab 2 Content',
-        closable : false,
+        closable: false,
         type: 'filters',
-        ticketFilter: null}
-
-      ];
-
-  }
-  updateTopicList() {
-    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
-      this.topicService.authorized(this.selectedSubCategory.id).subscribe(
-        result => {
-          const mainCat: Topic = {};
-          mainCat.englishLabel = 'Select Topic';
-          mainCat.id = null;
-          this.topics = result;
-          this.topics.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topics = [];
-    }
-  }
-
-  updateSubCategory() {
-    if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
-      this.subCategoryService.authorized(this.selectedMainCategory.id).subscribe(
-        result => {
-          this.subCategories = result;
-          const mainCat: Subcategory = {};
-          mainCat.englishLabel = 'Select Sub Category';
-          mainCat.id = null;
-          this.subCategories.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topics = [];
-      this.subCategories = [];
-    }
-  }
-
-  listAllMainCategories() {
-
-    this.mainCategoryService.authorized().subscribe(
-      result => {
-        const mainCat: MainCategory = {};
-        mainCat.englishLabel = 'Select Main Category';
-        mainCat.id = null;
-        this.mainCategories = result;
-        this.mainCategories.unshift(mainCat);
+        ticketFilter: null
       }
-    );
+
+    ];
+
   }
 
   handleChange(e) {
@@ -201,7 +175,7 @@ export class TicketsComponent implements OnInit {
   setSelectedTicket(ticketID: number) {
 
     this.selectedTicketId = ticketID;
-    if (this.selectedTicketId != null ) {
+    if (this.selectedTicketId != null) {
       this.disableViewTicketBTN = false;
       this.disableEditTicketBTN = false;
     } else {
@@ -220,7 +194,7 @@ export class TicketsComponent implements OnInit {
   }
 
   handleClose(event) {
-    this.items.splice(event['index'] , 1);
+    this.items.splice(event['index'], 1);
     this.selectedTab = 0;
   }
 
@@ -231,36 +205,7 @@ export class TicketsComponent implements OnInit {
     let itemAlreadyFound = false;
     let itemIndex = 0;
 
-    for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
-      console.log(this.items[i].header);
-      if (this.items[i].header == this.selectedTicketId) {
-         itemAlreadyFound = true;
-         itemIndex = i;
-        break;
-      }
-    }
-
-    if (!itemAlreadyFound) {
-      this.items.push({header: this.selectedTicketId , content: 'Dynamic Tab Content', closable : true,
-      type: 'viewTicket',
-      ticketFilter: null});
-      setTimeout(() => {
-        this.activeIndexChange();
-      }, 10);
-    } else {
-      this.selectedTab = itemIndex;
-    }
-}
-
-
-  openTicketForEdit() {
-
-    // check id the ticket is already opened
-    // if opened -> activate its tab
-    let itemAlreadyFound = false;
-    let itemIndex = 0;
-
-    for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
+    for (let i = 0; i <= this.items.length - 1; i++) {
       console.log(this.items[i].header);
       if (this.items[i].header == this.selectedTicketId) {
         itemAlreadyFound = true;
@@ -270,9 +215,42 @@ export class TicketsComponent implements OnInit {
     }
 
     if (!itemAlreadyFound) {
-      this.items.push({header: this.selectedTicketId , content: 'Dynamic Tab Content', closable : true,
+      this.items.push({
+        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: true,
         type: 'viewTicket',
-        ticketFilter: null});
+        ticketFilter: null
+      });
+      setTimeout(() => {
+        this.activeIndexChange();
+      }, 10);
+    } else {
+      this.selectedTab = itemIndex;
+    }
+  }
+
+
+  openTicketForEdit() {
+
+    // check id the ticket is already opened
+    // if opened -> activate its tab
+    let itemAlreadyFound = false;
+    let itemIndex = 0;
+
+    for (let i = 0; i <= this.items.length - 1; i++) {
+      console.log(this.items[i].header);
+      if (this.items[i].header == this.selectedTicketId) {
+        itemAlreadyFound = true;
+        itemIndex = i;
+        break;
+      }
+    }
+
+    if (!itemAlreadyFound) {
+      this.items.push({
+        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: true,
+        type: 'viewTicket',
+        ticketFilter: null
+      });
       setTimeout(() => {
         this.activeIndexChange();
       }, 10);
@@ -281,33 +259,36 @@ export class TicketsComponent implements OnInit {
     }
 
   }
-   createNewTicket() {
 
-     // check id the ticket is already opened
-     // if opened -> activate its tab
-     let itemAlreadyFound = false;
-     let itemIndex = 0;
+  createNewTicket() {
 
-     for (let i = 0 ; i <= this.items.length - 1 ; i++ ) {
-       console.log(this.items[i].header);
-       if (this.items[i].header == 'New Ticket') {
-         itemAlreadyFound = true;
-         itemIndex = i;
-         break;
-       }
-     }
+    // check id the ticket is already opened
+    // if opened -> activate its tab
+    let itemAlreadyFound = false;
+    let itemIndex = 0;
 
-     if (!itemAlreadyFound) {
-     this.items.push({header: 'New Ticket' , content: 'Dynamic Tab Content', closable : true,
-       type: 'NewTicket',
-       ticketFilter: null});
-         setTimeout(() => {
-       this.activeIndexChange();
-     }, 10);
-     } else {
-       this.selectedTab = itemIndex;
-     }
+    for (let i = 0; i <= this.items.length - 1; i++) {
+      console.log(this.items[i].header);
+      if (this.items[i].header === 'New Ticket') {
+        itemAlreadyFound = true;
+        itemIndex = i;
+        break;
+      }
+    }
+
+    if (!itemAlreadyFound) {
+      this.items.push({
+        header: 'New Ticket', content: 'Dynamic Tab Content', closable: true,
+        type: 'NewTicket',
+        ticketFilter: null
+      });
+      setTimeout(() => {
+        this.activeIndexChange();
+      }, 10);
+    } else {
+      this.selectedTab = itemIndex;
+    }
   }
- }
+}
 
 

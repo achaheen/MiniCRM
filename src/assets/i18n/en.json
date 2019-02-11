@@ -133,5 +133,7 @@
   "Validate-CustomerMobile":"CustomerMobile is not valid ",
   "Validate-CustomerSegment":"CustomerSegment is not valid ",
   "Validate-CustomerBranch":"CustomerBranch is not valid ",
-  "Validate-CustomerEmail":"CustomerEmail is not valid "
+  "Validate-CustomerEmail":"CustomerEmail is not valid ",
+
+  "ResetTicket" : "Reset Ticket"
 }

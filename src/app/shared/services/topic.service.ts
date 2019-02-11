@@ -14,6 +14,7 @@ export class TopicService extends BasicHttpService {
   constructor(httpClient: HttpClient) {
     super(httpClient);
     this.baseURL = environment.apiUrl + 'topics/';
+
   }
 
   all() {
@@ -29,12 +30,8 @@ export class TopicService extends BasicHttpService {
   }
 
 
-  authorized(parent) {
-    if (parent === undefined || parent == null || parent === '') {
-      return this.httpClient.get<Topic[]>(this.baseURL + 'authorized');
-    } else {
-      return this.httpClient.get<Topic[]>(this.baseURL + `authorized/${parent}`);
-    }
+  authorized(request) {
+    return this.httpClient.post<Topic[]>(this.baseURLAuthorized + 'topics', request);
   }
 
 }
