@@ -16,6 +16,7 @@ import {CustomerAccounts} from '../../../../shared/model/customerAccounts';
 import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
 import {environment} from '../../../../../environments/environment';
+import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 
 @Component({
   selector: 'app-create-ticket',
@@ -23,16 +24,14 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./create-ticket.component.scss'],
   providers: [MessageService]
 })
-export class CreateTicketComponent implements OnInit {
+export class CreateTicketComponent extends BasicTopicSelection implements OnInit {
 
   uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
   blocked = true;
   ticketForm: FormGroup;
-  mainCategoriesList: MainCategory[];
-  subCategoriesList: Subcategory[];
-  topicsList: Topic[];
+
   ticketTypeList: Type[];
   // channelList: Channel[];
   priorityList: Priority[];
@@ -45,12 +44,15 @@ export class CreateTicketComponent implements OnInit {
   attachments: any[] = [];
 
   constructor(public utils: UtilsService,
-              private ticketHttp: TicketsService,
-              private messageService: MessageService,
-              private mainCategoryService: MainCategoryService,
-              private subCategoryService: SubCategoryService,
-              private topicService: TopicService,
-              private fb: FormBuilder, private fileUploadService: FileUploadService) {
+              public ticketHttp: TicketsService,
+              public messageService: MessageService,
+              public mainCategoryService: MainCategoryService,
+              public subCategoryService: SubCategoryService,
+              public topicService: TopicService,
+              public fb: FormBuilder, public fileUploadService: FileUploadService) {
+    super(topicService, subCategoryService, mainCategoryService, utils);
+    this.enableAdminSelection = false;
+    this.authroizedTopicsRequest = {permissions: ['create']};
   }
 
   ngOnInit() {
@@ -91,55 +93,6 @@ export class CreateTicketComponent implements OnInit {
       this.ticketForm.controls.Topic.updateValueAndValidity();
       console.log('Selected Topic : ' + this.selectedTopic.englishLabel);
     }
-  }
-
-  updateTopicList() {
-    if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
-
-      this.ticketForm.controls.SubCategory.setValue(this.selectedSubCategory);
-
-      this.topicService.active(this.selectedSubCategory.id).subscribe(
-        result => {
-          const mainCat: Topic = {};
-          mainCat.englishLabel = 'Select Topic';
-          mainCat.id = null;
-          this.topicsList = result;
-          this.topicsList.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topicsList = [];
-    }
-  }
-
-  updateSubCategory() {
-    if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
-      this.ticketForm.controls.MainCategory.setValue(this.selectedMainCategory);
-      this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
-        result => {
-          this.subCategoriesList = result;
-          const mainCat: Subcategory = {};
-          mainCat.englishLabel = 'Select Sub Category';
-          mainCat.id = null;
-          this.subCategoriesList.unshift(mainCat);
-        }
-      );
-    } else {
-      this.topicsList = [];
-      this.subCategoriesList = [];
-    }
-  }
-
-  listAllMainCategories() {
-    this.mainCategoryService.all().subscribe(
-      result => {
-        const mainCat: MainCategory = {};
-        mainCat.englishLabel = 'Select Main Category';
-        mainCat.id = null;
-        this.mainCategoriesList = result;
-        this.mainCategoriesList.unshift(mainCat);
-      }
-    );
   }
 
   bindFormToTicket() {

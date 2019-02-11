@@ -49,21 +49,21 @@
 
       <td class="grid-label">{{'MainCat' | translate}}</td>
       <td class="grid-input">
-        <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategoriesList" [(ngModel)]="selectedMainCategory"
+        <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory"
                     [ngModelOptions]="{standalone: true}"
                     optionLabel="englishLabel"></p-dropdown>
       </td>
 
       <td class="grid-label">{{'SubCat' | translate}}</td>
       <td class="grid-input">
-        <p-dropdown (onChange)="updateTopicList()" [options]="subCategoriesList" [(ngModel)]="selectedSubCategory"
+        <p-dropdown (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory"
                     [ngModelOptions]="{standalone: true}"
                     optionLabel="englishLabel"></p-dropdown>
       </td>
 
       <td class="grid-label">{{'Topic' | translate}}</td>
       <td class="grid-input">
-        <p-dropdown [options]="topicsList" (onChange)="onChangeTopic()" [(ngModel)]="selectedTopic"
+        <p-dropdown [options]="topics" (onChange)="onChangeTopic()" [(ngModel)]="selectedTopic"
                     [ngModelOptions]="{standalone: true}"
                     optionLabel="englishLabel"></p-dropdown>
     </tr>
@@ -156,7 +156,6 @@
           </ng-template>
         </p-fileUpload>
       </td>
-
     </tr>
   </table>
   <div style="text-align: right;">

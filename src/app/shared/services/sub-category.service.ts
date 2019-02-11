@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Subcategory} from '../model/subcategory';
 import {BasicHttpService} from './basicHttp.service';
 import {MainCategory} from '../model/mainCategory';
+import {Topic} from '../model/topic';
 
 @Injectable({
   providedIn: 'root'
@@ -30,13 +31,17 @@ export class SubCategoryService extends BasicHttpService {
     return this.httpClient.get<Subcategory[]>(this.baseURL + 'all/' + mainCat);
   }
 
-  authorized(parent) {
+  authorized(request) {
+    return this.httpClient.post<Topic[]>(this.baseURLAuthorized + 'subCats', request);
+  }
+
+ /* authorized(parent) {
     if (parent === undefined || parent == null || parent === '') {
       return this.httpClient.get<Subcategory[]>(this.baseURL + `authorized`);
     } else {
       return this.httpClient.get<Subcategory[]>(this.baseURL + `authorized/${parent}`);
     }
-  }
+  }*/
 
   changeStatus(subCat, newStatus) {
     return this.httpClient.get<Subcategory[]>(this.baseURL + `change/${subCat}/${newStatus}`);
