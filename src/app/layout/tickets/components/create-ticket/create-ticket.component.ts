@@ -42,6 +42,8 @@ export class CreateTicketComponent implements OnInit {
 
   uploadedFiles: any[] = [];
 
+  lockAfterSave:boolean = false;
+
   constructor(public utils: UtilsService,
               private ticketHttp: TicketsService,
               private messageService: MessageService,
@@ -168,14 +170,27 @@ export class CreateTicketComponent implements OnInit {
 
   }
 
+  reset(){
+    this.lockAfterSave = false;
+    // this.ticketHolder = {};
+    // this.ticket = {};
+    // this.selectedMainCategory={};
+    // this.selectedSubCategory={};
+    // this.selectedTopic={};
+    this.ticketForm.reset();
+    console.log("Reset Ticket")
+
+  }
+
   SaveTicket() {
     console.log('Start Save Ticket');
     let self = this;
     this.bindFormToTicket();
 
 
-    this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => function () {
+    this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'})
+        this.lockAfterSave = true;
       },
       error => {
         // can't create Ticket

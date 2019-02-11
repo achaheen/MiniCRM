@@ -2,7 +2,7 @@
 
 <!--<p-blockUI [blocked]="blocked"></p-blockUI>-->
 
-<form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()" style="w">
+<form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()">
 <table class="ticketFormTb" *ngIf="ticket">
 
   <tr><td colspan="8">
@@ -134,7 +134,9 @@
   </tr>
 </table>
   <div style="text-align: right;">
-    <button type="submit" pButton icon="pi pi-user-plus"  class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid"></button>
+    <button type="submit" pButton icon="pi pi-user-plus"  class="ui-button-rounded"  label="{{'SaveTicket' | translate}}"  [disabled]="!this.ticketForm.valid || lockAfterSave"></button>
+    <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'ResetTicket' | translate}}" (click)="reset()"></button>
+
   </div>
 </form>
 
