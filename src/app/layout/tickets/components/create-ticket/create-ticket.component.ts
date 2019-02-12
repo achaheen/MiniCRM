@@ -147,6 +147,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
 
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
+        this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
         this.lockAfterSave = true;
       },
       error => {
