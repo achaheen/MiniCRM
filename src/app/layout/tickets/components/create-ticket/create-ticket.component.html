@@ -31,13 +31,13 @@
 
     <td class="grid-label">{{'MainCat' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
+      <p-dropdown (onChange)="updateSubCategory();onChangeTopic()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
                   optionLabel="englishLabel"></p-dropdown>
     </td>
 
     <td class="grid-label">{{'SubCat' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown  (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
+      <p-dropdown  (onChange)="updateTopicList();onChangeTopic()" [options]="subCategories" [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
                    optionLabel="englishLabel"></p-dropdown>
     </td>
 
@@ -51,7 +51,7 @@
   <tr>
     <td class="grid-label">{{'TicketType' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown [options]="utils.typesList"  formControlName="TicketType"
+      <p-dropdown [options]="utils.typesList"  (onChange)="onChangeType()" [(ngModel)]="selectedTicketType" [ngModelOptions]="{standalone: true}"
                   optionLabel="englishLabel" ></p-dropdown>
     </td>
     <td class="grid-label">{{'Channel' | translate}}</td>
@@ -60,7 +60,7 @@
 
     <td class="grid-label">{{'Priority' | translate}}</td>
     <td class="grid-input">
-      <p-dropdown [options]="utils.priorityList" formControlName="Priority"
+      <p-dropdown [options]="utils.priorityList"  (onChange)="onChangePriority()" [(ngModel)]="selectedPriority" [ngModelOptions]="{standalone: true}"
                   optionLabel="priority"></p-dropdown>
      </td>
   </tr>

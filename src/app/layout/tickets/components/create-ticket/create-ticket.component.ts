@@ -39,6 +39,9 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   selectedMainCategory: MainCategory;
   selectedSubCategory: Subcategory;
   selectedTopic: Topic;
+  selectedTicketType: Type;
+  selectedPriority: Priority;
+
 
   uploadedFiles: any[] = [];
   attachments: any[] = [];
@@ -73,9 +76,9 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       'SubCategory': new FormControl(''),
       'Topic': new FormControl('', Validators.required),
       'Subject': new FormControl('', Validators.required),
-      'TicketType': new FormControl(''),
+      'TicketType': new FormControl('',Validators.required),
       'Channel': new FormControl('', Validators.required),
-      'Priority': new FormControl(''),
+      'Priority': new FormControl('',Validators.required),
       'Details': new FormControl('', Validators.required),
       'CustomerBasic': new FormControl('', Validators.required),
       'CustomerNameEn': new FormControl('', Validators.required),
@@ -92,18 +95,36 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   onChangeTopic() {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       this.ticketForm.controls.Topic.setValue(this.selectedTopic);
-      this.ticketForm.controls.Topic.updateValueAndValidity();
-      console.log('Selected Topic : ' + this.selectedTopic.englishLabel);
+    }else{
+      this.ticketForm.controls.Topic.setValue(null);
     }
+    this.ticketForm.controls.Topic.updateValueAndValidity();
+  }
+
+  onChangeType() {
+    if (this.selectedTicketType != null && this.selectedTicketType.typeID != null) {
+      this.ticketForm.controls.TicketType.setValue(this.selectedTicketType);
+    }else{
+      this.ticketForm.controls.TicketType.setValue(null);
+    }
+    this.ticketForm.controls.TicketType.updateValueAndValidity();
+  }
+  onChangePriority() {
+    if (this.selectedPriority != null && this.selectedPriority.priorityValue != null) {
+      this.ticketForm.controls.Priority.setValue(this.selectedPriority);
+    }else{
+      this.ticketForm.controls.Priority.setValue(null);
+    }
+    this.ticketForm.controls.Priority.updateValueAndValidity();
   }
 
   bindFormToTicket() {
 
     this.ticket.topic = this.selectedTopic;
     this.ticket.subject = this.ticketForm.value.Subject;
-    this.ticket.ticketType = this.ticketForm.value.TicketType.typeID;
+    this.ticket.ticketType = this.selectedTicketType.typeID;
     this.ticket.sourceChannel = this.ticketForm.value.Channel;
-    this.ticket.priority = this.ticketForm.value.Priority.priorityValue;
+    this.ticket.priority = this.selectedPriority.priorityValue;
     this.ticket.details = this.ticketForm.value.Details;
 
 
