@@ -4,7 +4,7 @@
   </p-header>
   <p-fieldset legend="Select Category/SubCategory/Topic" [toggleable]="true">
 
-    <table>
+    <table style="margin-bottom: 20px">
       <tr>
         <td class="grid-label">{{'MainCat'|translate}}</td>
         <td class="grid-input ">
@@ -32,7 +32,7 @@
 
       </tr>
     </table>
-    <table id="usersTable" *ngIf="selectedMainCategory!=null">
+    <table id="usersTable" *ngIf="selectedMainCategory!=null" style="margin-bottom: 20px">
       <tr>
         <td class="grid-input ">
           <p-radioButton name="toggleFilter" value="Users" [label]="'createByUsers'|translate"
@@ -41,7 +41,7 @@
                          [(ngModel)]="selectType"></p-radioButton>
         </td>
 
-        <ng-container *ngIf="selectType==='Users'">
+         <ng-container *ngIf="selectType==='Users'">
 
           <td class="grid-label">{{'selectUsers'|translate}}</td>
           <td class="grid-input ">
