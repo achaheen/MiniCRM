@@ -1,8 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TicketHistroy} from '../../../../../shared/model/ticketHistroy';
 import {UtilsService} from '../../../../../shared/services/utils.service';
-import {TicketActions} from '../../../../../shared/model/ticketActions';
-import {Escalationhistory} from '../../../../../shared/model/escalationhistory';
 import {Ticket} from '../../../../../shared/model/ticket';
 
 @Component({

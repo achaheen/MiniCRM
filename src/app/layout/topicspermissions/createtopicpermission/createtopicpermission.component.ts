@@ -34,6 +34,7 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
 
     this.basicGroupSelection = new BasicGroupSelections(groupServices);
     this.basicUserSelection = new BasicUserSelection(userServices);
+    this.enableAdminSelection = true;
   }
 
   ngOnInit() {

@@ -17,7 +17,7 @@
       <ng-template pTemplate="body" let-history>
         <tr>
           <td>{{history.creationDate | date:'medium'}}</td>
-          <td>{{utils.findAction(history.actionID)}}</td>
+          <td>{{utils.printLocLabel(history.actionID)}}</td>
           <td>{{history.createdBy}}</td>
           <td>{{history.oldStatus!=null?utils.findStatus(history.oldStatus):''}}</td>
           <td>{{history.newStatus!=null?utils.findStatus(history.newStatus):''}}</td>
@@ -43,10 +43,7 @@
           <th>{{'DoneBy' | translate}}</th>
           <th>{{'title' | translate}}</th>
           <th>{{'reply' | translate}}</th>
-          <th>{{'OldStatus' | translate}}</th>
-          <th>{{'NewStatus' | translate}}</th>
-          <th>{{'OldTopic' | translate}}</th>
-          <th>{{'NewTopic' | translate}}</th>
+
         </tr>
       </ng-template>
 
@@ -55,10 +52,8 @@
           <td>{{ticketData.creationDate | date:'medium'}}</td>
           <td>{{utils.printLocLabel(ticketData.actionID)}}</td>
           <td>{{ticketData.createdBy}}</td>
-          <td>{{utils.findStatus(ticketData.oldStatus)}}</td>
-          <td>{{utils.findStatus(ticketData.newStatus)}}</td>
-          <td>{{ticketData.oldTopic}}</td>
-          <td>{{ticketData.newTopic}}</td>
+          <td>{{ticketData.title}}</td>
+          <td>{{ticketData.ticketData}}</td>
         </tr>
       </ng-template>
     </p-table>

@@ -128,7 +128,6 @@
   "escSlaName": "Escalation Name",
   "slaLevel": "SLA Level",
   "slaTime": "SLA Time (Hours) ",
-  ""
   "Validate-MainCategory": "MainCategory is not valid ",
   "Validate-SubCategory": "SubCategory is not valid ",
   "Validate-Topic": "Topic is not valid ",
