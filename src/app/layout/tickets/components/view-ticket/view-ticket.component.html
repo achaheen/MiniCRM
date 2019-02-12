@@ -95,12 +95,28 @@
     <td class="grid-input"><input id="oTopic" type="text" pInputText name="otopic" [attr.disabled]="true"
                                   [ngModel]="ticket.originalTopic.englishLabel"></td>
   </tr>
-  <tr>
-    <td colspan="8">
-      <hr/>
-    </td>
-  </tr>
 
+  <ng-container *ngIf="ticket.attachmentsList!=null && ticket.attachmentsList.length>0">
+    <tr class="text-center">
+      <td colspan="8" align="center">
+       <h4>{{'attachments'|translate}}</h4>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8">
+        <hr/>
+      </td>
+    </tr>
+
+    <tr app-view-attachment [attachmentID]="ticket.attachmentsList"
+    ></tr>
+
+    <tr>
+      <td colspan="8">
+        <hr/>
+      </td>
+    </tr>
+  </ng-container>
   <tr>
     <td colspan="8">
       <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>

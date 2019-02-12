@@ -76,23 +76,24 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       'SubCategory': new FormControl(''),
       'Topic': new FormControl('', Validators.required),
       'Subject': new FormControl('', Validators.required),
-      'TicketType': new FormControl('',Validators.required),
+      'TicketType': new FormControl('', Validators.required),
       'Channel': new FormControl('', Validators.required),
-      'Priority': new FormControl('',Validators.required),
+      'Priority': new FormControl('', Validators.required),
       'Details': new FormControl('', Validators.required),
-      'CustomerBasic': new FormControl('', Validators.required),
-      'CustomerNameEn': new FormControl('', Validators.required),
-      'CustomerNameAr': new FormControl('', Validators.required),
-      'CustomerMobile': new FormControl('', Validators.compose([Validators.required, Validators.pattern('[05][0-9]{9}')])),
-      'CustomerSegment': new FormControl('', Validators.required),
-      'CustomerBranch': new FormControl('', Validators.required),
-      'CustomerEmail': new FormControl('', Validators.compose([Validators.required, Validators.email]))
+      'CustomerBasic': new FormControl(''),
+      'CustomerNameEn': new FormControl(''),
+      'CustomerNameAr': new FormControl(''),
+      'CustomerMobile': new FormControl('', Validators.compose([Validators.pattern('[05][0-9]{9}')])),
+      'CustomerSegment': new FormControl(''),
+      'CustomerBranch': new FormControl(''),
+      'CustomerEmail': new FormControl('', Validators.compose([Validators.email]))
     });
   }
+
   onChangeTopic() {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       this.ticketForm.controls.Topic.setValue(this.selectedTopic);
-    }else{
+    } else {
       this.ticketForm.controls.Topic.setValue(null);
     }
     this.ticketForm.controls.Topic.updateValueAndValidity();
@@ -101,15 +102,16 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   onChangeType() {
     if (this.selectedTicketType != null && this.selectedTicketType.typeID != null) {
       this.ticketForm.controls.TicketType.setValue(this.selectedTicketType);
-    }else{
+    } else {
       this.ticketForm.controls.TicketType.setValue(null);
     }
     this.ticketForm.controls.TicketType.updateValueAndValidity();
   }
+
   onChangePriority() {
     if (this.selectedPriority != null && this.selectedPriority.priorityValue != null) {
       this.ticketForm.controls.Priority.setValue(this.selectedPriority);
-    }else{
+    } else {
       this.ticketForm.controls.Priority.setValue(null);
     }
     this.ticketForm.controls.Priority.updateValueAndValidity();
@@ -175,6 +177,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     console.log('End Save Ticket');
 
   }
+
   onUploadFiles(event) {
 
     event.files.forEach(file => {

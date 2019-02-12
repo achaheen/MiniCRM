@@ -4,7 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {SearchTicketsContainer} from '../model/searchTicketsContainer';
 import {SearchTicketsResult} from '../model/searchTicketsResult';
 import {Ticket} from '../model/ticket';
-import {TicketHolder} from "../model/ticketHolder";
+import {TicketHolder} from '../model/ticketHolder';
+import {Attachment} from '../model/attachment';
 
 
 @Injectable({
@@ -27,5 +28,12 @@ export class TicketsService {
 
   create(ticketHolder: TicketHolder) {
     return this.httpClient.post<Ticket>(this.baseURL + 'create', ticketHolder);
+  }
+
+  getAttachmentsInfo(request) {
+    return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/info', request);
+  }
+  getAttachmentsData(request) {
+    return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/data', request);
   }
 }
