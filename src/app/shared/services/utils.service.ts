@@ -60,7 +60,30 @@ export class UtilsService {
       }
 
     }
+
     return '';
   }
 
+
+
+
+  getMainCat(topic: Topic) {
+    if (topic !== undefined && topic !== null) {
+      if (!topic.subCategory !== undefined && topic.subCategory !== null) {
+        if (topic.subCategory.mainCategory !== undefined && topic.subCategory.mainCategory !== null) {
+          return topic.subCategory.mainCategory;
+        }
+      }
+    }
+    return null;
+  }
+
+  getSubCat(topic: Topic) {
+    if (topic !== undefined && topic !== null) {
+      if (!topic.subCategory !== undefined && topic.subCategory !== null) {
+        return topic.subCategory;
+      }
+    }
+    return null;
+  }
 }

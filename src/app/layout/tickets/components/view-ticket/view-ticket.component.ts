@@ -13,7 +13,8 @@ export class ViewTicketComponent implements OnInit {
   @Input() ticketID: number;
 
   ticket: Ticket;
-  constructor(private utils: UtilsService, private ticketHttp: TicketsService) {
+
+  constructor(public utils: UtilsService, private ticketHttp: TicketsService) {
 
   }
 
@@ -22,7 +23,7 @@ export class ViewTicketComponent implements OnInit {
     if (this.ticketID !== undefined) {
       this.ticketHttp.getTicketByID(this.ticketID).subscribe(value => {
         this.ticket = value;
-       }, error1 => {
+      }, error1 => {
         console.log(JSON.stringify(error1));
       });
     }

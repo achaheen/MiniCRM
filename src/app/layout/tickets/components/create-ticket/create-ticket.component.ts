@@ -43,7 +43,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   uploadedFiles: any[] = [];
   attachments: any[] = [];
 
-  lockAfterSave:boolean = false;
+  lockAfterSave: boolean = false;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
@@ -85,10 +85,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       'CustomerBranch': new FormControl('', Validators.required),
       'CustomerEmail': new FormControl('', Validators.compose([Validators.required, Validators.email]))
     });
-
   }
-
-
   onChangeTopic() {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       this.ticketForm.controls.Topic.setValue(this.selectedTopic);
@@ -117,26 +114,23 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     customerAccount.segment = this.ticketForm.value.CustomerSegment;
 
     this.ticket.customerAccount = customerAccount;
-
-
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
-
     this.ticketHolder.attachments = this.attachments;
   }
 
-  reset(){
-    console.log("Reset Ticket")
-     this.lockAfterSave = false;
-     this.ticketHolder = {};
-     this.ticket = {};
-     this.selectedMainCategory={};
-     this.subCategories = [];
-     this.selectedSubCategory={};
-     this.topics = [];
-     this.selectedTopic={};
-     this.ticketForm.reset();
-     this.ticketForm.updateValueAndValidity();
+  reset() {
+    console.log('Reset Ticket');
+    this.lockAfterSave = false;
+    this.ticketHolder = {};
+    this.ticket = {};
+    this.selectedMainCategory = {};
+    this.subCategories = [];
+    this.selectedSubCategory = {};
+    this.topics = [];
+    this.selectedTopic = {};
+    this.ticketForm.reset();
+    this.ticketForm.updateValueAndValidity();
 
   }
 
@@ -144,7 +138,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     console.log('Start Save Ticket');
     let self = this;
     this.bindFormToTicket();
-
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
         this.lockAfterSave = true;
@@ -160,7 +153,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     console.log('End Save Ticket');
 
   }
-
   onUploadFiles(event) {
 
     event.files.forEach(file => {

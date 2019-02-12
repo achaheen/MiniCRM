@@ -4,7 +4,7 @@ import {Topic} from './topic';
 
 export interface TopicSla extends BasicModelWithIDInt {
 
-  sLALevel?: number;
+  slalevel?: number;
   sLAImpl?: string;
   slaid?: Sla;
   topicID?: Topic;

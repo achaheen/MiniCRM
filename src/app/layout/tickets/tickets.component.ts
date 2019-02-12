@@ -24,6 +24,7 @@ import {BasicTopicSelection} from '../general/basic-topic-selection';
 export class TicketsComponent extends BasicTopicSelection implements OnInit {
   defaultPageSize = 10;
   openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
+  escalatedTicketFilter: SearchTicketsContainer = {'status': [8], 'size': this.defaultPageSize, page: 0};
   closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
   wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
   assignedTicketFilter: SearchTicketsContainer = {'assignedTo': [this.getCurrentUserID()], 'size': this.defaultPageSize, page: 0};
@@ -59,6 +60,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
     this.listAllMainCategories();
 
     this.items = [
+
       {
         header: 'All Tickets',
         content: 'Tab 2 Content',
@@ -105,6 +107,13 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         closable: false,
         type: 'filters',
         ticketFilter: null
+      },
+      {
+        header: 'Escalated Tickets',
+        content: 'Tab 1 Content',
+        closable: false,
+        type: 'filters',
+        ticketFilter: this.escalatedTicketFilter
       }
 
     ];
@@ -129,6 +138,9 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         break;
       case 4:
         this.selectedFilter = this.closedTicketFilter;
+        break;
+      case 6:
+        this.selectedFilter = this.escalatedTicketFilter;
         break;
     }
     this.getTicketList(this.selectedFilter);

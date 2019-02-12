@@ -4,18 +4,18 @@ import {TicketActions} from './ticketActions';
 
 export interface Ticketdata extends BasicModelWithIDInt {
 
-   actionID?: TicketActions;
-   title?: string;
-   ticketData?: string;
-   notes?: string;
-   hidden?: boolean;
-   oldStatus?: number;
-   newStatus?: number;
-   oldTopic?: number;
-   newTopic?: number;
-   notificationID?: number;
-   notify?: boolean;
-   notfiyStatus?: number;
-   ticketID?: Ticket;
+  actionID?: TicketActions;
+
+  createdBy?: string;
+  modificationDate?: any;
+  modifiedBy?: any;
+  creationDate?: string;
+  title?: string;
+  ticketData?: string;
+  notes?: string;
+  hidden?: boolean;
+  notificationID?: any;
+  notify?: any;
+  notfiyStatus?: any;
 
 }

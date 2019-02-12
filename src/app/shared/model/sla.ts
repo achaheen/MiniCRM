@@ -10,7 +10,7 @@ export interface Sla extends  BasicModelWithIDInt {
   createdBy?: string;
   modifiedBy?: string;
   modificationDate?: Date;
-  sLAName?: string;
+  slaname?: string;
   catID?: number;
   topicslaList?: TopicSla[];
   escalationhistoryList?: Escalationhistory[];

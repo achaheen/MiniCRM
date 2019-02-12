@@ -1,15 +1,13 @@
 import {BasicModelWithIDInt} from './basicModelWithIDInt';
 import {Ticket} from './ticket';
 import {Sla} from './sla';
+import {TopicSla} from './topicSla';
+import {Topic} from './topic';
 
-export interface Escalationhistory extends BasicModelWithIDInt {
+export interface Escalationhistory {
 
-  eSCLevel?: number;
-  eSCDateTime?: Date;
-  escUsers?: string;
-  escEmails?: string;
-  sla?: Sla;
-  ticketID?: Ticket;
-
+  id?: number;
+  escDateTime?: Date;
+  topicSLA?: TopicSla;
 
 }

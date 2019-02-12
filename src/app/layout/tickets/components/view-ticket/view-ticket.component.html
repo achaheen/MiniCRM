@@ -103,40 +103,9 @@
 
   <tr>
     <td colspan="8">
-
-      <p-accordion>
-        <p-accordionTab header="{{'TicketHistory' | translate}}" [selected]="false">
-
-          <p-table [value]="ticket.ticketHistoryList">
-            <ng-template pTemplate="header">
-  <tr>
-    <th>{{'HistoryDate' | translate}}</th>
-    <th>{{'Action' | translate}}</th>
-    <th>{{'DoneBy' | translate}}</th>
-    <th>{{'OldStatus' | translate}}</th>
-    <th>{{'NewStatus' | translate}}</th>
-    <th>{{'OldTopic' | translate}}</th>
-    <th>{{'NewTopic' | translate}}</th>
+      <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>
+    </td>
   </tr>
-  </ng-template>
-
-  <ng-template pTemplate="body" let-history>
-    <tr>
-      <td>{{history.creationDate | date:'medium'}}</td>
-      <td>{{utils.findAction(history.actionID)}}</td>
-      <td>{{history.createdBy}}</td>
-      <td>{{utils.findStatus(history.oldStatus)}}</td>
-      <td>{{utils.findStatus(history.newStatus)}}</td>
-      <td>{{history.oldTopic}}</td>
-      <td>{{history.newTopic}}</td>
-    </tr>
-  </ng-template>
-  </p-table>
-
-  </p-accordionTab>
-  </p-accordion>
-
-  </td> </tr>
 
 </table>
 
