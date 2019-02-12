@@ -63,6 +63,8 @@ export class BasicTopicSelection {
     if (!this.enableAdminSelection) {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
         this.authroizedTopicsRequest.mainCat = this.selectedMainCategory.id;
+
+        console.log("Request " + JSON.stringify(this.authroizedTopicsRequest));
         this.subCategoryService.authorized(this.authroizedTopicsRequest).subscribe(
           result => {
             this.subCategories = result;
