@@ -17,5 +17,6 @@ export interface Ticketdata extends BasicModelWithIDInt {
   notificationID?: any;
   notify?: any;
   notfiyStatus?: any;
+  attachmentsList?: number[];
 
 }

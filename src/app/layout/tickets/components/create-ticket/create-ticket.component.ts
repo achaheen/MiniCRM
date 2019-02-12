@@ -137,7 +137,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticket.customerAccount = customerAccount;
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
-    this.ticketHolder.attachments = this.attachments;
+    this.ticketHolder.attachments = this.attachments[0];
   }
 
   reset() {
