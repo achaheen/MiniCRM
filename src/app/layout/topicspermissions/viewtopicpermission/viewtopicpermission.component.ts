@@ -12,6 +12,7 @@ export class ViewtopicpermissionComponent implements OnInit {
 
   @Input() permissionsList: Array<TopicsPermissions>;
   cols: Tablecols[];
+  frozenCols: Tablecols[];
   selectedPermissionsList: Array<TopicsPermissions>;
 
 
@@ -43,6 +44,8 @@ export class ViewtopicpermissionComponent implements OnInit {
       {'field': 'canSubscribe', 'header': 'canSubscribe', format: true, formatType: 'checkbox'}
     ];
 
+    this.frozenCols = [
+    ]
   }
 
   ngOnInit() {

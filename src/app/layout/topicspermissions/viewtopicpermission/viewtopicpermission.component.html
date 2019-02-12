@@ -2,11 +2,21 @@
          [rows]="50"
          [columns]="cols"
          [(selection)]="selectedPermissionsList"
-         dataKey="id">
+         dataKey="id"
+         [scrollable]="true"
+         scrollHeight="100px"
+        >
+  <ng-template pTemplate="colgroup" let-columns>
+    <colgroup>
+      <col style="width: 50px">
+      <col *ngFor="let col of columns" style="width:100px;">
+    </colgroup>
+  </ng-template>
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <!--<th style="width: 50px;"></th>-->
-      <th style="width: 3em">
+      <th style="width: 3em!important;">
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
