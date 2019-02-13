@@ -1,0 +1,41 @@
+<p-panel>
+  <p-header>
+    {{'subCatWizard'|translate}}
+  </p-header>
+  <table style="margin-bottom: 20px"><tr>
+    <td><h5>{{'MainCat'|translate}}</h5></td>
+    <td><p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
+                    [options]="mainCategories"
+                    [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+    </p-dropdown>
+    </td>
+
+    <td><h5>{{'SubCat'|translate}}</h5></td>
+    <td><p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"
+                    [options]="subCategories"
+                    [(ngModel)]="selectedSubCategory" optionLabel="englishLabel">
+    </p-dropdown>
+    </td>
+  </tr></table>
+
+  <h5 class="first">{{'arabicLabel'|translate}}</h5>
+  <input id="arabicLabel" type="text" size="150" pInputText [(ngModel)]="item.arabicLabel">
+  <h5 class="first">{{'englishLabel'|translate}}</h5>
+  <input id="englishLabel" type="text" size="150" pInputText [(ngModel)]="item.englishLabel">
+  <ng-container *ngIf="item.id!=null">
+    <h5 class="first">{{'Status'|translate}}</h5>
+    <p-checkbox binary="true" [(ngModel)]="item.enabled"></p-checkbox>
+  </ng-container>
+  <p-footer>
+    <button type="button"
+            [disabled]="!(item!=null && item.arabicLabel!=null &&
+            item.englishLabel!=null && item.arabicLabel.length>0
+            && item.englishLabel.length>0 && selectedMainCategory!=null&& selectedMainCategory.id!=null && selectedSubCategory!=null&& selectedSubCategory.id!=null )" pButton
+            (click)="execute()"
+            label="{{'doneBTN' | translate}}"></button>
+    <button type="button"
+            pButton
+            (click)="parent.enableCreateEditMode=false;"
+            label="{{'backBTN' | translate}}"></button>
+  </p-footer>
+</p-panel>
