@@ -238,3 +238,94 @@ table.ticketFormTb{
   overflow:auto!important;
 }
 
+
+.replyContainer{
+  padding: 12px 18px;
+  border: solid 1px #3e7ad9;
+  border-radius: 15px;
+  float: left;
+  width: 100%;
+  margin-bottom: 7px;
+}
+.replyContainer .replyPerson{
+  display: block;
+ // width: 7%;
+  border-right: solid 1px #d8d8d8;
+  float: left;
+  padding-right: 5px;
+  text-align: center;
+  background-color: #efefef;
+  background-image: linear-gradient(to left,#f3f3f3, #fff);
+}
+
+.replyContainer .reply{
+  display: block;
+  float: left;
+  margin-left: 20px;
+  width: 70%;
+  color: #495057;
+  border-right: solid 1px #d8d8d8;
+}
+.replyContainer .person{
+  font-weight: BOLD;
+}
+.replyContainer .date{
+  width: 100px;
+}
+.replyAction {
+  font-weight: bold;
+  border-bottom: solid 1px #d8d8d8;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+.replyAction span{
+   font-weight: normal;
+ }
+
+.replyContainer .replyTitle{
+  font-weight: BOLD;
+  color: #797979;
+  margin-bottom: 5px;
+  border-bottom: solid 1px #d8d8d8;
+  width: fit-content;
+  line-height: 12px;
+}
+.attachmentList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.attachmentList li {
+  float: left;
+  margin: 10px;
+
+}
+
+.attachmentList li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+
+}
+
+.attachmentList .btn-secondary:hover{
+  background-color: #0076ec;
+}
+
+
+.replyContainer .ReplyAttachment{
+  display: block;
+  float: left;
+  margin-left: 20px;
+  color: #495057;
+}
+
+.replyContainer .attachementTitle{
+
+  font-weight: bold;
+  margin-bottom: 10px;
+}

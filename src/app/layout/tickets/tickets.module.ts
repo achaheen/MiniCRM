@@ -24,9 +24,10 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
 import {FileUploadModule} from 'primeng/fileupload';
 import { ViewTicketExtraListsComponent } from './components/view-ticket/view-ticket-extra-lists/view-ticket-extra-lists.component';
-import { ViewAttachmentComponent } from './components/view-attachment/view-attachment.component'
+import { ViewAttachmentComponent } from './components/view-attachment/view-attachment.component';
+import { ViewTicketDataComponent } from './components/view-ticket-data/view-ticket-data.component'
 @NgModule({
-  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent],
+  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent, ViewTicketDataComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
