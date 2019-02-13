@@ -23,9 +23,10 @@ import {ToastModule} from 'primeng/toast';
 import {TranslateModule} from '@ngx-translate/core';
 import { CreateMainCatComponent } from './main-cat-list/create-main-cat/create-main-cat.component';
 import { CreateSubCatComponent } from './sub-cat-list/create-sub-cat/create-sub-cat.component';
+import { CreateTopicComponent } from './topics-list/create-topic/create-topic.component';
 
 @NgModule({
-  declarations: [TopicsListComponent, MainCatListComponent, SubCatListComponent, CreateMainCatComponent, CreateSubCatComponent],
+  declarations: [TopicsListComponent, MainCatListComponent, SubCatListComponent, CreateMainCatComponent, CreateSubCatComponent, CreateTopicComponent],
   imports: [
     CommonModule,
     TopicsRoutingModule,

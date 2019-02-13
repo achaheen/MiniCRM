@@ -1,0 +1,86 @@
+<ng-container *ngIf="!enableCreateEditMode"  >
+
+  <table style="margin-bottom: 20px"><tr>
+
+
+  <td class="grid-label">{{'MainCat'|translate}}</td>
+  <td class="grid-input ">
+    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
+                [options]="mainCategories"
+                [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+    </p-dropdown>
+  </td>
+
+  <td class="grid-label">{{'SubCat'|translate}}</td>
+  <td class="grid-input ">
+    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"
+                [options]="subCategories"
+                [(ngModel)]="selectedSubCategory" optionLabel="englishLabel">
+    </p-dropdown>
+  </td>
+
+  </tr></table>
+  <p-table #dt [value]="topics"
+           selectionMode="single"
+           [rows]="10"
+           [columns]="topicCols"
+           [(selection)]="selectedTopic"
+           [paginator]="true"
+           [resizableColumns]="true" columnResizeMode="expand"
+           [responsive]="true"
+           dataKey="id">
+
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th style="width: 3em"></th>
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" >
+      <tr  *ngIf="rowData['id'] != null">
+        <td>
+          <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
+        </td>
+        <td *ngFor="let col of columns">
+          <ng-container *ngIf="col.field==='mainCategory'">
+            {{utils.printLocLabel(rowData['subCategory'][col.field])}}
+          </ng-container>
+          <ng-container *ngIf="col.field==='subCategory'">
+            {{utils.printLocLabel(rowData[col.field])}}
+          </ng-container>
+          <ng-container *ngIf="col.field==='topic'">
+          {{utils.printLocLabel(rowData)}}
+          </ng-container>
+          <ng-container *ngIf="col.field!=='mainCategory' && col.field!=='subCategory'&& col.field!=='topic'">
+            {{rowData[col.field]}}
+          </ng-container>
+
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-panel class="btnPanel no_style">
+
+    <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
+            class="ui-button-rounded"
+            label="{{'createBTN' | translate}}"></button>
+    <button type="button" pButton *ngIf="selectedTopic!=null && selectedTopic.id!=null"
+            icon="fa fa-folder-open-o"
+            (click)="enableCreateEditMode=true" class="ui-button-rounded"
+            label="{{'modifyBTN' | translate}}"></button>
+    <button type="button" *ngIf="selectedTopic!=null && selectedTopic.id!=null" pButton
+            icon="fa fa-pencil-square-o"
+            (click)="changeStatus()" class="ui-button-rounded"
+
+            label="{{ 'changeStatusBTN' | translate}}"></button>
+
+  </p-panel>
+</ng-container>
+<app-create-topic *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
+                    [mainCategories]="mainCategories"
+                    [subCategories]="subCategories"
+                    [parent]="this"
+                    [item]="selectedTopic"></app-create-topic>
+

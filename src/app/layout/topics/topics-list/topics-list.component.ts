@@ -7,6 +7,7 @@ import {SubCategoryService} from '../../../shared/services/sub-category.service'
 import {TopicService} from '../../../shared/services/topic.service';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {UsersService} from '../../../shared/services/users.service';
+import {Subcategory} from "../../../shared/model/subcategory";
 
 @Component({
   selector: 'app-topics-list',
@@ -18,6 +19,7 @@ export class TopicsListComponent extends BasicTopicSelection implements OnInit {
   @Input() topicsList: Topic[];
 
   topicCols: any[];
+  enableCreateEditMode = false;
 
   constructor(public topicService: TopicService
     , public subCategoryService: SubCategoryService, public mainCatService: MainCategoryService, private  userServices: UsersService
@@ -37,7 +39,43 @@ export class TopicsListComponent extends BasicTopicSelection implements OnInit {
   }
 
   ngOnInit() {
+    this.listAllMainCategories();
+  }
 
+
+  changeStatus() {
+    if (this.selectedTopic != null && this.selectedTopic.id != null) {
+      //  this.topicService.changeStatus(this.selectedTopic.id, !this.selectedTopic.enabled).subscribe(value => {
+      //   this.topics = value;
+      // });
+    }
+  }
+
+
+  handleCreateEditEvent(event) {
+    if (event != null) {
+      this.topics = event;
+      this.selectedSubCategory = null;
+      this.selectedMainCategory = null;
+      this.enableCreateEditMode = false;
+    }
+  }
+
+  public updateSubCategory() {
+    if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
+      this.subCategoryService.allByMainCat(this.selectedMainCategory.id).subscribe(
+        result => {
+          this.subCategories = result;
+          const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'Select Sub Category', id: null};
+          this.subCategories.unshift(subcategory);
+        }
+      );
+    } else {
+      this.topics = [];
+      this.selectedTopic = null;
+      this.selectedSubCategory = null;
+      this.subCategories = [];
+    }
   }
 
 }

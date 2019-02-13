@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {MainCategory} from '../../../../shared/model/mainCategory';
 import {MainCategoryService} from '../../../../shared/services/main-category.service';
 import {Location} from '@angular/common';
 import {SubCategoryService} from '../../../../shared/services/sub-category.service';
@@ -7,7 +6,6 @@ import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {TopicService} from '../../../../shared/services/topic.service';
 import {UtilsService} from '../../../../shared/services/utils.service';
 import {Subcategory} from '../../../../shared/model/subcategory';
-import {templateRefExtractor} from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-create-sub-cat',

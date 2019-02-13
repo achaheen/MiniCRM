@@ -6,10 +6,6 @@ export interface Ticketdata extends BasicModelWithIDInt {
 
   actionID?: TicketActions;
 
-  createdBy?: string;
-  modificationDate?: any;
-  modifiedBy?: any;
-  creationDate?: string;
   title?: string;
   ticketData?: string;
   notes?: string;

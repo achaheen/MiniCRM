@@ -34,4 +34,14 @@ export class TopicService extends BasicHttpService {
     return this.httpClient.post<Topic[]>(this.baseURLAuthorized + 'topics', request);
   }
 
+
+  changeStatus(topic, newStatus) {
+    return this.httpClient.get<Topic[]>(this.baseURL + `change/${topic}/${newStatus}`);
+  }
+  edit(request) {
+    return this.httpClient.post<Topic[]>(this.baseURL + `edit`, request);
+  }
+  create(request) {
+    return this.httpClient.post<Topic[]>(this.baseURL + `create`, request);
+  }
 }
