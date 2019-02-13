@@ -1,4 +1,30 @@
 <p-accordion>
+
+  <p-accordionTab header="{{'TicketActions' | translate}}" [selected]="false">
+
+    <p-table [paginator]="true" [rows]="10" [value]="ticket.ticketdataList">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>{{'HistoryDate' | translate}}</th>
+          <th>{{'Action' | translate}}</th>
+          <th>{{'DoneBy' | translate}}</th>
+          <th>{{'reply' | translate}}</th>
+          <th>{{'title' | translate}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-ticketData>
+        <tr>
+          <td>{{ticketData.creationDate | date:'medium'}}</td>
+          <td>{{utils.printLocLabel(ticketData.actionID)}}</td>
+          <td>{{ticketData.createdBy}}</td>
+          <td>{{ticketData.ticketData}}</td>
+          <td>{{ticketData.title}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-accordionTab>
+
   <p-accordionTab header="{{'TicketHistory' | translate}}" [selected]="false">
 
     <p-table [paginator]="true" [rows]="10" [value]="ticket.ticketHistoryList">
@@ -19,41 +45,15 @@
           <td>{{history.creationDate | date:'medium'}}</td>
           <td>{{utils.printLocLabel(history.actionID)}}</td>
           <td>{{history.createdBy}}</td>
-          <td>{{history.oldStatus!=null?utils.findStatus(history.oldStatus):''}}</td>
-          <td>{{history.newStatus!=null?utils.findStatus(history.newStatus):''}}</td>
+          <td>{{history.oldStatus != null ? utils.findStatus(history.oldStatus) : ''}}</td>
+          <td>{{history.newStatus != null ? utils.findStatus(history.newStatus) : ''}}</td>
           <td>
-            {{(history.oldTopic!=null)?utils.printLocLabel(utils.getMainCat(history.oldTopic)).concat('-').concat(utils.printLocLabel(utils.getSubCat(history.oldTopic))).concat('-')
-            .concat(utils.printLocLabel(history.oldTopic)):''}}
+            {{(history.oldTopic != null) ? utils.printLocLabel(utils.getMainCat(history.oldTopic)).concat('-').concat(utils.printLocLabel(utils.getSubCat(history.oldTopic))).concat('-')
+            .concat(utils.printLocLabel(history.oldTopic)) : ''}}
           </td>
-          <td>{{(history.newTopic!=null)?utils.printLocLabel(utils.getMainCat(history.newTopic)).concat('-')
+          <td>{{(history.newTopic != null) ? utils.printLocLabel(utils.getMainCat(history.newTopic)).concat('-')
             .concat(utils.printLocLabel(utils.getSubCat(history.newTopic))).concat('-')
-            .concat(utils.printLocLabel(history.newTopic)):''}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-
-  </p-accordionTab>
-  <p-accordionTab header="{{'TicketActions' | translate}}" [selected]="false">
-
-    <p-table [paginator]="true" [rows]="10" [value]="ticket.ticketdataList">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>{{'HistoryDate' | translate}}</th>
-          <th>{{'Action' | translate}}</th>
-          <th>{{'DoneBy' | translate}}</th>
-          <th>{{'title' | translate}}</th>
-          <th>{{'reply' | translate}}</th>
-
-        </tr>
-      </ng-template>
-
-      <ng-template pTemplate="body" let-ticketData>
-        <tr>
-          <td>{{ticketData.creationDate | date:'medium'}}</td>
-          <td>{{utils.printLocLabel(ticketData.actionID)}}</td>
-          <td>{{ticketData.createdBy}}</td>
-          <td>{{ticketData.title}}</td>
-          <td>{{ticketData.ticketData}}</td>
+            .concat(utils.printLocLabel(history.newTopic)) : ''}}</td>
         </tr>
       </ng-template>
     </p-table>
@@ -73,7 +73,6 @@
           <th>{{'Topic' | translate}}</th>
         </tr>
       </ng-template>
-
       <ng-template pTemplate="body" let-escHist>
         <tr>
           <td>{{escHist.escDateTime | date:'medium'}}</td>
@@ -86,6 +85,5 @@
         </tr>
       </ng-template>
     </p-table>
-
   </p-accordionTab>
 </p-accordion>

@@ -143,5 +143,9 @@
   "Validate-CustomerSegment": "CustomerSegment is not valid ",
   "Validate-CustomerBranch": "CustomerBranch is not valid ",
   "Validate-CustomerEmail": "CustomerEmail is not valid ",
-  "ResetTicket": "Reset Ticket"
+  "ResetTicket": "Reset Ticket",
+  "fileName": "File Name",
+  "fileType": "File Type",
+  "download": "Download File",
+  "attachments": "Attachments"
 }
