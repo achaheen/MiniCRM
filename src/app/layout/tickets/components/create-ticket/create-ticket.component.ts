@@ -200,7 +200,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       console.log('attachments ' + this.attachments);
       uploadElement.clear();
     }, error1 => {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
     });
   }
 }

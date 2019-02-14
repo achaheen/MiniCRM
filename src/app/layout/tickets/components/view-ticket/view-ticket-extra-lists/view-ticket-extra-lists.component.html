@@ -1,29 +1,6 @@
 <p-accordion>
 
-  <p-accordionTab header="{{'TicketActions' | translate}}" [selected]="false">
 
-    <p-table [paginator]="true" [rows]="10" [value]="ticket.ticketdataList">
-      <ng-template pTemplate="header">
-        <tr>
-          <th>{{'HistoryDate' | translate}}</th>
-          <th>{{'Action' | translate}}</th>
-          <th>{{'DoneBy' | translate}}</th>
-          <th>{{'reply' | translate}}</th>
-          <th>{{'title' | translate}}</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-ticketData>
-        <tr>
-          <td>{{ticketData.creationDate | date:'medium'}}</td>
-          <td>{{utils.printLocLabel(ticketData.actionID)}}</td>
-          <td>{{ticketData.createdBy}}</td>
-          <td>{{ticketData.ticketData}}</td>
-          <td>{{ticketData.title}}</td>
-        </tr>
-      </ng-template>
-    </p-table>
-
-  </p-accordionTab>
 
   <p-accordionTab header="{{'TicketHistory' | translate}}" [selected]="false">
 

@@ -113,14 +113,16 @@
   </ng-container>
   <tr>
     <td colspan="8">
-      <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="8" >
       <app-view-ticket-data [ticketDataList]="ticket.ticketdataList"></app-view-ticket-data>
     </td>
   </tr>
+  <tr>
+    <td colspan="8">
+
+      <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>
+    </td>
+  </tr>
+
 
 </table>
 
