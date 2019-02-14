@@ -15,13 +15,13 @@
   </td>
 </div-->
 <ng-container *ngIf="!enableCreateEditMode">
-  <td class="grid-label">{{'MainCat'|translate}}</td>
+  <!--td class="grid-label">{{'MainCat'|translate}}</td>
   <td class="grid-input ">
     <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
                 [options]="mainCategories"
                 [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
     </p-dropdown>
-  </td>
+  </td-->
   <p-table #dtopic [value]="subCategories"
            selectionMode="single"
            [rows]="10"

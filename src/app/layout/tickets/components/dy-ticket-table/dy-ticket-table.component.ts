@@ -3,7 +3,6 @@ import {Validators, FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {SearchTicketsContainer} from '../../../../shared/model/searchTicketsContainer';
 import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {TicketsService} from '../../../../shared/services/tickets.service';
-import {SearchTicketsResult} from '../../../../shared/model/searchTicketsResult';
 import {Ticket} from '../../../../shared/model/ticket';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {SearchTicketsSorting} from '../../../../shared/model/searchTicketsSorting';
