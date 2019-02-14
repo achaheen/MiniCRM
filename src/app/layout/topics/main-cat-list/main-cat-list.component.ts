@@ -26,13 +26,11 @@ export class MainCatListComponent implements OnInit {
       {field: 'modificationDate', header: utils.translateService.instant('modificationDate')},
       {field: 'modifiedBy', header: utils.translateService.instant('modifiedBy')}];
   }
-
   ngOnInit() {
     this.mainCatService.all().subscribe(value => {
       this.mainCatList = value;
     });
   }
-
   changeStatus() {
     if (this.selectedMainCat != null && this.selectedMainCat.id != null) {
       this.mainCatService.changeStatus(this.selectedMainCat.id, !this.selectedMainCat.enabled).subscribe(value => {
@@ -47,6 +45,4 @@ export class MainCatListComponent implements OnInit {
       this.enableCreateEditMode = false;
     }
   }
-
-
 }

@@ -1,14 +1,17 @@
 <ng-container *ngIf="!enableCreateEditMode">
   <p-table #dt [value]="mainCatList"
            selectionMode="single"
-           [rows]="10"
+           [rows]="5"
            [columns]="mainCatCols"
-           (onRowSelect)="subComponent.updateSubCategory()"
+           (onRowSelect)="subComponent.updateSubCategory();"
            [(selection)]="selectedMainCat"
            [paginator]="true"
            [resizableColumns]="true" columnResizeMode="expand"
            [responsive]="true"
            dataKey="id">
+    <ng-template pTemplate="caption">
+      {{'MainCatList'|translate}}
+    </ng-template>
 
     <ng-template pTemplate="header" let-columns>
       <tr>
@@ -34,9 +37,7 @@
     <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
             class="ui-button-rounded"
             label="{{'createBTN' | translate}}"></button>
-    <button type="button" pButton routerLinkActive="active" routerLink="sc"
-            class="ui-button-rounded"
-            label="{{'createBTN' | translate}}"></button>
+
     <button type="button" pButton *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" icon="fa fa-folder-open-o"
             (click)="enableCreateEditMode=true" class="ui-button-rounded"
             label="{{'modifyBTN' | translate}}"></button>
@@ -49,4 +50,5 @@
 <app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)" [parent]="this"
                      [item]="selectedMainCat"></app-create-main-cat>
 
-<app-sub-cat-list #subComponent [selectedMainCategory]="selectedMainCat" ></app-sub-cat-list>
+<app-sub-cat-list *ngIf="selectedMainCat!=null" #subComponent
+                  [selectedMainCategory]="selectedMainCat"></app-sub-cat-list>

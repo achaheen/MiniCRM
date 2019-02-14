@@ -149,5 +149,9 @@
   "download": "Download File",
   "attachments": "Attachments",
   "mainCats": "Main Categories",
-  "notesDetails": "Ticket Status Will Be : "
+  "notesDetails": "Ticket Status Will Be : ",
+  "MainCatList": "Main Categories List",
+  "SubCatList": "Sub Categories List",
+  "TopicList": "Topics List"
+
 }

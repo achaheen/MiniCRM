@@ -7,7 +7,7 @@ import {SubCategoryService} from '../../../shared/services/sub-category.service'
 import {TopicService} from '../../../shared/services/topic.service';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {UsersService} from '../../../shared/services/users.service';
-import {Subcategory} from "../../../shared/model/subcategory";
+import {Subcategory} from '../../../shared/model/subcategory';
 
 @Component({
   selector: 'app-topics-list',

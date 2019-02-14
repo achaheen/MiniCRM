@@ -19,7 +19,8 @@ export class SubCatListComponent extends BasicTopicSelection implements OnInit {
     super(topicService, subCatService, mainCatService, utils);
     this.subCatCols = [
       {field: 'id', header: 'ID'},
-      {field: 'mainCategory', header: 'Main Category'},
+      {field: 'arabicLabel', header: utils.translateService.instant('arabicLabel')},
+      {field: 'englishLabel', header: utils.translateService.instant('englishLabel')},
       {field: 'enabled', header: 'Enabled?'},
       {field: 'creationDate', header: 'Creation Date'},
       {field: 'createdBy', header: 'Created By'},

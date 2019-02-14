@@ -1,4 +1,3 @@
-
 <!--div>
 
   <td class="grid-label">{{'SubCat'|translate}}</td>
@@ -24,8 +23,9 @@
   </td-->
   <p-table #dtopic [value]="subCategories"
            selectionMode="single"
-           [rows]="10"
+           [rows]="8"
            [columns]="subCatCols"
+           (onRowSelect)="topicList.updateTopicList();topicList.selectedSubCategory=selectedSubCategory"
            [(selection)]="selectedSubCategory"
            [paginator]="true"
            [resizableColumns]="true" columnResizeMode="expand"
@@ -46,20 +46,12 @@
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
         <td *ngFor="let col of columns">
-          <ng-container *ngIf="col.field==='mainCategory'">
-            {{utils.printLocLabel(rowData[col.field])}}
-          </ng-container>
-          <ng-container *ngIf="col.field!=='mainCategory'">
-            {{rowData[col.field]}}
-
-          </ng-container>
-
+          {{rowData[col.field]}}
         </td>
       </tr>
     </ng-template>
   </p-table>
   <p-panel class="btnPanel no_style">
-
     <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
             class="ui-button-rounded"
             label="{{'createBTN' | translate}}"></button>
@@ -70,12 +62,13 @@
     <button type="button" *ngIf="selectedSubCategory!=null && selectedSubCategory.id!=null" pButton
             icon="fa fa-pencil-square-o"
             (click)="changeStatus()" class="ui-button-rounded"
-
             label="{{ 'changeStatusBTN' | translate}}"></button>
-
   </p-panel>
 </ng-container>
 <app-create-sub-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
                     [mainCategories]="mainCategories"
+                    [selectedMainCategory]="selectedMainCategory"
                     [parent]="this"
                     [item]="selectedSubCategory"></app-create-sub-cat>
+<app-topics-list #topicList *ngIf="selectedSubCategory!=null" [selectedSubCategory]="selectedSubCategory"
+                 [selectedMainCategory]="selectedMainCategory"></app-topics-list>

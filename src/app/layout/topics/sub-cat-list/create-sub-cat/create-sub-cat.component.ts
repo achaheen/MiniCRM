@@ -16,6 +16,7 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
 
 
   @Input() item: Subcategory = {};
+
   @Output() event: EventEmitter<Object> = new EventEmitter();
   @Input() parent: any;
 
