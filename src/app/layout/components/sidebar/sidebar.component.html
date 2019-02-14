@@ -21,9 +21,13 @@
       <span>{{ 'Groups' | translate }}</span>
     </a>
 
-    <a [routerLink]="['/tp/list']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+    <a [routerLink]="['/tp']" [routerLinkActive]="['router-link-active']" class="list-group-item">
       <i class="fa fa-fw fa-table"></i>&nbsp;
       <span>{{ 'Tables' | translate }}</span>
+    </a>
+    <a [routerLink]="['/mc']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-align-justify"></i>&nbsp;
+      <span>{{ 'mainCats' | translate }}</span>
     </a>
     <!--
       <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">

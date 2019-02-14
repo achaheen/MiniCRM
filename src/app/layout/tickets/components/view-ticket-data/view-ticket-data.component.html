@@ -12,7 +12,7 @@
       <div class="replyContent"> {{reply.ticketData}} </div>
     </div>
     <div class="ReplyAttachment">
-        <!--<div class="attachementTitle">Attachements</div>-->
+    <div class="attachementTitle"> {{'attachments'|translate}}</div>
         <div class="attachmentContent">
           <tr app-view-attachment [attachmentID]="reply.attachmentsList"></tr>
         </div>

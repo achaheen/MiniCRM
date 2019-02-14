@@ -39,28 +39,18 @@ export interface Ticket {
   priority?: number;
 
   lastTicketData?: number;
-
   solved?: boolean;
-
   closed?: boolean;
-
   deleted?: boolean;
-
   createdBy?: string;
   modificationDate?: Date;
   modifiedBy?: string;
   creationDate?: number;
-
   ticketdataList?: Ticketdata[];
-
   escalationhistoryList?: Escalationhistory[];
-
   smsHistoryList?: SmsHistory[];
-
   ticketExtData?: TicketExtData[];
   ticketHistoryList?: TicketHistroy[];
-
-
   statusLabel?: string;
   typeLabel?: string;
   chanelLabel?: string;
