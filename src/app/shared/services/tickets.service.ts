@@ -33,7 +33,12 @@ export class TicketsService {
   getAttachmentsInfo(request) {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/info', request);
   }
+
   getAttachmentsData(request) {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/data', request);
+  }
+
+  getUserPermissionsOnTopic(topicID) {
+    return this.httpClient.get(this.baseURL + 'permissions/' + topicID);
   }
 }
