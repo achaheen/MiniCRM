@@ -3,7 +3,7 @@ import {Attachment} from '../../../../shared/model/attachment';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import *  as FileSaver from 'file-saver';
 @Component({
-  selector: 'tr[app-view-attachment]',
+  selector: 'app-view-attachment',
   templateUrl: './view-attachment.component.html',
   styleUrls: ['./view-attachment.component.scss']
 })
