@@ -1,0 +1,69 @@
+<table class="replyTB">
+  <tr>
+    <td class="grid-label">{{'Action'| translate}}</td>
+    <td class="grid-input">
+      <p-dropdown (onChange)="onChangeAction();" [options]="actionList" [(ngModel)]="selectedAction"
+                  optionLabel="englishLabel"></p-dropdown>
+    </td>
+  </tr>
+  <tr>
+    <td class="grid-label">{{'Title'| translate}}</td>
+    <td class="grid-input"><input id="userID" type="text" pInputText name="userID" [(ngModel)]="ticketData.title"></td>
+  </tr>
+  <tr>
+    <td class="grid-label">{{'Reply'| translate}}</td>
+    <td class="grid-input"><textarea id="details" type="text" pInputTextarea name="details"
+                                     [(ngModel)]="ticketData.ticketData" /> </td>
+  </tr>
+  <tr>
+  <tr *ngIf="selectedAction.actionID == 12">
+    <td class="grid-label">{{'MainCat'|translate}}</td>
+    <td class="grid-input ">
+      <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory();prepare()"
+                  placeholder="{{'selectMainCatLabel'|translate}}"
+                  [options]="mainCategories" optionLabel="englishLabel"
+                  [(ngModel)]="selectedMainCategory">
+      </p-dropdown>
+    </td>
+    <td class="grid-label">{{'SubCat'|translate}}</td>
+    <td class="grid-input minWidth">
+      <p-dropdown class="minWidth" appendTo="body"
+                  placeholder="{{'selectSubCatLabel'|translate}}"
+                  (onChange)="updateTopicList();" [options]="subCategories"
+                  [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
+    </td>
+    <td class="grid-label">{{'Topic'|translate}}</td>
+    <td class="grid-input minWidth">
+      <p-dropdown class="minWidth"  placeholder="{{'selectTopicLabel'|translate}}"
+                  appendTo="body" [options]="topics" [(ngModel)]="selectedTopic"
+                  optionLabel="englishLabel"></p-dropdown>
+    </td>
+  </tr>
+  <tr>
+    <td class="grid-label">{{'attachments'| translate}}</td>
+    <td class="grid-input">
+
+      <p-fileUpload name="files" #uploadFile  multiple="multiple"
+                    (onUpload)="onUploadFiles($event)"
+                    auto="true"
+                    (uploadHandler)="customUploader($event,uploadFile)"
+                    customUpload="true"
+                    accept=".csv,.xml,.tsv,.xlsx,.pdf" maxFileSize="1000000">
+        <ng-template pTemplate="content">
+          <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size * 0.000001}} bytes</li>
+          </ul>
+        </ng-template>
+      </p-fileUpload>
+
+    </td>
+  </tr>
+  <tr>
+    <td class="grid-label">{{'notesDetails'| translate}}</td>
+    <td class="grid-input">{{selectedAction.setStatusTo.englishLabel}}</td>
+  </tr>
+</table>
+
+<div style="text-align: right;">
+  <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'SaveReply' | translate}}" (click)="addReply()"></button>
+</div>

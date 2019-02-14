@@ -319,13 +319,41 @@ table.ticketFormTb{
 
 .replyContainer .ReplyAttachment{
   display: block;
+  color: #495057;
   float: left;
   margin-left: 20px;
-  color: #495057;
 }
 
 .replyContainer .attachementTitle{
-
   font-weight: bold;
   margin-bottom: 10px;
+}
+
+.replyContainer .attachementContent{
+  display: block;
+  color: #495057;
+  float: left;
+  margin-left: 20px;}
+
+
+.attachementContent .attachmentList ul {
+  //list-style-type: none;
+  //margin: 0;
+  //padding: 0;
+  //overflow: hidden;
+}
+
+.attachementContent .attachmentList li {
+  float: none;
+  margin: 0px;
+
+}
+
+.attachementContent .attachmentList li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+
 }

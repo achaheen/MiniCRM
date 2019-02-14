@@ -147,5 +147,6 @@
   "fileName": "File Name",
   "fileType": "File Type",
   "download": "Download File",
-  "attachments": "Attachments"
+  "attachments": "Attachments",
+  "notesDetails": "Ticket Status Will Be : "
 }

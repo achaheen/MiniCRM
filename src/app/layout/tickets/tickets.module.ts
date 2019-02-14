@@ -25,9 +25,10 @@ import { CreateTicketComponent } from './components/create-ticket/create-ticket.
 import {FileUploadModule} from 'primeng/fileupload';
 import { ViewTicketExtraListsComponent } from './components/view-ticket/view-ticket-extra-lists/view-ticket-extra-lists.component';
 import { ViewAttachmentComponent } from './components/view-attachment/view-attachment.component';
-import { ViewTicketDataComponent } from './components/view-ticket-data/view-ticket-data.component'
+import { ViewTicketDataComponent } from './components/view-ticket-data/view-ticket-data.component';
+import { TicketReplyComponent } from './components/ticket-reply/ticket-reply.component'
 @NgModule({
-  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent, ViewTicketDataComponent],
+  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent, ViewTicketDataComponent, TicketReplyComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
