@@ -13,7 +13,7 @@
   <tr>
     <td class="grid-label">{{'Reply'| translate}}</td>
     <td class="grid-input"><textarea id="details" type="text" pInputTextarea name="details"
-                                     [(ngModel)]="ticketData.ticketData" /> </td>
+                                     [(ngModel)]="ticketData.ticketData" ></textarea> </td>
   </tr>
   <tr>
   <tr *ngIf="selectedAction.actionID == 12">
@@ -65,5 +65,5 @@
 </table>
 
 <div style="text-align: right;">
-  <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'SaveReply' | translate}}" (click)="addReply()"></button>
+  <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'SaveReply' | translate}}" (click)="addReply()" ></button>
 </div>
