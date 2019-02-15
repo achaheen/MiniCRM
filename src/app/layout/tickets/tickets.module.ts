@@ -8,7 +8,7 @@ import {
   ButtonModule, CheckboxModule,
   DataGridModule,
   DialogModule, FieldsetModule,
-  InputTextModule, ListboxModule, MessageModule, MultiSelectModule,
+  InputTextModule, ListboxModule, MessageModule, MessagesModule, MultiSelectModule,
   PanelModule, PasswordModule, RadioButtonModule,
   TabViewModule, TriStateCheckboxModule
 } from 'primeng/primeng';
@@ -19,17 +19,20 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {AccordionModule} from 'primeng/accordion';
 import {DropdownModule} from 'primeng/dropdown';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
-import { ViewTicketComponent } from './components/view-ticket/view-ticket.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {ViewTicketComponent} from './components/view-ticket/view-ticket.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import { CreateTicketComponent } from './components/create-ticket/create-ticket.component';
+import {CreateTicketComponent} from './components/create-ticket/create-ticket.component';
 import {FileUploadModule} from 'primeng/fileupload';
-import { ViewTicketExtraListsComponent } from './components/view-ticket/view-ticket-extra-lists/view-ticket-extra-lists.component';
-import { ViewAttachmentComponent } from './components/view-attachment/view-attachment.component';
-import { ViewTicketDataComponent } from './components/view-ticket-data/view-ticket-data.component';
-import { TicketReplyComponent } from './components/ticket-reply/ticket-reply.component'
+import {ViewTicketExtraListsComponent} from './components/view-ticket/view-ticket-extra-lists/view-ticket-extra-lists.component';
+import {ViewAttachmentComponent} from './components/view-attachment/view-attachment.component';
+import {ViewTicketDataComponent} from './components/view-ticket-data/view-ticket-data.component';
+import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.component';
+
 @NgModule({
-  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent, CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent, ViewTicketDataComponent, TicketReplyComponent],
+  declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
+    CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
+    ViewTicketDataComponent, TicketReplyComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
@@ -38,6 +41,7 @@ import { TicketReplyComponent } from './components/ticket-reply/ticket-reply.com
     ButtonModule,
     DialogModule,
     BlockUIModule,
+    MessageModule,
     PanelModule,
     InputTextModule,
     DataGridModule,
@@ -45,7 +49,7 @@ import { TicketReplyComponent } from './components/ticket-reply/ticket-reply.com
     TriStateCheckboxModule,
     CheckboxModule,
     ReactiveFormsModule,
-    MessageModule,
+    MessagesModule,
     ToastModule,
     RadioButtonModule,
     MultiSelectModule,
@@ -54,8 +58,8 @@ import { TicketReplyComponent } from './components/ticket-reply/ticket-reply.com
     PasswordModule,
     AccordionModule, TranslateModule,
     DropdownModule,
-    InputTextareaModule,
-    FileUploadModule,MenubarModule
+    InputTextareaModule, MessageModule,
+    FileUploadModule, MenubarModule
   ]
 })
 export class TicketsModule {

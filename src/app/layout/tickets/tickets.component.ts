@@ -219,7 +219,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
 
     for (let i = 0; i <= this.items.length - 1; i++) {
       console.log(this.items[i].header);
-      if (this.items[i].header == this.selectedTicketId) {
+      if (this.items[i].header === this.selectedTicketId) {
         itemAlreadyFound = true;
         itemIndex = i;
         break;

@@ -6,6 +6,8 @@ import {SearchTicketsResult} from '../model/searchTicketsResult';
 import {Ticket} from '../model/ticket';
 import {TicketHolder} from '../model/ticketHolder';
 import {Attachment} from '../model/attachment';
+import {TicketActions} from '../model/ticketActions';
+import {TicketLock} from '../model/ticket-lock';
 
 
 @Injectable({
@@ -38,7 +40,15 @@ export class TicketsService {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/data', request);
   }
 
-  getUserPermissionsOnTopic(topicID) {
-    return this.httpClient.get(this.baseURL + 'permissions/' + topicID);
+  getAuthorizedActions(topicID) {
+    return this.httpClient.get<TicketActions[]>(this.baseURL + 'authorizedActions/' + topicID);
+  }
+
+  getLock(ticketID, actionID) {
+    return this.httpClient.get<TicketLock>(this.baseURL + 'lock/' + ticketID + '/' + actionID);
+  }
+
+  action(holder) {
+    return this.httpClient.post<Ticket>(this.baseURL + 'action', holder);
   }
 }

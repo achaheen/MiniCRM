@@ -1,140 +1,151 @@
-<p-menubar [model]="items"></p-menubar>
+<p-menubar [model]="items" [autoDisplay]="false"></p-menubar>
+<div class="p-grid">
+  <div [ngClass]="ticketLock!=null?'p-col-8':'p-col-12'">
+    <table class="formTB" *ngIf="ticket">
+      <tr>
+        <td class="grid-label">{{'TicketID' | translate}}</td>
+        <td class="grid-input"><input id="ticketID" type="text" pInputText name="ticketID" [attr.disabled]="true"
+                                      [ngModel]="ticket.id"></td>
+        <td class="grid-label">{{'MainCat' | translate}}</td>
+        <td class="grid-input">
 
-<table class="formTB" *ngIf="ticket">
-  <tr>
-    <td class="grid-label">{{'TicketID' | translate}}</td>
-    <td class="grid-input"><input id="ticketID" type="text" pInputText name="ticketID" [attr.disabled]="true"
-                                  [ngModel]="ticket.id"></td>
-    <td class="grid-label">{{'MainCat' | translate}}</td>
-    <td class="grid-input">
+          <input id="mainCategory" type="text" pInputText name="subCategory" [attr.disabled]="true"
+                 [ngModel]="utils.printLocLabel(ticket.topic.subCategory.mainCategory)"
+                 (ngModelChange)="ticket.topic.subCategory.mainCategory($event)">
 
-      <input id="mainCategory" type="text" pInputText name="subCategory" [attr.disabled]="true"
-             [ngModel]="utils.printLocLabel(ticket.topic.subCategory.mainCategory)"
-             (ngModelChange)="ticket.topic.subCategory.mainCategory($event)">
+        </td>
+        <td class="grid-label">{{'SubCat' | translate}}</td>
+        <td class="grid-input"><input id="subCategory" type="text" pInputText name="subCategory" [attr.disabled]="true"
+                                      [ngModel]="ticket.topic.subCategory.englishLabel"></td>
+        <td class="grid-label">{{'Topic' | translate}}</td>
+        <td class="grid-input"><input id="topic" type="text" pInputText name="topic" [attr.disabled]="true"
+                                      [ngModel]="ticket.topic.englishLabel"></td>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'createdBy' | translate}}</td>
+        <td class="grid-input"><input id="createdBy" type="text" pInputText name="createdBy" [attr.disabled]="true"
+                                      *ngIf="ticket " [ngModel]="ticket.createdBy"></td>
+        <td class="grid-label">{{'creationDate' | translate}}</td>
+        <td class="grid-input"><input id="creationDate" type="text" pInputText name="creationDate"
+                                      [attr.disabled]="true"
+                                      [ngModel]="ticket.creationDate | date:'medium'"
+                                      (ngModelChange)="ticket.creationDate($event)"></td>
+        <td class="grid-label">{{'modificationDate' | translate}}</td>
+        <td class="grid-input"><input id="lastModification" type="text" pInputText name="lastModification"
+                                      [attr.disabled]="true" [ngModel]="ticket.modificationDate | date:'medium'"
+                                      (ngModelChange)="ticket.modificationDate($event)"></td>
+        <td class="grid-label">{{'Status' | translate}}</td>
+        <td class="grid-input"><input id="status" type="text" pInputText name="status" [attr.disabled]="true"
+                                      [ngModel]="utils.findStatus(ticket.currentStatus)"
+                                      (ngModelChange)="ticket.currentStatus($event)"></td>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'Subject' | translate}}</td>
+        <td class="grid-input"><input id="subject" type="text" pInputText name="subject" [attr.disabled]="true"
+                                      [ngModel]="ticket.subject"></td>
+        <td class="grid-label">{{'TicketType' | translate}}</td>
+        <td class="grid-input"><input id="ticketType" type="text" pInputText name="ticketType" [attr.disabled]="true"
+                                      [ngModel]="utils.findType(ticket.ticketType)"
+                                      (ngModelChange)="ticket.ticketType($event)"></td>
+        <td class="grid-label">{{'Channel' | translate}}</td>
+        <td class="grid-input"><input id="channel" type="text" pInputText name="channel" [attr.disabled]="true"
+                                      [ngModel]="ticket.sourceChannel"></td>
+        <td class="grid-label">{{'Priority' | translate}}</td>
+        <td class="grid-input"><input id="priority" type="text" pInputText name="priority" [attr.disabled]="true"
+                                      [ngModel]="utils.findPriority(ticket.priority)"
+                                      (ngModelChange)="ticket.priority($event)"></td>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'Details' | translate}}</td>
+        <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+                                                     [attr.disabled]="true" [ngModel]="ticket.details"> </textarea></td>
+      </tr>
 
-    </td>
-    <td class="grid-label">{{'SubCat' | translate}}</td>
-    <td class="grid-input"><input id="subCategory" type="text" pInputText name="subCategory" [attr.disabled]="true"
-                                  [ngModel]="ticket.topic.subCategory.englishLabel"></td>
-    <td class="grid-label">{{'Topic' | translate}}</td>
-    <td class="grid-input"><input id="topic" type="text" pInputText name="topic" [attr.disabled]="true"
-                                  [ngModel]="ticket.topic.englishLabel"></td>
-  </tr>
-  <tr>
-    <td class="grid-label">{{'createdBy' | translate}}</td>
-    <td class="grid-input"><input id="createdBy" type="text" pInputText name="createdBy" [attr.disabled]="true"
-                                  *ngIf="ticket " [ngModel]="ticket.createdBy"></td>
-    <td class="grid-label">{{'creationDate' | translate}}</td>
-    <td class="grid-input"><input id="creationDate" type="text" pInputText name="creationDate" [attr.disabled]="true"
-                                  [ngModel]="ticket.creationDate | date:'medium'"
-                                  (ngModelChange)="ticket.creationDate($event)"></td>
-    <td class="grid-label">{{'modificationDate' | translate}}</td>
-    <td class="grid-input"><input id="lastModification" type="text" pInputText name="lastModification"
-                                  [attr.disabled]="true" [ngModel]="ticket.modificationDate | date:'medium'"
-                                  (ngModelChange)="ticket.modificationDate($event)"></td>
-    <td class="grid-label">{{'Status' | translate}}</td>
-    <td class="grid-input"><input id="status" type="text" pInputText name="status" [attr.disabled]="true"
-                                  [ngModel]="utils.findStatus(ticket.currentStatus)"
-                                  (ngModelChange)="ticket.currentStatus($event)"></td>
-  </tr>
-  <tr>
-    <td class="grid-label">{{'Subject' | translate}}</td>
-    <td class="grid-input"><input id="subject" type="text" pInputText name="subject" [attr.disabled]="true"
-                                  [ngModel]="ticket.subject"></td>
-    <td class="grid-label">{{'TicketType' | translate}}</td>
-    <td class="grid-input"><input id="ticketType" type="text" pInputText name="ticketType" [attr.disabled]="true"
-                                  [ngModel]="utils.findType(ticket.ticketType)"
-                                  (ngModelChange)="ticket.ticketType($event)"></td>
-    <td class="grid-label">{{'Channel' | translate}}</td>
-    <td class="grid-input"><input id="channel" type="text" pInputText name="channel" [attr.disabled]="true"
-                                  [ngModel]="ticket.sourceChannel"></td>
-    <td class="grid-label">{{'Priority' | translate}}</td>
-    <td class="grid-input"><input id="priority" type="text" pInputText name="priority" [attr.disabled]="true"
-                                  [ngModel]="utils.findPriority(ticket.priority)"
-                                  (ngModelChange)="ticket.priority($event)"></td>
-  </tr>
-  <tr>
-    <td class="grid-label">{{'Details' | translate}}</td>
-    <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
-                                                 [attr.disabled]="true" [ngModel]="ticket.details"> </textarea></td>
-  </tr>
+      <tr>
+        <td colspan="8">
+          <hr/>
+        </td>
+      </tr>
 
-  <tr>
-    <td colspan="8">
-      <hr/>
-    </td>
-  </tr>
+      <tr>
+        <td class="grid-label">{{'CustomerBasic' | translate}}</td>
+        <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                      [attr.disabled]="true"
+                                      [ngModel]="ticket.customerAccount.customerCIF"></td>
+        <td class="grid-label">{{'CustomerName' | translate}}</td>
+        <td class="grid-input"><input id="customerName" type="text" pInputText name="customerName"
+                                      [attr.disabled]="true"
+                                      [ngModel]="ticket.customerAccount.customerNameEn"></td>
+        <td class="grid-label">{{'CustomerMobile' | translate}}</td>
+        <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                      [attr.disabled]="true" [ngModel]="ticket.customerAccount.mobile"></td>
+        <td class="grid-label">{{'CustomerSegment' | translate}}</td>
+        <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+                                      [attr.disabled]="true" [ngModel]="ticket.customerAccount.segment"></td>
+      </tr>
 
-  <tr>
-    <td class="grid-label">{{'CustomerBasic' | translate}}</td>
-    <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic" [attr.disabled]="true"
-                                  [ngModel]="ticket.customerAccount.customerCIF"></td>
-    <td class="grid-label">{{'CustomerName' | translate}}</td>
-    <td class="grid-input"><input id="customerName" type="text" pInputText name="customerName" [attr.disabled]="true"
-                                  [ngModel]="ticket.customerAccount.customerNameEn"></td>
-    <td class="grid-label">{{'CustomerMobile' | translate}}</td>
-    <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
-                                  [attr.disabled]="true" [ngModel]="ticket.customerAccount.mobile"></td>
-    <td class="grid-label">{{'CustomerSegment' | translate}}</td>
-    <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
-                                  [attr.disabled]="true" [ngModel]="ticket.customerAccount.segment"></td>
-  </tr>
+      <tr>
+        <td colspan="8">
+          <hr/>
+        </td>
+      </tr>
 
-  <tr>
-    <td colspan="8">
-      <hr/>
-    </td>
-  </tr>
+      <tr>
+        <td class="grid-label">{{'OriginalMainCategory' | translate}}</td>
+        <td class="grid-input"><input id="oMainCategory" type="text" pInputText name="ostaffID" [attr.disabled]="true"
+                                      [ngModel]="ticket.originalTopic.subCategory.mainCategory.englishLabel"></td>
+        <td class="grid-label">{{'OriginalSubCategory' | translate}}</td>
+        <td class="grid-input"><input id="oSubCategory" type="text" pInputText name="osubCategory"
+                                      [attr.disabled]="true"
+                                      [ngModel]="ticket.originalTopic.subCategory.englishLabel"></td>
+        <td class="grid-label">{{'OriginalTopic' | translate}}</td>
+        <td class="grid-input"><input id="oTopic" type="text" pInputText name="otopic" [attr.disabled]="true"
+                                      [ngModel]="ticket.originalTopic.englishLabel"></td>
+      </tr>
 
-  <tr>
-    <td class="grid-label">{{'OriginalMainCategory' | translate}}</td>
-    <td class="grid-input"><input id="oMainCategory" type="text" pInputText name="ostaffID" [attr.disabled]="true"
-                                  [ngModel]="ticket.originalTopic.subCategory.mainCategory.englishLabel"></td>
-    <td class="grid-label">{{'OriginalSubCategory' | translate}}</td>
-    <td class="grid-input"><input id="oSubCategory" type="text" pInputText name="osubCategory" [attr.disabled]="true"
-                                  [ngModel]="ticket.originalTopic.subCategory.englishLabel"></td>
-    <td class="grid-label">{{'OriginalTopic' | translate}}</td>
-    <td class="grid-input"><input id="oTopic" type="text" pInputText name="otopic" [attr.disabled]="true"
-                                  [ngModel]="ticket.originalTopic.englishLabel"></td>
-  </tr>
+      <ng-container *ngIf="ticket.attachmentsList!=null && ticket.attachmentsList.length>0">
+        <tr>
+          <td colspan="8">
+            <hr/>
+          </td>
+        </tr>
 
-  <ng-container *ngIf="ticket.attachmentsList!=null && ticket.attachmentsList.length>0">
-    <tr>
-      <td colspan="8">
-        <hr/>
-      </td>
-    </tr>
+        <tr>
 
-    <tr >
+          <td class="grid-label">
+            <h4>{{'attachments'|translate}}</h4>
+          </td>
+          <td class="grid-label" colspan="7">
+            <app-view-attachment [attachmentID]="ticket.attachmentsList"></app-view-attachment>
+          </td>
 
-      <td class="grid-label">
-        <h4>{{'attachments'|translate}}</h4>
-      </td>
-      <td class="grid-label" colspan="7">
-        <app-view-attachment [attachmentID]="ticket.attachmentsList" ></app-view-attachment>
-      </td>
+        </tr>
 
-    </tr>
+        <tr>
+          <td colspan="8">
+            <hr/>
+          </td>
+        </tr>
+      </ng-container>
+      <tr>
+        <td colspan="8">
+          <app-view-ticket-data [ticketDataList]="ticket.ticketdataList"></app-view-ticket-data>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
 
-    <tr>
-      <td colspan="8">
-        <hr/>
-      </td>
-    </tr>
-  </ng-container>
-  <tr>
-    <td colspan="8">
-      <app-view-ticket-data [ticketDataList]="ticket.ticketdataList"></app-view-ticket-data>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="8">
-
-      <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>
-    </td>
-  </tr>
+          <app-view-ticket-extra-lists [ticket]="ticket"></app-view-ticket-extra-lists>
+        </td>
+      </tr>
 
 
-</table>
+    </table>
 
 
+  </div>
+  <div class="p-col-4" *ngIf="ticketLock!=null">
+    <app-ticket-reply [actionList]="ticketActionList" [selectedAction]="selectedTicketAction" [parent]="this"
+                      [ticket]="ticket" [ticketLock]="ticketLock"></app-ticket-reply>
+  </div>
+</div>

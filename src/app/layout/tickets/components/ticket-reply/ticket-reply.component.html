@@ -13,13 +13,13 @@
   <tr>
     <td class="grid-label">{{'Reply'| translate}}</td>
     <td class="grid-input"><textarea id="details" type="text" pInputTextarea name="details"
-                                     [(ngModel)]="ticketData.ticketData" ></textarea> </td>
+                                     [(ngModel)]="ticketData.ticketData"></textarea></td>
   </tr>
   <tr>
-  <tr *ngIf="selectedAction.actionID == 12">
+  <tr *ngIf="selectedAction.actionID ===8">
     <td class="grid-label">{{'MainCat'|translate}}</td>
     <td class="grid-input ">
-      <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory();prepare()"
+      <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
                   placeholder="{{'selectMainCatLabel'|translate}}"
                   [options]="mainCategories" optionLabel="englishLabel"
                   [(ngModel)]="selectedMainCategory">
@@ -34,7 +34,7 @@
     </td>
     <td class="grid-label">{{'Topic'|translate}}</td>
     <td class="grid-input minWidth">
-      <p-dropdown class="minWidth"  placeholder="{{'selectTopicLabel'|translate}}"
+      <p-dropdown class="minWidth" placeholder="{{'selectTopicLabel'|translate}}"
                   appendTo="body" [options]="topics" [(ngModel)]="selectedTopic"
                   optionLabel="englishLabel"></p-dropdown>
     </td>
@@ -43,7 +43,7 @@
     <td class="grid-label">{{'attachments'| translate}}</td>
     <td class="grid-input">
 
-      <p-fileUpload name="files" #uploadFile  multiple="multiple"
+      <p-fileUpload name="files" #uploadFile multiple="multiple"
                     (onUpload)="onUploadFiles($event)"
                     auto="true"
                     (uploadHandler)="customUploader($event,uploadFile)"
@@ -58,12 +58,14 @@
 
     </td>
   </tr>
-  <tr>
+  <tr *ngIf="selectedAction.setStatusTo != null">
     <td class="grid-label">{{'notesDetails'| translate}}</td>
-    <td class="grid-input">{{selectedAction.setStatusTo.englishLabel}}</td>
+    <td
+      class="grid-input">{{ utils.printLocLabel(selectedAction.setStatusTo)}}</td>
   </tr>
 </table>
 
 <div style="text-align: right;">
-  <button type="button" pButton icon="fa fa-eraser"  class="ui-button-rounded"  label="{{'SaveReply' | translate}}" (click)="addReply()" ></button>
+  <button type="button" pButton icon="fa fa-eraser" class="ui-button-rounded" label="{{'SaveReply' | translate}}"
+          (click)="addReply()"></button>
 </div>

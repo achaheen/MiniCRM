@@ -8,6 +8,8 @@ import {LabelEnabled} from '../model/label-enabled';
 import {MainCategory} from '../model/mainCategory';
 import {Topic} from '../model/topic';
 import {TranslateService} from '@ngx-translate/core';
+import {TicketActions} from '../model/ticketActions';
+import {Ticket} from '../model/ticket';
 
 @Injectable({
   providedIn: 'root'
@@ -15,30 +17,29 @@ import {TranslateService} from '@ngx-translate/core';
 export class UtilsService {
 
   statusList: Status[];
-  actionList: Action[];
+  actionList: TicketActions[];
   typesList: Type[];
   priorityList: Priority[];
 
 
   constructor(public translateService: TranslateService) {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
-    //this.statusList.unshift({'id':null,'englishLabel':'Select Ticket Type'})
-    this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as Action[];
+    this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as TicketActions[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];
-    this.typesList .unshift({'typeID':null,'englishLabel':'Select Ticket Type'});
+    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type'});
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[];
-    this.priorityList.unshift({'priorityValue':null,'priority':'Select Priority'})
+    this.priorityList.unshift({'priorityValue': null, 'priority': 'Select Priority'});
 
   }
 
   findStatus(id: number) {
     const status = this.statusList.find(x => x.id == id);
-    return (status != null && status != undefined ? status.englishLabel : '');
+    return (status != null && status !== undefined ? status.englishLabel : '');
   }
 
   findType(id: number) {
     const type = this.typesList.find(x => x.typeID == id);
-    return (type != null && type != undefined ? type.englishLabel : '');
+    return (type != null && type !== undefined ? type.englishLabel : '');
   }
 
   findPriority(id: number) {
@@ -46,14 +47,18 @@ export class UtilsService {
     return (priority != null && priority != undefined ? priority.priority : '');
   }
 
-  findAction(id: number) {
-    const action = this.actionList.find(x => x.actionID == id);
-    return (action != null && action != undefined ? action.englishLabel : '');
+  findActionAsString(id: number) {
+    const action = this.findAction(id);
+    return (action != null && action !== undefined ? this.printLocLabel(action) : '');
+  }
+
+  findAction(id: number): TicketActions {
+    return this.actionList.find(value => id === value.actionID);
   }
 
   printLocLabel(labelObj: LabelEnabled): string {
     if (labelObj !== undefined && labelObj !== null) {
-      console.log('printing ' + JSON.stringify(labelObj));
+      // console.log('printing ' + JSON.stringify(labelObj));
       const lang: string = localStorage.getItem(environment.language);
 
       if (lang === null || lang === '' || lang === 'en') {
@@ -66,8 +71,6 @@ export class UtilsService {
 
     return '';
   }
-
-
 
 
   getMainCat(topic: Topic) {
