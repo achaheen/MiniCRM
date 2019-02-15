@@ -1,25 +1,27 @@
-<ng-container *ngIf="!enableCreateEditMode"  >
+<ng-container *ngIf="!enableCreateEditMode && subCategories!=null && subCategories.length>0">
 
-  <table style="margin-bottom: 20px"><tr>
+  <table style="margin-bottom: 20px">
+    <tr>
 
 
-  <td class="grid-label">{{'MainCat'|translate}}</td>
-  <td class="grid-input ">
-    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
-                [options]="mainCategories"
-                [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
-    </p-dropdown>
-  </td>
+      <td class="grid-label">{{'MainCat'|translate}}</td>
+      <td class="grid-input ">
+        <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
+                    [options]="mainCategories"
+                    [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+        </p-dropdown>
+      </td>
 
-  <td class="grid-label">{{'SubCat'|translate}}</td>
-  <td class="grid-input ">
-    <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"
-                [options]="subCategories"
-                [(ngModel)]="selectedSubCategory" optionLabel="englishLabel">
-    </p-dropdown>
-  </td>
+      <td class="grid-label">{{'SubCat'|translate}}</td>
+      <td class="grid-input ">
+        <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"
+                    [options]="subCategories"
+                    [(ngModel)]="selectedSubCategory" optionLabel="englishLabel">
+        </p-dropdown>
+      </td>
 
-  </tr></table>
+    </tr>
+  </table>
   <p-table #dt [value]="topics"
            selectionMode="single"
            [rows]="10"
@@ -29,7 +31,9 @@
            [resizableColumns]="true" columnResizeMode="expand"
            [responsive]="true"
            dataKey="id">
-
+    <ng-template pTemplate="caption">
+      {{'TopicList'|translate}}
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 3em"></th>
@@ -38,8 +42,8 @@
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns" >
-      <tr  *ngIf="rowData['id'] != null">
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+      <tr *ngIf="rowData['id'] != null">
         <td>
           <p-tableRadioButton [value]="rowData"></p-tableRadioButton>
         </td>
@@ -51,7 +55,7 @@
             {{utils.printLocLabel(rowData[col.field])}}
           </ng-container>
           <ng-container *ngIf="col.field==='topic'">
-          {{utils.printLocLabel(rowData)}}
+            {{utils.printLocLabel(rowData)}}
           </ng-container>
           <ng-container *ngIf="col.field!=='mainCategory' && col.field!=='subCategory'&& col.field!=='topic'">
             {{rowData[col.field]}}
@@ -79,8 +83,8 @@
   </p-panel>
 </ng-container>
 <app-create-topic *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
-                    [mainCategories]="mainCategories"
-                    [subCategories]="subCategories"
-                    [parent]="this"
-                    [item]="selectedTopic"></app-create-topic>
+                  [mainCategories]="mainCategories"
+                  [subCategories]="subCategories"
+                  [parent]="this"
+                  [item]="selectedTopic"></app-create-topic>
 

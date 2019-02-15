@@ -50,5 +50,5 @@
 <app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)" [parent]="this"
                      [item]="selectedMainCat"></app-create-main-cat>
 
-<app-sub-cat-list *ngIf="selectedMainCat!=null" #subComponent
+<app-sub-cat-list   #subComponent
                   [selectedMainCategory]="selectedMainCat"></app-sub-cat-list>

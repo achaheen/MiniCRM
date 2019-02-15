@@ -13,7 +13,7 @@
                 optionLabel="englishLabel"></p-dropdown>
   </td>
 </div-->
-<ng-container *ngIf="!enableCreateEditMode">
+<ng-container *ngIf="!enableCreateEditMode && subCategories!=null && subCategories.length>0">
   <!--td class="grid-label">{{'MainCat'|translate}}</td>
   <td class="grid-input ">
     <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
@@ -31,7 +31,9 @@
            [resizableColumns]="true" columnResizeMode="expand"
            [responsive]="true"
            dataKey="id">
-
+    <ng-template pTemplate="caption">
+      {{'SubCatList'|translate}}
+    </ng-template>
     <ng-template pTemplate="header" let-columns>
       <tr>
         <th style="width: 3em"></th>
@@ -70,5 +72,5 @@
                     [selectedMainCategory]="selectedMainCategory"
                     [parent]="this"
                     [item]="selectedSubCategory"></app-create-sub-cat>
-<app-topics-list #topicList *ngIf="selectedSubCategory!=null" [selectedSubCategory]="selectedSubCategory"
+<app-topics-list #topicList   [selectedSubCategory]="selectedSubCategory"
                  [selectedMainCategory]="selectedMainCategory"></app-topics-list>
