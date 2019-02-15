@@ -249,7 +249,7 @@ table.ticketFormTb{
 }
 .replyContainer .replyPerson{
   display: block;
- // width: 7%;
+  width: 10%;
   border-right: solid 1px #d8d8d8;
   float: left;
   padding-right: 5px;
@@ -261,10 +261,11 @@ table.ticketFormTb{
 .replyContainer .reply{
   display: block;
   float: left;
-  margin-left: 20px;
-  width: 70%;
+  margin-left: 10px;
+  width: 65%;
   color: #495057;
   border-right: solid 1px #d8d8d8;
+  padding: 8px;
 }
 .replyContainer .person{
   font-weight: BOLD;
@@ -290,20 +291,20 @@ table.ticketFormTb{
   width: fit-content;
   line-height: 12px;
 }
-.attachmentList ul {
+.attachementContent ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-.attachmentList li {
+.attachementContent li {
   float: left;
   margin: 10px;
 
 }
 
-.attachmentList li a {
+.attachementContent li a {
   display: block;
   color: white;
   text-align: center;
@@ -312,7 +313,7 @@ table.ticketFormTb{
 
 }
 
-.attachmentList .btn-secondary:hover{
+.attachementContent .btn-secondary:hover{
   background-color: #0076ec;
 }
 
@@ -321,35 +322,37 @@ table.ticketFormTb{
   display: block;
   color: #495057;
   float: left;
+  width: 20%;
   margin-left: 20px;
 }
 
 .replyContainer .attachementTitle{
   font-weight: bold;
   margin-bottom: 10px;
+  border-bottom: solid 1px #d8d8d8;
+  width: fit-content;
 }
 
-.replyContainer .attachementContent{
+.replyContainer .ReplyattachmentContent{
   display: block;
   color: #495057;
-  float: left;
-  margin-left: 20px;}
+  float: left;}
 
 
-.attachementContent .attachmentList ul {
+.ReplyAttachment .ReplyattachmentContent ul {
   //list-style-type: none;
   //margin: 0;
   //padding: 0;
   //overflow: hidden;
 }
 
-.attachementContent .attachmentList li {
+.ReplyAttachment .ReplyattachmentContent li {
   float: none;
-  margin: 0px;
+  margin: 0px 0px 5px 0px;
 
 }
 
-.attachementContent .attachmentList li a {
+.ReplyAttachment .ReplyattachmentContent li a {
   display: block;
   color: white;
   text-align: center;

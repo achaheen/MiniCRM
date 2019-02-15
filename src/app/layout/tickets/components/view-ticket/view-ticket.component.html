@@ -1,3 +1,5 @@
+<p-menubar [model]="items"></p-menubar>
+
 <table class="formTB" *ngIf="ticket">
   <tr>
     <td class="grid-label">{{'TicketID' | translate}}</td>
@@ -103,7 +105,16 @@
       </td>
     </tr>
 
-    <tr app-view-attachment [attachmentID]="ticket.attachmentsList"></tr>
+    <tr >
+
+      <td class="grid-label">
+        <h4>{{'attachments'|translate}}</h4>
+      </td>
+      <td class="grid-label" colspan="7">
+        <app-view-attachment [attachmentID]="ticket.attachmentsList" ></app-view-attachment>
+      </td>
+
+    </tr>
 
     <tr>
       <td colspan="8">

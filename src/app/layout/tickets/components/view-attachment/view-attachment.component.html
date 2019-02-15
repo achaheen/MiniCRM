@@ -1,14 +1,11 @@
-<td class="grid-label">
-  <h4>{{'attachments'|translate}}</h4>
-</td>
-<td class="grid-label attachmentList" colspan="7">
-  <ul>
+<div class="attachementContent">
+  <ul attachmentList>
     <li *ngFor="let attach of attachmentList">
       <button class="btn btn-secondary" (click)="downloadFile(attach)">
         <i class="fa fa-download fa-lg"></i> {{attach.fileName}}
       </button>
     </li>
   </ul>
-</td>
+</div>
 
 
