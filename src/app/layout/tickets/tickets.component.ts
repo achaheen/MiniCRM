@@ -14,6 +14,7 @@ import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
 import {Status} from '../../shared/model/status';
 import {BasicTopicSelection} from '../general/basic-topic-selection';
+import {UtilsService} from '../../shared/services/utils.service';
 
 
 @Component({
@@ -23,11 +24,17 @@ import {BasicTopicSelection} from '../general/basic-topic-selection';
 })
 export class TicketsComponent extends BasicTopicSelection implements OnInit {
   defaultPageSize = 10;
-  openTicketFilter: SearchTicketsContainer = {'status': [1], 'size': this.defaultPageSize, page: 0};
+  openTicketFilter: SearchTicketsContainer = {
+    'status': [1, 6],
+    'size': this.defaultPageSize,
+    page: 0,
+    sorting: {sortBy: 'priority', sortType: 1}
+  };
   escalatedTicketFilter: SearchTicketsContainer = {'status': [8], 'size': this.defaultPageSize, page: 0};
-  closedTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
-  wordOnProgressTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
-  assignedTicketFilter: SearchTicketsContainer = {'assignedTo': [this.getCurrentUserID()], 'size': this.defaultPageSize, page: 0};
+  closedTicketFilter: SearchTicketsContainer = {'status': [2], 'size': this.defaultPageSize, page: 0};
+  workOnProgressTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
+  nonFilteredTickets: SearchTicketsContainer = {'size': this.defaultPageSize, page: 0};
+  createdTicketsFilter: SearchTicketsContainer = {createdBy: [this.getCurrentUserID()], size: this.defaultPageSize, page: 0};
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult: SearchTicketsResult;
@@ -38,7 +45,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   topics: Topic[];
   selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
-
+  previousTab: number = 0;
   items: any[];
   selectedTab = 0;
   selectedTicketId: number;
@@ -48,8 +55,8 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
 
   constructor(public ticketService: TicketsService, public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService, public topicService: TopicService,
-              public  translate: TranslateService) {
-    super(topicService, subCategoryService, mainCategoryService, null);
+              public  translate: TranslateService, public utils: UtilsService) {
+    super(topicService, subCategoryService, mainCategoryService, utils);
 
     this.enableAdminSelection = false;
   }
@@ -60,60 +67,49 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
     this.listAllMainCategories();
 
     this.items = [
-
       {
-        header: 'All Tickets',
-        content: 'Tab 2 Content',
+        header: this.utils.translateService.instant('NonFilteredTicketTab'),
+        content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter
+        ticketFilter: this.nonFilteredTickets
       },
-
       {
-        header: 'Assigned Tickets',
-        content: 'Tab 1 Content',
+        header: this.utils.translateService.instant('WorkOnProgressTab'),
+        content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.assignedTicketFilter
-      },
-
-      {
-        header: 'Opened Tickets',
-        content: 'Tab 2 Content',
-        closable: false,
-        type: 'filters',
-        ticketFilter: this.openTicketFilter
-      },
-
-      {
-        header: 'Work On Progress Tickets',
-        content: 'Tab 2 Content',
-        closable: false,
-        type: 'filters',
-        ticketFilter: this.openTicketFilter
-      },
-
-      {
-        header: 'Closed Tickets',
-        content: 'Tab 2 Content',
-        closable: false,
-        type: 'filters',
-        ticketFilter: this.openTicketFilter
-      },
-
-      {
-        header: 'Advanced Search',
-        content: 'Tab 2 Content',
-        closable: false,
-        type: 'filters',
-        ticketFilter: null
+        ticketFilter: this.workOnProgressTicketFilter
       },
       {
-        header: 'Escalated Tickets',
-        content: 'Tab 1 Content',
+        header: this.utils.translateService.instant('EscalatedTicketsTab'),
+        content: '',
         closable: false,
         type: 'filters',
         ticketFilter: this.escalatedTicketFilter
+      },
+
+      {
+        header: this.utils.translateService.instant('OpenedTicketsTab'),
+        content: '',
+        closable: false,
+        type: 'filters',
+        ticketFilter: this.openTicketFilter
+      },
+
+      {
+        header: this.utils.translateService.instant('ClosedTicketsTab'),
+        content: '',
+        closable: false,
+        type: 'filters',
+        ticketFilter: this.closedTicketFilter
+      },
+      {
+        header: this.utils.translateService.instant('CreatedTicketsTab'),
+        content: '',
+        closable: false,
+        type: 'filters',
+        ticketFilter: this.createdTicketsFilter
       }
 
     ];
@@ -121,9 +117,14 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   }
 
   handleChange(e) {
+    console.log(JSON.stringify(e));
     const index = e.index;
 
-    switch (index) {
+    if (index != null && index < this.items.length) {
+      this.previousTab = index;
+      this.selectedFilter = this.items[index].ticketFilter;
+      /**
+       switch (index) {
       case 0:
         this.selectedFilter = this.openTicketFilter;
         break;
@@ -134,7 +135,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         this.selectedFilter = this.openTicketFilter;
         break;
       case 3:
-        this.selectedFilter = this.wordOnProgressTicketFilter;
+        this.selectedFilter = this.workOnProgressTicketFilter;
         break;
       case 4:
         this.selectedFilter = this.closedTicketFilter;
@@ -142,8 +143,9 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
       case 6:
         this.selectedFilter = this.escalatedTicketFilter;
         break;
+    }**/
+      this.getTicketList(this.selectedFilter);
     }
-    this.getTicketList(this.selectedFilter);
   }
 
   getTicketList(ticketFilters: SearchTicketsContainer) {
@@ -207,7 +209,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
 
   handleClose(event) {
     this.items.splice(event['index'], 1);
-    this.selectedTab = 0;
+    this.selectedTab = this.previousTab;
   }
 
 
@@ -218,7 +220,6 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
     let itemIndex = 0;
 
     for (let i = 0; i <= this.items.length - 1; i++) {
-      console.log(this.items[i].header);
       if (this.items[i].header === this.selectedTicketId) {
         itemAlreadyFound = true;
         itemIndex = i;
@@ -250,7 +251,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
 
     for (let i = 0; i <= this.items.length - 1; i++) {
       console.log(this.items[i].header);
-      if (this.items[i].header == this.selectedTicketId) {
+      if (this.items[i].header === this.selectedTicketId) {
         itemAlreadyFound = true;
         itemIndex = i;
         break;

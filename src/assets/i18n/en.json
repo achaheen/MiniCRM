@@ -152,6 +152,11 @@
   "notesDetails": "Ticket Status Will Be : ",
   "MainCatList": "Main Categories List",
   "SubCatList": "Sub Categories List",
-  "TopicList": "Topics List"
-
+  "TopicList": "Topics List",
+  "NonFilteredTicketTab": "Non Filtered",
+  "EscalatedTicketsTab": "Escalated Tickets",
+  "OpenedTicketsTab": "Opened Tickets",
+  "ClosedTicketsTab": "Closed Tickets",
+  "WorkOnProgressTab": "Work on Progress Tickets",
+  "CreatedTicketsTab": "Created Tickets"
 }

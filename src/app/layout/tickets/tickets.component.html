@@ -3,13 +3,15 @@
     <table class="minWidth">
       <tr>
         <td class="grid-label">{{'MainCat'|translate}}</td>
-        <td class="grid-input " >
-          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
+        <td class="grid-input ">
+          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory"
+                      optionLabel="englishLabel">
           </p-dropdown>
         </td>
         <td class="grid-label">{{'SubCat'|translate}}</td>
         <td class="grid-input minWidth">
-          <p-dropdown (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory" optionLabel="englishLabel"></p-dropdown>
+          <p-dropdown (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory"
+                      optionLabel="englishLabel"></p-dropdown>
         </td>
         <td class="grid-label">{{'Topic'|translate}}</td>
         <td class="grid-input minWidth">
@@ -23,13 +25,21 @@
   </p-accordionTab>
 </p-accordion>
 
-<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView"  [(activeIndex)]="selectedTab" (onClose)="handleClose($event)">
+<p-tabView (onChange)="handleChange($event)" id="ticketsTabsView" [(activeIndex)]="selectedTab"
+           (onClose)="handleClose($event)">
 
-  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"  [headerStyleClass]="item.type" [selected]="i ==0" [closable]="item.closable">
+  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index" #tab
+              [headerStyleClass]="item.type"
+              [selected]="i===0" [closable]="item.closable">
 
     <ng-template pTemplate="content">
-       <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList" [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"  (selectTicketEmitter)="setSelectedTicket($event)"  (eventEmitter)="getTicketList($event)" > </app-dy-ticket-table>
-       <app-view-ticket *ngIf="item.type == 'viewTicket'" [ticketID]="this.selectedTicketId">   </app-view-ticket>
+      <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
+                           [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"
+
+                           (selectTicketEmitter)="setSelectedTicket($event)"
+                           (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
+      <app-view-ticket *ngIf="item.type == 'viewTicket'" [ticketID]="this.selectedTicketId"
+                       [ticketListParent]="this"></app-view-ticket>
       <app-create-ticket *ngIf="item.type == 'NewTicket'"></app-create-ticket>
     </ng-template>
 
@@ -37,12 +47,14 @@
 </p-tabView>
 
 
-
 <p-panel class="btnPanel no_style">
 
-  <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded" label="{{'CreateTicket' | translate}}" [disabled]="disableCreateTicketBTN"> </button>
-  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded" label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"> </button>
-  <button type="button" pButton icon="fa fa-pencil-square-o" (click)="openTicketForEdit()" class="ui-button-rounded" label="{{'EditTicket' | translate}}" [disabled]="disableEditTicketBTN"> </button>
+  <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded"
+          label="{{'CreateTicket' | translate}}" [disabled]="disableCreateTicketBTN"></button>
+  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded"
+          label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"></button>
+  <button type="button" pButton icon="fa fa-pencil-square-o" (click)="openTicketForEdit()" class="ui-button-rounded"
+          label="{{'EditTicket' | translate}}" [disabled]="disableEditTicketBTN"></button>
 
 </p-panel>
 

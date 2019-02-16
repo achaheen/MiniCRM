@@ -7,6 +7,7 @@ import {TicketActions} from '../../../../shared/model/ticketActions';
 import {forEach} from '@angular/router/src/utils/collection';
 import {utils} from 'protractor';
 import {TicketLock} from '../../../../shared/model/ticket-lock';
+import {TicketsComponent} from '../../tickets.component';
 
 @Component({
   selector: 'app-view-ticket',
@@ -16,7 +17,7 @@ import {TicketLock} from '../../../../shared/model/ticket-lock';
 export class ViewTicketComponent implements OnInit {
 
   @Input() ticketID: number;
-
+  @Input() ticketListParent: TicketsComponent;
   public ticket: Ticket;
   items: MenuItem[] = [];
   actionItem: MenuItem = {};
@@ -65,6 +66,9 @@ export class ViewTicketComponent implements OnInit {
   }
 
   prepareMenuItems() {
+    this.items = [];
+    this.actionItem = {};
+    this.actionsItems = [];
     if (this.ticketActionList != null) {
       this.ticketActionList.forEach(value => {
         const menuItem: MenuItem = {

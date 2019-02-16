@@ -4,9 +4,10 @@ import {SearchTicketsContainer} from '../../../../shared/model/searchTicketsCont
 import {LazyLoadEvent, MessageService} from 'primeng/api';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {trigger, state, style, transition, animate} from '@angular/animations';
 import {SearchTicketsSorting} from '../../../../shared/model/searchTicketsSorting';
 import {UtilsService} from '../../../../shared/services/utils.service';
+import {utils} from 'protractor';
 
 
 @Component({
@@ -30,11 +31,12 @@ import {UtilsService} from '../../../../shared/services/utils.service';
 })
 export class DyTicketTableComponent implements OnInit {
 
-  constructor(private utils: UtilsService , private fb: FormBuilder, private messageServie: MessageService, private ticketsService: TicketsService) { }
+  constructor(private utils: UtilsService, private fb: FormBuilder, private messageServie: MessageService, private ticketsService: TicketsService) {
+  }
 
 
- @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
- @Output() selectTicketEmitter: EventEmitter<number> = new EventEmitter();
+  @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
+  @Output() selectTicketEmitter: EventEmitter<number> = new EventEmitter();
 
 // Global Variables
   cols: any[];
@@ -43,44 +45,47 @@ export class DyTicketTableComponent implements OnInit {
   @Input() ticketList: Ticket[] = [];
   @Input() totalRecords: number;
   ticketForm: FormGroup;
- // @Input() ticketsResult: SearchTicketsResult = {};
+  // @Input() ticketsResult: SearchTicketsResult = {};
   selectedTicket: Ticket;
 // End Global Variables
 
 // Class Init
   ngOnInit() {
 //  this.getTicketList()
-  this.initDataTable();
-  this.initFormBuilder();
+    this.initDataTable();
+    this.initFormBuilder();
   }
-
 
 
   initDataTable() {
     this.cols = [
-      { field: 'id', header: 'ID' },
-      { field: 'mainCategory', header: 'Main Categ' },
-      { field: 'subCategory', header: 'Sub Categ' },
-      { field: 'topic', header: 'Topic' },
-      { field: 'currentStatus', header: 'Status' },
-      { field: 'ticketType', header: 'Type'},
-      { field: 'assignedTo', header: 'Assigned To' },
-      { field: 'creationDate', header: 'Create Date' }];
+      {field: 'id', header: 'ID'},
+      {field: 'mainCategory', header: this.utils.translateService.instant('MainCat')},
+      {field: 'subCategory', header: this.utils.translateService.instant('SubCat')},
+      {field: 'topic', header: this.utils.translateService.instant('Topic')},
+      {field: 'currentStatus', header: this.utils.translateService.instant('Status')},
+      {field: 'ticketType', header: this.utils.translateService.instant('Type')},
+      {field: 'priority', header: this.utils.translateService.instant('Priority')},
+      {field: 'creationDate', header: this.utils.translateService.instant('creationDate')},
+      {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate')}
+    ];
 
     this.sortCols = [
-      { field: 'id', header: 'ID' }, {header: 'Main Categ'}, {header: 'Sub Categ'},
-      { field: 'topic', header: 'Topic' },
-      { field: 'currentStatus', header: 'Status' },
-      { field: 'ticketType', header: 'Type'},
-      { field: 'assignedTo', header: 'Assigned To' },
-      { field: 'creationDate', header: 'Create Date' }];
+      {field: 'id', header: 'ID'}, {header: this.utils.translateService.instant('MainCat')},
+      {header: this.utils.translateService.instant('SubCat')},
+      {field: 'topic', header: this.utils.translateService.instant('Topic')},
+      {field: 'currentStatus', header: this.utils.translateService.instant('Status')},
+      {field: 'ticketType', header: this.utils.translateService.instant('Type')},
+      {field: 'priority', header: this.utils.translateService.instant('Priority')},
+      {field: 'creationDate', header: this.utils.translateService.instant('creationDate')},
+      {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate')}];
   }
 
 
   initFormBuilder() {
 
     this.ticketForm = this.fb.group({
-      'userID': new FormControl('',  Validators.required ),
+      'userID': new FormControl('', Validators.required),
       'staffID': new FormControl('', Validators.required),
       'title': new FormControl(''),
       'firstName': new FormControl('', Validators.required),
@@ -88,16 +93,16 @@ export class DyTicketTableComponent implements OnInit {
       'department': new FormControl(''),
       'userType': new FormControl('', Validators.required),
       'enabled': new FormControl(''),
-      'email': new FormControl('', Validators.compose([Validators.required, Validators.email] )),
+      'email': new FormControl('', Validators.compose([Validators.required, Validators.email])),
       'password': new FormControl('', Validators.required)
     });
   }
 
 
-    setSelectedTicket(event) {
+  setSelectedTicket(event) {
 
-      console.log('TicketID=' +  (this.selectedTicket == null ? null : this.selectedTicket.id));
-      this.selectTicketEmitter.emit((this.selectedTicket == null ? null : this.selectedTicket.id));
+    console.log('TicketID=' + (this.selectedTicket == null ? null : this.selectedTicket.id));
+    this.selectTicketEmitter.emit((this.selectedTicket == null ? null : this.selectedTicket.id));
   }
 
   loadCarsLazy(event: LazyLoadEvent) {
@@ -105,7 +110,7 @@ export class DyTicketTableComponent implements OnInit {
 
     const pageNum = (event.first / event.rows);
     this.ticketFilters.page = pageNum;
-    const sortField: SearchTicketsSorting = { sortBy: event.sortField , sortType: event.sortOrder};
+    const sortField: SearchTicketsSorting = {sortBy: event.sortField, sortType: event.sortOrder};
     this.ticketFilters.sorting = sortField;
 
     this.eventEmitter.emit(this.ticketFilters);
