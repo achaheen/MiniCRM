@@ -2,9 +2,16 @@
   <tr>
     <td class="grid-label">{{'Action'| translate}}</td>
     <td class="grid-input">
-      <p-dropdown (onChange)="onChangeAction();" [options]="actionList" [(ngModel)]="selectedAction"
+      <p-dropdown  [options]="parent.ticketActionList"
+                   dataKey="actionID"
+                  [(ngModel)]="parent.selectedTicketAction"
                   optionLabel="englishLabel"></p-dropdown>
     </td>
+  </tr>
+  <tr *ngIf="parent.selectedTicketAction.setStatusTo != null">
+    <td class="grid-label">{{'notesDetails'| translate}}</td>
+    <td
+      class="grid-input">{{ utils.printLocLabel(parent.selectedTicketAction.setStatusTo)}}</td>
   </tr>
   <tr>
     <td class="grid-label">{{'Title'| translate}}</td>
@@ -16,7 +23,7 @@
                                      [(ngModel)]="ticketData.ticketData"></textarea></td>
   </tr>
   <tr>
-  <tr *ngIf="selectedAction.actionID ===8">
+  <tr *ngIf="parent.selectedTicketAction.actionID ===8">
     <td class="grid-label">{{'MainCat'|translate}}</td>
     <td class="grid-input ">
       <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
@@ -58,11 +65,7 @@
 
     </td>
   </tr>
-  <tr *ngIf="selectedAction.setStatusTo != null">
-    <td class="grid-label">{{'notesDetails'| translate}}</td>
-    <td
-      class="grid-input">{{ utils.printLocLabel(selectedAction.setStatusTo)}}</td>
-  </tr>
+
 </table>
 
 <div style="text-align: right;">

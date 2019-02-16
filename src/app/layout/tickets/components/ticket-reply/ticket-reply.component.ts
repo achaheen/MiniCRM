@@ -12,6 +12,7 @@ import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {Ticket} from '../../../../shared/model/ticket';
 import {TicketLock} from '../../../../shared/model/ticket-lock';
 import {TicketsService} from '../../../../shared/services/tickets.service';
+import {ViewTicketComponent} from '../view-ticket/view-ticket.component';
 
 @Component({
   selector: 'app-ticket-reply',
@@ -21,11 +22,8 @@ import {TicketsService} from '../../../../shared/services/tickets.service';
 })
 export class TicketReplyComponent extends BasicTopicSelection implements OnInit {
 
-  @Input() actionList: TicketActions[];
-  @Input() selectedAction: TicketActions;
-  @Input() ticket: Ticket;
-  @Input() ticketLock: TicketLock;
-  @Input() parent: any;
+
+  @Input() parent: ViewTicketComponent;
   ticketData: Ticketdata = {};
 
   uploadedFiles: any[] = [];
@@ -41,8 +39,8 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
     this.enableAdminSelection = false;
     this.authroizedTopicsRequest = {permissions: ['chgDpt']};
   }
-
   ngOnInit() {
+
   }
 
   onChangeAction() {
@@ -52,9 +50,9 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
   addReply() {
 
     const ticketHolder: TicketHolder = {
-      actionID: this.selectedAction.actionID,
+      actionID: this.parent.selectedTicketAction.actionID,
       attachments: this.attachments[0],
-      ticket: {id: this.ticket.id}, lockID: this.ticketLock.lockID,
+      ticket: {id: this.parent.ticket.id}, lockID: this.parent.ticketLock.lockID,
       ticketdata: this.ticketData
     };
     this.ticketHttp.action(ticketHolder).subscribe(value => {

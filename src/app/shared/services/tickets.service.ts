@@ -40,8 +40,12 @@ export class TicketsService {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/data', request);
   }
 
-  getAuthorizedActions(topicID) {
+  getAuthorizedActionsByTopic(topicID) {
     return this.httpClient.get<TicketActions[]>(this.baseURL + 'authorizedActions/' + topicID);
+  }
+
+  getAuthorizedActionsByTicket(ticketID) {
+    return this.httpClient.get<TicketActions[]>(this.baseURL + 'authorizedActions/ticket/' + ticketID);
   }
 
   getLock(ticketID, actionID) {

@@ -26,16 +26,13 @@ export class ViewTicketComponent implements OnInit {
   ticketLock: TicketLock;
 
   constructor(public utils: UtilsService, private ticketHttp: TicketsService) {
-
   }
 
   ngOnInit() {
-
-
     if (this.ticketID !== undefined) {
       this.ticketHttp.getTicketByID(this.ticketID).subscribe(value => {
         this.ticket = value;
-        this.ticketHttp.getAuthorizedActions(this.ticket.topic.id).subscribe(value1 => {
+        this.ticketHttp.getAuthorizedActionsByTicket(this.ticket.id).subscribe(value1 => {
           this.ticketActionList = value1;
           this.prepareMenuItems();
         }, error1 => {
@@ -45,10 +42,7 @@ export class ViewTicketComponent implements OnInit {
         console.log(JSON.stringify(error1));
       });
     }
-
-
   }
-
 
   onSelectAction(menuItem) {
     console.log(JSON.stringify(menuItem));
@@ -64,13 +58,11 @@ export class ViewTicketComponent implements OnInit {
           }, error1 => this.ticketLock = null)
           ;
         }
-
       } catch (e) {
         console.log(e);
       }
     }
   }
-
 
   prepareMenuItems() {
     if (this.ticketActionList != null) {
@@ -90,6 +82,5 @@ export class ViewTicketComponent implements OnInit {
     this.actionItem.id = '0';
     this.actionItem.items = this.actionsItems;
     this.items.push(this.actionItem);
-
   }
 }

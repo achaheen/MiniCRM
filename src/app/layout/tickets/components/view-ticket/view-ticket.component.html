@@ -145,7 +145,6 @@
 
   </div>
   <div class="p-col-4" *ngIf="ticketLock!=null">
-    <app-ticket-reply [actionList]="ticketActionList" [selectedAction]="selectedTicketAction" [parent]="this"
-                      [ticket]="ticket" [ticketLock]="ticketLock"></app-ticket-reply>
+    <app-ticket-reply [parent]="this"></app-ticket-reply>
   </div>
 </div>
