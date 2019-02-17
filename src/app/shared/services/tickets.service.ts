@@ -36,6 +36,10 @@ export class TicketsService {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/info', request);
   }
 
+  downloadAttachment(id) {
+    return this.httpClient.get<Blob>(this.baseURL + 'attachments/download/' + id, {responseType: 'blob' as 'json'});
+  }
+
   getAttachmentsData(request) {
     return this.httpClient.post<Attachment[]>(this.baseURL + 'attachments/data', request);
   }
