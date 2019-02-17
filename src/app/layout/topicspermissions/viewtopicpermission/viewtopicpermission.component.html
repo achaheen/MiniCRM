@@ -4,7 +4,7 @@
          [(selection)]="selectedPermissionsList"
          dataKey="id"
          [scrollable]="true"
-         scrollHeight="100px"
+         scrollHeight="800px"
         >
   <ng-template pTemplate="colgroup" let-columns>
     <colgroup>
@@ -19,7 +19,7 @@
       <th style="width: 3em!important;">
         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
       </th>
-      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+      <th *ngFor="let col of columns;let i = index" [pSortableColumn]="col.field">
 
         <div class="col-header"> {{col.header|translate}}</div>
 
@@ -27,6 +27,7 @@
                     aria-disabled="true" [field]="col.field" ariaLabel="Activate to sort"
                     ariaLabelDesc="Activate to sort in descending order"
                     ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+        <p-tableHeaderCheckbox *ngIf="i>10"></p-tableHeaderCheckbox>
       </th>
 
     </tr>

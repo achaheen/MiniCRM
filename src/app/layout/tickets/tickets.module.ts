@@ -13,6 +13,7 @@ import {
   TabViewModule, TriStateCheckboxModule
 } from 'primeng/primeng';
 import {MenubarModule} from 'primeng/menubar';
+import {SidebarModule} from 'primeng/sidebar';
 import {DyTicketTableComponent} from './components/dy-ticket-table/dy-ticket-table.component';
 import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -59,7 +60,8 @@ import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.compo
     AccordionModule, TranslateModule,
     DropdownModule,
     InputTextareaModule, MessageModule,
-    FileUploadModule, MenubarModule
+    FileUploadModule, MenubarModule,
+    SidebarModule
   ]
 })
 export class TicketsModule {

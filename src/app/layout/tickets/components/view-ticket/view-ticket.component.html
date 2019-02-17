@@ -1,7 +1,10 @@
 <p-menubar [model]="items" [autoDisplay]="false"></p-menubar>
-<div class="p-grid">
-  <div [ngClass]="ticketLock!=null?'p-col-8':'p-col-12'">
-    <table class="formTB" *ngIf="ticket">
+
+<div *ngIf="ticketLock!=null" class="replyTB">
+  <app-ticket-reply [parent]="this"></app-ticket-reply>
+</div>
+
+ <table class="formTB" *ngIf="ticket">
       <tr>
         <td class="grid-label">{{'TicketID' | translate}}</td>
         <td class="grid-input"><input id="ticketID" type="text" pInputText name="ticketID" [attr.disabled]="true"
@@ -143,8 +146,3 @@
     </table>
 
 
-  </div>
-  <div class="p-col-4" *ngIf="ticketLock!=null">
-    <app-ticket-reply [parent]="this"></app-ticket-reply>
-  </div>
-</div>
