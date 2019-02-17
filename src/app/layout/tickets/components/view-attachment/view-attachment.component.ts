@@ -24,8 +24,9 @@ export class ViewAttachmentComponent implements OnInit {
   }
 
   downloadFile(attch: Attachment) {
-    this.ticketsService.getAttachmentsData([attch.id]).subscribe(value => {
-      const blob = new Blob([value[0].rawcontent], {type: attch.fileType}); // pass a useful mime type here
+    this.ticketsService.downloadAttachment([attch.id]).subscribe(value => {
+      // @ts-ignore
+      const blob = new Blob([value], {type: attch.fileType}); // pass a useful mime type here
       FileSaver.saveAs(blob, attch.fileName);
     });
   }
