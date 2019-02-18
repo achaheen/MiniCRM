@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../../shared/model/user';
@@ -12,8 +12,9 @@ import {environment} from '../../../../environments/environment';
 export class HeaderComponent implements OnInit {
   public pushRightClass: string;
   public username: string;
+  languageTitle:string = 'Arabic';
 
-  constructor(private translate: TranslateService, public router: Router) {
+  constructor(public el: ElementRef,private translate: TranslateService, public router: Router) {
 
     this.translate.addLangs(['en', 'ar']);
     this.translate.setDefaultLang('en');
@@ -56,7 +57,35 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('isLoggedin');
   }
 
-  changeLang(language: string) {
-    this.translate.use(language);
+  changeLang() {
+
+    if(localStorage.getItem('lang') == 'en')
+    {
+      this.translate.use('ar');
+      localStorage.setItem('lang','ar');
+      this.languageTitle ='English';
+    }else{
+      this.translate.use('en');
+      localStorage.setItem('lang','en');
+      this.languageTitle ='Arabic';
+    }
+    this.rltAndLtr();
+ //   this.updateLanguage();
   }
+  //
+  // updateLanguage(): void {
+  //
+  //   const lang = document.createAttribute('lang');
+  //   lang.value = this.translate.currentLang;
+  //   this.el.nativeElement.parentElement.parentElement.attributes.setNamedItem(lang);
+  //
+  //   const dir = document.createAttribute('dir');
+  //   if(this.translate.currentLang =='ar'){
+  //     dir.value = 'rtl';
+  //   }else{
+  //     dir.value = 'ltr';
+  //   }
+  //   this.el.nativeElement.parentElement.parentElement.attributes.setNamedItem(dir);
+  //
+  // }
 }

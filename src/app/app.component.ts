@@ -9,7 +9,14 @@ export class AppComponent implements OnInit {
     constructor() {
     }
 
+    language:string;
+    direction:string;
     ngOnInit() {
-
+        this.language = localStorage.getItem('lang');
+        if(this.language == 'ar'){
+          this.direction='rtl';
+        }else{
+          this.direction='ltr';
+        }
     }
 }
