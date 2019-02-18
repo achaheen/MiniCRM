@@ -367,3 +367,7 @@ table.ticketFormTb{
   background-image: linear-gradient(to bottom, #f3f3f3, #fff);
   margin-top: 10px;
 }
+
+body .ui-table .ui-table-tbody > tr > td {
+  white-space: normal;
+}
