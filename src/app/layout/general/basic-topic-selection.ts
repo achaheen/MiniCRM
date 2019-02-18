@@ -15,14 +15,14 @@ export class BasicTopicSelection {
               public mainCatService: MainCategoryService, public utils: UtilsService) {
   }
 
-  @Input() protected mainCategories: MainCategory[] = [];
-  @Input() protected selectedMainCategory: MainCategory;
-  @Input() protected subCategories: Subcategory[] = [];
-  @Input() protected selectedSubCategory: Subcategory;
-  @Input() protected topics: Topic[] = [];
-  @Input() protected selectedTopic: Topic;
+  @Input() public mainCategories: MainCategory[] = [];
+  @Input() public selectedMainCategory: MainCategory;
+  @Input() public subCategories: Subcategory[] = [];
+  @Input() public selectedSubCategory: Subcategory;
+  @Input() public topics: Topic[] = [];
+  @Input() public selectedTopic: Topic;
 
-  @Input() protected enableAdminSelection: Boolean = true;
+  @Input() public enableAdminSelection: Boolean = true;
   public authroizedTopicsRequest: GetAuthorizedTopicsRequest = {permissions: ['read']};
 
   public updateTopicList() {

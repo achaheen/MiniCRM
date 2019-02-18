@@ -1,27 +1,6 @@
-<ng-container *ngIf="!enableCreateEditMode && subCategories!=null && subCategories.length>0">
-
-  <table style="margin-bottom: 20px">
-    <tr>
+<ng-container *ngIf="!enableCreateEditMode">
 
 
-      <td class="grid-label">{{'MainCat'|translate}}</td>
-      <td class="grid-input ">
-        <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
-                    [options]="mainCategories"
-                    [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
-        </p-dropdown>
-      </td>
-
-      <td class="grid-label">{{'SubCat'|translate}}</td>
-      <td class="grid-input ">
-        <p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"
-                    [options]="subCategories"
-                    [(ngModel)]="selectedSubCategory" optionLabel="englishLabel">
-        </p-dropdown>
-      </td>
-
-    </tr>
-  </table>
   <p-table #dt [value]="topics"
            selectionMode="single"
            [rows]="10"

@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SubCategoryService} from '../../../shared/services/sub-category.service';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {BasicTopicSelection} from '../../general/basic-topic-selection';
 import {TopicService} from '../../../shared/services/topic.service';
 import {UtilsService} from '../../../shared/services/utils.service';
+import {MainCatListComponent} from '../main-cat-list/main-cat-list.component';
+import {TopicsListComponent} from '../topics-list/topics-list.component';
 
 @Component({
   selector: 'app-sub-cat-list',
@@ -13,6 +15,9 @@ import {UtilsService} from '../../../shared/services/utils.service';
 export class SubCatListComponent extends BasicTopicSelection implements OnInit {
   subCatCols: any[];
   enableCreateEditMode = false;
+  @Input() parentMainCat: MainCatListComponent;
+  @ViewChild('topicList')
+  topicList: TopicsListComponent;
 
   constructor(public  subCatService: SubCategoryService, public  mainCatService: MainCategoryService
     , public topicService: TopicService, public utils: UtilsService) {
@@ -29,9 +34,20 @@ export class SubCatListComponent extends BasicTopicSelection implements OnInit {
   }
 
   ngOnInit() {
-    this.listAllMainCategories();
+    if (this.selectedMainCategory != null) {
+      this.updateSubCategory();
+    }
   }
 
+
+  onParentChange(event) {
+    if (event != null && event.data != null) {
+      this.selectedMainCategory = event.data;
+      this.updateSubCategory();
+    } else {
+      this.subCategories = [];
+    }
+  }
 
   changeStatus() {
     if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
