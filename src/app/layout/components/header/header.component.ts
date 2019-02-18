@@ -13,13 +13,12 @@ export class HeaderComponent implements OnInit {
   public pushRightClass: string;
   public username: string;
   languageTitle:string = 'Arabic';
+  defaultLanguage:string='en';
+  defaultDir:string = 'ltr';
 
   constructor(public el: ElementRef,private translate: TranslateService, public router: Router) {
 
-    this.translate.addLangs(['en', 'ar']);
-    this.translate.setDefaultLang('en');
-    const browserLang = this.translate.getBrowserLang();
-    this.translate.use(browserLang.match(/en|ar/) ? browserLang : 'en');
+    this.prepareLanguageDir();
 
     const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
     this.username = user.firstName + ' ' + user.lastName;
@@ -34,6 +33,21 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+
+  prepareLanguageDir(){
+    this.defaultLanguage = localStorage.getItem('lang');
+    this.translate.addLangs(['en', 'ar']);
+    this.translate.setDefaultLang(this.defaultLanguage);
+    this.translate.use(this.defaultLanguage);
+    if (this.defaultLanguage =='ar'){
+      this.languageTitle='English';
+      this.defaultDir = 'rtl';
+    } else{
+      this.languageTitle='Arabic';
+      this.defaultDir = 'ltr';
+    }
+    this.rltAndLtr();
+  }
   ngOnInit() {
     this.pushRightClass = 'push-right';
   }
