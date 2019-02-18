@@ -44,12 +44,21 @@ export class ViewtopicpermissionComponent implements OnInit {
       {'field': 'canSubscribe', 'header': 'canSubscribe', format: true, formatType: 'checkbox'}
     ];
 
-    this.frozenCols = [
-    ]
+    this.frozenCols = [];
   }
 
   ngOnInit() {
 
   }
+
+  handleHeaderCheckBox(event, field) {
+    // console.log('event:' + event + ' field : ' + field);
+    const state: boolean = event as boolean;
+    this.permissionsList.forEach(value => {
+      value[field] = state;
+    });
+  }
+
+
 
 }
