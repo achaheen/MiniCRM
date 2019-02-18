@@ -44,10 +44,6 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
 
   }
 
-  onChangeAction() {
-
-  }
-
   addReply() {
 
     const ticketHolder: TicketHolder = {
@@ -59,9 +55,8 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
     this.ticketHttp.action(ticketHolder).subscribe(value => {
       this.parent.ticket = value;
       this.parent.ticketLock = null;
-
-      this.parent.ticketListParent.items.splice(this.parent.ticketListParent.items.indexOf({header: this.parent.ticket.id}), 1);
-      this.parent.ticketListParent.selectedTab = this.parent.ticketListParent.previousTab;
+      this.parent.getAuthorizedActions();
+      // this.parent.ticketListParent.items.splice(this.parent.ticketListParent.items.indexOf({header: this.parent.ticket.id}), 1);
     }, error1 => {
 
     });

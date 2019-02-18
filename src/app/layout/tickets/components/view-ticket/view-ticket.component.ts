@@ -33,16 +33,20 @@ export class ViewTicketComponent implements OnInit {
     if (this.ticketID !== undefined) {
       this.ticketHttp.getTicketByID(this.ticketID).subscribe(value => {
         this.ticket = value;
-        this.ticketHttp.getAuthorizedActionsByTicket(this.ticket.id).subscribe(value1 => {
-          this.ticketActionList = value1;
-          this.prepareMenuItems();
-        }, error1 => {
-          console.log(`cannot get available actions for ticket ${this.ticket.id} , error ${JSON.stringify(error1)}`);
-        });
+        this.getAuthorizedActions();
       }, error1 => {
         console.log(JSON.stringify(error1));
       });
     }
+  }
+
+  getAuthorizedActions() {
+    this.ticketHttp.getAuthorizedActionsByTicket(this.ticket.id).subscribe(value1 => {
+      this.ticketActionList = value1;
+      this.prepareMenuItems();
+    }, error1 => {
+      console.log(`cannot get available actions for ticket ${this.ticket.id} , error ${JSON.stringify(error1)}`);
+    });
   }
 
   onSelectAction(menuItem) {
@@ -52,13 +56,21 @@ export class ViewTicketComponent implements OnInit {
         const actionID = Number(menuItem.item['id']);
         console.log('action ID ' + actionID);
         this.selectedTicketAction = this.utils.findAction(actionID);
-        if (this.selectedTicketAction != null) {
-          this.ticketHttp.getLock(this.ticket.id, this.selectedTicketAction.actionID).subscribe(value => {
-            this.ticketLock = value;
-            this.ticket = this.ticketLock.ticketID;
-          }, error1 => this.ticketLock = null)
-          ;
-        }
+        this.ticketHttp.validateAuthorizedAction(this.ticket.id, actionID).subscribe(value => {
+          if (value) {
+            if (this.selectedTicketAction != null) {
+              this.ticketHttp.getLock(this.ticket.id, this.selectedTicketAction.actionID).subscribe(value => {
+                this.ticketLock = value;
+                this.ticket = this.ticketLock.ticketID;
+              }, error1 => {
+                this.ticketLock = null;
+                console.log(JSON.stringify(error1));
+              });
+            }
+          } else {
+            this.getAuthorizedActions();
+          }
+        });
       } catch (e) {
         console.log(e);
       }

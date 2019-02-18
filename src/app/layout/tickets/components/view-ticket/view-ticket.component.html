@@ -31,11 +31,11 @@
         <td class="grid-label">{{'creationDate' | translate}}</td>
         <td class="grid-input"><input id="creationDate" type="text" pInputText name="creationDate"
                                       [attr.disabled]="true"
-                                      [ngModel]="ticket.creationDate | date:'medium'"
+                                      [ngModel]="ticket.creationDate"
                                       (ngModelChange)="ticket.creationDate($event)"></td>
         <td class="grid-label">{{'modificationDate' | translate}}</td>
         <td class="grid-input"><input id="lastModification" type="text" pInputText name="lastModification"
-                                      [attr.disabled]="true" [ngModel]="ticket.modificationDate | date:'medium'"
+                                      [attr.disabled]="true" [ngModel]="ticket.modificationDate"
                                       (ngModelChange)="ticket.modificationDate($event)"></td>
         <td class="grid-label">{{'Status' | translate}}</td>
         <td class="grid-input"><input id="status" type="text" pInputText name="status" [attr.disabled]="true"

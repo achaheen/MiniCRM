@@ -52,6 +52,10 @@ export class TicketsService {
     return this.httpClient.get<TicketActions[]>(this.baseURL + 'authorizedActions/ticket/' + ticketID);
   }
 
+  validateAuthorizedAction(ticketID, actionID) {
+    return this.httpClient.get<Boolean>(this.baseURL + 'authorizedActions/validate/ticket/' + ticketID + '/' + actionID);
+  }
+
   getLock(ticketID, actionID) {
     return this.httpClient.get<TicketLock>(this.baseURL + 'lock/' + ticketID + '/' + actionID);
   }
