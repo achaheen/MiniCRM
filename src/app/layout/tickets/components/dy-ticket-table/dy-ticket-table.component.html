@@ -33,11 +33,9 @@
         </td>
         <td *ngFor="let col of cols" class="ui-resizable-column">
 
-          <div *ngIf="col.field ==='creationDate' || col.field ==='escalationCalDate'">
-            {{ticket[col.field] | date:'medium'}}
-          </div>
 
-          <div *ngIf="col.field !='creationDate' && col.field !='escalationCalDate' && col.field !='topic' && col.field !='currentStatus' && col.field !='ticketType'" >
+
+          <div *ngIf="col.field !='topic' && col.field !='currentStatus' && col.field !='ticketType'" >
             {{ticket[col.field]}}
           </div>
 
