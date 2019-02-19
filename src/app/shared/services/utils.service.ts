@@ -72,6 +72,21 @@ export class UtilsService {
     return '';
   }
 
+  getLabelNameLoc(labelObj: LabelEnabled): string {
+    if (labelObj !== undefined && labelObj !== null) {
+      // console.log('printing ' + JSON.stringify(labelObj));
+      const lang: string = localStorage.getItem(environment.language);
+
+      if (lang === null || lang === '' || lang === 'en') {
+        return 'englishLabel';
+      } else {
+        return 'arabicLabel';
+      }
+
+    }
+
+    return 'arabicLabel';
+  }
 
   getMainCat(topic: Topic) {
     if (topic !== undefined && topic !== null) {

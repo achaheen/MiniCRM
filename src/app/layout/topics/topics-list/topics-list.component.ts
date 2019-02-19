@@ -55,9 +55,9 @@ export class TopicsListComponent extends BasicTopicSelection implements OnInit {
 
   changeStatus() {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
-      //  this.topicService.changeStatus(this.selectedTopic.id, !this.selectedTopic.enabled).subscribe(value => {
-      //   this.topics = value;
-      // });
+        this.topicService.changeStatus(this.selectedTopic.id, !this.selectedTopic.enabled).subscribe(value => {
+          this.topics = value;
+        });
     }
   }
 

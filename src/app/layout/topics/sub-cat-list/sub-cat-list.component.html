@@ -56,6 +56,7 @@
   <p-panel class="btnPanel no_style">
     <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
             class="ui-button-rounded"
+            *ngIf="parentMainCat.selectedMainCategory!=null"
             label="{{'createBTN' | translate}}"></button>
     <button type="button" pButton *ngIf="selectedSubCategory!=null && selectedSubCategory.id!=null"
             icon="fa fa-folder-open-o"

@@ -1,7 +1,6 @@
 import {SearchTicketsSorting} from './searchTicketsSorting';
 
 export interface SearchTicketsContainer {
-
   size?: number;
   page?: number;
   searchUser?: string;
@@ -20,7 +19,7 @@ export interface SearchTicketsContainer {
   types?: number[];
   status?: number[];
   customerAccounts?: number[];
-  assignedTo?: string[] ;
+  assignedTo?: string[];
   crossedMainSla?: boolean;
   language?: number[];
   priority?: number[];
@@ -28,5 +27,15 @@ export interface SearchTicketsContainer {
   solved?: boolean;
   closed?: boolean;
   sorting?: SearchTicketsSorting;
+  customerContainer?: CustomerSearchContainer;
+}
 
+export interface CustomerSearchContainer {
+  customerBasic?: string;
+  customerName?: string;
+  customerMobile?: string;
+  customerEmail?: string;
+  customerSegment?: string;
+  customerBranch?: string;
+  nan?: string;
 }

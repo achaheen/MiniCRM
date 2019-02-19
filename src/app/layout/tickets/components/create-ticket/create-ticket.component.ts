@@ -57,7 +57,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
               public fb: FormBuilder, public fileUploadService: FileUploadService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
-    this.authroizedTopicsRequest = {permissions: ['create']};
+    this.authorizedTopicsRequest = {permissions: ['create']};
   }
 
   ngOnInit() {

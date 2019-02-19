@@ -41,6 +41,8 @@
   "modificationDate": "Modification Date",
   "modifiedBy": "Modified By",
   "creationDate": "Creation Date",
+  "creationDateStart": "Creation Date Before",
+  "creationDateEnd": "Creation Date After",
   "id": "id",
   "assigne": "User/Group",
   "type": "Type",
@@ -158,5 +160,6 @@
   "OpenedTicketsTab": "Opened Tickets",
   "ClosedTicketsTab": "Closed Tickets",
   "WorkOnProgressTab": "Work on Progress Tickets",
-  "CreatedTicketsTab": "Created Tickets"
+  "CreatedTicketsTab": "Created Tickets",
+  "nan": "National ID/Iqama"
 }

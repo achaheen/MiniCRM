@@ -28,15 +28,14 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
   }
 
   ngOnInit() {
+    if (this.parent.selectedMainCategory != null) {
+      this.selectedMainCategory = this.parent.selectedMainCategory;
+    }
     if (this.item == null) {
       this.item = {};
-      if (this.parent != null) {
-        this.item.mainCategory = this.selectedMainCategory;
-      }
     } else {
       this.selectedMainCategory = this.item.mainCategory;
     }
-
   }
 
   execute() {
@@ -47,7 +46,6 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
     this.item.mainCategory = this.selectedMainCategory;
 
     if (this.item.id != null) {
-      this.item.enabled = true;
       this.subCategoryService.edit(this.item).subscribe(value => {
         this.fireEvent(value);
       });

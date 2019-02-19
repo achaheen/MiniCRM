@@ -1,6 +1,4 @@
 <ng-container *ngIf="!enableCreateEditMode">
-
-
   <p-table #dt [value]="topics"
            selectionMode="single"
            [rows]="10"
@@ -45,9 +43,9 @@
     </ng-template>
   </p-table>
   <p-panel class="btnPanel no_style">
-
     <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
             class="ui-button-rounded"
+            *ngIf="parentSubCat.selectedSubCategory!=null"
             label="{{'createBTN' | translate}}"></button>
     <button type="button" pButton *ngIf="selectedTopic!=null && selectedTopic.id!=null"
             icon="fa fa-folder-open-o"
@@ -56,14 +54,11 @@
     <button type="button" *ngIf="selectedTopic!=null && selectedTopic.id!=null" pButton
             icon="fa fa-pencil-square-o"
             (click)="changeStatus()" class="ui-button-rounded"
-
             label="{{ 'changeStatusBTN' | translate}}"></button>
-
   </p-panel>
 </ng-container>
 <app-create-topic *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
-                  [mainCategories]="mainCategories"
-                  [subCategories]="subCategories"
+                  [subCategories]="parentSubCat.subCategories"
+                  [selectedSubCategory]="parentSubCat.selectedSubCategory"
                   [parent]="this"
                   [item]="selectedTopic"></app-create-topic>
-
