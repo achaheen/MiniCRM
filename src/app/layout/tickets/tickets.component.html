@@ -6,16 +6,15 @@
 </p-accordion -->
 
 <app-ticket-filters [selectedFilter]="selectedFilter" [parent]="this"></app-ticket-filters>
-
 <p-tabView (onChange)="handleChange($event)" id="ticketsTabsView" [(activeIndex)]="selectedTab"
+           (onClose)="handleClose($event)">
 
-      <app-dy-ticket-table *ngIf="item           (onClose)="handleClose($event)">
+  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index" #tab
+              [headerStyleClass]="item.type"
+              [selected]="i===0" [closable]="item.closable">
 
-      <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index" #tab
-                  [headerStyleClass]="item.type"
-                  [selected]="i===0" [closable]="item.closable">
-
-        <ng-template pTemplate="content">.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
+    <ng-template pTemplate="content">
+      <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
                            [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"
 
                            (selectTicketEmitter)="setSelectedTicket($event)"
