@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {TopicPermissionsService} from '../../../shared/services/topic-permissions-service.service';
 import {TopicsPermissions} from '../../../shared/model/topicsPermissions';
 import {Tablecols} from '../../../shared/model/tablecols';
@@ -16,7 +16,7 @@ export class ViewtopicpermissionComponent implements OnInit {
   selectedPermissionsList: Array<TopicsPermissions>;
 
 
-  constructor(private topicPermissionService: TopicPermissionsService) {
+  constructor(public elem:ElementRef, private topicPermissionService: TopicPermissionsService) {
     this.cols = [
       {'field': 'id', 'header': 'id'},
       {'field': 'mainCat', 'header': 'MainCat', composed: true},
@@ -44,12 +44,22 @@ export class ViewtopicpermissionComponent implements OnInit {
       {'field': 'canSubscribe', 'header': 'canSubscribe', format: true, formatType: 'checkbox'}
     ];
 
-    this.frozenCols = [
-    ]
+    this.frozenCols = [];
   }
 
   ngOnInit() {
 
   }
+
+
+  handleHeaderCheckBox(event, field) {
+    // console.log('event:' + event + ' field : ' + field);
+    const state: boolean = event as boolean;
+    this.permissionsList.forEach(value => {
+      value[field] = state;
+    });
+  }
+
+
 
 }

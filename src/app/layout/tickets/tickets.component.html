@@ -4,8 +4,10 @@
       <tr>
         <td class="grid-label">{{'MainCat'|translate}}</td>
         <td class="grid-input ">
-          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory"
-                      optionLabel="englishLabel">
+          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" >
+            <ng-template let-rprtOption ptemplate="item">
+             {{utils.printLocLabel(rprtOption)}}
+            </ng-template>
           </p-dropdown>
         </td>
         <td class="grid-label">{{'SubCat'|translate}}</td>
@@ -49,7 +51,7 @@
 
 <p-panel class="btnPanel no_style">
 
-  <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded"
+  <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded btn-create"
           label="{{'CreateTicket' | translate}}" [disabled]="disableCreateTicketBTN"></button>
   <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView()" class="ui-button-rounded"
           label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"></button>

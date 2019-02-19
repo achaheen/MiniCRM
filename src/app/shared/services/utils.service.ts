@@ -58,12 +58,14 @@ export class UtilsService {
 
   printLocLabel(labelObj: LabelEnabled): string {
     if (labelObj !== undefined && labelObj !== null) {
-      // console.log('printing ' + JSON.stringify(labelObj));
+     console.log('printing ' + JSON.stringify(labelObj));
       const lang: string = localStorage.getItem(environment.language);
 
       if (lang === null || lang === '' || lang === 'en') {
+        console.log('printing ' + labelObj.englishLabel);
         return labelObj.englishLabel;
       } else {
+        console.log('printing ' + labelObj.arabicLabel);
         return labelObj.arabicLabel;
       }
 

@@ -16,10 +16,7 @@ export class HeaderComponent implements OnInit {
   defaultLanguage:string='en';
   defaultDir:string = 'ltr';
 
-  constructor(public el: ElementRef,private translate: TranslateService, public router: Router) {
-
-    this.prepareLanguageDir();
-
+  constructor(private translate: TranslateService, public router: Router) {
     const user: User = JSON.parse(localStorage.getItem(environment.currentUser)) as User;
     this.username = user.firstName + ' ' + user.lastName;
     this.router.events.subscribe(val => {
@@ -35,20 +32,26 @@ export class HeaderComponent implements OnInit {
 
 
   prepareLanguageDir(){
+    console.log("prepareLanguageDir ()");
     this.defaultLanguage = localStorage.getItem('lang');
     this.translate.addLangs(['en', 'ar']);
     this.translate.setDefaultLang(this.defaultLanguage);
     this.translate.use(this.defaultLanguage);
-    if (this.defaultLanguage =='ar'){
+    if (this.defaultLanguage === 'ar'){
       this.languageTitle='English';
       this.defaultDir = 'rtl';
     } else{
       this.languageTitle='Arabic';
       this.defaultDir = 'ltr';
     }
+
+    console.log("Direction : " + this.defaultDir);
+    console.log("Language : " + this.defaultLanguage );
+    console.log("Language title : " + this.languageTitle);
     this.rltAndLtr();
   }
   ngOnInit() {
+    this.prepareLanguageDir();
     this.pushRightClass = 'push-right';
   }
 
@@ -64,7 +67,8 @@ export class HeaderComponent implements OnInit {
 
   rltAndLtr() {
     const dom: any = document.querySelector('body');
-    dom.classList.toggle('rtl');
+    dom.classList = [];
+    dom.classList.add(this.defaultDir);
   }
 
   onLoggedout() {
@@ -72,17 +76,24 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLang() {
-
-    if(localStorage.getItem('lang') == 'en')
-    {
-      this.translate.use('ar');
-      localStorage.setItem('lang','ar');
-      this.languageTitle ='English';
+    console.log("check language is english " + this.defaultLanguage === 'en')
+    if(this.defaultLanguage === 'en'){
+        this.defaultLanguage = 'ar';
+        this.defaultDir = 'rtl';
+        this.languageTitle = 'English';
     }else{
-      this.translate.use('en');
-      localStorage.setItem('lang','en');
-      this.languageTitle ='Arabic';
+      this.defaultLanguage = 'en';
+      this.defaultDir = 'ltr';
+      this.languageTitle = 'Arabic';
     }
+
+    this.translate.use(this.defaultLanguage);
+    localStorage.setItem('lang',this.defaultLanguage);
+
+    console.log("Direction : " + this.defaultDir);
+    console.log("Language : " + this.defaultLanguage );
+    console.log("Language title : " + this.languageTitle);
+
     this.rltAndLtr();
  //   this.updateLanguage();
   }

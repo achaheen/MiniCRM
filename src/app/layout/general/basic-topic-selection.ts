@@ -46,7 +46,7 @@ export class BasicTopicSelection {
 
         this.topicService.active(this.selectedSubCategory.id).subscribe(
           result => {
-            const topic: Topic = {id: null, arabicLabel: 'Select Topic', englishLabel: 'Select Topic'};
+            const topic: Topic = {id: null, arabicLabel: 'اختر التوبيك', englishLabel: 'Select Topic'};
             this.topics = result;
             this.topics.unshift(topic);
           }
@@ -68,7 +68,7 @@ export class BasicTopicSelection {
         this.subCategoryService.authorized(this.authroizedTopicsRequest).subscribe(
           result => {
             this.subCategories = result;
-            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'Select Sub Category', id: null};
+            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'اختر القسم الفرعي', id: null};
             this.subCategories.unshift(subcategory);
           }
         );
@@ -83,7 +83,7 @@ export class BasicTopicSelection {
         this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
           result => {
             this.subCategories = result;
-            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'Select Sub Category', id: null};
+            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'اختر القسم الفرعي', id: null};
             this.subCategories.unshift(subcategory);
           }
         );
@@ -100,7 +100,7 @@ export class BasicTopicSelection {
     if (!this.enableAdminSelection) {
       this.mainCatService.authorized(this.authroizedTopicsRequest).subscribe(
         result => {
-          const mainCat: MainCategory = {id: null, arabicLabel: 'Select Main Category', englishLabel: 'Select Main Category'};
+          const mainCat: MainCategory = {id: null, arabicLabel: 'اختر القسم الرئيسي', englishLabel: 'اخترSelect Main Category'};
           this.mainCategories = result;
           this.mainCategories.unshift(mainCat);
         }, error1 => {
@@ -110,7 +110,7 @@ export class BasicTopicSelection {
     } else {
       this.mainCatService.active().subscribe(
         result => {
-          const mainCat: MainCategory = {id: null, arabicLabel: 'Select Main Category', englishLabel: 'Select Main Category'};
+          const mainCat: MainCategory = {id: null, arabicLabel: 'اختر القسم الرئيسي', englishLabel: 'Select Main Category'};
           this.mainCategories = result;
           this.mainCategories.unshift(mainCat);
         }, error1 => {

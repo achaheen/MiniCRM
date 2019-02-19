@@ -38,6 +38,7 @@
   "Repeat Password": "Repeat Password",
   "Register": "Register",
   "Log in": "Log in",
+  "TicketsCategories" : "Ticket Categories",
   "createdBy": "Created By",
   "modificationDate": "Modification Date",
   "modifiedBy": "Modified By",
@@ -159,5 +160,9 @@
   "OpenedTicketsTab": "Opened Tickets",
   "ClosedTicketsTab": "Closed Tickets",
   "WorkOnProgressTab": "Work on Progress Tickets",
-  "CreatedTicketsTab": "Created Tickets"
+  "CreatedTicketsTab": "Created Tickets",
+  "TopicPermissions" : "Topic Permissions",
+  "Groups" : "Groups",
+  "Tickets" : "Tickets",
+  "Users" : "Users"
 }

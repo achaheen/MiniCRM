@@ -5,7 +5,7 @@
          dataKey="id"
          [scrollable]="true"
          scrollHeight="800px"
-        >
+>
   <ng-template pTemplate="colgroup" let-columns>
     <colgroup>
       <col style="width: 50px">
@@ -27,9 +27,19 @@
                     aria-disabled="true" [field]="col.field" ariaLabel="Activate to sort"
                     ariaLabelDesc="Activate to sort in descending order"
                     ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
-        <p-checkbox *ngIf="i>10"></p-checkbox>
+
+
       </th>
 
+
+    </tr>
+    <tr>
+      <th>
+      </th>
+      <th *ngFor="let col of columns">
+        <p-checkbox *ngIf="col.formatType==='checkbox'" binary="true"
+                    (onChange)="handleHeaderCheckBox($event,col.field)"></p-checkbox>
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-perm let-columns="columns" let-expanded="expanded">
