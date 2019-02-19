@@ -1,21 +1,26 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {UtilsService} from '../../../shared/services/utils.service';
-import {MainCategory} from '../../../shared/model/mainCategory';
+import {BasicTopicSelection} from '../../general/basic-topic-selection';
+import {SubCategoryService} from '../../../shared/services/sub-category.service';
+import {TopicService} from '../../../shared/services/topic.service';
+import {SubCatListComponent} from '../sub-cat-list/sub-cat-list.component';
 
 @Component({
   selector: 'app-main-cat-list',
   templateUrl: './main-cat-list.component.html',
   styleUrls: ['./main-cat-list.component.scss']
 })
-export class MainCatListComponent implements OnInit {
+export class MainCatListComponent extends BasicTopicSelection implements OnInit {
   mainCatCols: any[];
-  mainCatList: MainCategory[];
-  selectedMainCat: MainCategory;
+
   enableCreateEditMode = false;
+  @ViewChild('subCatList')
+  subCatList: SubCatListComponent;
 
-  constructor(private mainCatService: MainCategoryService, private utils: UtilsService) {
-
+  constructor(public  subCatService: SubCategoryService, public  mainCatService: MainCategoryService
+    , public topicService: TopicService, public utils: UtilsService) {
+    super(topicService, subCatService, mainCatService, utils);
     this.mainCatCols = [
       {field: 'id', header: 'ID'},
       {field: 'arabicLabel', header: utils.translateService.instant('arabicLabel')},
@@ -26,22 +31,24 @@ export class MainCatListComponent implements OnInit {
       {field: 'modificationDate', header: utils.translateService.instant('modificationDate')},
       {field: 'modifiedBy', header: utils.translateService.instant('modifiedBy')}];
   }
+
   ngOnInit() {
     this.mainCatService.all().subscribe(value => {
-      this.mainCatList = value;
+      this.mainCategories = value;
     });
   }
+
   changeStatus() {
-    if (this.selectedMainCat != null && this.selectedMainCat.id != null) {
-      this.mainCatService.changeStatus(this.selectedMainCat.id, !this.selectedMainCat.enabled).subscribe(value => {
-        this.mainCatList = value;
+    if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
+      this.mainCatService.changeStatus(this.selectedMainCategory.id, !this.selectedMainCategory.enabled).subscribe(value => {
+        this.mainCategories = value;
       });
     }
   }
 
   handleCreateEditEvent(event) {
     if (event != null) {
-      this.mainCatList = event;
+      this.mainCategories = event;
       this.enableCreateEditMode = false;
     }
   }

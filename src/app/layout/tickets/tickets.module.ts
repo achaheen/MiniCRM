@@ -5,7 +5,7 @@ import {TicketsRoutingModule} from './tickets-routing.module';
 import {TicketsComponent} from './tickets.component';
 import {
   BlockUIModule,
-  ButtonModule, CheckboxModule,
+  ButtonModule, CalendarModule, CheckboxModule,
   DataGridModule,
   DialogModule, FieldsetModule,
   InputTextModule, ListboxModule, MessageModule, MessagesModule, MultiSelectModule,
@@ -29,11 +29,14 @@ import {ViewTicketExtraListsComponent} from './components/view-ticket/view-ticke
 import {ViewAttachmentComponent} from './components/view-attachment/view-attachment.component';
 import {ViewTicketDataComponent} from './components/view-ticket-data/view-ticket-data.component';
 import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.component';
+import {TicketFiltersComponent} from './components/ticket-filters/ticket-filters.component';
+import {TopicsSelectionModule} from '../topics-selection/topics-selection.module';
+import {TopicspermissionsModule} from '../topicspermissions/topicspermissions.module';
 
 @NgModule({
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
     CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
-    ViewTicketDataComponent, TicketReplyComponent],
+    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
@@ -61,7 +64,8 @@ import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.compo
     DropdownModule,
     InputTextareaModule, MessageModule,
     FileUploadModule, MenubarModule,
-    SidebarModule
+    SidebarModule, CalendarModule,
+    TopicsSelectionModule, TopicspermissionsModule
   ]
 })
 export class TicketsModule {

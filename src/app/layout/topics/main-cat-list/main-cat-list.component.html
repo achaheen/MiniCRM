@@ -1,10 +1,10 @@
 <ng-container *ngIf="!enableCreateEditMode">
-  <p-table #dt [value]="mainCatList"
+  <p-table #dt [value]="mainCategories"
            selectionMode="single"
            [rows]="5"
            [columns]="mainCatCols"
-           (onRowSelect)="subComponent.updateSubCategory();"
-           [(selection)]="selectedMainCat"
+           (onRowSelect)="subCatList.onParentChange($event);subCatList.topicList.onParentChange(null);"
+           [(selection)]="selectedMainCategory"
            [paginator]="true"
            [resizableColumns]="true" columnResizeMode="expand"
            [responsive]="true"
@@ -38,17 +38,20 @@
             class="ui-button-rounded"
             label="{{'createBTN' | translate}}"></button>
 
-    <button type="button" pButton *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" icon="fa fa-folder-open-o"
+    <button type="button" pButton *ngIf="selectedMainCategory!=null && selectedMainCategory.id!=null"
+            icon="fa fa-folder-open-o"
             (click)="enableCreateEditMode=true" class="ui-button-rounded"
             label="{{'modifyBTN' | translate}}"></button>
-    <button type="button" *ngIf="selectedMainCat!=null && selectedMainCat.id!=null" pButton icon="fa fa-pencil-square-o"
+    <button type="button" *ngIf="selectedMainCategory!=null && selectedMainCategory.id!=null" pButton
+            icon="fa fa-pencil-square-o"
             (click)="changeStatus()" class="ui-button-rounded"
             label="{{'changeStatusBTN' | translate}}"></button>
 
   </p-panel>
 </ng-container>
 <app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)" [parent]="this"
-                     [item]="selectedMainCat"></app-create-main-cat>
+                     [item]="selectedMainCategory"></app-create-main-cat>
 
-<app-sub-cat-list   #subComponent
-                  [selectedMainCategory]="selectedMainCat"></app-sub-cat-list>
+<app-sub-cat-list #subCatList [parentMainCat]="this"
+
+                  [selectedMainCategory]="selectedMainCategory"></app-sub-cat-list>

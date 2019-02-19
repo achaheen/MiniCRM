@@ -1,0 +1,25 @@
+<table class="minWidth">
+  <tr>
+    <td class="grid-label">{{'MainCat'|translate}}</td>
+    <td class="grid-input ">
+      <p-dropdown (onChange)="parent.updateSubCategory()" [options]="parent.mainCategoriesSelectItems"
+                  [(ngModel)]="parent.selectedMainCategory"
+                  [filter]="true"
+                  filterBy="label,value.id">
+      </p-dropdown>
+    </td>
+    <td class="grid-label">{{'SubCat'|translate}}</td>
+    <td class="grid-input minWidth">
+      <p-dropdown (onChange)="parent.updateTopicList()" [options]="parent.subCategoriesSelectItems"
+                  [(ngModel)]="parent.selectedSubCategory" [filter]="true"
+                  filterBy="label,value.id"
+      ></p-dropdown>
+    </td>
+    <td class="grid-label">{{'Topic'|translate}}</td>
+    <td class="grid-input minWidth">
+      <p-dropdown [options]="parent.topicsSelectItems" [(ngModel)]="parent.selectedTopic" [filter]="true"
+                  filterBy="label,value.id"></p-dropdown>
+    </td>
+
+  </tr>
+</table>

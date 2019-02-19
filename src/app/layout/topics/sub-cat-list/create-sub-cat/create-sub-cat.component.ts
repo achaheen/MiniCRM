@@ -6,6 +6,7 @@ import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {TopicService} from '../../../../shared/services/topic.service';
 import {UtilsService} from '../../../../shared/services/utils.service';
 import {Subcategory} from '../../../../shared/model/subcategory';
+import {SubCatListComponent} from '../sub-cat-list.component';
 
 @Component({
   selector: 'app-create-sub-cat',
@@ -16,9 +17,8 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
 
 
   @Input() item: Subcategory = {};
-
   @Output() event: EventEmitter<Object> = new EventEmitter();
-  @Input() parent: any;
+  @Input() parent: SubCatListComponent;
 
   constructor(mainCatService: MainCategoryService,
               subCatService: SubCategoryService, topicService: TopicService, utils: UtilsService,
@@ -28,6 +28,9 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
   }
 
   ngOnInit() {
+    if (this.parent.selectedMainCategory != null) {
+      this.selectedMainCategory = this.parent.selectedMainCategory;
+    }
     if (this.item == null) {
       this.item = {};
     } else {
@@ -43,7 +46,6 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
     this.item.mainCategory = this.selectedMainCategory;
 
     if (this.item.id != null) {
-      this.item.enabled = true;
       this.subCategoryService.edit(this.item).subscribe(value => {
         this.fireEvent(value);
       });

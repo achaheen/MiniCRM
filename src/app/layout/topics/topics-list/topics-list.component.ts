@@ -8,6 +8,7 @@ import {TopicService} from '../../../shared/services/topic.service';
 import {MainCategoryService} from '../../../shared/services/main-category.service';
 import {UsersService} from '../../../shared/services/users.service';
 import {Subcategory} from '../../../shared/model/subcategory';
+import {SubCatListComponent} from '../sub-cat-list/sub-cat-list.component';
 
 @Component({
   selector: 'app-topics-list',
@@ -16,8 +17,7 @@ import {Subcategory} from '../../../shared/model/subcategory';
 })
 export class TopicsListComponent extends BasicTopicSelection implements OnInit {
 
-  @Input() topicsList: Topic[];
-
+  @Input() parentSubCat: SubCatListComponent;
   topicCols: any[];
   enableCreateEditMode = false;
 
@@ -39,15 +39,25 @@ export class TopicsListComponent extends BasicTopicSelection implements OnInit {
   }
 
   ngOnInit() {
-    this.listAllMainCategories();
+    if (this.selectedSubCategory != null) {
+      this.updateTopicList();
+    }
   }
 
+  onParentChange(event) {
+    if (event != null && event.data != null) {
+      this.selectedSubCategory = event.data;
+      this.updateTopicList();
+    } else {
+      this.topics = [];
+    }
+  }
 
   changeStatus() {
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
-      //  this.topicService.changeStatus(this.selectedTopic.id, !this.selectedTopic.enabled).subscribe(value => {
-      //   this.topics = value;
-      // });
+        this.topicService.changeStatus(this.selectedTopic.id, !this.selectedTopic.enabled).subscribe(value => {
+          this.topics = value;
+        });
     }
   }
 

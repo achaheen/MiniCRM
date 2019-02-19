@@ -37,7 +37,7 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
               public fileUploadService: FileUploadService, public ticketHttp: TicketsService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
-    this.authroizedTopicsRequest = {permissions: ['chgDpt']};
+    this.authorizedTopicsRequest = {permissions: ['chgDpt']};
   }
 
   ngOnInit() {

@@ -45,7 +45,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   topics: Topic[];
   selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
-  previousTab: number = 0;
+  previousTab = 0;
   items: any[];
   selectedTab = 0;
   selectedTicketId: number;

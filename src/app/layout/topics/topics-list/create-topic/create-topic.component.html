@@ -3,12 +3,6 @@
     {{'subCatWizard'|translate}}
   </p-header>
   <table style="margin-bottom: 20px"><tr>
-    <td><h5>{{'MainCat'|translate}}</h5></td>
-    <td><p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
-                    [options]="mainCategories"
-                    [(ngModel)]="selectedMainCategory" optionLabel="englishLabel">
-    </p-dropdown>
-    </td>
 
     <td><h5>{{'SubCat'|translate}}</h5></td>
     <td><p-dropdown class="minWidth" appendTo="body" (onChange)="updateTopicList()"

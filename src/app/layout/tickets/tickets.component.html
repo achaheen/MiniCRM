@@ -1,41 +1,21 @@
-<p-accordion>
+<!-- p-accordion>
   <p-accordionTab header="{{'TicketsCategories' | translate}}" [selected]="true">
-    <table class="minWidth">
-      <tr>
-        <td class="grid-label">{{'MainCat'|translate}}</td>
-        <td class="grid-input ">
-          <p-dropdown (onChange)="updateSubCategory()" [options]="mainCategories" [(ngModel)]="selectedMainCategory" >
-            <ng-template let-rprtOption ptemplate="item">
-             {{utils.printLocLabel(rprtOption)}}
-            </ng-template>
-          </p-dropdown>
-        </td>
-        <td class="grid-label">{{'SubCat'|translate}}</td>
-        <td class="grid-input minWidth">
-          <p-dropdown (onChange)="updateTopicList()" [options]="subCategories" [(ngModel)]="selectedSubCategory"
-                      optionLabel="englishLabel"></p-dropdown>
-        </td>
-        <td class="grid-label">{{'Topic'|translate}}</td>
-        <td class="grid-input minWidth">
-          <p-dropdown [options]="topics" [(ngModel)]="selectedTopic" optionLabel="englishLabel"></p-dropdown>
-        </td>
-        <td colspan="2" style="padding: 0px 40px">
-          <p-button label="Apply" (onClick)="applyGlobalFilter()"></p-button>
-        </td>
-      </tr>
-    </table>
+    <app-topics-selection [parent]="this"></app-topics-selection>
+    <p-button label="Apply" (onClick)="applyGlobalFilter()"></p-button>
   </p-accordionTab>
-</p-accordion>
+</p-accordion -->
+
+<app-ticket-filters [selectedFilter]="selectedFilter" [parent]="this"></app-ticket-filters>
 
 <p-tabView (onChange)="handleChange($event)" id="ticketsTabsView" [(activeIndex)]="selectedTab"
-           (onClose)="handleClose($event)">
 
-  <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index" #tab
-              [headerStyleClass]="item.type"
-              [selected]="i===0" [closable]="item.closable">
+      <app-dy-ticket-table *ngIf="item           (onClose)="handleClose($event)">
 
-    <ng-template pTemplate="content">
-      <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
+      <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index" #tab
+                  [headerStyleClass]="item.type"
+                  [selected]="i===0" [closable]="item.closable">
+
+        <ng-template pTemplate="content">.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
                            [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"
 
                            (selectTicketEmitter)="setSelectedTicket($event)"

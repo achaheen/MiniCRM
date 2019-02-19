@@ -13,7 +13,7 @@
                 optionLabel="englishLabel"></p-dropdown>
   </td>
 </div-->
-<ng-container *ngIf="!enableCreateEditMode && subCategories!=null && subCategories.length>0">
+<ng-container *ngIf="!enableCreateEditMode ">
   <!--td class="grid-label">{{'MainCat'|translate}}</td>
   <td class="grid-input ">
     <p-dropdown class="minWidth" appendTo="body" (onChange)="updateSubCategory()"
@@ -24,8 +24,8 @@
   <p-table #dtopic [value]="subCategories"
            selectionMode="single"
            [rows]="8"
+           (onRowSelect)="topicList.onParentChange($event)"
            [columns]="subCatCols"
-           (onRowSelect)="topicList.updateTopicList();topicList.selectedSubCategory=selectedSubCategory"
            [(selection)]="selectedSubCategory"
            [paginator]="true"
            [resizableColumns]="true" columnResizeMode="expand"
@@ -56,6 +56,7 @@
   <p-panel class="btnPanel no_style">
     <button type="button" pButton icon="fa fa-plus-square" (click)="enableCreateEditMode=true;"
             class="ui-button-rounded"
+            *ngIf="parentMainCat.selectedMainCategory!=null"
             label="{{'createBTN' | translate}}"></button>
     <button type="button" pButton *ngIf="selectedSubCategory!=null && selectedSubCategory.id!=null"
             icon="fa fa-folder-open-o"
@@ -68,9 +69,9 @@
   </p-panel>
 </ng-container>
 <app-create-sub-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
-                    [mainCategories]="mainCategories"
-                    [selectedMainCategory]="selectedMainCategory"
+                    [mainCategories]="parentMainCat.mainCategories"
+                    [selectedMainCategory]="parentMainCat.selectedMainCategory"
                     [parent]="this"
                     [item]="selectedSubCategory"></app-create-sub-cat>
-<app-topics-list #topicList   [selectedSubCategory]="selectedSubCategory"
-                 [selectedMainCategory]="selectedMainCategory"></app-topics-list>
+<app-topics-list #topicList [selectedSubCategory]="selectedSubCategory"
+                 [parentSubCat]="this"></app-topics-list>
