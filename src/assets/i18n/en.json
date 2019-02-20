@@ -162,8 +162,10 @@
   "WorkOnProgressTab": "Work on Progress Tickets",
   "CreatedTicketsTab": "Created Tickets",
   "nan": "National ID/Iqama",
-  "TopicPermissions" : "Topic Permissions",
-  "Groups" : "Groups",
-  "Tickets" : "Tickets",
-  "Users" : "Users"
+  "TopicPermissions": "Topic Permissions",
+  "Groups": "Groups",
+  "Tickets": "Tickets",
+  "Users": "Users",
+  "InvalidFileSize": "Sorry, the file size exceeds the maximum file size",
+  "InvalidFileType": "File type is not allowed"
 }

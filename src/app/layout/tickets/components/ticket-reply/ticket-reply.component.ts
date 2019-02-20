@@ -25,7 +25,8 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
 
   @Input() parent: ViewTicketComponent;
   ticketData: Ticketdata = {};
-
+  maxFileSize = 15000000;
+  maxUploadFiles = 10;
   uploadedFiles: any[] = [];
   attachments: any[] = [];
 
@@ -71,20 +72,49 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
 
   }
-
   customUploader(events, uploadElement) {
-    this.fileUploadService.uploadFiles(events.files).subscribe(value => {
-      events.files.forEach(file => {
-        this.uploadedFiles.push(file);
-        console.log(JSON.stringify(this.uploadedFiles));
-      });
-      this.attachments.push(value);
-      events.files = [];
-      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-      console.log('attachments ' + this.attachments);
+    console.log(this.attachments.length + events.files.length);
+    if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
+      events.files = null;
       uploadElement.clear();
-    }, error1 => {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
-    });
+    } else {
+      this.fileUploadService.uploadFiles(events.files).subscribe(value => {
+        events.files.forEach(file => {
+          this.uploadedFiles.push(file);
+          console.log(JSON.stringify(this.uploadedFiles));
+        });
+        this.attachments.push(value);
+        events.files = [];
+        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        console.log('attachments ' + this.attachments);
+        uploadElement.clear();
+      }, error1 => {
+        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
+      });
+    }
   }
+
+
+  /*customUploader(events, uploadElement) {
+    if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
+      events.files = null;
+      uploadElement.clear();
+    } else {
+      this.fileUploadService.uploadFiles(events.files).subscribe(value => {
+        events.files.forEach(file => {
+          this.uploadedFiles.push(file);
+          console.log(JSON.stringify(this.uploadedFiles));
+        });
+        this.attachments.push(value);
+        events.files = [];
+        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        console.log('attachments ' + this.attachments);
+        uploadElement.clear();
+      }, error1 => {
+        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
+      });
+    }
+  }*/
 }

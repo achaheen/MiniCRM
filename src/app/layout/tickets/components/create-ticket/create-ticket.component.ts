@@ -31,7 +31,8 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   ticketHolder: TicketHolder = {};
   blocked = true;
   ticketForm: FormGroup;
-
+  maxFileSize = 15000000;
+  maxUploadFiles = 10;
   ticketTypeList: Type[];
   // channelList: Channel[];
   priorityList: Priority[];
@@ -154,7 +155,8 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.selectedTopic = {};
     this.ticketForm.reset();
     this.ticketForm.updateValueAndValidity();
-
+    this.attachments = [];
+    this.uploadedFiles = [];
   }
 
   SaveTicket() {
@@ -189,18 +191,25 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   }
 
   customUploader(events, uploadElement) {
-    this.fileUploadService.uploadFiles(events.files).subscribe(value => {
-      events.files.forEach(file => {
-        this.uploadedFiles.push(file);
-        console.log(JSON.stringify(this.uploadedFiles));
-      });
-      this.attachments.push(value);
-      events.files = [];
-      this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-      console.log('attachments ' + this.attachments);
+    console.log(this.attachments.length + events.files.length);
+    if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
+      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
+      events.files = null;
       uploadElement.clear();
-    }, error1 => {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
-    });
+    } else {
+      this.fileUploadService.uploadFiles(events.files).subscribe(value => {
+        events.files.forEach(file => {
+          this.uploadedFiles.push(file);
+          console.log(JSON.stringify(this.uploadedFiles));
+        });
+        this.attachments.push(value);
+        events.files = [];
+        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        console.log('attachments ' + this.attachments);
+        uploadElement.clear();
+      }, error1 => {
+        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
+      });
+    }
   }
 }
