@@ -1,5 +1,82 @@
 .rtl {
-    .sidebar {
+  .replyContainer{
+    float:right;
+  }
+  .replyContainer .replyPerson {
+    float: right;
+    border-left: solid 1px #d8d8d8;
+    background-image: linear-gradient(to right, #f3f3f3, #fff);
+  }
+  .replyContainer .reply {
+    border-left: solid 1px #d8d8d8;
+    float: right;
+  }
+  .replyContainer .ReplyAttachment {
+    float: left;
+  }
+  .replyContainer .ReplyattachmentContent {
+    float: right;
+  }
+
+  .navbar-expand-lg .navbar-nav{
+
+    float: left;
+  }
+  .ui-tabview-panel table{
+    margin-right: 1px;
+  }
+.btn-create{
+  float: left;
+}
+  .btnPanel{
+    float: left;
+  }
+  .ui-paginator-bottom{
+
+    direction: ltr !important;
+    text-align: center !important;
+
+  }
+  .fa-angle-double-right:before {
+    content: none;
+    content: "\f100";
+  }
+
+  .list-group-item {
+      padding: 0.75rem 0.50rem !important;
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu-right{
+    right: auto;
+  }
+   .dropdown-item{
+    float: right;
+  }
+  .navbar-collapse{
+    display: block !important;
+  }
+
+   .fa-user::after {
+     content: none;
+    }
+
+  .nav-item{
+    float: right;
+  }
+  .collapsed[_ngcontent-c1] {
+    margin-right: 55px !important;
+  }
+
+  .ui-tabview.ui-tabview-top .ui-tabview-nav li {
+    margin-left: 2px;
+    float: right;
+  }
+
+  .col-header {
+    float: right !important;
+  }
+
+
+  .sidebar {
         left: auto !important;
         right: 0 !important;
         > ul.list-group {
@@ -8,7 +85,7 @@
     }
     .main-container {
         margin-left: 0 !important;
-        margin-right: 235px;
+        margin-right: 135px;
     }
     /*rtl dropdown items correction*/
     .dropdown-menu {
@@ -16,14 +93,15 @@
     }
     * {
         direction: rtl;
+        text-align: right;
     }
     .navbar * {
-        direction: ltr;
+      direction: rtl;
     }
 
-    .sidebar * {
-        direction: ltr;
-    }
+    //.sidebar * {
+    //    direction: ltr;
+    //}
 
     .navbar .dropdown-menu {
         text-align: left;
@@ -72,3 +150,6 @@
         }
     }
 }
+
+
+

@@ -1,4 +1,5 @@
 {
+  "Arabic": "اللغة العربية",
   "Dashboard": "Dashboard",
   "Charts": "Charts",
   "Tables": "Tables",
@@ -41,8 +42,6 @@
   "modificationDate": "Modification Date",
   "modifiedBy": "Modified By",
   "creationDate": "Creation Date",
-  "creationDateStart": "Creation Date Before",
-  "creationDateEnd": "Creation Date After",
   "id": "id",
   "assigne": "User/Group",
   "type": "Type",
@@ -162,5 +161,9 @@
   "ClosedTicketsTab": "Closed Tickets",
   "WorkOnProgressTab": "Work on Progress Tickets",
   "CreatedTicketsTab": "Created Tickets",
-  "nan": "National ID/Iqama"
+  "nan": "National ID/Iqama",
+  "TopicPermissions" : "Topic Permissions",
+  "Groups" : "Groups",
+  "Tickets" : "Tickets",
+  "Users" : "Users"
 }
