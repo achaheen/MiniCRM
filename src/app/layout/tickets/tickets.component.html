@@ -11,7 +11,8 @@
   <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"
               [headerStyleClass]="item.type"
               [selected]="i===0" [closable]="item.closable">
-    <app-ticket-filters [selectedFilter]="item.ticketFilter" [parent]="this"></app-ticket-filters>
+    <app-ticket-filters [selectedFilter]="item.ticketFilter" [parent]="this"
+                        *ngIf="item.ticketsTab!==undefined &&item.ticketsTab "></app-ticket-filters>
     <ng-template pTemplate="content">
       <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
                            [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"

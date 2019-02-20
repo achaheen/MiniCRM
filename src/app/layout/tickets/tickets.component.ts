@@ -73,20 +73,21 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         closable: false,
         type: 'filters',
         ticketFilter: this.nonFilteredTickets
+        , ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('WorkOnProgressTab'),
         content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.workOnProgressTicketFilter
+        ticketFilter: this.workOnProgressTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('EscalatedTicketsTab'),
         content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.escalatedTicketFilter
+        ticketFilter: this.escalatedTicketFilter, ticketsTab: true
       },
 
       {
@@ -94,7 +95,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.openTicketFilter
+        ticketFilter: this.openTicketFilter, ticketsTab: true
       },
 
       {
@@ -102,14 +103,14 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
         content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.closedTicketFilter
+        ticketFilter: this.closedTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('CreatedTicketsTab'),
         content: '',
         closable: false,
         type: 'filters',
-        ticketFilter: this.createdTicketsFilter
+        ticketFilter: this.createdTicketsFilter, ticketsTab: true
       }
 
     ];
