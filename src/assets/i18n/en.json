@@ -62,6 +62,7 @@
   "true": "Yes",
   "false": "No",
   "apply": "Apply",
+  "filters": "Filters",
   "viewTopicFilters": "Filter By Categories",
   "viewUsersFilters": "Filter By Users",
   "viewGroupsFilters": "Filter By Groups",

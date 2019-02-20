@@ -10,6 +10,8 @@ import {Topic} from '../model/topic';
 import {TranslateService} from '@ngx-translate/core';
 import {TicketActions} from '../model/ticketActions';
 import {Ticket} from '../model/ticket';
+import {SelectItem} from 'primeng/api';
+import {SourceChannel} from '../model/source-channel';
 
 @Injectable({
   providedIn: 'root'
@@ -20,16 +22,72 @@ export class UtilsService {
   actionList: TicketActions[];
   typesList: Type[];
   priorityList: Priority[];
-
+  channelList: SourceChannel[];
+  statusListSelectItems: SelectItem[] = [];
+  typesListSelectItems: SelectItem[] = [];
+  priorityListSelectItems: SelectItem[] = [];
+  channelListSelectItems: SelectItem[] = [];
 
   constructor(public translateService: TranslateService) {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
     this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as TicketActions[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];
-    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type'});
+    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type', arabicLabel: 'برجاء اختيار نوع الطلب'});
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[];
     this.priorityList.unshift({'priorityValue': null, 'priority': 'Select Priority'});
+    this.channelList = JSON.parse(localStorage.getItem(environment.ticketChannelList)) as SourceChannel[];
+    this.channelList.unshift({channelID: null, arabicLabel: 'برجاء اختبار المصدر', englishLabel: 'Select Source Channel'});
 
+    this.initSelectItemLists();
+  }
+
+  initSelectItemLists() {
+    this.getPriorityListAsSelectItems();
+    this.getChannelsListAsSelectItems();
+    this.getTicketTypesListAsSelectItems();
+    this.getStatusListAsSelectItems();
+  }
+
+  getStatusListAsSelectItems() {
+    this.statusListSelectItems = [];
+    if (this.statusList != null) {
+
+      this.statusList.forEach(value => {
+        const item: SelectItem = {label: value[this.getLabelNameLoc(value)], value};
+        this.statusListSelectItems.push(item);
+      });
+    }
+  }
+
+  getChannelsListAsSelectItems() {
+    this.channelListSelectItems = [];
+    if (this.channelList != null) {
+      const list: SelectItem[] = [];
+      this.channelList.forEach(value => {
+        const item: SelectItem = {label: value[this.getLabelNameLoc(value)], value};
+        this.channelListSelectItems.push(item);
+      });
+    }
+  }
+
+  getPriorityListAsSelectItems() {
+    this.priorityListSelectItems = [];
+    if (this.priorityList != null) {
+      this.priorityList.forEach(value => {
+        const item: SelectItem = {label: value.priority, value};
+        this.priorityListSelectItems.push(item);
+      });
+    }
+  }
+
+  getTicketTypesListAsSelectItems() {
+    this.typesListSelectItems = [];
+    if (this.typesList != null) {
+      this.typesList.forEach(value => {
+        const item: SelectItem = {label: value[this.getLabelNameLoc(value)], value};
+        this.typesListSelectItems.push(item);
+      });
+    }
   }
 
   findStatus(id: number) {

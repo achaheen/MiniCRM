@@ -9,6 +9,7 @@ import {SearchTicketsContainer} from '../../../../shared/model/searchTicketsCont
 import {Type} from '../../../../shared/model/type';
 import {Status} from '../../../../shared/model/status';
 import {Priority} from '../../../../shared/model/priority';
+import {SourceChannel} from '../../../../shared/model/source-channel';
 
 @Component({
   selector: 'app-ticket-filters',
@@ -17,9 +18,10 @@ import {Priority} from '../../../../shared/model/priority';
 })
 export class TicketFiltersComponent extends BasicTopicSelection implements OnInit {
   @Input() defaultPageSize = 10;
-  @Input() selectedFilter: SearchTicketsContainer = {};
+  @Input() selectedFilter: SearchTicketsContainer;
   @Input() parent: any;
   @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
+  activeIndex = null;
   customerBasic: string;
   customerName: string;
   customerMobile: string;
@@ -33,6 +35,7 @@ export class TicketFiltersComponent extends BasicTopicSelection implements OnIni
 
   ticketType: Type;
   ticketStatus: Status;
+  ticketSource: SourceChannel;
   // ticketChannel: Ticket;
   ticketPriority: Priority;
 
@@ -43,28 +46,25 @@ export class TicketFiltersComponent extends BasicTopicSelection implements OnIni
   }
 
   ngOnInit() {
+    if (this.selectedFilter == null) {
+      this.selectedFilter = {page: 0, size: this.defaultPageSize};
+    }
   }
 
   applyFilter() {
     if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
       const mainCategory = this.selectedMainCategory.id;
       this.selectedFilter.mainCats = [mainCategory];
-    } else {
-      this.selectedFilter.mainCats = undefined;
     }
 
     if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
       const subCategory = this.selectedSubCategory.id;
       this.selectedFilter.subCats = [subCategory];
-    } else {
-      this.selectedFilter.subCats = undefined;
     }
 
     if (this.selectedTopic != null && this.selectedTopic.id != null) {
       const topic = this.selectedTopic.id;
       this.selectedFilter.topics = [topic];
-    } else {
-      this.selectedFilter.topics = undefined;
     }
     this.selectedFilter.customerContainer = {};
     if (this.validateString(this.customerMobile)) {
@@ -94,8 +94,11 @@ export class TicketFiltersComponent extends BasicTopicSelection implements OnIni
     if (this.ticketStatus != null && this.ticketStatus.id != null) {
       this.selectedFilter.status = [this.ticketStatus.id];
     }
-    if (this.ticketPriority != null) {
+    if (this.ticketPriority != null && this.ticketPriority.priorityValue != null) {
       this.selectedFilter.priority = [this.ticketPriority.priorityValue];
+    }
+    if (this.ticketSource != null && this.ticketSource.channelID != null) {
+      this.selectedFilter.sourceChannels = [this.ticketSource.channelID];
     }
     if (this.startDate != null) {
       this.selectedFilter.startDate = this.startDate;
@@ -103,8 +106,10 @@ export class TicketFiltersComponent extends BasicTopicSelection implements OnIni
     if (this.endDate != null) {
       this.selectedFilter.endDate = this.endDate;
     }
+
     // this.eventEmitter.emit(this.selectedFilter);
     this.parent.getTicketList(this.selectedFilter);
+    this.activeIndex = -1;
   }
 
   clear() {

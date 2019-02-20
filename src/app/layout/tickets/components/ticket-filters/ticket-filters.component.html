@@ -1,5 +1,5 @@
-<p-accordion>
-  <p-accordionTab header="{{'TicketsCategories' | translate}}" [selected]="true">
+<p-accordion [activeIndex]="activeIndex">
+  <p-accordionTab header="{{'filters' | translate}}">
 
     <app-topics-selection [parent]="this"></app-topics-selection>
 
@@ -7,20 +7,32 @@
       <tr>
         <td class="grid-label">{{'TicketType' | translate}}</td>
         <td class="grid-input">
-          <p-dropdown [options]="utils.typesList" [(ngModel)]="ticketType"
-                      optionLabel="englishLabel"></p-dropdown>
+          <p-dropdown [options]="utils.typesListSelectItems" [(ngModel)]="ticketType"
+          ></p-dropdown>
         </td>
         <td class="grid-label">{{'Channel' | translate}}</td>
-        <td class="grid-input"></td>
+        <td class="grid-input">
+          <p-dropdown [options]="utils.channelListSelectItems" [(ngModel)]="ticketSource"
+          ></p-dropdown>
+        </td>
 
         <td class="grid-label">{{'Priority' | translate}}</td>
         <td class="grid-input">
-          <p-dropdown [options]="utils.priorityList" [(ngModel)]="ticketPriority"
-                      optionLabel="priority"></p-dropdown>
+          <p-dropdown [options]="utils.priorityListSelectItems" [(ngModel)]="ticketPriority"
+          ></p-dropdown>
         </td>
 
       </tr>
-
+      <tr>
+        <td class="grid-label">{{'creationDateStart' | translate}}</td>
+        <td class="grid-input">
+          <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="12"></p-calendar>
+        </td>
+        <td class="grid-label">{{'creationDateEnd' | translate}}</td>
+        <td class="grid-input">
+          <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="12"></p-calendar>
+        </td>
+      </tr>
       <tr>
         <td class="grid-label">{{'CustomerBasic' | translate}}</td>
         <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
@@ -49,16 +61,7 @@
         <td class="grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
                                       [(ngModel)]="customerBranch"></td>
       </tr>
-      <tr>
-        <td class="grid-label">{{'creationDateStart' | translate}}</td>
-        <td class="grid-input">
-          <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="12"></p-calendar>
-        </td>
-        <td class="grid-label">{{'creationDateEnd' | translate}}</td>
-        <td class="grid-input">
-          <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="12"></p-calendar>
-        </td>
-      </tr>
+
     </table>
     <p-button label="Apply" (onClick)="applyFilter()"></p-button>
     <p-button label="Clear" (onClick)="clear()"></p-button>

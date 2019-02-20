@@ -53,9 +53,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem(environment.ticketPriorityList, JSON.stringify(ticketExtras.ticketPriorityList));
         localStorage.setItem(environment.ticketStatusList, JSON.stringify(ticketExtras.ticketStatusList));
         localStorage.setItem(environment.ticketTypeList, JSON.stringify(ticketExtras.tickettypesList));
+        localStorage.setItem(environment.ticketChannelList, JSON.stringify(ticketExtras.channelsList));
         localStorage.setItem(environment.ticketActionsList, JSON.stringify(ticketExtras.ticketactionsList));
       }
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['tickets']);
     }, error1 => {
       this.loading = false;
       // auth failed show some errors to user

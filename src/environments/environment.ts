@@ -12,6 +12,7 @@ export const environment = {
   ticketStatusList: 'ticketStatusList',
   ticketPriorityList: 'ticketPriorityList',
   ticketActionsList: 'ticketActionsList',
+  ticketChannelList: 'ticketChannelList',
   language: 'lang'
 };
 
