@@ -19,10 +19,12 @@
         </td>
         <td class="grid-label">{{'SubCat' | translate}}</td>
         <td class="grid-input"><input id="subCategory" type="text" pInputText name="subCategory" [attr.disabled]="true"
-                                      [ngModel]="ticket.topic.subCategory.englishLabel"></td>
+                                      [ngModel]="utils.printLocLabel(ticket.topic.subCategory)"
+                                      (ngModelChange)="ticket.topic.subCategory($event)"></td>
         <td class="grid-label">{{'Topic' | translate}}</td>
         <td class="grid-input"><input id="topic" type="text" pInputText name="topic" [attr.disabled]="true"
-                                      [ngModel]="ticket.topic.englishLabel"></td>
+                                      [ngModel]="utils.printLocLabel(ticket.topic)"
+                                      (ngModelChange)="ticket.topic($event)"></td>
       </tr>
       <tr>
         <td class="grid-label">{{'createdBy' | translate}}</td>
@@ -96,14 +98,17 @@
       <tr>
         <td class="grid-label">{{'OriginalMainCategory' | translate}}</td>
         <td class="grid-input"><input id="oMainCategory" type="text" pInputText name="ostaffID" [attr.disabled]="true"
-                                      [ngModel]="ticket.originalTopic.subCategory.mainCategory.englishLabel"></td>
+                                      [ngModel]="utils.printLocLabel(ticket.originalTopic.subCategory.mainCategory) "
+                                      (ngModelChange)="ticket.originalTopic.subCategory.mainCategory($event)"></td>
         <td class="grid-label">{{'OriginalSubCategory' | translate}}</td>
         <td class="grid-input"><input id="oSubCategory" type="text" pInputText name="osubCategory"
                                       [attr.disabled]="true"
-                                      [ngModel]="ticket.originalTopic.subCategory.englishLabel"></td>
+                                      [ngModel]="utils.printLocLabel(ticket.originalTopic.subCategory)"
+                                      (ngModelChange)="ticket.originalTopic.subCategory($event)"></td>
         <td class="grid-label">{{'OriginalTopic' | translate}}</td>
         <td class="grid-input"><input id="oTopic" type="text" pInputText name="otopic" [attr.disabled]="true"
-                                      [ngModel]="ticket.originalTopic.englishLabel"></td>
+                                      [ngModel]="utils.printLocLabel(ticket.originalTopic)"
+                                      (ngModelChange)="ticket.originalTopic($event)"></td>
       </tr>
 
       <ng-container *ngIf="ticket.attachmentsList!=null && ticket.attachmentsList.length>0">

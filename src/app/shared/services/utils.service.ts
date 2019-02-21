@@ -26,7 +26,7 @@ export class UtilsService {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
     this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as TicketActions[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];
-    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type'});
+    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type', 'arabicLabel' : 'اختر نوع الطلب'});
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[];
     this.priorityList.unshift({'priorityValue': null, 'priority': 'Select Priority'});
 
@@ -34,12 +34,12 @@ export class UtilsService {
 
   findStatus(id: number) {
     const status = this.statusList.find(x => x.id == id);
-    return (status != null && status !== undefined ? status.englishLabel : '');
+    return (status != null && status !== undefined ? this.printLocLabel(status): '');
   }
 
   findType(id: number) {
     const type = this.typesList.find(x => x.typeID == id);
-    return (type != null && type !== undefined ? type.englishLabel : '');
+    return (type != null && type !== undefined ? this.printLocLabel(type): '');
   }
 
   findPriority(id: number) {
@@ -58,14 +58,10 @@ export class UtilsService {
 
   printLocLabel(labelObj: LabelEnabled): string {
     if (labelObj !== undefined && labelObj !== null) {
-     console.log('printing ' + JSON.stringify(labelObj));
       const lang: string = localStorage.getItem(environment.language);
-
       if (lang === null || lang === '' || lang === 'en') {
-        console.log('printing ' + labelObj.englishLabel);
-        return labelObj.englishLabel;
+       return labelObj.englishLabel;
       } else {
-        console.log('printing ' + labelObj.arabicLabel);
         return labelObj.arabicLabel;
       }
 

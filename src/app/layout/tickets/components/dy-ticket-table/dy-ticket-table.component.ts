@@ -100,14 +100,10 @@ export class DyTicketTableComponent implements OnInit {
 
 
   setSelectedTicket(event) {
-
-    console.log('TicketID=' + (this.selectedTicket == null ? null : this.selectedTicket.id));
     this.selectTicketEmitter.emit((this.selectedTicket == null ? null : this.selectedTicket.id));
   }
 
   loadCarsLazy(event: LazyLoadEvent) {
-    console.log(JSON.stringify(event));
-
     const pageNum = (event.first / event.rows);
     this.ticketFilters.page = pageNum;
     const sortField: SearchTicketsSorting = {sortBy: event.sortField, sortType: event.sortOrder};

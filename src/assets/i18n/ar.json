@@ -18,6 +18,10 @@
     "Repeat Password": "تأكيد كلمة السر",
     "Register": "التسجيل",
     "Log in": "تسجيل الدخول",
+    "createdBy": "إنشاء بواسطة",
+    "modificationDate": "تاريخ التعديل",
+    "modifiedBy": "تعديل بواسطه",
+    "creationDate": "تاريخ الإنشاء",
     "TicketsCategories" : "أقسام الطلبات",
 
   "TicketID" : "رقم التزكرة",
@@ -34,6 +38,7 @@
   "CustomerName" : "الأسم",
   "CustomerMobile": "الجوال",
   "CustomerSegment": "سيجمنت",
+  "CustomerEmail" : "البريد الإلكتروني",
   "OriginalMainCategory" : "القسم الرئيسيي الأصلي",
   "OriginalSubCategory": "القسم الفرعي الأصلي",
   "OriginalTopic":"الموضوع الأصلي",
@@ -48,5 +53,19 @@
   "TopicPermissions" : "صلاحيات الموضوع",
   "Groups" : "المجموعات",
   "Tickets" : "الطلبات",
-  "Users" : "المستخدمين"
+  "Users" : "المستخدمين",
+  "Branch" : "الفرع",
+  "creationDateStart" : "من تاريخ",
+  "creationDateEnd" : "إلي تاريخ",
+  "nan" : "رقم الهوية / الإقامة",
+  "Reply" : "الرد",
+  "attachments" : "المرفقات",
+  "Title": "العنوان",
+  "CreateTicket": "طلب جديد",
+  "ViewTicket": "فتح الطلب",
+  "EditTicket": "تعديل الطلب",
+  "SaveTicket": "حفظ الطلب",
+  "apply": "بحث",
+  "clear": "مسح"
 }
+

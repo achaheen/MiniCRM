@@ -61,6 +61,7 @@
   "true": "Yes",
   "false": "No",
   "apply": "Apply",
+  "clear": "Clear",
   "viewTopicFilters": "Filter By Categories",
   "viewUsersFilters": "Filter By Users",
   "viewGroupsFilters": "Filter By Groups",
@@ -164,5 +165,9 @@
   "TopicPermissions" : "Topic Permissions",
   "Groups" : "Groups",
   "Tickets" : "Tickets",
-  "Users" : "Users"
+  "Users" : "Users",
+  "CustomerEmail" : "Customer Email",
+  "Branch" : "Branch",
+  "creationDateStart" : "From Date",
+  "creationDateEnd" : "To Date"
 }

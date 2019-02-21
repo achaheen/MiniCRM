@@ -67,6 +67,7 @@
             (click)="changeStatus()" class="ui-button-rounded"
             label="{{ 'changeStatusBTN' | translate}}"></button>
   </p-panel>
+  <div style="clear:both"></div>
 </ng-container>
 <app-create-sub-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)"
                     [mainCategories]="parentMainCat.mainCategories"

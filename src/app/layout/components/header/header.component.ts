@@ -32,7 +32,6 @@ export class HeaderComponent implements OnInit {
 
 
   prepareLanguageDir(){
-    console.log("prepareLanguageDir ()");
     this.defaultLanguage = localStorage.getItem('lang');
     this.translate.addLangs(['en', 'ar']);
     this.translate.setDefaultLang(this.defaultLanguage);
@@ -45,9 +44,6 @@ export class HeaderComponent implements OnInit {
       this.defaultDir = 'ltr';
     }
 
-    console.log("Direction : " + this.defaultDir);
-    console.log("Language : " + this.defaultLanguage );
-    console.log("Language title : " + this.languageTitle);
     this.rltAndLtr();
   }
   ngOnInit() {

@@ -1,14 +1,29 @@
 .rtl {
+
+   .ui-submenu-list {
+    left: initial!important;
+   }
+  .ui-menuitem-text{
+     margin: 0px 5px;
+   }
+  .replyAction span {
+    float: right;
+  }
+  .ui-dropdown-panel .ui-dropdown-item{
+    text-align: right!important;
+  }
   .replyContainer{
     float:right;
   }
   .replyContainer .replyPerson {
     float: right;
     border-left: solid 1px #d8d8d8;
+    border-right:none!important;
     background-image: linear-gradient(to right, #f3f3f3, #fff);
   }
   .replyContainer .reply {
     border-left: solid 1px #d8d8d8;
+    border-right:none!important;
     float: right;
   }
   .replyContainer .ReplyAttachment {
@@ -64,6 +79,7 @@
   }
   .collapsed[_ngcontent-c1] {
     margin-right: 55px !important;
+    margin-left: auto !important;
   }
 
   .ui-tabview.ui-tabview-top .ui-tabview-nav li {
