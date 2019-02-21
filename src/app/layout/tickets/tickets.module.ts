@@ -32,11 +32,12 @@ import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.compo
 import {TicketFiltersComponent} from './components/ticket-filters/ticket-filters.component';
 import {TopicsSelectionModule} from '../topics-selection/topics-selection.module';
 import {TopicspermissionsModule} from '../topicspermissions/topicspermissions.module';
+import { SearchCustomerComponent } from './components/create-ticket/search-customer/search-customer.component';
 
 @NgModule({
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
     CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
-    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent],
+    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,

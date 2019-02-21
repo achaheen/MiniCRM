@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
 import {UtilsService} from '../../../../shared/services/utils.service';
@@ -17,6 +17,8 @@ import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
 import {environment} from '../../../../../environments/environment';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
+import {AccountServicesService} from '../../../../shared/services/account-services.service';
+import {CustomerSearchContainer, SearchTicketsContainer} from '../../../../shared/model/searchTicketsContainer';
 
 @Component({
   selector: 'app-create-ticket',
@@ -29,25 +31,23 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
-  blocked = true;
   ticketForm: FormGroup;
   maxFileSize = 15000000;
   maxUploadFiles = 10;
   ticketTypeList: Type[];
   // channelList: Channel[];
-  priorityList: Priority[];
 
   selectedMainCategory: MainCategory;
   selectedSubCategory: Subcategory;
   selectedTopic: Topic;
   selectedTicketType: Type;
   selectedPriority: Priority;
-
-
+  accountsList: CustomerAccounts[];
+  @Input() selectedAccount: CustomerAccounts;
   uploadedFiles: any[] = [];
   attachments: any[] = [];
 
-  lockAfterSave: boolean = false;
+  lockAfterSave = false;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
@@ -55,7 +55,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
               public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService,
               public topicService: TopicService,
-              public fb: FormBuilder, public fileUploadService: FileUploadService) {
+              public fb: FormBuilder, public fileUploadService: FileUploadService, private accountServices: AccountServicesService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
     this.authorizedTopicsRequest = {permissions: ['create']};
@@ -64,6 +64,15 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   ngOnInit() {
     this.initTicketForm();
     this.initValueLists();
+    if (this.selectedAccount != null) {
+      this.ticketForm.value.CustomerBasic = this.selectedAccount.customerCIF;
+      this.ticketForm.value.CustomerNameEn = this.selectedAccount.customerNameEn;
+      this.ticketForm.value.CustomerNameAr = this.selectedAccount.customerNameAR;
+      this.ticketForm.value.CustomerBranch = this.selectedAccount.branchName;
+      this.ticketForm.value.CustomerMobile = this.selectedAccount.mobile;
+      this.ticketForm.value.CustomerEmail = this.selectedAccount.email;
+      this.ticketForm.value.CustomerSegment = this.selectedAccount.segment;
+    }
   }
 
   initValueLists() {
@@ -137,6 +146,10 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     customerAccount.email = this.ticketForm.value.CustomerEmail;
     customerAccount.segment = this.ticketForm.value.CustomerSegment;
 
+    if (this.selectedAccount != null) {
+      customerAccount.id = this.selectedAccount.id;
+    }
+
     this.ticket.customerAccount = customerAccount;
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
@@ -187,6 +200,18 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       console.log(JSON.stringify(this.uploadedFiles));
     });
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+
+  }
+
+  searchCustomer() {
+    this.accountsList = [];
+    const searchData: CustomerSearchContainer = {
+      customerBasic: this.ticketForm.value.CustomerBasic, customerEmail: this.ticketForm.value.CustomerEmail
+      , customerMobile: this.ticketForm.value.CustomerMobile
+    };
+    this.accountServices.search(searchData).subscribe(value => {
+      this.accountsList = value;
+    });
 
   }
 

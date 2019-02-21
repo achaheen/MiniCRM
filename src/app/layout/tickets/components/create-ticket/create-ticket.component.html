@@ -7,7 +7,6 @@
 
     <tr>
       <td colspan="8">
-
         <p-message severity="error" text="{{'Validate-MainCategory' | translate}}"
                    *ngIf="!ticketForm.controls['MainCategory'].valid&&ticketForm.controls['MainCategory'].dirty"></p-message>
         <p-message severity="error" text="{{'Validate-SubCategory' | translate}}"
@@ -40,130 +39,134 @@
                    *ngIf="!ticketForm.controls['CustomerEmail'].valid&&ticketForm.controls['CustomerEmail'].dirty"></p-message>
       </td>
     </tr>
+    <ng-container>
 
-    <tr>
-      <td class="grid-label">{{'TicketID' | translate}}</td>
-      <td class="grid-input"><input id="userID" type="text" pInputText name="userID" formControlName="TicketID"
-                                    [attr.disabled]="true"></td>
+    </ng-container>
+    <ng-container *ngIf="selectedAccount!=null">
+      <tr>
+        <td class="grid-label">{{'TicketID' | translate}}</td>
+        <td class="grid-input"><input id="userID" type="text" pInputText name="userID" formControlName="TicketID"
+                                      [attr.disabled]="true"></td>
 
-      <td class="grid-label">{{'MainCat' | translate}}</td>
-      <td class="grid-input">
-        <p-dropdown (onChange)="updateSubCategory();onChangeTopic()" [options]="mainCategories"
-                    [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
-                    optionLabel="englishLabel"></p-dropdown>
-      </td>
+        <td class="grid-label">{{'MainCat' | translate}}</td>
+        <td class="grid-input">
+          <p-dropdown (onChange)="updateSubCategory();onChangeTopic()" [options]="mainCategories"
+                      [(ngModel)]="selectedMainCategory" [ngModelOptions]="{standalone: true}"
+                      optionLabel="englishLabel"></p-dropdown>
+        </td>
 
-      <td class="grid-label">{{'SubCat' | translate}}</td>
-      <td class="grid-input">
-        <p-dropdown (onChange)="updateTopicList();onChangeTopic()" [options]="subCategories"
-                    [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
-                    optionLabel="englishLabel"></p-dropdown>
-      </td>
+        <td class="grid-label">{{'SubCat' | translate}}</td>
+        <td class="grid-input">
+          <p-dropdown (onChange)="updateTopicList();onChangeTopic()" [options]="subCategories"
+                      [(ngModel)]="selectedSubCategory" [ngModelOptions]="{standalone: true}"
+                      optionLabel="englishLabel"></p-dropdown>
+        </td>
 
-      <td class="grid-label">{{'Topic' | translate}}</td>
-      <td class="grid-input">
-        <p-dropdown [options]="topics" (onChange)="onChangeTopic()" [(ngModel)]="selectedTopic"
-                    [ngModelOptions]="{standalone: true}"
-                    optionLabel="englishLabel"></p-dropdown>
-      </td>
-    </tr>
+        <td class="grid-label">{{'Topic' | translate}}</td>
+        <td class="grid-input">
+          <p-dropdown [options]="topics" (onChange)="onChangeTopic()" [(ngModel)]="selectedTopic"
+                      [ngModelOptions]="{standalone: true}"
+                      optionLabel="englishLabel"></p-dropdown>
+        </td>
+      </tr>
 
-    <tr>
-      <td class="grid-label">{{'TicketType' | translate}}</td>
-      <td class="grid-input">
-        <p-dropdown [options]="utils.typesList" (onChange)="onChangeType()" [(ngModel)]="selectedTicketType"
-                    [ngModelOptions]="{standalone: true}"
-                    optionLabel="englishLabel"></p-dropdown>
-      </td>
-      <td class="grid-label">{{'Channel' | translate}}</td>
-      <td class="grid-input"><input id="channel" type="text" pInputText name="channel"
-                                    formControlName="Channel"></td>
+      <tr>
+        <td class="grid-label">{{'TicketType' | translate}}</td>
+        <td class="grid-input">
+          <p-dropdown [options]="utils.typesList" (onChange)="onChangeType()" [(ngModel)]="selectedTicketType"
+                      [ngModelOptions]="{standalone: true}"
+                      optionLabel="englishLabel"></p-dropdown>
+        </td>
+        <td class="grid-label">{{'Channel' | translate}}</td>
+        <td class="grid-input"><input id="channel" type="text" pInputText name="channel"
+                                      formControlName="Channel"></td>
 
-      <td class="grid-label">{{'Priority' | translate}}</td>
-      <td class="grid-input">
-        <p-dropdown [options]="utils.priorityList" (onChange)="onChangePriority()" [(ngModel)]="selectedPriority"
-                    [ngModelOptions]="{standalone: true}"
-                    optionLabel="priority"></p-dropdown>
-      </td>
-    </tr>
+        <td class="grid-label">{{'Priority' | translate}}</td>
+        <td class="grid-input">
+          <p-dropdown [options]="utils.priorityList" (onChange)="onChangePriority()" [(ngModel)]="selectedPriority"
+                      [ngModelOptions]="{standalone: true}"
+                      optionLabel="priority"></p-dropdown>
+        </td>
+      </tr>
 
-    <tr>
+      <tr>
 
-      <td class="grid-label">{{'Subject' | translate}}</td>
-      <td class="grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText name="subject"
-                                                formControlName="Subject"></td>
-
-
-    </tr>
-    <tr>
-      <td class="grid-label">{{'Details' | translate}}</td>
-      <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
-                                                   formControlName="Details"> </textarea></td>
-    </tr>
-
-    <tr>
-      <td colspan="8">
-        <hr/>
-      </td>
-    </tr>
-    <tr>
-      <td class="grid-label">{{'CustomerBasic' | translate}}</td>
-      <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
-                                    formControlName="CustomerBasic"></td>
-      <td class="grid-label">{{'CustomerName' | translate}}</td>
-      <td class="grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
-                                    formControlName="CustomerNameEn"></td>
-
-      <td class="grid-label">{{'CustomerName' | translate}}</td>
-      <td class="grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
-                                    formControlName="CustomerNameAr"></td>
-
-      <td class="grid-label">{{'CustomerMobile' | translate}}</td>
-      <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
-                                    formControlName="CustomerMobile"></td>
-    </tr>
-    <tr>
-      <td class="grid-label">{{'CustomerEmail' | translate}}</td>
-      <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
-                                    formControlName="CustomerEmail"></td>
-
-      <td class="grid-label">{{'CustomerSegment' | translate}}</td>
-      <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
-                                    formControlName="CustomerSegment"></td>
-
-      <td class="grid-label">{{'CustomerBranch' | translate}}</td>
-      <td class="grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
-                                    formControlName="CustomerBranch"></td>
-
-    </tr>
-    <tr>
-      <td colspan="8">
-        <hr/>
-      </td>
-    </tr>
-    <tr>
-      <td class="grid-label">Attachments</td>
-      <td class="grid-input" colspan="7">
+        <td class="grid-label">{{'Subject' | translate}}</td>
+        <td class="grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText name="subject"
+                                                  formControlName="Subject"></td>
 
 
-        <p-fileUpload name="files" #uploadFile multiple="multiple"
-                      (onUpload)="onUploadFiles($event)"
-                      auto="true"
-                      [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
-                      [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
-                      (uploadHandler)="customUploader($event,uploadFile)"
-                      customUpload="true"
-                      accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
-          <ng-template pTemplate="content">
-            <ul *ngIf="uploadedFiles.length">
-              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
-            </ul>
-          </ng-template>
-        </p-fileUpload>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'Details' | translate}}</td>
+        <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+                                                     formControlName="Details"> </textarea></td>
+      </tr>
 
-      </td>
+      <tr>
+        <td colspan="8">
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'CustomerBasic' | translate}}</td>
+        <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                      formControlName="CustomerBasic"></td>
+        <td class="grid-label">{{'CustomerName' | translate}}</td>
+        <td class="grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
+                                      formControlName="CustomerNameEn"></td>
 
-    </tr>
+        <td class="grid-label">{{'CustomerName' | translate}}</td>
+        <td class="grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
+                                      formControlName="CustomerNameAr"></td>
+
+        <td class="grid-label">{{'CustomerMobile' | translate}}</td>
+        <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                      formControlName="CustomerMobile"></td>
+      </tr>
+      <tr>
+        <td class="grid-label">{{'CustomerEmail' | translate}}</td>
+        <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                      formControlName="CustomerEmail"></td>
+
+        <td class="grid-label">{{'CustomerSegment' | translate}}</td>
+        <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+                                      formControlName="CustomerSegment"></td>
+
+        <td class="grid-label">{{'CustomerBranch' | translate}}</td>
+        <td class="grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
+                                      formControlName="CustomerBranch"></td>
+
+      </tr>
+      <tr>
+        <td colspan="8">
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td class="grid-label">Attachments</td>
+        <td class="grid-input" colspan="7">
+
+
+          <p-fileUpload name="files" #uploadFile multiple="multiple"
+                        (onUpload)="onUploadFiles($event)"
+                        auto="true"
+                        [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
+                        [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
+                        (uploadHandler)="customUploader($event,uploadFile)"
+                        customUpload="true"
+                        accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
+            <ng-template pTemplate="content">
+              <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
+              </ul>
+            </ng-template>
+          </p-fileUpload>
+
+        </td>
+
+      </tr>
+    </ng-container>
   </table>
   <div style="text-align: right;">
     <button type="submit" pButton icon="pi pi-user-plus" class="ui-button-rounded" label="{{'SaveTicket' | translate}}"
@@ -171,5 +174,6 @@
     <button type="button" pButton icon="fa fa-eraser" class="ui-button-rounded" label="{{'ResetTicket' | translate}}"
             (click)="reset()"></button>
   </div>
+
 </form>
 

@@ -167,5 +167,6 @@
   "Tickets": "Tickets",
   "Users": "Users",
   "InvalidFileSize": "Sorry, the file size exceeds the maximum file size",
-  "InvalidFileType": "File type is not allowed"
+  "InvalidFileType": "File type is not allowed",
+  "Clear": "Clear"
 }

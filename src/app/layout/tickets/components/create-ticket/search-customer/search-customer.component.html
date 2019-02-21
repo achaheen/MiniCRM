@@ -1,0 +1,28 @@
+<table class="minWidth">
+  <tr>
+    <td class="grid-label">{{'CustomerBasic' | translate}}</td>
+    <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                  [(ngModel)]="customerBasic"></td>
+    <td class="grid-label">{{'nan' | translate}}</td>
+    <td class="grid-input"><input id="nan" type="text" pInputText name="customerBasic"
+                                  [(ngModel)]="nin"></td>
+
+  </tr>
+  <tr>
+    <td class="grid-label">{{'CustomerMobile' | translate}}</td>
+    <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                  [(ngModel)]="customerMobile"></td>
+    <td class="grid-label">{{'CustomerEmail' | translate}}</td>
+    <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                  [(ngModel)]="customerEmail"></td>
+  </tr>
+  <tr>
+    <td>
+      <p-button label="{{'Search'|translate}}" (onClick)="search()"></p-button>
+
+    </td>
+    <td>
+      <p-button label="{{'Clear'|translate}}" (onClick)="clear()"></p-button>
+    </td>
+  </tr>
+</table>
