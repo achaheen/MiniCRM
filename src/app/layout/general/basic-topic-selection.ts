@@ -38,11 +38,13 @@ export class BasicTopicSelection {
             const topic: Topic = {id: null, arabicLabel: 'اختر الموضوع', englishLabel: 'Select Topic'};
             this.topics = result;
             this.topics.unshift(topic);
+            this.buildTopicSelectItems();
           }
         );
       } else {
         this.topics = [];
         this.selectedTopic = null;
+        this.buildTopicSelectItems();
       }
     } else {
       if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {

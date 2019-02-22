@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AccountServicesService} from '../../../../../shared/services/account-services.service';
 import {CustomerSearchContainer} from '../../../../../shared/model/searchTicketsContainer';
 import {CustomerAccounts} from '../../../../../shared/model/customerAccounts';
+import {CreateTicketComponent} from '../create-ticket.component';
 
 @Component({
   selector: 'app-search-customer',
@@ -15,8 +16,19 @@ export class SearchCustomerComponent implements OnInit {
   nin: string;
   accountsList: CustomerAccounts[];
   selectedAccount: CustomerAccounts;
+  cols: any;
+
+  @Input() parent: CreateTicketComponent;
 
   constructor(private accountServices: AccountServicesService) {
+    this.cols = [{header: 'id', field: 'id'}, {header: 'customerNameAR', field: 'customerNameAR'},
+      {header: 'customerNameAR', field: 'customerNameAR'},
+      {header: 'customerNameAR', field: 'customerNameEn'},
+      {
+        header: 'customerCIF',
+        field: 'customerCIF'
+      }, {header: 'nan', field: 'nin'},
+      {header: 'CustomerMobile', field: 'mobile'}, {header: 'Email', field: 'email'}];
   }
 
   ngOnInit() {
@@ -25,13 +37,17 @@ export class SearchCustomerComponent implements OnInit {
   search() {
     this.accountsList = [];
     const searchData: CustomerSearchContainer = {
-      customerBasic: this.customerBasic, customerEmail: this.customerEmail
-      , customerMobile: this.customerMobile, nan: this.nin
+      customerBasic: this.customerBasic == null ? '' : this.customerBasic,
+      customerEmail: this.customerEmail == null ? '' : this.customerEmail,
+      customerMobile: this.customerMobile == null ? '' : '%' + this.customerMobile + '%',
+      nan: this.nin == null ? '' : '%' + this.nin + '%',
+      customerName: '', customerBranch: '', customerSegment: ''
     };
     this.accountServices.search(searchData).subscribe(value => {
       this.accountsList = value;
     });
   }
+
 
   clear() {
     this.accountsList = [];
@@ -41,7 +57,9 @@ export class SearchCustomerComponent implements OnInit {
     this.nin = null;
   }
 
-
-
+  doSelection() {
+    this.parent.selectedAccount = this.selectedAccount;
+    this.parent.updateCustomerAccountFields();
+  }
 
 }

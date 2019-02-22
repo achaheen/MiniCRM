@@ -10,6 +10,8 @@ export class TopicsSelectionComponent implements OnInit {
 
   @Input() public parent: BasicTopicSelection;
 
+  @Input() skipTable: boolean;
+
   constructor() {
   }
 

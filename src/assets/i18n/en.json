@@ -95,9 +95,12 @@
   "Priority": "Priority",
   "Details": "Details",
   "CustomerBasic": "Customer Basic",
+  "customerCIF": "Customer CIF",
   "CustomerName": "Customer Name",
   "CustomerMobile": "Customer Mobile",
   "CustomerSegment": "Customer Segment",
+  "customerNameAR": "Customer Arabic Name",
+  "customerNameEn": "Customer English Name",
   "OriginalMainCategory": "Original Main Category",
   "OriginalSubCategory": "Original Sub Category",
   "OriginalTopic": "Original Topic",
@@ -168,5 +171,7 @@
   "Users": "Users",
   "InvalidFileSize": "Sorry, the file size exceeds the maximum file size",
   "InvalidFileType": "File type is not allowed",
-  "Clear": "Clear"
+  "Clear": "Clear",
+  "AccountsSearchResults": "Accounts Search Results",
+  "SelectAcctBTN": "Select Account"
 }

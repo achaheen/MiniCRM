@@ -19,6 +19,7 @@ import {environment} from '../../../../../environments/environment';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {AccountServicesService} from '../../../../shared/services/account-services.service';
 import {CustomerSearchContainer, SearchTicketsContainer} from '../../../../shared/model/searchTicketsContainer';
+import {SourceChannel} from '../../../../shared/model/source-channel';
 
 @Component({
   selector: 'app-create-ticket',
@@ -42,6 +43,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   selectedTopic: Topic;
   selectedTicketType: Type;
   selectedPriority: Priority;
+  selectedChannel: SourceChannel;
   accountsList: CustomerAccounts[];
   @Input() selectedAccount: CustomerAccounts;
   uploadedFiles: any[] = [];
@@ -65,13 +67,35 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.initTicketForm();
     this.initValueLists();
     if (this.selectedAccount != null) {
-      this.ticketForm.value.CustomerBasic = this.selectedAccount.customerCIF;
-      this.ticketForm.value.CustomerNameEn = this.selectedAccount.customerNameEn;
-      this.ticketForm.value.CustomerNameAr = this.selectedAccount.customerNameAR;
-      this.ticketForm.value.CustomerBranch = this.selectedAccount.branchName;
-      this.ticketForm.value.CustomerMobile = this.selectedAccount.mobile;
-      this.ticketForm.value.CustomerEmail = this.selectedAccount.email;
-      this.ticketForm.value.CustomerSegment = this.selectedAccount.segment;
+      this.updateCustomerAccountFields();
+    }
+  }
+
+  updateCustomerAccountFields() {
+    if (this.selectedAccount != null) {
+      this.ticketForm.controls['CustomerBasic'].setValue(this.selectedAccount.customerCIF);
+      this.ticketForm.controls['CustomerBasic'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerNameEn'].setValue(this.selectedAccount.customerNameEn);
+      this.ticketForm.controls['CustomerNameEn'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerNameAr'].setValue(this.selectedAccount.customerNameAR);
+      this.ticketForm.controls['CustomerNameAr'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerBranch'].setValue(this.selectedAccount.branchName);
+      this.ticketForm.controls['CustomerBranch'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerMobile'].setValue(this.selectedAccount.mobile);
+      this.ticketForm.controls['CustomerMobile'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerEmail'].setValue(this.selectedAccount.email);
+      this.ticketForm.controls['CustomerEmail'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerSegment'].setValue(this.selectedAccount.segment);
+      this.ticketForm.controls['CustomerSegment'].updateValueAndValidity();
+      /**
+       this.ticketForm.value.CustomerBasic.patchValue(this.selectedAccount.customerCIF);
+       this.ticketForm.value.CustomerNameEn.patchValue(this.selectedAccount.customerNameEn);
+       this.ticketForm.value.CustomerNameAr.patchValue(this.selectedAccount.customerNameAR);
+       this.ticketForm.value.CustomerBranch.patchValue(this.selectedAccount.branchName);
+       this.ticketForm.value.CustomerMobile.patchValue(this.selectedAccount.mobile);
+       this.ticketForm.value.CustomerEmail.patchValue(this.selectedAccount.email);
+       this.ticketForm.value.CustomerSegment.patchValue(this.selectedAccount.segment);
+       */
     }
   }
 
@@ -82,9 +106,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   initTicketForm() {
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl(''),
-      'MainCategory': new FormControl(''),
-      'SubCategory': new FormControl(''),
-      'Topic': new FormControl('', Validators.required),
       'Subject': new FormControl('', Validators.required),
       'TicketType': new FormControl('', Validators.required),
       'Channel': new FormControl('', Validators.required),
@@ -127,12 +148,21 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketForm.controls.Priority.updateValueAndValidity();
   }
 
+  onChangeChannel() {
+    if (this.selectedChannel != null && this.selectedChannel.channelID != null) {
+      this.ticketForm.controls.Channel.setValue(this.selectedChannel);
+    } else {
+      this.ticketForm.controls.Channel.setValue(null);
+    }
+    this.ticketForm.controls.Channel.updateValueAndValidity();
+  }
+
   bindFormToTicket() {
 
     this.ticket.topic = this.selectedTopic;
     this.ticket.subject = this.ticketForm.value.Subject;
     this.ticket.ticketType = this.selectedTicketType.typeID;
-    this.ticket.sourceChannel = this.ticketForm.value.Channel;
+    this.ticket.sourceChannel = this.selectedChannel.channelID;
     this.ticket.priority = this.selectedPriority.priorityValue;
     this.ticket.details = this.ticketForm.value.Details;
 
@@ -174,11 +204,16 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
 
   SaveTicket() {
     console.log('Start Save Ticket');
+    if (this.selectedTopic == null) {
+      this.messageService.add({severity: 'error', summary: 'Failed', detail: 'No Topic Selected'});
+      return;
+    }
     let self = this;
     this.bindFormToTicket();
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
-        this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
+        // this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
+        this.ticket = returnedTicket;
         this.lockAfterSave = true;
       },
       error => {
@@ -200,18 +235,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       console.log(JSON.stringify(this.uploadedFiles));
     });
     this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-
-  }
-
-  searchCustomer() {
-    this.accountsList = [];
-    const searchData: CustomerSearchContainer = {
-      customerBasic: this.ticketForm.value.CustomerBasic, customerEmail: this.ticketForm.value.CustomerEmail
-      , customerMobile: this.ticketForm.value.CustomerMobile
-    };
-    this.accountServices.search(searchData).subscribe(value => {
-      this.accountsList = value;
-    });
 
   }
 
