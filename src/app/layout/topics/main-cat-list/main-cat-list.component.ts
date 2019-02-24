@@ -22,11 +22,11 @@ export class MainCatListComponent extends BasicTopicSelection implements OnInit 
     , public topicService: TopicService, public utils: UtilsService) {
     super(topicService, subCatService, mainCatService, utils);
     this.mainCatCols = [
-      {field: 'id', header: 'ID'},
+      {field: 'id', header: utils.translateService.instant('ID')},
       {field: 'arabicLabel', header: utils.translateService.instant('arabicLabel')},
       {field: 'englishLabel', header: utils.translateService.instant('englishLabel')},
-      {field: 'enabled', header: 'Enabled?'},
-      {field: 'creationDate', header: utils.translateService.instant('creationDate')},
+      {field: 'enabled', header: utils.translateService.instant('enabled')},
+      {field: 'creationdate', header: utils.translateService.instant('creationDate')},
       {field: 'createdBy', header: utils.translateService.instant('createdBy')},
       {field: 'modificationDate', header: utils.translateService.instant('modificationDate')},
       {field: 'modifiedBy', header: utils.translateService.instant('modifiedBy')}];

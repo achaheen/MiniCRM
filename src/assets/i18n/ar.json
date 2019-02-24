@@ -66,6 +66,13 @@
   "EditTicket": "تعديل الطلب",
   "SaveTicket": "حفظ الطلب",
   "apply": "بحث",
-  "clear": "مسح"
+  "clear": "مسح",
+  "ID": "المسلسل",
+  "arabicLabel": "الاسم بالعربية",
+  "englishLabel": "الاسم بالانجليزية",
+  "enabled": "مفعل",
+  "MainCatList": "قائمة الأقسام الرئيسية",
+  "SubCatList": "قائمة الأقسام الفرعية",
+  "TopicList": "قائمة الموضوعات"
 }
 

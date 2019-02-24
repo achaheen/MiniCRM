@@ -59,7 +59,7 @@ export class DyTicketTableComponent implements OnInit {
 
   initDataTable() {
     this.cols = [
-      {field: 'id', header: 'ID'},
+      {field: 'id', header: this.utils.translateService.instant('ID')},
       {field: 'mainCategory', header: this.utils.translateService.instant('MainCat')},
       {field: 'subCategory', header: this.utils.translateService.instant('SubCat')},
       {field: 'topic', header: this.utils.translateService.instant('Topic')},
@@ -71,7 +71,8 @@ export class DyTicketTableComponent implements OnInit {
     ];
 
     this.sortCols = [
-      {field: 'id', header: 'ID'}, {header: this.utils.translateService.instant('MainCat')},
+      {field: 'id', header: this.utils.translateService.instant('ID')},
+      {header: this.utils.translateService.instant('MainCat')},
       {header: this.utils.translateService.instant('SubCat')},
       {field: 'topic', header: this.utils.translateService.instant('Topic')},
       {field: 'currentStatus', header: this.utils.translateService.instant('Status')},

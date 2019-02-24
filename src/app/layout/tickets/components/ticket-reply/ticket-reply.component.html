@@ -55,12 +55,14 @@
       <p-fileUpload name="files" #uploadFile multiple="multiple"
                     (onUpload)="onUploadFiles($event)"
                     auto="true"
+                    [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
+                    [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
                     (uploadHandler)="customUploader($event,uploadFile)"
                     customUpload="true"
-                    accept=".csv,.xml,.tsv,.xlsx,.pdf" maxFileSize="1000000">
+                    accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
         <ng-template pTemplate="content">
           <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size * 0.000001}} bytes</li>
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
           </ul>
         </ng-template>
       </p-fileUpload>

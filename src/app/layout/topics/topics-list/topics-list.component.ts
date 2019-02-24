@@ -26,15 +26,15 @@ export class TopicsListComponent extends BasicTopicSelection implements OnInit {
     , private groupServices: GroupsService, public utils: UtilsService) {
     super(topicService, subCategoryService, mainCatService, utils);
     this.topicCols = [
-      {field: 'id', header: 'ID'},
-      {field: 'mainCategory', header: 'Main Category'},
-      {field: 'subCategory', header: 'Sub Category'},
-      {field: 'topic', header: 'Topic'},
-      {field: 'enabled', header: 'Enabled?'},
-      {field: 'creationDate', header: 'Creation Date'},
-      {field: 'createdBy', header: 'Created By'},
-      {field: 'modificationDate', header: 'Modification Date'},
-      {field: 'modifiedBy', header: 'Modified By'}];
+      {field: 'id', header: utils.translateService.instant('ID')},
+      {field: 'mainCategory', header: utils.translateService.instant('MainCat')},
+      {field: 'subCategory', header: utils.translateService.instant('SubCat')},
+      {field: 'topic', header: utils.translateService.instant('Topic')},
+      {field: 'enabled', header: utils.translateService.instant('enabled')},
+      {field: 'creationDate', header: utils.translateService.instant('creationDate')},
+      {field: 'createdBy', header: utils.translateService.instant('createdBy')},
+      {field: 'modificationDate', header: utils.translateService.instant('modificationDate')},
+      {field: 'modifiedBy', header: utils.translateService.instant('modifiedBy')}];
 
   }
 

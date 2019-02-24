@@ -1,5 +1,5 @@
-<p-accordion>
-  <p-accordionTab header="{{'Search' | translate}}" [selected]="true" class="searchPanel">
+<p-accordion [activeIndex]="activeIndex">
+  <p-accordionTab header="{{'filters' | translate}}">
 
     <app-topics-selection [parent]="this"></app-topics-selection>
 <hr/>
@@ -11,11 +11,26 @@
                       optionLabel="englishLabel"></p-dropdown>
         </td>
         <td class="grid-label">{{'Channel' | translate}}</td>
-        <td class="grid-input"></td>
+        <td class="grid-input">
+          <p-dropdown [options]="utils.channelListSelectItems" [(ngModel)]="ticketSource"
+          ></p-dropdown>
+        </td>
+
         <td class="grid-label">{{'Priority' | translate}}</td>
         <td class="grid-input">
-          <p-dropdown [options]="utils.priorityList" [(ngModel)]="ticketPriority"
-                      optionLabel="priority"></p-dropdown>
+          <p-dropdown [options]="utils.priorityListSelectItems" [(ngModel)]="ticketPriority"
+          ></p-dropdown>
+        </td>
+
+      </tr>
+      <tr>
+        <td class="grid-label">{{'creationDateStart' | translate}}</td>
+        <td class="grid-input">
+          <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="12"></p-calendar>
+        </td>
+        <td class="grid-label">{{'creationDateEnd' | translate}}</td>
+        <td class="grid-input">
+          <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="12"></p-calendar>
         </td>
 
         <td class="grid-label">{{'CustomerSegment' | translate}}</td>
