@@ -6,7 +6,7 @@
       <div class="date">{{reply.creationDate}}</div>
     </div>
     <div class="reply">
-      <div class="replyAction"><span>Action : </span> {{reply.actionID.englishLabel}}</div>
+      <div class="replyAction"><span>{{'Action' | translate }} : </span> {{utils.printLocLabel(reply.actionID)}}</div>
       <div class="replyTitle">{{reply.title}}</div>
       <div class="replyContent"> {{reply.ticketData}} </div>
     </div>

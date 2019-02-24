@@ -48,10 +48,13 @@
             label="{{'changeStatusBTN' | translate}}"></button>
 
   </p-panel>
+
+  <div style="clear:both"></div>
+
 </ng-container>
 <app-create-main-cat *ngIf="enableCreateEditMode" (event)="handleCreateEditEvent($event)" [parent]="this"
                      [item]="selectedMainCategory"></app-create-main-cat>
-
 <app-sub-cat-list #subCatList [parentMainCat]="this"
 
                   [selectedMainCategory]="selectedMainCategory"></app-sub-cat-list>
+<hr/>

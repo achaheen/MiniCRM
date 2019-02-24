@@ -44,15 +44,15 @@
           </div>
 
           <div *ngIf="col.field ==='topic'">
-            {{ticket[col.field].englishLabel}}
+            {{utils.printLocLabel(ticket[col.field]) }}
           </div>
 
           <div *ngIf="col.field ==='mainCategory'">
-            {{ticket['topic'].subCategory.mainCategory.englishLabel}}
+            {{utils.printLocLabel(ticket['topic'].subCategory.mainCategory) }}
           </div>
 
           <div *ngIf="col.field ==='subCategory'">
-            {{ticket['topic'].subCategory.englishLabel}}
+            {{utils.printLocLabel(ticket['topic'].subCategory)}}
           </div>
 
           <div *ngIf="col.field ==='currentStatus'">

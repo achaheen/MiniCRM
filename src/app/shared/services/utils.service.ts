@@ -93,12 +93,12 @@ export class UtilsService {
 
   findStatus(id: number) {
     const status = this.statusList.find(x => x.id == id);
-    return (status != null && status !== undefined ? status.englishLabel : '');
+    return (status != null && status !== undefined ? this.printLocLabel(status): '');
   }
 
   findType(id: number) {
     const type = this.typesList.find(x => x.typeID == id);
-    return (type != null && type !== undefined ? type.englishLabel : '');
+    return (type != null && type !== undefined ? this.printLocLabel(type): '');
   }
 
   findPriority(id: number) {
@@ -119,10 +119,9 @@ export class UtilsService {
     if (labelObj !== undefined && labelObj !== null) {
 
       const lang: string = localStorage.getItem(environment.language);
-
       if (lang === null || lang === '' || lang === 'en') {
 
-        return labelObj.englishLabel;
+       return labelObj.englishLabel;
       } else {
 
         return labelObj.arabicLabel;
