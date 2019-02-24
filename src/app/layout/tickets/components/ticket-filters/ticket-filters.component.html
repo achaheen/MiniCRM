@@ -7,8 +7,8 @@
       <tr>
         <td class="grid-label">{{'TicketType' | translate}}</td>
         <td class="grid-input">
-          <p-dropdown [options]="utils.typesList" [(ngModel)]="ticketType"
-                      optionLabel="englishLabel"></p-dropdown>
+          <p-dropdown [options]="utils.typesListSelectItems" [(ngModel)]="ticketType"
+          ></p-dropdown>
         </td>
         <td class="grid-label">{{'Channel' | translate}}</td>
         <td class="grid-input">

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
 import {UtilsService} from '../../../../shared/services/utils.service';
@@ -17,6 +17,9 @@ import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
 import {environment} from '../../../../../environments/environment';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
+import {AccountServicesService} from '../../../../shared/services/account-services.service';
+import {CustomerSearchContainer, SearchTicketsContainer} from '../../../../shared/model/searchTicketsContainer';
+import {SourceChannel} from '../../../../shared/model/source-channel';
 
 @Component({
   selector: 'app-create-ticket',
@@ -29,25 +32,24 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
-  blocked = true;
   ticketForm: FormGroup;
   maxFileSize = 15000000;
   maxUploadFiles = 10;
   ticketTypeList: Type[];
   // channelList: Channel[];
-  priorityList: Priority[];
 
   selectedMainCategory: MainCategory;
   selectedSubCategory: Subcategory;
   selectedTopic: Topic;
   selectedTicketType: Type;
   selectedPriority: Priority;
-
-
+  selectedChannel: SourceChannel;
+  accountsList: CustomerAccounts[];
+  @Input() selectedAccount: CustomerAccounts;
   uploadedFiles: any[] = [];
   attachments: any[] = [];
 
-  lockAfterSave: boolean = false;
+  lockAfterSave = false;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
@@ -55,7 +57,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
               public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService,
               public topicService: TopicService,
-              public fb: FormBuilder, public fileUploadService: FileUploadService) {
+              public fb: FormBuilder, public fileUploadService: FileUploadService, private accountServices: AccountServicesService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
     this.authorizedTopicsRequest = {permissions: ['create']};
@@ -64,6 +66,37 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   ngOnInit() {
     this.initTicketForm();
     this.initValueLists();
+    if (this.selectedAccount != null) {
+      this.updateCustomerAccountFields();
+    }
+  }
+
+  updateCustomerAccountFields() {
+    if (this.selectedAccount != null) {
+      this.ticketForm.controls['CustomerBasic'].setValue(this.selectedAccount.customerCIF);
+      this.ticketForm.controls['CustomerBasic'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerNameEn'].setValue(this.selectedAccount.customerNameEn);
+      this.ticketForm.controls['CustomerNameEn'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerNameAr'].setValue(this.selectedAccount.customerNameAR);
+      this.ticketForm.controls['CustomerNameAr'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerBranch'].setValue(this.selectedAccount.branchName);
+      this.ticketForm.controls['CustomerBranch'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerMobile'].setValue(this.selectedAccount.mobile);
+      this.ticketForm.controls['CustomerMobile'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerEmail'].setValue(this.selectedAccount.email);
+      this.ticketForm.controls['CustomerEmail'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerSegment'].setValue(this.selectedAccount.segment);
+      this.ticketForm.controls['CustomerSegment'].updateValueAndValidity();
+      /**
+       this.ticketForm.value.CustomerBasic.patchValue(this.selectedAccount.customerCIF);
+       this.ticketForm.value.CustomerNameEn.patchValue(this.selectedAccount.customerNameEn);
+       this.ticketForm.value.CustomerNameAr.patchValue(this.selectedAccount.customerNameAR);
+       this.ticketForm.value.CustomerBranch.patchValue(this.selectedAccount.branchName);
+       this.ticketForm.value.CustomerMobile.patchValue(this.selectedAccount.mobile);
+       this.ticketForm.value.CustomerEmail.patchValue(this.selectedAccount.email);
+       this.ticketForm.value.CustomerSegment.patchValue(this.selectedAccount.segment);
+       */
+    }
   }
 
   initValueLists() {
@@ -73,9 +106,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   initTicketForm() {
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl(''),
-      'MainCategory': new FormControl(''),
-      'SubCategory': new FormControl(''),
-      'Topic': new FormControl('', Validators.required),
       'Subject': new FormControl('', Validators.required),
       'TicketType': new FormControl('', Validators.required),
       'Channel': new FormControl('', Validators.required),
@@ -118,12 +148,21 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketForm.controls.Priority.updateValueAndValidity();
   }
 
+  onChangeChannel() {
+    if (this.selectedChannel != null && this.selectedChannel.channelID != null) {
+      this.ticketForm.controls.Channel.setValue(this.selectedChannel);
+    } else {
+      this.ticketForm.controls.Channel.setValue(null);
+    }
+    this.ticketForm.controls.Channel.updateValueAndValidity();
+  }
+
   bindFormToTicket() {
 
     this.ticket.topic = this.selectedTopic;
     this.ticket.subject = this.ticketForm.value.Subject;
     this.ticket.ticketType = this.selectedTicketType.typeID;
-    this.ticket.sourceChannel = this.ticketForm.value.Channel;
+    this.ticket.sourceChannel = this.selectedChannel.channelID;
     this.ticket.priority = this.selectedPriority.priorityValue;
     this.ticket.details = this.ticketForm.value.Details;
 
@@ -136,6 +175,10 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     customerAccount.mobile = this.ticketForm.value.CustomerMobile;
     customerAccount.email = this.ticketForm.value.CustomerEmail;
     customerAccount.segment = this.ticketForm.value.CustomerSegment;
+
+    if (this.selectedAccount != null) {
+      customerAccount.id = this.selectedAccount.id;
+    }
 
     this.ticket.customerAccount = customerAccount;
     this.ticketHolder.ticket = this.ticket;
@@ -161,11 +204,16 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
 
   SaveTicket() {
     console.log('Start Save Ticket');
+    if (this.selectedTopic == null) {
+      this.messageService.add({severity: 'error', summary: 'Failed', detail: 'No Topic Selected'});
+      return;
+    }
     let self = this;
     this.bindFormToTicket();
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
-        this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
+        // this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
+        this.ticket = returnedTicket;
         this.lockAfterSave = true;
       },
       error => {
@@ -205,7 +253,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
         this.attachments.push(value);
         events.files = [];
         this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-        console.log('attachments ' + this.attachments);
+        // console.log('attachments ' + this.attachments);
         uploadElement.clear();
       }, error1 => {
         this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});

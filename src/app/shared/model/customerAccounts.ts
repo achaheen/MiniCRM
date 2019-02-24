@@ -1,7 +1,6 @@
 import {BasicModelWithIDInt} from './basicModelWithIDInt';
 
 export interface CustomerAccounts extends BasicModelWithIDInt {
-
   customerNameAR?: string;
   customerNameEn?: string;
   email?: string;
@@ -10,6 +9,4 @@ export interface CustomerAccounts extends BasicModelWithIDInt {
   segment?: string;
   customerCIF?: string;
   branchName?: string;
-
-
 }
