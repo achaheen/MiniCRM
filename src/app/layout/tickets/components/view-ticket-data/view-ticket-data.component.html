@@ -1,20 +1,21 @@
-  <div class="replyContainer" *ngFor="let reply of ticketDataList">
 
+  <div class="replyContainer" *ngFor="let reply of ticketDataList">
     <div class="replyPerson">
       <div class="avatar" class="fa fa-address-card fa-3x" aria-hidden="true"></div>
       <div class="person">{{reply.createdBy}}</div>
       <div class="date">{{reply.creationDate}}</div>
-  </div>
-
+    </div>
     <div class="reply">
       <div class="replyAction"><span>Action : </span> {{reply.actionID.englishLabel}}</div>
       <div class="replyTitle">{{reply.title}}</div>
       <div class="replyContent"> {{reply.ticketData}} </div>
     </div>
     <div class="ReplyAttachment">
-    <div class="attachementTitle"> {{'attachments'|translate}}</div>
-        <div class="ReplyattachmentContent">
-          <app-view-attachment [attachmentID]="reply.attachmentsList"></app-view-attachment>
-        </div>
+      <div class="attachementTitle"> {{'attachments'|translate}}</div>
+      <div class="ReplyattachmentContent">
+        <app-view-attachment [attachmentID]="reply.attachmentsList"></app-view-attachment>
+      </div>
     </div>
   </div>
+
+

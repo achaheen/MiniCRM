@@ -12,6 +12,7 @@ import {TicketActions} from '../model/ticketActions';
 import {Ticket} from '../model/ticket';
 import {SelectItem} from 'primeng/api';
 import {SourceChannel} from '../model/source-channel';
+import {GlobalMessageService} from '../../layout/messages/global-message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class UtilsService {
   priorityListSelectItems: SelectItem[] = [];
   channelListSelectItems: SelectItem[] = [];
 
-  constructor(public translateService: TranslateService) {
+  constructor(public translateService: TranslateService, public messageService: GlobalMessageService) {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
     this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as TicketActions[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];

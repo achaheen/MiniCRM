@@ -173,5 +173,14 @@
   "InvalidFileType": "File type is not allowed",
   "Clear": "Clear",
   "AccountsSearchResults": "Accounts Search Results",
-  "SelectAcctBTN": "Select Account"
+  "SelectAcctBTN": "Select Account",
+  "TicketCreatedMsg": "Ticket created with ID {{id}}",
+  "SuccessFullMsg": "Success",
+  "FailureMsg": "Failed!",
+  "FailureMsgWithCode": "Failure! Error {{code}} Occurred",
+  "TicketCreationFailedMsg": "Ticket creation failed with error : {{error}}",
+  "FileUploaded": "File Uploaded",
+  "FileUploadFailed": "File Upload Failed",
+  "MaximumFileReached": "Maximum files reached",
+  "ActionSavedSuccess": "Action Saved"
 }

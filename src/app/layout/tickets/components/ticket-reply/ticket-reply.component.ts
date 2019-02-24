@@ -31,7 +31,6 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
   attachments: any[] = [];
 
   constructor(public utils: UtilsService,
-              public messageService: MessageService,
               public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService,
               public topicService: TopicService,
@@ -57,9 +56,14 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       this.parent.ticket = value;
       this.parent.ticketLock = null;
       this.parent.getAuthorizedActions();
+      this.utils.translateService.get(['SuccessFullMsg', 'ActionSavedSuccess']).subscribe(value1 => {
+        this.utils.messageService.success(value1['SuccessFullMsg'], value1['ActionSavedSuccess']);
+      });
+
       // this.parent.ticketListParent.items.splice(this.parent.ticketListParent.items.indexOf({header: this.parent.ticket.id}), 1);
     }, error1 => {
 
+      this.utils.messageService.printError(error1);
     });
 
   }
@@ -69,13 +73,16 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       this.uploadedFiles.push(file);
       console.log(JSON.stringify(this.uploadedFiles));
     });
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+    this.utils.messageService.success('', 'FileUploaded');
 
   }
+
   customUploader(events, uploadElement) {
     console.log(this.attachments.length + events.files.length);
     if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
+      this.utils.translateService.get(['FileUploadFailed', 'MaximumFileReached']).subscribe(value => {
+        this.utils.messageService.error(value.FileUploadFailed, value.MaximumFileReached);
+      });
       events.files = null;
       uploadElement.clear();
     } else {
@@ -86,11 +93,11 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
         });
         this.attachments.push(value);
         events.files = [];
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+        this.utils.messageService.success('', 'FileUploaded');
         console.log('attachments ' + this.attachments);
         uploadElement.clear();
       }, error1 => {
-        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
+        this.utils.messageService.error('', this.utils.translateService.instant('FileUploadFailed'));
       });
     }
   }
