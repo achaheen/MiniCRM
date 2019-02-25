@@ -43,9 +43,7 @@
 
 
 <p-dialog #editDialog header="{{this.dialogType != 'New' ? 'Update User' : 'Create New User'}}" [(visible)]="display" [style]="{width: '900px'}" *ngIf="selectedUser != null" dismissableMask="true">
-  <p-header [title]="">
-        {{this.disableForEdit}}
-  </p-header>
+  <p-header [title]=""> </p-header>
 
 
 <form [formGroup]="this.userForm" (ngSubmit)="onSubmit()">
@@ -104,7 +102,7 @@
 
 </table>
 
-  <p-fieldset legend="User Roles And Groups" >
+  <p-fieldset legend="User Roles And Groups" id="userRolesFS">
   <table>
   <tr>
      <td class="grid-label">User Roles</td>
@@ -120,9 +118,10 @@
     </td>
   </tr>
   </table>
+    <div id="fieldSetFooter"></div>
   </p-fieldset>
 
-  <div style="float: right">
+  <div class="btnPanel">
         <button type="submit" pButton icon="{{this.dialogType != 'New' ? 'pi pi-pencil' : 'pi pi-user-plus'}}" class="ui-button-rounded"  label="{{this.dialogType != 'New' ? 'Update User' : 'Add User'}}"  [disabled]="!this.userForm.valid"></button>
     </div>
   </form>

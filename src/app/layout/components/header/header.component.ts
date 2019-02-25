@@ -72,7 +72,6 @@ export class HeaderComponent implements OnInit {
   }
 
   changeLang() {
-    console.log("check language is english " + this.defaultLanguage === 'en')
     if(this.defaultLanguage === 'en'){
         this.defaultLanguage = 'ar';
         this.defaultDir = 'rtl';
@@ -86,27 +85,6 @@ export class HeaderComponent implements OnInit {
     this.translate.use(this.defaultLanguage);
     localStorage.setItem('lang',this.defaultLanguage);
 
-    console.log("Direction : " + this.defaultDir);
-    console.log("Language : " + this.defaultLanguage );
-    console.log("Language title : " + this.languageTitle);
-
     this.rltAndLtr();
- //   this.updateLanguage();
   }
-  //
-  // updateLanguage(): void {
-  //
-  //   const lang = document.createAttribute('lang');
-  //   lang.value = this.translate.currentLang;
-  //   this.el.nativeElement.parentElement.parentElement.attributes.setNamedItem(lang);
-  //
-  //   const dir = document.createAttribute('dir');
-  //   if(this.translate.currentLang =='ar'){
-  //     dir.value = 'rtl';
-  //   }else{
-  //     dir.value = 'ltr';
-  //   }
-  //   this.el.nativeElement.parentElement.parentElement.attributes.setNamedItem(dir);
-  //
-  // }
 }
