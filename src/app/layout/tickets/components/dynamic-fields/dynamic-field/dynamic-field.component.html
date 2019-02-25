@@ -1,0 +1,21 @@
+<ng-container [ngSwitch]="field.type">
+
+  <div *ngSwitchCase="1">
+    <div class="p-col">
+      <span>{{field.enableTranslate ? (field.label|translate) : field.label}}</span>
+      <p-dropdown [options]="selections" [(ngModel)]="field.value" [filter]="true" filterBy="label,value"
+                  [autoWidth]="true"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="2">
+    <div class="p-col">
+      <span>{{field.enableTranslate ? (field.label|translate) : field.label}}</span>
+      <input type="text" [minLength]="field.minLen" [maxLength]="field.maxLen" [width]="field.width"
+             pInputText
+             [(ngModel)]="field.value">
+    </div>
+  </div>
+
+</ng-container>

@@ -59,10 +59,8 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       this.utils.translateService.get(['SuccessFullMsg', 'ActionSavedSuccess']).subscribe(value1 => {
         this.utils.messageService.success(value1['SuccessFullMsg'], value1['ActionSavedSuccess']);
       });
-
       // this.parent.ticketListParent.items.splice(this.parent.ticketListParent.items.indexOf({header: this.parent.ticket.id}), 1);
     }, error1 => {
-
       this.utils.messageService.printError(error1);
     });
 

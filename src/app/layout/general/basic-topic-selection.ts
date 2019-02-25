@@ -8,6 +8,7 @@ import {UtilsService} from '../../shared/services/utils.service';
 import {Input} from '@angular/core';
 import {GetAuthorizedTopicsRequest} from '../../shared/model/get-authorized-topics-request';
 import {SelectItem} from 'primeng/api';
+import {Configuration} from '../../shared/model/configuration';
 
 export class BasicTopicSelection {
 
@@ -28,6 +29,8 @@ export class BasicTopicSelection {
 
   @Input() public enableAdminSelection: Boolean = true;
   @Input() public authorizedTopicsRequest: GetAuthorizedTopicsRequest = {permissions: ['read']};
+
+  mainCatConfigurations: Configuration;
 
   public updateTopicList() {
     if (!this.enableAdminSelection) {
@@ -79,11 +82,14 @@ export class BasicTopicSelection {
   }
 
   public updateSubCategory() {
+    if (this.selectedMainCategory != null) {
+      this.getConfigurations('mainCat');
+    }
     if (!this.enableAdminSelection) {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
         this.authorizedTopicsRequest.mainCat = this.selectedMainCategory.id;
 
-        console.log('Request ' + JSON.stringify(this.authorizedTopicsRequest));
+        // console.log('Request ' + JSON.stringify(this.authorizedTopicsRequest));
         this.subCategoryService.authorized(this.authorizedTopicsRequest).subscribe(
           result => {
             this.subCategories = result;
@@ -101,6 +107,7 @@ export class BasicTopicSelection {
       }
     } else {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
+        console.log(JSON.stringify(this.selectedMainCategory));
         this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
           result => {
             this.subCategories = result;
@@ -169,5 +176,16 @@ export class BasicTopicSelection {
     }
   }
 
+  getConfigurations(type) {
+    if (type === 'mainCat') {
+      if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
+        this.mainCatService.getConfiguration(this.selectedMainCategory.id).subscribe(value => {
+          this.mainCatConfigurations = value;
+        });
+      } else {
+        this.mainCatConfigurations = null;
+      }
+    }
+  }
 
 }

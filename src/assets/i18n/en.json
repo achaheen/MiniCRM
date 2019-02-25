@@ -187,5 +187,6 @@
   "FileUploaded": "File Uploaded",
   "FileUploadFailed": "File Upload Failed",
   "MaximumFileReached": "Maximum files reached",
-  "ActionSavedSuccess": "Action Saved"
+  "ActionSavedSuccess": "Action Saved",
+  "Configurations": "Configurations"
 }

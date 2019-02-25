@@ -153,6 +153,14 @@
           </td>
 
         </tr>
+        <tr
+          *ngIf="mainCatConfigurations!=null && mainCatConfigurations.fields!=null ">
+          <td colspan="1">Dynamic Fields</td>
+          <td colspan="7">
+            <app-dynamic-fields   #dynFields
+                                [dynamicListValue]="mainCatConfigurations.fields"></app-dynamic-fields>
+          </td>
+        </tr>
       </ng-container>
     </table>
     <div style="text-align: right;">

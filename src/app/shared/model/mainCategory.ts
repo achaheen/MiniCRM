@@ -7,6 +7,4 @@ export   interface MainCategory extends BasicModelWithIDInt, LabelEnabled {
   enabled?: boolean;
   maincatholidaysList?: MainCatHolidays[];
   subcategoryList?: Subcategory[];
-
-
 }

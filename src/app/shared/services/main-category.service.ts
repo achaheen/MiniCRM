@@ -3,7 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {MainCategory} from '../model/mainCategory';
 import {BasicHttpService} from './basicHttp.service';
-import {Topic} from '../model/topic';
+import {Configuration} from '../model/configuration';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +41,14 @@ export class MainCategoryService extends BasicHttpService {
   //   return this.httpClient.get<MainCategory[]>(this.baseURL + 'authorized');
   // }
   authorized(request) {
-    return this.httpClient.post<Topic[]>(this.baseURLAuthorized + 'mainCats', request);
+    return this.httpClient.post<MainCategory[]>(this.baseURLAuthorized + 'mainCats', request);
   }
+
   changeStatus(mainCat, newStatus) {
     return this.httpClient.get<MainCategory[]>(this.baseURL + `change/${mainCat}/${newStatus}`);
+  }
+
+  getConfiguration(mainCat) {
+    return this.httpClient.get<Configuration>(this.baseURL + 'config/' + mainCat);
   }
 }

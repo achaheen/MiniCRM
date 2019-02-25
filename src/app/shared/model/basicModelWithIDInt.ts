@@ -1,7 +1,9 @@
-import {BasicModel} from "./basicModel";
+import {BasicModel} from './basicModel';
+import {Configuration} from './configuration';
 
-export interface BasicModelWithIDInt extends BasicModel{
+export interface BasicModelWithIDInt extends BasicModel {
 
- id?: number;
+  id?: number;
+  configuration?: any;
 
 }

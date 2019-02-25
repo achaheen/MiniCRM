@@ -7,7 +7,6 @@ import {Ticket} from '../../../../shared/model/ticket';
 import {trigger, state, style, transition, animate} from '@angular/animations';
 import {SearchTicketsSorting} from '../../../../shared/model/searchTicketsSorting';
 import {UtilsService} from '../../../../shared/services/utils.service';
-import {utils} from 'protractor';
 
 
 @Component({
@@ -31,7 +30,7 @@ import {utils} from 'protractor';
 })
 export class DyTicketTableComponent implements OnInit {
 
-  constructor(private utils: UtilsService, private fb: FormBuilder, private messageServie: MessageService, private ticketsService: TicketsService) {
+  constructor(private utils: UtilsService, private fb: FormBuilder, private ticketsService: TicketsService) {
   }
 
   @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
@@ -55,7 +54,6 @@ export class DyTicketTableComponent implements OnInit {
     this.initFormBuilder();
   }
 
-
   initDataTable() {
     this.cols = [
       {field: 'id', header: 'ID'},
@@ -70,12 +68,9 @@ export class DyTicketTableComponent implements OnInit {
       {field: 'creationDate', header: this.utils.translateService.instant('creationDate'), sort: true},
       {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate'), sort: true}
     ];
-
   }
 
-
   initFormBuilder() {
-
     this.ticketForm = this.fb.group({
       'userID': new FormControl('', Validators.required),
       'staffID': new FormControl('', Validators.required),
@@ -90,21 +85,18 @@ export class DyTicketTableComponent implements OnInit {
     });
   }
 
-
   setSelectedTicket(event) {
-
-    console.log('TicketID=' + (this.selectedTicket == null ? null : this.selectedTicket.id));
+    // console.log('TicketID=' + (this.selectedTicket == null ? null : this.selectedTicket.id));
     this.selectTicketEmitter.emit((this.selectedTicket == null ? null : this.selectedTicket.id));
   }
 
   loadCarsLazy(event: LazyLoadEvent) {
-    console.log(JSON.stringify(event));
+    // console.log(JSON.stringify(event));
     const pageNum = (event.first / event.rows);
     this.ticketFilters.page = pageNum;
     const sortField: SearchTicketsSorting = {sortBy: event.sortField, sortType: event.sortOrder};
     this.ticketFilters.sorting = sortField;
     this.eventEmitter.emit(this.ticketFilters);
-
   }
 
 }

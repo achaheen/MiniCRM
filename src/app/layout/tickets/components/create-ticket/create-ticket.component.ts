@@ -1,11 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
 import {UtilsService} from '../../../../shared/services/utils.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MainCategory} from '../../../../shared/model/mainCategory';
-import {Subcategory} from '../../../../shared/model/subcategory';
-import {Topic} from '../../../../shared/model/topic';
 import {MainCategoryService} from '../../../../shared/services/main-category.service';
 import {SubCategoryService} from '../../../../shared/services/sub-category.service';
 import {TopicService} from '../../../../shared/services/topic.service';
@@ -16,6 +13,7 @@ import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {SourceChannel} from '../../../../shared/model/source-channel';
+import {DynamicFieldsComponent} from '../dynamic-fields/dynamic-fields.component';
 
 @Component({
   selector: 'app-create-ticket',
@@ -32,10 +30,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   maxUploadFiles = 10;
   ticketTypeList: Type[];
   // channelList: Channel[];
-
-  selectedMainCategory: MainCategory;
-  selectedSubCategory: Subcategory;
-  selectedTopic: Topic;
   selectedTicketType: Type;
   selectedPriority: Priority;
   selectedChannel: SourceChannel;
@@ -43,6 +37,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   uploadedFiles: any[] = [];
   attachments: any[] = [];
   lockAfterSave = false;
+  @ViewChild('dynFields') dynFieldsComp: DynamicFieldsComponent;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
@@ -58,17 +53,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   ngOnInit() {
     this.initTicketForm();
     this.initValueLists();
-    if (this.selectedAccount != null) {
-      this.updateCustomerAccountFields();
-    }
-
-  }
-
-  messge() {
-    this.utils.messageService.success('value.SuccessFullMsg', 'value.TicketCreatedMsg');
-    this.utils.translateService.get(['SuccessFullMsg', 'TicketCreatedMsg'], {'id': '21212121'}).subscribe(value => {
-      this.utils.messageService.success(value.SuccessFullMsg, value.TicketCreatedMsg);
-    });
+    this.updateCustomerAccountFields();
   }
 
   updateCustomerAccountFields() {
@@ -174,6 +159,11 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
     this.ticketHolder.attachments = this.attachments[0];
+
+    if (this.dynFieldsComp != null) {
+      this.dynFieldsComp.updateFields();
+      this.ticketHolder.extDataList = [this.dynFieldsComp.extData];
+    }
   }
 
   reset() {
@@ -190,6 +180,12 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketForm.updateValueAndValidity();
     this.attachments = [];
     this.uploadedFiles = [];
+    if (this.dynFieldsComp != null) {
+      this.mainCatConfigurations = null;
+      this.dynFieldsComp.clear();
+      this.ticket.ticketExtData = null;
+    }
+    this.updateCustomerAccountFields();
   }
 
   SaveTicket() {
@@ -260,4 +256,12 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       });
     }
   }
+
+  getExtendedFields(event) {
+    if (event != null) {
+      this.ticket.ticketExtData = [event];
+    }
+  }
+
+
 }

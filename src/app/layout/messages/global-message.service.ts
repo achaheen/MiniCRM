@@ -28,22 +28,22 @@ export class GlobalMessageService {
   }
 
   error(header, details) {
+    console.log(header + ' ' + details);
     this.messageSubject.next({closable: true, severity: 'error', summary: header, detail: details});
   }
 
   printError(error) {
     if (error !== null) {
       try {
-        const resCode: ResponseCode = error as ResponseCode;
-        this.error(resCode.code, resCode.msg);
+        const resCode: ResponseCode = error.error as ResponseCode;
+        console.log(JSON.stringify(resCode));
+        this.error(resCode['code'], resCode['msg']);
       } catch (e) {
         this.error('Error', JSON.stringify(error));
       }
     }
   }
-
   getMessage(): Observable<Message> {
     return this.messageSubject.asObservable();
   }
-
 }
