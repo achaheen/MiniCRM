@@ -1,12 +1,11 @@
 <div class="p-grid">
   <ng-container *ngFor="let field of dynamicListValue;let index">
-    <div *ngIf="index%2===0;" class="p-col-4">
+    <div *ngIf="index%2===0;" class="p-col">
       <app-dynamic-field [field]="field"></app-dynamic-field>
     </div>
-
   </ng-container>
   <ng-container *ngFor="let field of dynamicListValue;let index">
-    <div *ngIf="index%2!==0" class="p-col-4">
+    <div *ngIf="index%2!==0" class="p-col">
       <app-dynamic-field [field]="field"></app-dynamic-field>
     </div>
   </ng-container>

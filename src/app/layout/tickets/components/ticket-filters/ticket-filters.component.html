@@ -65,11 +65,11 @@
 
         <td class="grid-label">{{'creationDateStart' | translate}}</td>
         <td class="grid-input">
-          <p-calendar [(ngModel)]="startDate" showTime="true" hourFormat="12"></p-calendar>
+          <p-calendar [(ngModel)]="startDate" hideOnDateTimeSelect="true" showTime="true" hourFormat="12"></p-calendar>
         </td>
         <td class="grid-label">{{'creationDateEnd' | translate}}</td>
         <td class="grid-input">
-          <p-calendar [(ngModel)]="endDate" showTime="true" hourFormat="12"></p-calendar>
+          <p-calendar [(ngModel)]="endDate" hideOnDateTimeSelect="true" showTime="true" hourFormat="12"></p-calendar>
         </td>
       </tr>
 

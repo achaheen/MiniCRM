@@ -83,10 +83,10 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
 
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl(''),
-      'Subject': new FormControl('', Validators.required),
+      'Subject': new FormControl(''),
       'TicketType': new FormControl('', Validators.required),
       'Channel': new FormControl('', Validators.required),
-      'Priority': new FormControl('', Validators.required),
+      'Priority': new FormControl(''),
       'Details': new FormControl('', Validators.required),
       'CustomerBasic': new FormControl(''),
       'CustomerNameEn': new FormControl(''),
@@ -96,15 +96,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       'CustomerBranch': new FormControl(''),
       'CustomerEmail': new FormControl('', Validators.compose([Validators.email]))
     });
-  }
-
-  onChangeTopic() {
-    if (this.selectedTopic != null && this.selectedTopic.id != null) {
-      this.ticketForm.controls.Topic.setValue(this.selectedTopic);
-    } else {
-      this.ticketForm.controls.Topic.setValue(null);
-    }
-    this.ticketForm.controls.Topic.updateValueAndValidity();
   }
 
   onChangeType() {
@@ -142,7 +133,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticket.sourceChannel = this.selectedChannel.channelID;
     this.ticket.priority = this.selectedPriority.priorityValue;
     this.ticket.details = this.ticketForm.value.Details;
-    let customerAccount: CustomerAccounts = {};
+    const customerAccount: CustomerAccounts = {};
     customerAccount.customerCIF = this.ticketForm.value.CustomerBasic;
     customerAccount.customerNameEn = this.ticketForm.value.CustomerNameEn;
     customerAccount.customerNameAR = this.ticketForm.value.CustomerNameAr;
@@ -194,7 +185,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       //// this.messageService.add({severity: 'error', summary: 'Failed', detail: 'No Topic Selected'});
       return;
     }
-    let self = this;
     this.bindFormToTicket();
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
         this.ticket = returnedTicket;
@@ -257,11 +247,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     }
   }
 
-  getExtendedFields(event) {
-    if (event != null) {
-      this.ticket.ticketExtData = [event];
-    }
-  }
+
 
 
 }

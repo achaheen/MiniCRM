@@ -17,5 +17,12 @@
              [(ngModel)]="field.value">
     </div>
   </div>
+  <div *ngSwitchCase="3">
+    <div class="p-col">
 
+      <p-calendar placeholder="{{field.enableTranslate ? (field.label|translate) : field.label}}" [(ngModel)]="field.value" showTime="true" hourFormat="12" hideOnDateTimeSelect="true"
+                  dataType="string"></p-calendar>
+    </div>
+
+  </div>
 </ng-container>

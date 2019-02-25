@@ -19,6 +19,5 @@ export interface Field {
   minLen?: number;
   maxLen?: number;
   value?: any;
-
 }
 
