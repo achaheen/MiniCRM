@@ -8,7 +8,7 @@ import {UtilsService} from '../../shared/services/utils.service';
 import {Input} from '@angular/core';
 import {GetAuthorizedTopicsRequest} from '../../shared/model/get-authorized-topics-request';
 import {SelectItem} from 'primeng/api';
-import {Configuration} from '../../shared/model/configuration';
+import {Configuration, Field} from '../../shared/model/configuration';
 
 export class BasicTopicSelection {
 
@@ -82,9 +82,9 @@ export class BasicTopicSelection {
   }
 
   public updateSubCategory() {
-    /*if (this.selectedMainCategory != null) {
+    if (this.selectedMainCategory != null) {
       this.getConfigurations('mainCat');
-    }*/
+    }
     if (!this.enableAdminSelection) {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
         this.authorizedTopicsRequest.mainCat = this.selectedMainCategory.id;
@@ -175,17 +175,50 @@ export class BasicTopicSelection {
       });
     }
   }
-/*
+
+
   getConfigurations(type) {
     if (type === 'mainCat') {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
-        this.mainCatService.getConfiguration(this.selectedMainCategory.id).subscribe(value => {
-          this.mainCatConfigurations = value;
-        });
+
+        this.mainCatConfigurations = this.selectedMainCategory.configuration;
+        if (this.mainCatConfigurations != null && this.mainCatConfigurations.fields != null) {
+          this.mainCatConfigurations.slicedFields = [[]];
+          if (this.mainCatConfigurations.fields.length <= 4) {
+            this.mainCatConfigurations.slicedFields = [this.mainCatConfigurations.fields];
+          } else {
+            this.mainCatConfigurations.slicedFields = this.chunkArray(this.mainCatConfigurations.fields, 3);
+          }
+        }
+
       } else {
         this.mainCatConfigurations = null;
       }
     }
-  }*/
+  }
+
+  chunkArray(array, chunkSize) {
+    let index;
+    const arrayLength = array.length;
+    const finalArray: [[]] = [[]];
+    for (index = 0; index < arrayLength; index += chunkSize) {
+      let chunk = array.slice(index, index + chunkSize);
+      if (chunk.length < chunkSize) {
+        console.log(`chunk size ${chunkSize} < length ${chunk.length} `);
+        chunk = this.fillArrayOfFields(chunk, chunkSize);
+      }
+      finalArray.push(chunk);
+    }
+
+    return finalArray;
+  }
+
+  fillArrayOfFields(array: Field[], chunkSize) {
+    while (array.length < chunkSize) {
+      array.push({type: -1, mappedField: ''});
+    }
+    console.log(`chunk size now ${chunkSize} equal array length ${array.length}`);
+    return array;
+  }
 
 }

@@ -1,6 +1,7 @@
 export interface Configuration {
   fields?: Field[];
   lockTime?: number;
+  slicedFields?: [Field[]];
 }
 
 
@@ -16,7 +17,7 @@ export interface Field {
   mappedField: string;
   width?: string;
   type: number;
-  options: Option[];
+  options?: Option[];
   minLen?: number;
   maxLen?: number;
   value?: any;

@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Field} from '../../../../shared/model/configuration';
 import {TicketExtData} from '../../../../shared/model/ticketExtData';
-import {SelectItem} from "primeng/api";
+import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'div[app-dynamic-fields]',
@@ -18,7 +18,6 @@ export class DynamicFieldsComponent implements OnInit {
 
   field: Field;
 
-  selections: SelectItem[];
 
   constructor() {
   }
@@ -49,13 +48,16 @@ export class DynamicFieldsComponent implements OnInit {
   }
 
 
-
-  init() {
-    if (this.field != null && this.field.type === 1) {
-      this.selections = [];
-      this.field.options.forEach(opt => {
-        this.selections.push({value: opt.value, label: opt.label});
+  getLabelModel(field) {
+    let selections: SelectItem[];
+    if (field != null && field.type === 1) {
+      selections = [];
+      field.options.forEach(opt => {
+        selections.push({value: opt.value, label: opt.label});
       });
     }
+    return selections;
   }
+
+
 }

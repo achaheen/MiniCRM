@@ -12,148 +12,145 @@
 
       <div class="p-col-12">
 
-      <p-message severity="error" text="{{'Validate-Subject' | translate}}"
-                     *ngIf="!ticketForm.controls['Subject'].valid&&ticketForm.controls['Subject'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-TicketType' | translate}}"
-                     *ngIf="!ticketForm.controls['TicketType'].valid&&ticketForm.controls['TicketType'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-Channel' | translate}}"
-                     *ngIf="!ticketForm.controls['Channel'].valid&&ticketForm.controls['Channel'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-Priority' | translate}}"
-                     *ngIf="!ticketForm.controls['Priority'].valid&&ticketForm.controls['Priority'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-Details' | translate}}"
-                     *ngIf="!ticketForm.controls['Details'].valid&&ticketForm.controls['Details'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerBasic' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerBasic'].valid&&ticketForm.controls['CustomerBasic'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerNameEn' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerNameEn'].valid&&ticketForm.controls['CustomerNameEn'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerNameAr' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerNameAr'].valid&&ticketForm.controls['CustomerNameAr'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerMobile' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerMobile'].valid&&ticketForm.controls['CustomerMobile'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerSegment' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerSegment'].valid&&ticketForm.controls['CustomerSegment'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerBranch' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerBranch'].valid&&ticketForm.controls['CustomerBranch'].dirty"></p-message>
-          <p-message severity="error" text="{{'Validate-CustomerEmail' | translate}}"
-                     *ngIf="!ticketForm.controls['CustomerEmail'].valid&&ticketForm.controls['CustomerEmail'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-Subject' | translate}}"
+                   *ngIf="!ticketForm.controls['Subject'].valid&&ticketForm.controls['Subject'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-TicketType' | translate}}"
+                   *ngIf="!ticketForm.controls['TicketType'].valid&&ticketForm.controls['TicketType'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-Channel' | translate}}"
+                   *ngIf="!ticketForm.controls['Channel'].valid&&ticketForm.controls['Channel'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-Priority' | translate}}"
+                   *ngIf="!ticketForm.controls['Priority'].valid&&ticketForm.controls['Priority'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-Details' | translate}}"
+                   *ngIf="!ticketForm.controls['Details'].valid&&ticketForm.controls['Details'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerBasic' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerBasic'].valid&&ticketForm.controls['CustomerBasic'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerNameEn' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerNameEn'].valid&&ticketForm.controls['CustomerNameEn'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerNameAr' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerNameAr'].valid&&ticketForm.controls['CustomerNameAr'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerMobile' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerMobile'].valid&&ticketForm.controls['CustomerMobile'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerSegment' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerSegment'].valid&&ticketForm.controls['CustomerSegment'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerBranch' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerBranch'].valid&&ticketForm.controls['CustomerBranch'].dirty"></p-message>
+        <p-message severity="error" text="{{'Validate-CustomerEmail' | translate}}"
+                   *ngIf="!ticketForm.controls['CustomerEmail'].valid&&ticketForm.controls['CustomerEmail'].dirty"></p-message>
       </div>
 
     </div>
 
-      <ng-container *ngIf="selectedAccount!=null">
+    <ng-container *ngIf="selectedAccount!=null">
 
-        <div class="p-grid" *ngIf="ticket!=null && ticket.id!=null">
-          <div class="p-col-2 grid-label">{{'TicketID' | translate}}</div>
-          <div class="p-col-2 grid-input"><span>{{ticket.id}}</span></div>
+      <div class="p-grid" *ngIf="ticket!=null && ticket.id!=null">
+        <div class="p-col-2 grid-label">{{'TicketID' | translate}}</div>
+        <div class="p-col-2 grid-input"><span>{{ticket.id}}</span></div>
+      </div>
+
+
+      <app-topics-selection [skipTable]="true" [parent]="this"></app-topics-selection>
+
+
+      <div class="p-grid">
+
+        <div class="p-col grid-label">{{'TicketType' | translate}}</div>
+        <div class="p-col minWidth">
+          <p-dropdown [options]="utils.typesListSelectItems" (onChange)="onChangeType()"
+                      [ngModelOptions]="{standalone: true}"
+                      [required]="true"
+                      [(ngModel)]="selectedTicketType"
+          ></p-dropdown>
         </div>
 
 
-
-         <app-topics-selection [skipTable]="true" [parent]="this"></app-topics-selection>
-
-
-
-        <div class="p-grid">
-
-        <div class="p-col grid-label">{{'TicketType' | translate}}</div>
-          <div class="p-col minWidth">
-            <p-dropdown [options]="utils.typesListSelectItems" (onChange)="onChangeType()"
-                        [ngModelOptions]="{standalone: true}"
-                        [required]="true"
-                        [(ngModel)]="selectedTicketType"
-            ></p-dropdown>
-          </div>
-
-
-
-          <div class="p-col grid-label">{{'Channel' | translate}}</div>
-           <div class="p-col minWidth">
+        <div class="p-col grid-label">{{'Channel' | translate}}</div>
+        <div class="p-col minWidth">
           <p-dropdown [options]="utils.channelListSelectItems" (onChange)="onChangeChannel()"
                       [ngModelOptions]="{standalone: true}"
                       [(ngModel)]="selectedChannel"
           ></p-dropdown>
-           </div>
-          <div class="p-col grid-label">{{'Priority' | translate}}</div>
-          <div class="p-col minWidth">
-            <p-dropdown [options]="utils.priorityListSelectItems" (onChange)="onChangePriority()"
-                        [ngModelOptions]="{standalone: true}"
-                        [(ngModel)]="selectedPriority"
-            ></p-dropdown>
-          </div>
         </div>
-
-
-
-        <div *ngIf="selectedMainCategory!=null && selectedMainCategory.configuration!=null&& selectedMainCategory.configuration.fields!=null">
-
-            <div app-dynamic-fields #dynFields class="p-grid" *ngFor="let fieldArray selectedMainCategory.configuration.fields;"  [dynamicListValue]="selectedMainCategory.configuration.fields"></div>
-          
+        <div class="p-col grid-label">{{'Priority' | translate}}</div>
+        <div class="p-col minWidth">
+          <p-dropdown [options]="utils.priorityListSelectItems" (onChange)="onChangePriority()"
+                      [ngModelOptions]="{standalone: true}"
+                      [(ngModel)]="selectedPriority"
+          ></p-dropdown>
         </div>
-
-          <div class="p-col-2 grid-label">{{'Subject' | translate}}</div>
-          <div class="p-col-2 grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
-                                                    name="subject"
-                                                    formControlName="Subject"></div>
-          <div class="p-col-2 grid-label">{{'Details' | translate}}</div>
-          <div class="p-col-2 grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
-                                                       formControlName="Details"> </textarea></div>
-
-            <hr/>
-
-          <div class="p-col-2 grid-label">{{'CustomerBasic' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
-                                        formControlName="CustomerBasic"></div>
-          <div class="p-col-2 grid-label">{{'CustomerNameEn' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
-                                        formControlName="CustomerNameEn"></div>
-
-          <div class="p-col-2 grid-label">{{'CustomerNameAR' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
-                                        formControlName="CustomerNameAr"></div>
-
-          <div class="p-col-2 grid-label">{{'CustomerMobile' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
-                                        formControlName="CustomerMobile"></div>
-
-          <div class="p-col-2 grid-label">{{'CustomerEmail' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
-                                        formControlName="CustomerEmail"></div>
-
-          <div class="p-col-2 grid-label">{{'CustomerSegment' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
-                                        formControlName="CustomerSegment"></div>
-
-          <div class="p-col-2 grid-label">{{'CustomerBranch' | translate}}</div>
-          <div class="p-col-2 grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
-                                        formControlName="CustomerBranch"></div>
+      </div>
 
 
-            <hr/>
+      <div
+        *ngIf="selectedMainCategory!=null && selectedMainCategory.configuration!=null&& selectedMainCategory.configuration.fields!=null">
 
-          <div class="p-col-2 grid-label">{{'attachments'|translate}}</div>
-          <div class="p-col-2 grid-input" colspan="7">
+        <div app-dynamic-fields #dynFields class="p-grid"
+
+             *ngFor="let fields of selectedMainCategory.configuration.slicedFields"
+             [dynamicListValue]="fields"></div>
+      </div>
+
+      <div class="p-col-2 grid-label">{{'Subject' | translate}}</div>
+      <div class="p-col-2 grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
+                                                         name="subject"
+                                                         formControlName="Subject"></div>
+      <div class="p-col-2 grid-label">{{'Details' | translate}}</div>
+      <div class="p-col-2 grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+                                                            formControlName="Details"> </textarea></div>
+
+      <hr/>
+
+      <div class="p-col-2 grid-label">{{'CustomerBasic' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                             formControlName="CustomerBasic"></div>
+      <div class="p-col-2 grid-label">{{'CustomerNameEn' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
+                                             formControlName="CustomerNameEn"></div>
+
+      <div class="p-col-2 grid-label">{{'CustomerNameAR' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
+                                             formControlName="CustomerNameAr"></div>
+
+      <div class="p-col-2 grid-label">{{'CustomerMobile' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                             formControlName="CustomerMobile"></div>
+
+      <div class="p-col-2 grid-label">{{'CustomerEmail' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                             formControlName="CustomerEmail"></div>
+
+      <div class="p-col-2 grid-label">{{'CustomerSegment' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+                                             formControlName="CustomerSegment"></div>
+
+      <div class="p-col-2 grid-label">{{'CustomerBranch' | translate}}</div>
+      <div class="p-col-2 grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
+                                             formControlName="CustomerBranch"></div>
 
 
-            <p-fileUpload name="files" #uploadFile multiple="multiple"
-                          (onUpload)="onUploadFiles($event)"
-                          auto="true"
-                          [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
-                          [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
-                          (uploadHandler)="customUploader($event,uploadFile)"
-                          customUpload="true"
-                          accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
-              <ng-template pTemplate="content">
-                <ul *ngIf="uploadedFiles.length">
-                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
-                </ul>
-              </ng-template>
-            </p-fileUpload>
+      <hr/>
 
-          </div>
-
-      </ng-container>
+      <div class="p-col-2 grid-label">{{'attachments'|translate}}</div>
+      <div class="p-col-2 grid-input" colspan="7">
 
 
+        <p-fileUpload name="files" #uploadFile multiple="multiple"
+                      (onUpload)="onUploadFiles($event)"
+                      auto="true"
+                      [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
+                      [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
+                      (uploadHandler)="customUploader($event,uploadFile)"
+                      customUpload="true"
+                      accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+
+      </div>
+
+    </ng-container>
 
 
     <div style="text-align: right;">
