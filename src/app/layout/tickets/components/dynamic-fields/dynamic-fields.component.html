@@ -1,0 +1,29 @@
+<div class="p-grid">
+  <ng-container *ngFor="let field of dynamicListValue;let index">
+    <div *ngIf="index%2===0;" class="p-col">
+      <app-dynamic-field [field]="field"></app-dynamic-field>
+    </div>
+  </ng-container>
+  <ng-container *ngFor="let field of dynamicListValue;let index">
+    <div *ngIf="index%2!==0" class="p-col">
+      <app-dynamic-field [field]="field"></app-dynamic-field>
+    </div>
+  </ng-container>
+
+</div>
+<!--div class="p-grid">
+  <div class="p-col">
+    <p-button type="button" label="{{'save' | translate}}" (onClick)="updateFields()"></p-button>
+    <p-button type="button" label="{{'clear' | translate}}" (onClick)="clear()"></p-button>
+  </div>
+
+</div -->
+<!--ng-container *ngFor="let field of dynamicListValue;let index">
+  <div *ngIf="index%2==0; then odd else even"></div>
+  <ng-template #odd>
+    <app-dynamic-field [field]="field"></app-dynamic-field>
+  </ng-template>
+  <ng-template #even>
+    <app-dynamic-field [field]="field"></app-dynamic-field>
+  </ng-template>
+</ng-container -->

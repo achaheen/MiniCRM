@@ -45,7 +45,6 @@ export class GlobalMessageService {
   printLocalizedMessage(header, value, utils: UtilsService, messageType?, params?) {
       utils.translateService.get([header, value], params).subscribe(v => {
 
-          console.log("Message  2  :" + JSON.stringify(v))
           const headerMessage = v[header];
           const details = v[value];
       if (messageType === undefined || messageType === null || messageType === '' || messageType === 'success') {

@@ -44,12 +44,14 @@ import {TopicsSelectionModule} from '../topics-selection/topics-selection.module
 import {TopicspermissionsModule} from '../topicspermissions/topicspermissions.module';
 import {SearchCustomerComponent} from './components/create-ticket/search-customer/search-customer.component';
 import {TicketingMessagesModule} from '../messages/messages.module';
+import { DynamicFieldsComponent } from './components/dynamic-fields/dynamic-fields.component';
+import { DynamicFieldComponent } from './components/dynamic-fields/dynamic-field/dynamic-field.component';
 
 @NgModule({
   providers: [],
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
     CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
-    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent],
+    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent, DynamicFieldsComponent, DynamicFieldComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,

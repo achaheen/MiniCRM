@@ -1,0 +1,12 @@
+<h5 class="first">{{'arabicLabel'|translate}}</h5>
+<input id="arabicLabel" type="text" size="150" pInputText [(ngModel)]="item.arabicLabel">
+<h5 class="first">{{'englishLabel'|translate}}</h5>
+<input id="englishLabel" type="text" size="150" pInputText [(ngModel)]="item.englishLabel">
+<ng-container *ngIf="item.id!=null">
+  <h5 class="first">{{'Status'|translate}}</h5>
+  <p-checkbox binary="true" [(ngModel)]="item.enabled"></p-checkbox>
+</ng-container>
+<ng-container *ngIf="!(item.mainCategory!==undefined && item.mainCategory!=null)">
+  <h5 class="first">{{'Configurations'|translate}}</h5>
+  <textarea [(ngModel)]="item.configuration" [rows]="3" [cols]="100" pInputTextarea></textarea></ng-container>
+

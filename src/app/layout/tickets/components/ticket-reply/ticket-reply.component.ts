@@ -56,12 +56,10 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       this.parent.ticket = value;
       this.parent.ticketLock = null;
       this.parent.getAuthorizedActions();
-        this.utils.translateService.get(['SuccessFullMsg', 'ActionSavedSuccess']).subscribe(value1 => {
+      this.utils.translateService.get(['SuccessFullMsg', 'ActionSavedSuccess']).subscribe(value1 => {
         this.utils.messageService.success(value1['SuccessFullMsg'], value1['ActionSavedSuccess']);
       });
-
     }, error1 => {
-
       this.utils.messageService.printError(error1);
     });
 
@@ -73,7 +71,6 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       console.log(JSON.stringify(this.uploadedFiles));
     });
     this.utils.messageService.success('', 'FileUploaded');
-
   }
 
   customUploader(events, uploadElement) {

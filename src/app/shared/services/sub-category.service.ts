@@ -32,7 +32,7 @@ export class SubCategoryService extends BasicHttpService {
   }
 
   authorized(request) {
-    return this.httpClient.post<Topic[]>(this.baseURLAuthorized + 'subCats', request);
+    return this.httpClient.post<Subcategory[]>(this.baseURLAuthorized + 'subCats', request);
   }
 
  /* authorized(parent) {
