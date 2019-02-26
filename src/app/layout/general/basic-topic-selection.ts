@@ -82,9 +82,9 @@ export class BasicTopicSelection {
   }
 
   public updateSubCategory() {
-    if (this.selectedMainCategory != null) {
+    /*if (this.selectedMainCategory != null) {
       this.getConfigurations('mainCat');
-    }
+    }*/
     if (!this.enableAdminSelection) {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
         this.authorizedTopicsRequest.mainCat = this.selectedMainCategory.id;
@@ -175,7 +175,7 @@ export class BasicTopicSelection {
       });
     }
   }
-
+/*
   getConfigurations(type) {
     if (type === 'mainCat') {
       if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
@@ -186,6 +186,6 @@ export class BasicTopicSelection {
         this.mainCatConfigurations = null;
       }
     }
-  }
+  }*/
 
 }

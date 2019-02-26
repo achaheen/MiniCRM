@@ -76,15 +76,14 @@
           </td>
         </tr>
         <tr
-          *ngIf="mainCatConfigurations!=null && mainCatConfigurations.fields!=null ">
+          *ngIf="selectedMainCategory!=null && selectedMainCategory.configuration!=null&& selectedMainCategory.configuration.fields!=null ">
           <td colspan="1">Dynamic Fields</td>
           <td colspan="7">
             <app-dynamic-fields #dynFields
-                                [dynamicListValue]="mainCatConfigurations.fields"></app-dynamic-fields>
+                                [dynamicListValue]="selectedMainCategory.configuration.fields"></app-dynamic-fields>
           </td>
         </tr>
         <tr>
-
           <td class="grid-label">{{'Subject' | translate}}</td>
           <td class="grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
                                                     name="subject"

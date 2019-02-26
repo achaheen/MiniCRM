@@ -45,22 +45,23 @@ export class CreateTopicComponent extends BasicTopicSelection implements OnInit 
       return;
     }
     this.item.subCategory = this.selectedSubCategory;
-    this.item.configuration = '{"lockTime":10}';
+    this.item.configuration = {lockTime: 10};
+
 
     if (this.item.id != null) {
       this.topicService.edit(this.item).subscribe(value => {
         this.fireEvent(value);
-        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','EditTopicSuccess',this.utils,'success');
-      },error1 => {
-        this.utils.messageService.printLocalizedMessage('FailureMsg','EditTopicFailed',this.utils,'error');
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'EditTopicSuccess', this.utils, 'success');
+      }, error1 => {
+        this.utils.messageService.printLocalizedMessage('FailureMsg', 'EditTopicFailed', this.utils, 'error');
         this.utils.messageService.printError(error1);
       });
     } else {
       this.topicService.create(this.item).subscribe(value => {
         this.fireEvent(value);
-        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','CreateTopicSuccess',this.utils,'success');
-      },error1 => {
-        this.utils.messageService.printLocalizedMessage('FailureMsg','CreateTopicFailed',this.utils,'error');
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'CreateTopicSuccess', this.utils, 'success');
+      }, error1 => {
+        this.utils.messageService.printLocalizedMessage('FailureMsg', 'CreateTopicFailed', this.utils, 'error');
         this.utils.messageService.printError(error1);
       });
     }

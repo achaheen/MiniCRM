@@ -4,6 +4,6 @@ import {Configuration} from './configuration';
 export interface BasicModelWithIDInt extends BasicModel {
 
   id?: number;
-  configuration?: any;
+  configuration?: Configuration;
 
 }

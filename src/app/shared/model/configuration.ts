@@ -1,5 +1,6 @@
 export interface Configuration {
-  fields: Field[];
+  fields?: Field[];
+  lockTime?: number;
 }
 
 

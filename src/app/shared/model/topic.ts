@@ -8,7 +8,6 @@ import {Subcategory} from './subcategory';
 import {LabelEnabled} from './label-enabled';
 
 export interface Topic extends BasicModelWithIDInt, LabelEnabled {
-  configuration?: string;
   enabled?: boolean;
   principals?: string;
   topicspermissionsList?: TopicsPermissions[];
