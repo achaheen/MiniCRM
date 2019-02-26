@@ -3,7 +3,7 @@ import {Field} from '../../../../../shared/model/configuration';
 import {SelectItem} from 'primeng/api';
 
 @Component({
-  selector: 'app-dynamic-field',
+  selector: 'div[app-dynamic-field]',
   templateUrl: './dynamic-field.component.html',
   styleUrls: ['./dynamic-field.component.scss']
 })

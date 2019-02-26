@@ -8,11 +8,11 @@
 <ng-container *ngIf="selectedAccount!=null">
 
   <form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()">
-    <table class="ticketFormTb" *ngIf="ticket">
+    <div class="p-grid" *ngIf="ticket">
 
-      <tr>
-        <td colspan="8">
-          <p-message severity="error" text="{{'Validate-Subject' | translate}}"
+      <div class="p-col-12">
+
+      <p-message severity="error" text="{{'Validate-Subject' | translate}}"
                      *ngIf="!ticketForm.controls['Subject'].valid&&ticketForm.controls['Subject'].dirty"></p-message>
           <p-message severity="error" text="{{'Validate-TicketType' | translate}}"
                      *ngIf="!ticketForm.controls['TicketType'].valid&&ticketForm.controls['TicketType'].dirty"></p-message>
@@ -36,107 +36,102 @@
                      *ngIf="!ticketForm.controls['CustomerBranch'].valid&&ticketForm.controls['CustomerBranch'].dirty"></p-message>
           <p-message severity="error" text="{{'Validate-CustomerEmail' | translate}}"
                      *ngIf="!ticketForm.controls['CustomerEmail'].valid&&ticketForm.controls['CustomerEmail'].dirty"></p-message>
-        </td>
-      </tr>
-      <ng-container>
+      </div>
 
-      </ng-container>
+    </div>
+
       <ng-container *ngIf="selectedAccount!=null">
-        <tr *ngIf="ticket!=null && ticket.id!=null">
-          <td colSpan="2" class="grid-label">{{'TicketID' | translate}}</td>
-          <td colSpan="6" class="grid-input"><span>{{ticket.id}}</span></td>
-        </tr>
-        <tr>
-          <td colspan="8">
-            <app-topics-selection [skipTable]="false" [parent]="this"></app-topics-selection>
-          </td>
-        </tr>
 
-        <tr>
-          <td class="grid-label">{{'TicketType' | translate}}</td>
-          <td class="grid-input">
+        <div class="p-grid" *ngIf="ticket!=null && ticket.id!=null">
+          <div class="p-col-2 grid-label">{{'TicketID' | translate}}</div>
+          <div class="p-col-2 grid-input"><span>{{ticket.id}}</span></div>
+        </div>
+
+
+
+         <app-topics-selection [skipTable]="true" [parent]="this"></app-topics-selection>
+
+
+
+        <div class="p-grid">
+
+        <div class="p-col grid-label">{{'TicketType' | translate}}</div>
+          <div class="p-col minWidth">
             <p-dropdown [options]="utils.typesListSelectItems" (onChange)="onChangeType()"
                         [ngModelOptions]="{standalone: true}"
                         [required]="true"
                         [(ngModel)]="selectedTicketType"
             ></p-dropdown>
-          </td>
-          <td class="grid-label">{{'Channel' | translate}}</td>
+          </div>
 
+
+
+          <div class="p-col grid-label">{{'Channel' | translate}}</div>
+           <div class="p-col minWidth">
           <p-dropdown [options]="utils.channelListSelectItems" (onChange)="onChangeChannel()"
                       [ngModelOptions]="{standalone: true}"
                       [(ngModel)]="selectedChannel"
           ></p-dropdown>
-          <td class="grid-label">{{'Priority' | translate}}</td>
-          <td class="grid-input">
+           </div>
+          <div class="p-col grid-label">{{'Priority' | translate}}</div>
+          <div class="p-col minWidth">
             <p-dropdown [options]="utils.priorityListSelectItems" (onChange)="onChangePriority()"
                         [ngModelOptions]="{standalone: true}"
                         [(ngModel)]="selectedPriority"
             ></p-dropdown>
-          </td>
-        </tr>
-        <tr
-          *ngIf="selectedMainCategory!=null && selectedMainCategory.configuration!=null&& selectedMainCategory.configuration.fields!=null ">
-          <td colspan="1">Dynamic Fields</td>
-          <td colspan="7">
-            <app-dynamic-fields #dynFields
-                                [dynamicListValue]="selectedMainCategory.configuration.fields"></app-dynamic-fields>
-          </td>
-        </tr>
-        <tr>
-          <td class="grid-label">{{'Subject' | translate}}</td>
-          <td class="grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
+          </div>
+        </div>
+
+
+
+        <div *ngIf="selectedMainCategory!=null && selectedMainCategory.configuration!=null&& selectedMainCategory.configuration.fields!=null">
+
+            <div app-dynamic-fields #dynFields class="p-grid" *ngFor="let fieldArray selectedMainCategory.configuration.fields;"  [dynamicListValue]="selectedMainCategory.configuration.fields"></div>
+          
+        </div>
+
+          <div class="p-col-2 grid-label">{{'Subject' | translate}}</div>
+          <div class="p-col-2 grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
                                                     name="subject"
-                                                    formControlName="Subject"></td>
-        </tr>
-        <tr>
-          <td class="grid-label">{{'Details' | translate}}</td>
-          <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
-                                                       formControlName="Details"> </textarea></td>
-        </tr>
-        <tr>
-          <td colspan="8">
+                                                    formControlName="Subject"></div>
+          <div class="p-col-2 grid-label">{{'Details' | translate}}</div>
+          <div class="p-col-2 grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+                                                       formControlName="Details"> </textarea></div>
+
             <hr/>
-          </td>
-        </tr>
-        <tr>
-          <td class="grid-label">{{'CustomerBasic' | translate}}</td>
-          <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
-                                        formControlName="CustomerBasic"></td>
-          <td class="grid-label">{{'CustomerNameEn' | translate}}</td>
-          <td class="grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
-                                        formControlName="CustomerNameEn"></td>
 
-          <td class="grid-label">{{'CustomerNameAR' | translate}}</td>
-          <td class="grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
-                                        formControlName="CustomerNameAr"></td>
+          <div class="p-col-2 grid-label">{{'CustomerBasic' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                        formControlName="CustomerBasic"></div>
+          <div class="p-col-2 grid-label">{{'CustomerNameEn' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
+                                        formControlName="CustomerNameEn"></div>
 
-          <td class="grid-label">{{'CustomerMobile' | translate}}</td>
-          <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
-                                        formControlName="CustomerMobile"></td>
-        </tr>
-        <tr>
-          <td class="grid-label">{{'CustomerEmail' | translate}}</td>
-          <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
-                                        formControlName="CustomerEmail"></td>
+          <div class="p-col-2 grid-label">{{'CustomerNameAR' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
+                                        formControlName="CustomerNameAr"></div>
 
-          <td class="grid-label">{{'CustomerSegment' | translate}}</td>
-          <td class="grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
-                                        formControlName="CustomerSegment"></td>
+          <div class="p-col-2 grid-label">{{'CustomerMobile' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                        formControlName="CustomerMobile"></div>
 
-          <td class="grid-label">{{'CustomerBranch' | translate}}</td>
-          <td class="grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
-                                        formControlName="CustomerBranch"></td>
+          <div class="p-col-2 grid-label">{{'CustomerEmail' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                        formControlName="CustomerEmail"></div>
 
-        </tr>
-        <tr>
-          <td colspan="8">
+          <div class="p-col-2 grid-label">{{'CustomerSegment' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+                                        formControlName="CustomerSegment"></div>
+
+          <div class="p-col-2 grid-label">{{'CustomerBranch' | translate}}</div>
+          <div class="p-col-2 grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
+                                        formControlName="CustomerBranch"></div>
+
+
             <hr/>
-          </td>
-        </tr>
-        <tr>
-          <td class="grid-label">{{'attachments'|translate}}</td>
-          <td class="grid-input" colspan="7">
+
+          <div class="p-col-2 grid-label">{{'attachments'|translate}}</div>
+          <div class="p-col-2 grid-input" colspan="7">
 
 
             <p-fileUpload name="files" #uploadFile multiple="multiple"
@@ -154,11 +149,13 @@
               </ng-template>
             </p-fileUpload>
 
-          </td>
+          </div>
 
-        </tr>
       </ng-container>
-    </table>
+
+
+
+
     <div style="text-align: right;">
       <button type="submit" pButton icon="pi pi-user-plus" class="ui-button-rounded"
               label="{{'SaveTicket' | translate}}"

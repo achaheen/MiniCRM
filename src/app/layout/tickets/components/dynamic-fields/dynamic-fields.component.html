@@ -1,17 +1,30 @@
-<div class="p-grid">
-  <ng-container *ngFor="let field of dynamicListValue;let index">
-    <div *ngIf="index%2===0;" class="p-col">
-      <app-dynamic-field [field]="field"></app-dynamic-field>
-    </div>
-  </ng-container>
-  <ng-container *ngFor="let field of dynamicListValue;let index">
-    <div *ngIf="index%2!==0" class="p-col">
-      <app-dynamic-field [field]="field"></app-dynamic-field>
-    </div>
+
+      <!--<div app-dynamic-field class="p-col" *ngFor="let field of dynamicListValue;let index" [field]="field"></div>-->
+
+  <ng-container *ngFor="let field of dynamicListValue;let index" >
+
+      <div  *ngIf="field.type === 10" class="p-col grid-label"> {{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+      <div  *ngIf="field.type === 10" class=" p-col minWidth">
+        <p-dropdown [options]="selections" [(ngModel)]="field.value" [filter]="true" filterBy="label,value"
+                    [autoWidth]="true"></p-dropdown>
+      </div>
+
+      <div *ngIf="field.type === 2" class="p-col grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+      <div  *ngIf="field.type === 2" class=" p-col minWidth">
+        <input type="text" [minLength]="field.minLen" [maxLength]="field.maxLen" [width]="field.width"
+               pInputText
+               [(ngModel)]="field.value">
+      </div>
+
+      <div *ngIf="field.type === 3" class="p-col grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+      <div *ngIf="field.type === 3" class=" p-col minWidth">
+        <p-calendar  [(ngModel)]="field.value" showTime="true" hourFormat="12" hideOnDateTimeSelect="true"
+                     dataType="string"></p-calendar>
+      </div>
+
   </ng-container>
 
-</div>
-<!--div class="p-grid">
+      <!--div class="p-grid">
   <div class="p-col">
     <p-button type="button" label="{{'save' | translate}}" (onClick)="updateFields()"></p-button>
     <p-button type="button" label="{{'clear' | translate}}" (onClick)="clear()"></p-button>
