@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Message, MessageService} from 'primeng/api';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Message} from 'primeng/api';
 import {GlobalMessageService} from './global-message.service';
 import {Subscription} from 'rxjs';
 
@@ -23,11 +23,13 @@ export class TicketMessagesComponent implements OnInit, OnDestroy {
   }
 
   subscribeOnNotification() {
-    console.log('Subscribe');
     this.subscription = this.messageService.getMessage().subscribe(value => {
       console.log(`message received ${JSON.stringify(value)}`);
       this.msgs = [];
       this.msgs.push(value);
+      setTimeout(() => {
+        this.msgs = [];
+      }, 10000);
     });
   }
 
