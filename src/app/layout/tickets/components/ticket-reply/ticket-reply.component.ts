@@ -59,7 +59,6 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       this.utils.translateService.get(['SuccessFullMsg', 'ActionSavedSuccess']).subscribe(value1 => {
         this.utils.messageService.success(value1['SuccessFullMsg'], value1['ActionSavedSuccess']);
       });
-      // this.parent.ticketListParent.items.splice(this.parent.ticketListParent.items.indexOf({header: this.parent.ticket.id}), 1);
     }, error1 => {
       this.utils.messageService.printError(error1);
     });
@@ -72,7 +71,6 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       console.log(JSON.stringify(this.uploadedFiles));
     });
     this.utils.messageService.success('', 'FileUploaded');
-
   }
 
   customUploader(events, uploadElement) {
@@ -99,27 +97,4 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       });
     }
   }
-
-
-  /*customUploader(events, uploadElement) {
-    if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
-      events.files = null;
-      uploadElement.clear();
-    } else {
-      this.fileUploadService.uploadFiles(events.files).subscribe(value => {
-        events.files.forEach(file => {
-          this.uploadedFiles.push(file);
-          console.log(JSON.stringify(this.uploadedFiles));
-        });
-        this.attachments.push(value);
-        events.files = [];
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-        console.log('attachments ' + this.attachments);
-        uploadElement.clear();
-      }, error1 => {
-        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: ''});
-      });
-    }
-  }*/
 }

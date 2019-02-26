@@ -56,7 +56,7 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
     if (this.filterType === 'mainCat') {
       console.log('filtering by cats');
       if (this.selectedTopic != null && this.selectedTopic.id != null) {
-        this.topicPermissionService.getTopicPermissions(this.selectedTopic.id).subscribe(value => {
+          this.topicPermissionService.getTopicPermissions(this.selectedTopic.id).subscribe(value => {
           this.permissionsList = value;
         });
       } else if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
@@ -74,6 +74,7 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
         this.topicPermissionService.getUserPermissions(this.selectedUser.id).subscribe(value => {
           this.permissionsList = value;
         }, error1 => {
+          this.utils.messageService.error('', this.utils.translateService.instant('FailureMsg'));
           console.log(error1);
         });
       }
@@ -82,6 +83,7 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
         this.topicPermissionService.getGroupPermissions(this.selectedGroup.id).subscribe(value => {
           this.permissionsList = value;
         }, error1 => {
+          this.utils.messageService.error('', this.utils.translateService.instant('FailureMsg'));
           console.log(error1);
         });
       }
@@ -92,10 +94,11 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
     if (this.viewPermComponent.selectedPermissionsList != null && this.viewPermComponent.selectedPermissionsList.length > 0) {
 
       this.topicPermissionService.modify(this.viewPermComponent.selectedPermissionsList).subscribe(value => {
-        console.log(JSON.stringify(value));
         this.applyFilter();
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','UpdatePermSuccess',this.utils,'success');
       }, error1 => {
-        console.log(JSON.stringify(error1));
+        this.utils.messageService.printLocalizedMessage('FailureMsg','UpdatePermFailed',this.utils,'error');
+        this.utils.messageService.printError(error1);
       });
     }
   }
@@ -106,8 +109,10 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
         console.log(JSON.stringify(value));
         this.viewPermComponent.selectedPermissionsList = null;
         this.applyFilter();
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','DeletePermSuccess',this.utils,'success');
       }, error1 => {
-        console.log(JSON.stringify(error1));
+        this.utils.messageService.printLocalizedMessage('FailureMsg','DeletePermFailed',this.utils,'error');
+        this.utils.messageService.printError(error1);
       });
     }
   }

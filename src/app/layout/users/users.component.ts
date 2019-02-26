@@ -8,6 +8,7 @@ import {Role} from '../../shared/model/role';
 import {RolesService} from '../../shared/services/roles.service';
 import {Group} from '../../shared/model/group';
 import {GroupsService} from '../../shared/services/groups.service';
+import {UtilsService} from "../../shared/services/utils.service";
 
 @Component({
   selector: 'app-users',
@@ -162,12 +163,12 @@ export class UsersComponent implements OnInit {
       this.userService.edit(this.userHolder).subscribe(
         returnedUser => {
           this.display = false;
-          this.messageService.add({severity: 'info', summary: 'Success', detail: 'User Updated Successfully'});
+          this.utils.messageService.printLocalizedMessage('SuccessFullMsg','UpdateUserSuccess',this.utils,'success');
         }
         , error => {
           // can't create user
-          console.error('Creation Failed !' + error.error.msg);
-          this.messageService.add({severity: 'error', summary: 'Failed', detail: error.error.msg});
+          this.utils.messageService.printLocalizedMessage('FailureMsg','UpdateUserFailed',this.utils,'error');
+          this.utils.messageService.printError(error);
           this.display = true;
         });
     } else {
@@ -175,12 +176,12 @@ export class UsersComponent implements OnInit {
         .subscribe(returnedUser => {
           this.users.unshift(returnedUser);
             this.display = false;
-            this.messageService.add({severity: 'info', summary: 'Success', detail: 'User Created Successfully'});
+            this.utils.messageService.printLocalizedMessage('SuccessFullMsg','CreateUserSuccess',this.utils,'success');
           }
           , error => {
             // can't create user
-            console.error('Creation Failed !' + error.error.msg);
-            this.messageService.add({severity: 'error', summary: 'Failed', detail: error.error.msg});
+            this.utils.messageService.printLocalizedMessage('FailureMsg','CreateUserFailed',this.utils,'error');
+            this.utils.messageService.printError(error);
             this.display = true;
           });
     }
@@ -266,7 +267,7 @@ export class UsersComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder, private userService: UsersService,
-              private messageService: MessageService, private rolesService: RolesService, private groupsService: GroupsService) {
+              private messageService: MessageService, private rolesService: RolesService, private groupsService: GroupsService,public utils : UtilsService) {
   }
 
 }

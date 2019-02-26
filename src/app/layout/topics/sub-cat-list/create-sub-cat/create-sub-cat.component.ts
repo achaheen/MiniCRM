@@ -48,10 +48,20 @@ export class CreateSubCatComponent extends BasicTopicSelection implements OnInit
     if (this.item.id != null) {
       this.subCategoryService.edit(this.item).subscribe(value => {
         this.fireEvent(value);
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','EditSubCatSuccess',this.utils,'success');
+      },error1 => {
+
+        this.utils.messageService.printLocalizedMessage('FailureMsg','EditSubCatFailed',this.utils,'error');
+        this.utils.messageService.printError(error1);
       });
     } else {
       this.subCategoryService.create(this.item).subscribe(value => {
         this.fireEvent(value);
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','CreateSubCatSuccess',this.utils,'success');
+      },error1 => {
+        
+        this.utils.messageService.printLocalizedMessage('FailureMsg','CreateSubCatFailed',this.utils,'error');
+        this.utils.messageService.printError(error1);
       });
     }
   }

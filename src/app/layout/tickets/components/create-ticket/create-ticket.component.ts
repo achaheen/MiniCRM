@@ -225,7 +225,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   customUploader(events, uploadElement) {
     console.log(this.attachments.length + events.files.length);
     if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
-      ////  this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
       events.files = null;
       uploadElement.clear();
     } else {
@@ -237,11 +236,8 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
         this.attachments.push(value);
         events.files = [];
         this.utils.messageService.success('', this.utils.translateService.instant('FileUploaded'));
-        ////  this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-        // console.log('attachments ' + this.attachments);
         uploadElement.clear();
       }, error1 => {
-        //// this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
         this.utils.messageService.error('', this.utils.translateService.instant('FileUploadFailed'));
       });
     }

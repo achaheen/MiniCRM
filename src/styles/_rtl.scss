@@ -1,5 +1,14 @@
 .rtl {
+  .ui-listbox .ui-chkbox{
+    margin: 0 0 0 0.5em !important;
+  }
+  .ui-listbox .ui-listbox-list .ui-listbox-item .ui-chkbox {
+    margin: 0 0 0 0.5em !important;
+  }
 
+  .loginContent, .loginBTN{
+    text-align: center !important;
+  }
    .ui-submenu-list {
     left: initial!important;
    }

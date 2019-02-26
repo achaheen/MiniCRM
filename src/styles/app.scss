@@ -102,7 +102,7 @@ table.formTB input{
 
 div.ui-listbox{
   width: 265px !important;
-  height: 160px !important;
+  //height: 160px !important;
 }
 
 .ui-fieldset legend{
@@ -412,4 +412,25 @@ table.searchTable td {
   outline: 0!important;
   cursor: pointer!important;
   font-weight: bold !important;
+}
+
+button.btn.btn-primary.loginBTN:hover {
+  border: solid 1px #cae9ff!important;
+}
+
+#userRolesFS table td{
+  vertical-align: text-top;
+}
+
+.Center-Container {
+  position: relative;
+  height: 100%;
+}
+
+.Absolute-Center {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
