@@ -179,5 +179,44 @@
   "creationDateEnd" : "To Date",
   "AccountsSearchResults": "Accounts Search Results",
   "SelectAcctBTN": "Select Account",
-  "login": "Login"
+  "TicketCreatedMsg": "Ticket created with ID {{id}}",
+  "SuccessFullMsg": "Success",
+  "FailureMsg": "Failed!",
+  "FailureMsgWithCode": "Failure! Error {{code}} Occurred",
+  "TicketCreationFailedMsg": "Ticket creation failed with error : {{error}}",
+  "FileUploaded": "File Uploaded",
+  "FileUploadFailed": "File Upload Failed",
+  "MaximumFileReached": "Maximum files reached",
+  "ActionSavedSuccess": "Action Saved",
+  "login": "Login",
+  "TopicPermCreateFailed": "Topic permissions creation failed",
+  "TopicPermCreateSuccess": "Topic permissions created successfully",
+  "UpdatePermFailed": "Update Permissions failed",
+  "UpdatePermSuccess": "Update Permissions success",
+  "DeletePermFailed": "Delete Permissions failed",
+  "DeletePermSuccess": "Delete Permissions success",
+
+  "CreateTopicFailed": "Create Topic failed",
+  "CreateTopicSuccess": "Create Topic success",
+
+  "EditTopicFailed": "Edit Topic failed",
+  "EditTopicSuccess": "Edit Topic success",
+
+  "CreateSubCatFailed": "Create Sub Category failed",
+  "CreateSubCatSuccess": "Create Sub Category success",
+
+  "EditSubCatFailed": "Edit Sub Category failed",
+  "EditSubCatSuccess": "Edit Sub Category success",
+
+  "CreateMainCatFailed": "Create Main Category failed",
+  "CreateMainCatSuccess": "Create Main Category success",
+
+  "EditMainCatFailed": "Edit Main Category failed",
+  "EditMainCatSuccess": "Edit Main Category success",
+
+  "CreateUserFailed": "Create User failed",
+  "CreateUserSuccess": "Create User success",
+
+  "UpdateUserFailed": "Update User failed",
+  "UpdateUserSuccess": "Update User success"
 }

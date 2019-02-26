@@ -40,12 +40,15 @@ export class MainCatListComponent extends BasicTopicSelection implements OnInit 
 
   changeStatus() {
     if (this.selectedMainCategory != null && this.selectedMainCategory.id != null) {
-      this.mainCatService.changeStatus(this.selectedMainCategory.id, !this.selectedMainCategory.enabled).subscribe(value => {
+        this.mainCatService.changeStatus(this.selectedMainCategory.id, !this.selectedMainCategory.enabled).subscribe(value => {
         this.mainCategories = value;
-      });
+          this.utils.messageService.printLocalizedMessage('SuccessFullMsg','EditMainCatSuccess',this.utils,'success');
+      },error1 => {
+          this.utils.messageService.printLocalizedMessage('FailureMsg','EditMainCatFailed',this.utils,'error');
+          this.utils.messageService.printError(error1);
+        });
     }
   }
-
   handleCreateEditEvent(event) {
     if (event != null) {
       this.mainCategories = event;

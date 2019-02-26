@@ -38,12 +38,6 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult: SearchTicketsResult;
-  mainCategories: MainCategory[];
-  selectedMainCategory: MainCategory;
-  subCategories: Subcategory[];
-  selectedSubCategory: Subcategory;
-  topics: Topic[];
-  selectedTopic: Topic;
   selectedFilter: SearchTicketsContainer = this.openTicketFilter;
   previousTab = 0;
   items: any[];

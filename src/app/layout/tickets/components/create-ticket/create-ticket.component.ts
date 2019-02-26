@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
 import {UtilsService} from '../../../../shared/services/utils.service';
-import {MessageService} from 'primeng/api';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MainCategory} from '../../../../shared/model/mainCategory';
 import {Subcategory} from '../../../../shared/model/subcategory';
@@ -15,21 +14,17 @@ import {Priority} from '../../../../shared/model/priority';
 import {CustomerAccounts} from '../../../../shared/model/customerAccounts';
 import {TicketHolder} from '../../../../shared/model/ticketHolder';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
-import {environment} from '../../../../../environments/environment';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
-import {AccountServicesService} from '../../../../shared/services/account-services.service';
-import {CustomerSearchContainer, SearchTicketsContainer} from '../../../../shared/model/searchTicketsContainer';
 import {SourceChannel} from '../../../../shared/model/source-channel';
 
 @Component({
   selector: 'app-create-ticket',
   templateUrl: './create-ticket.component.html',
-  styleUrls: ['./create-ticket.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./create-ticket.component.scss']
+
 })
 export class CreateTicketComponent extends BasicTopicSelection implements OnInit {
 
-  uploadURL: string = environment.apiUrl + 'upload/uploadMultipleFiles';
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
   ticketForm: FormGroup;
@@ -44,20 +39,17 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   selectedTicketType: Type;
   selectedPriority: Priority;
   selectedChannel: SourceChannel;
-  accountsList: CustomerAccounts[];
   @Input() selectedAccount: CustomerAccounts;
   uploadedFiles: any[] = [];
   attachments: any[] = [];
-
   lockAfterSave = false;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
-              public messageService: MessageService,
               public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService,
               public topicService: TopicService,
-              public fb: FormBuilder, public fileUploadService: FileUploadService, private accountServices: AccountServicesService) {
+              public fb: FormBuilder, public fileUploadService: FileUploadService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
     this.authorizedTopicsRequest = {permissions: ['create']};
@@ -69,6 +61,14 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     if (this.selectedAccount != null) {
       this.updateCustomerAccountFields();
     }
+
+  }
+
+  messge() {
+    this.utils.messageService.success('value.SuccessFullMsg', 'value.TicketCreatedMsg');
+    this.utils.translateService.get(['SuccessFullMsg', 'TicketCreatedMsg'], {'id': '21212121'}).subscribe(value => {
+      this.utils.messageService.success(value.SuccessFullMsg, value.TicketCreatedMsg);
+    });
   }
 
   updateCustomerAccountFields() {
@@ -87,15 +87,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       this.ticketForm.controls['CustomerEmail'].updateValueAndValidity();
       this.ticketForm.controls['CustomerSegment'].setValue(this.selectedAccount.segment);
       this.ticketForm.controls['CustomerSegment'].updateValueAndValidity();
-      /**
-       this.ticketForm.value.CustomerBasic.patchValue(this.selectedAccount.customerCIF);
-       this.ticketForm.value.CustomerNameEn.patchValue(this.selectedAccount.customerNameEn);
-       this.ticketForm.value.CustomerNameAr.patchValue(this.selectedAccount.customerNameAR);
-       this.ticketForm.value.CustomerBranch.patchValue(this.selectedAccount.branchName);
-       this.ticketForm.value.CustomerMobile.patchValue(this.selectedAccount.mobile);
-       this.ticketForm.value.CustomerEmail.patchValue(this.selectedAccount.email);
-       this.ticketForm.value.CustomerSegment.patchValue(this.selectedAccount.segment);
-       */
     }
   }
 
@@ -104,6 +95,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   }
 
   initTicketForm() {
+
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl(''),
       'Subject': new FormControl('', Validators.required),
@@ -165,8 +157,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticket.sourceChannel = this.selectedChannel.channelID;
     this.ticket.priority = this.selectedPriority.priorityValue;
     this.ticket.details = this.ticketForm.value.Details;
-
-
     let customerAccount: CustomerAccounts = {};
     customerAccount.customerCIF = this.ticketForm.value.CustomerBasic;
     customerAccount.customerNameEn = this.ticketForm.value.CustomerNameEn;
@@ -205,13 +195,16 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   SaveTicket() {
     console.log('Start Save Ticket');
     if (this.selectedTopic == null) {
-      this.messageService.add({severity: 'error', summary: 'Failed', detail: 'No Topic Selected'});
+      //// this.messageService.add({severity: 'error', summary: 'Failed', detail: 'No Topic Selected'});
       return;
     }
     let self = this;
     this.bindFormToTicket();
     this.ticketHttp.create(this.ticketHolder).subscribe(returnedTicket => {
-        this.messageService.add({severity: 'info', summary: 'Success', detail: 'Ticket Created Successfully'});
+        this.ticket = returnedTicket;
+        this.utils.translateService.get(['SuccessFullMsg', 'TicketCreatedMsg'], {'id': this.ticket.id}).subscribe(value => {
+          this.utils.messageService.success(value.SuccessFullMsg, value.TicketCreatedMsg);
+        });
         // this.ticketForm.controls.TicketID.setValue(returnedTicket.id);
         this.ticket = returnedTicket;
         this.lockAfterSave = true;
@@ -219,12 +212,17 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       error => {
         // can't create Ticket
         console.error('Creation Failed !' + error.error.msg);
-        this.messageService.add({severity: 'error', summary: 'Failed', detail: error.error.msg});
+        this.utils.translateService.get(['TicketCreationFailedMsg', 'FailureMsg'], {
+            'error': JSON.stringify(error)
+          }
+        ).subscribe(value => {
+          this.utils.messageService.error(value.FailureMsg, value.TicketCreationFailedMsg);
+        });
+        //// this.messageService.add({severity: 'error', summary: 'Failed', detail: error.error.msg});
         // this.display = true;
 
       });
 
-    console.log('End Save Ticket');
 
   }
 
@@ -234,14 +232,13 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       this.uploadedFiles.push(file);
       console.log(JSON.stringify(this.uploadedFiles));
     });
-    this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
+    this.utils.messageService.success('', 'FileUploaded');
 
   }
 
   customUploader(events, uploadElement) {
     console.log(this.attachments.length + events.files.length);
     if (this.attachments.length > this.maxUploadFiles || (this.attachments.length + events.files.length) > this.maxUploadFiles) {
-      this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: 'Maximum reached'});
       events.files = null;
       uploadElement.clear();
     } else {
@@ -252,11 +249,10 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
         });
         this.attachments.push(value);
         events.files = [];
-        this.messageService.add({severity: 'info', summary: 'File Uploaded', detail: ''});
-        // console.log('attachments ' + this.attachments);
+        this.utils.messageService.success('', this.utils.translateService.instant('FileUploaded'));
         uploadElement.clear();
       }, error1 => {
-        this.messageService.add({severity: 'error', summary: 'File Upload Failed', detail: JSON.stringify(error1)});
+        this.utils.messageService.error('', this.utils.translateService.instant('FileUploadFailed'));
       });
     }
   }

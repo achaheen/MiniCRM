@@ -34,7 +34,6 @@ export class DyTicketTableComponent implements OnInit {
   constructor(private utils: UtilsService, private fb: FormBuilder, private messageServie: MessageService, private ticketsService: TicketsService) {
   }
 
-
   @Output() eventEmitter: EventEmitter<SearchTicketsContainer> = new EventEmitter();
   @Output() selectTicketEmitter: EventEmitter<number> = new EventEmitter();
 
@@ -59,27 +58,19 @@ export class DyTicketTableComponent implements OnInit {
 
   initDataTable() {
     this.cols = [
-      {field: 'id', header: this.utils.translateService.instant('ID')},
-      {field: 'mainCategory', header: this.utils.translateService.instant('MainCat')},
-      {field: 'subCategory', header: this.utils.translateService.instant('SubCat')},
-      {field: 'topic', header: this.utils.translateService.instant('Topic')},
-      {field: 'currentStatus', header: this.utils.translateService.instant('Status')},
-      {field: 'ticketType', header: this.utils.translateService.instant('Type')},
-      {field: 'priority', header: this.utils.translateService.instant('Priority')},
-      {field: 'creationDate', header: this.utils.translateService.instant('creationDate')},
-      {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate')}
+      {field: 'id', header: 'ID'},
+      {field: 'mainCategory', header: this.utils.translateService.instant('MainCat'), sort: false},
+      {field: 'subCategory', header: this.utils.translateService.instant('SubCat'), sort: false},
+      {field: 'topic', header: this.utils.translateService.instant('Topic'), sort: true},
+      {field: 'CustomerBasic', header: this.utils.translateService.instant('CustomerBasic'), sort: false},
+      {field: 'nin', header: this.utils.translateService.instant('nan'), sort: false},
+      {field: 'currentStatus', header: this.utils.translateService.instant('Status'), sort: true},
+      {field: 'ticketType', header: this.utils.translateService.instant('Type'), sort: true},
+      {field: 'priority', header: this.utils.translateService.instant('Priority'), sort: true},
+      {field: 'creationDate', header: this.utils.translateService.instant('creationDate'), sort: true},
+      {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate'), sort: true}
     ];
 
-    this.sortCols = [
-      {field: 'id', header: this.utils.translateService.instant('ID')},
-      {header: this.utils.translateService.instant('MainCat')},
-      {header: this.utils.translateService.instant('SubCat')},
-      {field: 'topic', header: this.utils.translateService.instant('Topic')},
-      {field: 'currentStatus', header: this.utils.translateService.instant('Status')},
-      {field: 'ticketType', header: this.utils.translateService.instant('Type')},
-      {field: 'priority', header: this.utils.translateService.instant('Priority')},
-      {field: 'creationDate', header: this.utils.translateService.instant('creationDate')},
-      {field: 'modificationDate', header: this.utils.translateService.instant('modificationDate')}];
   }
 
 
@@ -101,15 +92,17 @@ export class DyTicketTableComponent implements OnInit {
 
 
   setSelectedTicket(event) {
+
+    console.log('TicketID=' + (this.selectedTicket == null ? null : this.selectedTicket.id));
     this.selectTicketEmitter.emit((this.selectedTicket == null ? null : this.selectedTicket.id));
   }
 
   loadCarsLazy(event: LazyLoadEvent) {
+    console.log(JSON.stringify(event));
     const pageNum = (event.first / event.rows);
     this.ticketFilters.page = pageNum;
     const sortField: SearchTicketsSorting = {sortBy: event.sortField, sortType: event.sortOrder};
     this.ticketFilters.sorting = sortField;
-
     this.eventEmitter.emit(this.ticketFilters);
 
   }

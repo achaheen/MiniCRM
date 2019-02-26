@@ -5,12 +5,22 @@ import {TicketsRoutingModule} from './tickets-routing.module';
 import {TicketsComponent} from './tickets.component';
 import {
   BlockUIModule,
-  ButtonModule, CalendarModule, CheckboxModule,
+  ButtonModule,
+  CalendarModule,
+  CheckboxModule,
   DataGridModule,
-  DialogModule, FieldsetModule,
-  InputTextModule, ListboxModule, MessageModule, MessagesModule, MultiSelectModule,
-  PanelModule, PasswordModule, RadioButtonModule,
-  TabViewModule, TriStateCheckboxModule
+  DialogModule,
+  FieldsetModule,
+  InputTextModule,
+  ListboxModule,
+  MessageModule,
+  MessagesModule,
+  MultiSelectModule,
+  PanelModule,
+  PasswordModule,
+  RadioButtonModule,
+  TabViewModule,
+  TriStateCheckboxModule
 } from 'primeng/primeng';
 import {MenubarModule} from 'primeng/menubar';
 import {SidebarModule} from 'primeng/sidebar';
@@ -32,9 +42,11 @@ import {TicketReplyComponent} from './components/ticket-reply/ticket-reply.compo
 import {TicketFiltersComponent} from './components/ticket-filters/ticket-filters.component';
 import {TopicsSelectionModule} from '../topics-selection/topics-selection.module';
 import {TopicspermissionsModule} from '../topicspermissions/topicspermissions.module';
-import { SearchCustomerComponent } from './components/create-ticket/search-customer/search-customer.component';
+import {SearchCustomerComponent} from './components/create-ticket/search-customer/search-customer.component';
+import {TicketingMessagesModule} from '../messages/messages.module';
 
 @NgModule({
+  providers: [],
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
     CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
     ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent],
@@ -66,7 +78,9 @@ import { SearchCustomerComponent } from './components/create-ticket/search-custo
     InputTextareaModule, MessageModule,
     FileUploadModule, MenubarModule,
     SidebarModule, CalendarModule,
-    TopicsSelectionModule, TopicspermissionsModule
+    TopicsSelectionModule,
+    TopicspermissionsModule,
+    TicketingMessagesModule
   ]
 })
 export class TicketsModule {

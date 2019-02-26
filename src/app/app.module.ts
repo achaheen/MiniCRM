@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {AuthGuard} from './shared';
 import {JwtModule} from '@auth0/angular-jwt';
 import {environment} from '../environments/environment';
+import {GlobalMessageService} from './layout/messages/global-message.service';
 
 
 // AoT requires an exported function for factories

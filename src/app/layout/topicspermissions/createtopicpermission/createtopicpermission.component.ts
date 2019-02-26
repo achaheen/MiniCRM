@@ -90,27 +90,24 @@ export class CreatetopicpermissionComponent extends BasicTopicSelection implemen
 
     this.topicsPermService.prepare(request).subscribe(value => {
       this.topicsPermissions = value;
+
+    },error1 => {
+      this.utils.messageService.printLocalizedMessage('FailureMsg','',this.utils,'error');
+      this.utils.messageService.printError(error1);
     });
 
-
-    /**
-     * old
-     if (this.selectedUsers.length > 0) {
-      this.createUserTopicsPerm(topics);
-    } else if (this.selectedGroups.length > 0) {
-      this.createGroupTopicsPerm(topics);
-    }*/
-    console.log(`topics permissions ${JSON.stringify(this.topicsPermissions)}`);
-  }
+   }
 
 
   create() {
     if (this.topicsPermissions != null && this.topicsPermissions.length > 0) {
-      this.topicsPermService.create(this.topicsPermissions).subscribe(value => {
-        console.log('Success');
+        this.topicsPermService.create(this.topicsPermissions).subscribe(value => {
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','TopicPermCreateSuccess',this.utils,'success');
         this.topicsPermissions = value;
       }, error1 => {
-        console.log(JSON.stringify(error1));
+          this.utils.messageService.printLocalizedMessage('FailureMsg','TopicPermCreateFailed',this.utils,'error');
+          this.utils.messageService.printError(error1);
+
       });
     }
   }

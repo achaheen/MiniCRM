@@ -1,6 +1,7 @@
-<p-toast [style]="{marginTop: '35px'}"></p-toast>
+<!--p-toast [style]="{marginTop: '35px'}"></p-toast-->
 
 <!--<p-blockUI [blocked]="blocked"></p-blockUI>-->
+
 <ng-container *ngIf="selectedAccount==null">
   <app-search-customer [parent]="this"></app-search-customer>
 </ng-container>
@@ -42,16 +43,45 @@
       </ng-container>
       <ng-container *ngIf="selectedAccount!=null">
         <tr *ngIf="ticket!=null && ticket.id!=null">
-          <td colSpan="2" class="grid-label">{{'TicketID' | translate}}</td>
-          <td colSpan="6" class="grid-input"><input id="userID" type="text" pInputText name="userID"
-                                                    formControlName="TicketID"
+          <td class="grid-label">{{'TicketID' | translate}}</td>
+          <td class="grid-input"><input id="userID" type="text" pInputText
+                                                    [(ngModel)]="ticket.id" [ngModelOptions]="{standalone: true}"
                                                     [attr.disabled]="true"></td>
         </tr>
+        <!--<tr>-->
+          <!--<td colspan="8">-->
+            <!--<app-topics-selection [skipTable]="false" [parent]="this"></app-topics-selection>-->
+          <!--</td>-->
+        <!--</tr>-->
+
+
         <tr>
-          <td colspan="8">
-            <app-topics-selection [skipTable]="false" [parent]="this"></app-topics-selection>
+          <td class="grid-label">{{'MainCat'|translate}}</td>
+          <td class="grid-input ">
+            <p-dropdown (onChange)="this.updateSubCategory()" [options]="this.mainCategoriesSelectItems"
+                        [(ngModel)]="this.selectedMainCategory"
+                        [ngModelOptions]="{standalone: true}"
+                        [filter]="true"
+                        filterBy="label,value.id">
+            </p-dropdown>
           </td>
+          <td class="grid-label">{{'SubCat'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown (onChange)="this.updateTopicList()" [options]="this.subCategoriesSelectItems"
+                        [(ngModel)]="this.selectedSubCategory"
+                        [ngModelOptions]="{standalone: true}"[filter]="true"
+                        filterBy="label,value.id"
+            ></p-dropdown>
+          </td>
+          <td class="grid-label">{{'Topic'|translate}}</td>
+          <td class="grid-input minWidth">
+            <p-dropdown [options]="this.topicsSelectItems" [(ngModel)]="this.selectedTopic"
+                        [ngModelOptions]="{standalone: true}" [filter]="true"
+                        filterBy="label,value.id"></p-dropdown>
+          </td>
+
         </tr>
+
 
         <tr>
           <td class="grid-label">{{'TicketType' | translate}}</td>
@@ -83,15 +113,12 @@
           <td class="grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
                                                     name="subject"
                                                     formControlName="Subject"></td>
-
-
         </tr>
         <tr>
           <td class="grid-label">{{'Details' | translate}}</td>
           <td class="grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
                                                        formControlName="Details"> </textarea></td>
         </tr>
-
         <tr>
           <td colspan="8">
             <hr/>
@@ -133,7 +160,7 @@
           </td>
         </tr>
         <tr>
-          <td class="grid-label">Attachments</td>
+          <td class="grid-label">{{'attachments'|translate}}</td>
           <td class="grid-input" colspan="7">
 
 
