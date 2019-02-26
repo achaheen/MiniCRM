@@ -26,27 +26,6 @@ export class DynamicFieldsComponent implements OnInit {
 
   }
 
-  updateFields() {
-    if (this.extData != null && this.dynamicListValue != null) {
-      this.dynamicListValue.forEach(value => {
-        if (value.value === null) {
-          value.value = '';
-        }
-        this.extData[value.mappedField] = value.value;
-      });
-    }
-    this.emitter.emit(this.extData);
-    console.log('Exd Data : ' + JSON.stringify(this.extData));
-  }
-
-
-  clear() {
-    console.log('Clear');
-    this.dynamicListValue.forEach(value => {
-      value.value = null;
-    });
-  }
-
 
   getLabelModel(field) {
     let selections: SelectItem[];

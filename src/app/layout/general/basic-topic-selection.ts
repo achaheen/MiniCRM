@@ -200,7 +200,7 @@ export class BasicTopicSelection {
   chunkArray(array, chunkSize) {
     let index;
     const arrayLength = array.length;
-    const finalArray: [[]] = [[]];
+    const finalArray: any = [];
     for (index = 0; index < arrayLength; index += chunkSize) {
       let chunk = array.slice(index, index + chunkSize);
       if (chunk.length < chunkSize) {
@@ -213,7 +213,7 @@ export class BasicTopicSelection {
     return finalArray;
   }
 
-  fillArrayOfFields(array: Field[], chunkSize) {
+  fillArrayOfFields(array: any[], chunkSize) {
     while (array.length < chunkSize) {
       array.push({type: -1, mappedField: ''});
     }

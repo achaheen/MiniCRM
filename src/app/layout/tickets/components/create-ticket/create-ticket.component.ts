@@ -14,6 +14,7 @@ import {FileUploadService} from '../../../../shared/services/file-upload.service
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {SourceChannel} from '../../../../shared/model/source-channel';
 import {DynamicFieldsComponent} from '../dynamic-fields/dynamic-fields.component';
+import {TicketExtData} from '../../../../shared/model/ticketExtData';
 
 @Component({
   selector: 'app-create-ticket',
@@ -79,7 +80,9 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.listAllMainCategories();
   }
 
+
   initTicketForm() {
+
 
     this.ticketForm = this.fb.group({
       'TicketID': new FormControl(''),
@@ -151,9 +154,33 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketHolder.customerAccount = customerAccount;
     this.ticketHolder.attachments = this.attachments[0];
 
-    if (this.dynFieldsComp != null) {
-      this.dynFieldsComp.updateFields();
-      this.ticketHolder.extDataList = [this.dynFieldsComp.extData];
+    if (this.mainCatConfigurations != null) {
+      if (this.mainCatConfigurations.slicedFields != null) {
+        const extData: TicketExtData = {};
+
+        this.mainCatConfigurations.slicedFields.forEach(value => {
+          value.forEach(value1 => {
+            if (value1.type !== -1) {
+              if (value1.value === null) {
+                value1.value = '';
+              }
+              extData[value1.mappedField] = value1.value;
+            }
+          });
+        });
+        this.ticketHolder.extDataList = [extData];
+      }
+
+    }
+  }
+
+  clearDynamicFields() {
+    if (this.dynFieldsComp != null && this.dynFieldsComp != null) {
+      this.mainCatConfigurations.slicedFields.forEach(value => {
+        value.forEach(value1 => {
+          value1.value = null;
+        });
+      });
     }
   }
 
@@ -172,9 +199,8 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.attachments = [];
     this.uploadedFiles = [];
     if (this.dynFieldsComp != null) {
-      this.mainCatConfigurations = null;
-      this.dynFieldsComp.clear();
-      this.ticket.ticketExtData = null;
+      this.clearDynamicFields();
+      this.ticket.ticketExtData = [];
     }
     this.updateCustomerAccountFields();
   }
@@ -242,8 +268,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       });
     }
   }
-
-
 
 
 }
