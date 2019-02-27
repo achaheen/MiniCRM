@@ -8,5 +8,6 @@
 </ng-container>
 <ng-container *ngIf="!(item.mainCategory!==undefined && item.mainCategory!=null)">
   <h5 class="first">{{'Configurations'|translate}}</h5>
-  <textarea [(ngModel)]="item.configuration" [rows]="3" [cols]="100" pInputTextarea></textarea></ng-container>
+  <textarea [(ngModel)]="configurationValue" [rows]="3" (ngModelChange)="onConfigValueChange($event)" [cols]="100"
+            pInputTextarea></textarea></ng-container>
 

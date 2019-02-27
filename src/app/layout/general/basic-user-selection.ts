@@ -1,10 +1,12 @@
 import {UsersService} from '../../shared/services/users.service';
 import {User} from '../../shared/model/user';
+import {SelectItem} from 'primeng/api';
 
 export class BasicUserSelection {
   public activeUsers: Array<User> = [];
   public allUsers: Array<User> = [];
 
+  public usersOptions: SelectItem[] = [];
 
   constructor(public  userServices: UsersService) {
 
@@ -13,22 +15,25 @@ export class BasicUserSelection {
   public getAllUsers() {
     this.userServices.all().subscribe(value => {
       this.allUsers = value;
-      /**
-       if (this.allUsers != null && this.allUsers.length > 0) {
-        const user: User = {id: 0, userID: ''};
-        this.allUsers.unshift(user);
-      }
-       */
+      this.buildOptions(value);
     });
   }
 
   public getActiveUsers() {
     this.userServices.activeUsers().subscribe(value => {
       this.activeUsers = value;
-      /**    if (this.activeUsers != null && this.activeUsers.length > 0) {
-        const user: User = {id: 0, userID: ''};
-        this.activeUsers.unshift(user);
-      }*/
+      this.buildOptions(value);
     });
+  }
+
+  buildOptions(value) {
+    if (value != null) {
+      this.usersOptions = [];
+      this.usersOptions.push({label: '', value: null});
+      value.forEach(value1 => {
+
+        this.usersOptions.push({label: value1.firstName + ' ' + value1.lastName, value: value1});
+      });
+    }
   }
 }
