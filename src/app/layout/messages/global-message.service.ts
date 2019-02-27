@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {Message} from 'primeng/api';
 import {ResponseCode} from '../../shared/model/response-code';
-import {UtilsService} from "../../shared/services/utils.service";
+import {UtilsService} from '../../shared/services/utils.service';
 
 @Injectable({
   providedIn: 'root'
@@ -42,19 +42,20 @@ export class GlobalMessageService {
       }
     }
   }
-  printLocalizedMessage(header, value, utils: UtilsService, messageType?, params?) {
-      utils.translateService.get([header, value], params).subscribe(v => {
 
-          const headerMessage = v[header];
-          const details = v[value];
+  printLocalizedMessage(header, value, utils: UtilsService, messageType?, params?) {
+    utils.translateService.get([header, value], params).subscribe(v => {
+
+      const headerMessage = v[header];
+      const details = v[value];
       if (messageType === undefined || messageType === null || messageType === '' || messageType === 'success') {
         this.success(headerMessage, details);
-      } else if (messageType == 'error') {
+      } else if (messageType === 'error') {
         this.error(headerMessage, details);
-      }else if (messageType == 'warn'){
-        this.warn(headerMessage,details);
-      }else if(messageType == 'info'){
-        this.info(headerMessage,details);
+      } else if (messageType === 'warn') {
+        this.warn(headerMessage, details);
+      } else if (messageType === 'info') {
+        this.info(headerMessage, details);
       }
     });
   }

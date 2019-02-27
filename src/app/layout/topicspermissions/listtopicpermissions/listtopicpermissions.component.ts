@@ -9,7 +9,6 @@ import {User} from '../../../shared/model/user';
 import {Group} from '../../../shared/model/group';
 import {UsersService} from '../../../shared/services/users.service';
 import {GroupsService} from '../../../shared/services/groups.service';
-import {SelectItem} from 'primeng/api';
 import {BasicTopicSelection} from '../../general/basic-topic-selection';
 import {BasicUserSelection} from '../../general/basic-user-selection';
 import {BasicGroupSelections} from '../../general/basic-group-selections';
@@ -28,7 +27,6 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
   selectedGroup: Group;
   filterType = 'mainCat';
   basicUserSelection: BasicUserSelection;
-
   basicGroupSelection: BasicGroupSelections;
 
   constructor(private topicPermissionService: TopicPermissionsService, public topicService: TopicService
@@ -38,25 +36,18 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
     this.basicUserSelection = new BasicUserSelection(this.userServices);
     this.basicGroupSelection = new BasicGroupSelections(this.groupServices);
   }
-
   ngOnInit() {
-
     this.listAllMainCategories();
-
   }
-
   ngAfterViewInit(): void {
-
   }
-
-
   applyFilter() {
     console.log('filtering topic permissions');
     this.permissionsList = [];
     if (this.filterType === 'mainCat') {
       console.log('filtering by cats');
       if (this.selectedTopic != null && this.selectedTopic.id != null) {
-          this.topicPermissionService.getTopicPermissions(this.selectedTopic.id).subscribe(value => {
+        this.topicPermissionService.getTopicPermissions(this.selectedTopic.id).subscribe(value => {
           this.permissionsList = value;
         });
       } else if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
@@ -95,9 +86,9 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
 
       this.topicPermissionService.modify(this.viewPermComponent.selectedPermissionsList).subscribe(value => {
         this.applyFilter();
-        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','UpdatePermSuccess',this.utils,'success');
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'UpdatePermSuccess', this.utils, 'success');
       }, error1 => {
-        this.utils.messageService.printLocalizedMessage('FailureMsg','UpdatePermFailed',this.utils,'error');
+        this.utils.messageService.printLocalizedMessage('FailureMsg', 'UpdatePermFailed', this.utils, 'error');
         this.utils.messageService.printError(error1);
       });
     }
@@ -109,9 +100,9 @@ export class ListtopicpermissionsComponent extends BasicTopicSelection implement
         console.log(JSON.stringify(value));
         this.viewPermComponent.selectedPermissionsList = null;
         this.applyFilter();
-        this.utils.messageService.printLocalizedMessage('SuccessFullMsg','DeletePermSuccess',this.utils,'success');
+        this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'DeletePermSuccess', this.utils, 'success');
       }, error1 => {
-        this.utils.messageService.printLocalizedMessage('FailureMsg','DeletePermFailed',this.utils,'error');
+        this.utils.messageService.printLocalizedMessage('FailureMsg', 'DeletePermFailed', this.utils, 'error');
         this.utils.messageService.printError(error1);
       });
     }

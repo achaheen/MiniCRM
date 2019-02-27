@@ -153,7 +153,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.ticketHolder.ticket = this.ticket;
     this.ticketHolder.customerAccount = customerAccount;
     this.ticketHolder.attachments = this.attachments[0];
-
     if (this.mainCatConfigurations != null) {
       if (this.mainCatConfigurations.slicedFields != null) {
         const extData: TicketExtData = {};
@@ -170,7 +169,6 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
         });
         this.ticketHolder.extDataList = [extData];
       }
-
     }
   }
 

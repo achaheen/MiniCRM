@@ -33,7 +33,6 @@
                         (onChange)="applyFilter()"
                         optionLabel="englishLabel"></p-dropdown>
           </td>
-
         </ng-container>
       </tr>
     </table>
@@ -42,7 +41,6 @@
         <td class="grid-input ">
           <p-radioButton name="toggleFilter" value="users" [(ngModel)]="filterType"
                          (onClick)="basicUserSelection.getActiveUsers();this.permissionsList=null"></p-radioButton>
-
         </td>
         <td class="grid-label">{{'viewUsersFilters'|translate}}</td>
 
@@ -51,14 +49,13 @@
           <td class="grid-input ">
             <p-dropdown
               placeholder="{{'selectUsers'|translate}}"
-              optionLabel="firstName"
+              [filter]="true"
+              filterBy="label,value.firstName,value.lastName"
               (onChange)="applyFilter()"
-              [(ngModel)]="selectedUser" [options]="basicUserSelection.activeUsers"
+              [(ngModel)]="selectedUser" [options]="basicUserSelection.usersOptions"
               [style]="{'width':'150px'}">
             </p-dropdown>
           </td>
-
-
         </ng-container>
       </tr>
     </table>
@@ -77,7 +74,9 @@
             <p-dropdown
               placeholder="{{'selectGroups'|translate}}"
               (onChange)="applyFilter()"
-              optionLabel="groupName" [(ngModel)]="selectedGroup" [options]="basicGroupSelection.activeGroups"
+              [filter]="true"
+              filterBy="label"
+              [(ngModel)]="selectedGroup" [options]="basicGroupSelection.groupsOptions"
               [style]="{'width':'150px'}">
             </p-dropdown>
           </td>
