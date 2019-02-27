@@ -3,30 +3,30 @@
 <ng-container *ngFor="let field of dynamicListValue">
 
   <div *ngIf="field.type === 1"
-       class="p-col grid-label"> {{field.enableTranslate ? (field.label|translate) : field.label}}</div>
-  <div *ngIf="field.type === 1" class="p-col minWidth">
+       class="p-col-1 grid-label"> {{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+  <div *ngIf="field.type === 1" class="p-col-3 minWidth">
     <p-dropdown [options]="getLabelModel(field)" [(ngModel)]="field.value" [filter]="true" filterBy="label,value"
                 [autoWidth]="true"></p-dropdown>
   </div>
 
-  <div *ngIf="field.type === 2"
-       class="p-col grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
-  <div *ngIf="field.type === 2" class="p-col minWidth">
+   <div *ngIf="field.type === 2"
+       class="p-col-1 grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+  <div *ngIf="field.type === 2" class="p-col-3 minWidth">
     <input type="text" [minLength]="field.minLen" [maxLength]="field.maxLen" [width]="field.width"
            pInputText
            [(ngModel)]="field.value">
   </div>
 
   <div *ngIf="field.type === 3"
-       class="p-col grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
-  <div *ngIf="field.type ===3" class="p-col minWidth">
+       class="p-col-1 grid-label">{{field.enableTranslate ? (field.label|translate) : field.label}}</div>
+  <div *ngIf="field.type ===3" class="p-col-3 minWidth">
     <p-calendar [(ngModel)]="field.value" showTime="true" hourFormat="12" hideOnDateTimeSelect="true"
                 dataType="string"></p-calendar>
   </div>
   <!-- Empty Div to align the view -->
   <div *ngIf="field.type === -1"
-       class="p-col grid-label">{{' '}}</div>
-  <div *ngIf="field.type === -1" class="p-col minWidth">{{' '}}
+       class="p-col-1 grid-label">{{' '}}</div>
+  <div *ngIf="field.type === -1" class="p-col-3 minWidth">{{' '}}
   </div>
 </ng-container>
 

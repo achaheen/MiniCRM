@@ -116,6 +116,7 @@
   "NewTopic": "New Topic",
   "title": "Title",
   "reply": "Reply",
+  "replies": "Replies",
   "notes": "Notes",
   "CreateTicket": "Create New Ticket",
   "ViewTicket": "View Ticket",
@@ -211,6 +212,7 @@
   "CreateUserFailed": "Create User failed",
   "CreateUserSuccess": "Create User success",
   "UpdateUserFailed": "Update User failed",
-  "UpdateUserSuccess": "Update User success"
+  "UpdateUserSuccess": "Update User success",
+  "SaveReply": "Save Reply"
 
 }

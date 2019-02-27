@@ -26,25 +26,25 @@
 
 
 <ng-container *ngIf="skipTable">
-  <div class="p-grid">
-  <div class="p-col grid-label">{{'MainCat'|translate}}</div>
-  <div class=" p-col minWidth">
+  <div class="p-grid p-justify-start">
+  <div class="p-col-1 grid-label">{{'MainCat'|translate}}</div>
+  <div class=" p-col-3 minWidth">
     <p-dropdown (onChange)="parent.updateSubCategory()" [options]="parent.mainCategoriesSelectItems"
                 [(ngModel)]="parent.selectedMainCategory"
                 [filter]="true"
                 filterBy="label,value.id">
     </p-dropdown>
   </div>
-  <div class="p-col grid-label">{{'SubCat'|translate}}</div>
-  <div class="p-col minWidth">
+  <div class="p-col-1 grid-label">{{'SubCat'|translate}}</div>
+  <div class="p-col-3 minWidth">
     <p-dropdown (onChange)="parent.updateTopicList()" [options]="parent.subCategoriesSelectItems"
                 [(ngModel)]="parent.selectedSubCategory" [filter]="true"
                 filterBy="label,value.id">
 
     </p-dropdown>
   </div>
-  <div class="p-col grid-label">{{'Topic'|translate}}</div>
-  <div class="p-col minWidth">
+  <div class="p-col-1 grid-label">{{'Topic'|translate}}</div>
+  <div class="p-col-3 minWidth">
     <p-dropdown [options]="parent.topicsSelectItems" [(ngModel)]="parent.selectedTopic" [filter]="true"
                 filterBy="label,value.id"></p-dropdown>
   </div>

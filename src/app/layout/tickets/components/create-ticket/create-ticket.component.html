@@ -11,7 +11,6 @@
     <div class="p-grid" *ngIf="ticket">
 
       <div class="p-col-12">
-
         <p-message severity="error" text="{{'Validate-Subject' | translate}}"
                    *ngIf="!ticketForm.controls['Subject'].valid&&ticketForm.controls['Subject'].dirty"></p-message>
         <p-message severity="error" text="{{'Validate-TicketType' | translate}}"
@@ -44,17 +43,17 @@
 
       <div class="p-grid" *ngIf="ticket!=null && ticket.id!=null">
         <div class="p-col-2 grid-label">{{'TicketID' | translate}}</div>
-        <div class="p-col-2 grid-input"><span>{{ticket.id}}</span></div>
+        <div class="p-col-2 minWidth"><span>{{ticket.id}}</span></div>
       </div>
 
 
       <app-topics-selection [skipTable]="true" [parent]="this"></app-topics-selection>
 
 
-      <div class="p-grid">
+      <div class="p-grid p-justify-start">
 
-        <div class="p-col grid-label">{{'TicketType' | translate}}</div>
-        <div class="p-col minWidth">
+        <div class="p-col-1 grid-label">{{'TicketType' | translate}}</div>
+        <div class="p-col-3 minWidth">
           <p-dropdown [options]="utils.typesListSelectItems" (onChange)="onChangeType()"
                       [ngModelOptions]="{standalone: true}"
                       [required]="true"
@@ -63,15 +62,15 @@
         </div>
 
 
-        <div class="p-col grid-label">{{'Channel' | translate}}</div>
-        <div class="p-col minWidth">
+        <div class="p-col-1 grid-label">{{'Channel' | translate}}</div>
+        <div class="p-col-3 minWidth">
           <p-dropdown [options]="utils.channelListSelectItems" (onChange)="onChangeChannel()"
                       [ngModelOptions]="{standalone: true}"
                       [(ngModel)]="selectedChannel"
           ></p-dropdown>
         </div>
-        <div class="p-col grid-label">{{'Priority' | translate}}</div>
-        <div class="p-col minWidth">
+        <div class="p-col-1 grid-label">{{'Priority' | translate}}</div>
+        <div class="p-col-3 minWidth">
           <p-dropdown [options]="utils.priorityListSelectItems" (onChange)="onChangePriority()"
                       [ngModelOptions]="{standalone: true}"
                       [(ngModel)]="selectedPriority"
@@ -89,50 +88,60 @@
              [dynamicListValue]="fields"></div>
       </div>
 
-      <div class="p-col-2 grid-label">{{'Subject' | translate}}</div>
-      <div class="p-col-2 grid-input" colspan="3"><input style="width: 100%" id="subject" type="text" pInputText
-                                                         (blur)="print()"
-                                                         name="subject"
-                                                         formControlName="Subject"></div>
-      <div class="p-col-2 grid-label">{{'Details' | translate}}</div>
-      <div class="p-col-2 grid-input" colspan="7"><textarea id="details" type="text" pInputTextarea name="details"
+      <div class="p-grid p-justify-start">
+
+          <div class="p-col-1 grid-label">{{'Subject' | translate}}</div>
+          <div class="p-col-7 minWidth"><input id="subject" type="text" pInputText
+                                                             (blur)="print()"
+                                                             name="subject"
+                                                             formControlName="Subject"></div>
+
+        </div>
+      <div class="p-grid p-justify-start">
+
+      <div class="p-col-1 grid-label">{{'Details' | translate}}</div>
+      <div class="p-col-11 minWidth" ><textarea id="details" type="text" pInputTextarea name="details"
                                                             formControlName="Details"> </textarea></div>
+      </div>
       <hr/>
 
-      <div class="p-col-2 grid-label">{{'CustomerBasic' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
+      <div class="p-grid p-justify-start">
+
+      <div class="p-col-1 grid-label">{{'CustomerBasic' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerBasic" type="text" pInputText name="customerBasic"
                                              formControlName="CustomerBasic"></div>
-      <div class="p-col-2 grid-label">{{'CustomerNameEn' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
+      <div class="p-col-1 grid-label">{{'CustomerNameEn' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
                                              formControlName="CustomerNameEn"></div>
 
-      <div class="p-col-2 grid-label">{{'CustomerNameAR' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
+      <div class="p-col-1 grid-label">{{'CustomerNameAR' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerNameAr" type="text" pInputText name="customerNameAr"
                                              formControlName="CustomerNameAr"></div>
+      </div>
+      <div class="p-grid p-justify-start">
 
-      <div class="p-col-2 grid-label">{{'CustomerMobile' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
+      <div class="p-col-1 grid-label">{{'CustomerMobile' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerMobile" type="text" pInputText name="customerMobile"
                                              formControlName="CustomerMobile"></div>
 
-      <div class="p-col-2 grid-label">{{'CustomerEmail' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
+      <div class="p-col-1 grid-label">{{'CustomerEmail' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerEmail" type="text" pInputText name="customerEmail"
                                              formControlName="CustomerEmail"></div>
 
-      <div class="p-col-2 grid-label">{{'CustomerSegment' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerSegment" type="text" pInputText name="customerSegment"
+      <div class="p-col-1 grid-label">{{'CustomerSegment' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerSegment" type="text" pInputText name="customerSegment"
                                              formControlName="CustomerSegment"></div>
-
-      <div class="p-col-2 grid-label">{{'CustomerBranch' | translate}}</div>
-      <div class="p-col-2 grid-input"><input id="customerBranch" type="text" pInputText name="customerBranch"
+      </div>
+      <div class="p-grid p-justify-start">
+      <div class="p-col-1 grid-label">{{'CustomerBranch' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="customerBranch" type="text" pInputText name="customerBranch"
                                              formControlName="CustomerBranch"></div>
-
+      </div>
 
       <hr/>
-
-      <div class="p-col-2 grid-label">{{'attachments'|translate}}</div>
-      <div class="p-col-2 grid-input" colspan="7">
-
-
+      <div class="p-grid p-justify-start">
+      <div class="p-col-1 grid-label">{{'attachments'|translate}}</div>
+      <div class="p-col-5 minWidth" >
         <p-fileUpload name="files" #uploadFile multiple="multiple"
                       (onUpload)="onUploadFiles($event)"
                       auto="true"
@@ -148,6 +157,7 @@
           </ng-template>
         </p-fileUpload>
 
+      </div>
       </div>
 
     </ng-container>

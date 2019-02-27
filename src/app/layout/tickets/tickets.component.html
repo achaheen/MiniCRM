@@ -26,11 +26,11 @@
 </p-tabView>
 
 <p-panel class="btnPanel no_style">
+  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView($event)" class="ui-button-rounded"
+          label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"></button>
 
   <button type="button" pButton icon="fa fa-plus-square" (click)="createNewTicket()" class="ui-button-rounded"
           label="{{'CreateTicket' | translate}}" [disabled]="disableCreateTicketBTN"></button>
-  <button type="button" pButton icon="fa fa-folder-open-o" (click)="openTicketForView($event)" class="ui-button-rounded"
-          label="{{'ViewTicket' | translate}}" [disabled]="disableViewTicketBTN"></button>
 
 </p-panel>
 
