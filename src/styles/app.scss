@@ -315,8 +315,7 @@ table.ticketFormTb{
 
 .attachementContent li {
   float: left;
-  margin: 10px;
-
+  margin: 0px 5px;
 }
 
 .attachementContent li a {
@@ -330,6 +329,10 @@ table.ticketFormTb{
 
 .attachementContent .btn-secondary:hover{
   background-color: #0076ec;
+}
+
+.attachementContent .btn{
+  font-size: small;
 }
 
 

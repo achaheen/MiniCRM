@@ -147,18 +147,17 @@
 
   <ng-container *ngIf="ticket.attachmentsList!=null && ticket.attachmentsList.length>0">
     <div class="p-grid p-justify-start">
-      <div class="p-col-1 grid-label">
-        <h4>{{'attachments'|translate}}</h4>
+      <div class="p-col-1 grid-label">{{'attachments'|translate}}
       </div>
-      <div class="p-col-5">
+      <div class="p-col-11">
         <app-view-attachment [attachmentID]="ticket.attachmentsList"></app-view-attachment>
       </div>
     </div>
   </ng-container>
 
-  <div class="p-grid p-justify-start">
+  <div class="p-grid p-justify-start" *ngIf="ticket.ticketdataList !=null && ticket.ticketdataList.length > 0">
     <div class="p-col-12">
-      <p-panel header="{{'replies' | translate}}">
+      <p-panel header="{{'replies' | translate}}" >
         <app-view-ticket-data [ticketDataList]="ticket.ticketdataList"></app-view-ticket-data>
         <div style="clear: both"></div>
       </p-panel>
