@@ -70,6 +70,17 @@
 
 
   </div>
+
+
+  <div
+    *ngIf="mainCatConfigurations!=null &&   mainCatConfigurations.fields!=null">
+
+    <div app-dynamic-fields #dynFields class="p-grid"
+         *ngFor="let fields of mainCatConfigurations.slicedFields"
+         [dynamicListValue]="fields" [extData]="ticket.ticketExtData" [viewType]="'viewTicket'"></div>
+  </div>
+
+
   <div class="p-grid p-justify-start">
 
 

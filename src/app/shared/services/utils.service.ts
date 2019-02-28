@@ -167,4 +167,31 @@ export class UtilsService {
     }
     return null;
   }
+
+
+
+  chunkArray(array, chunkSize) {
+    let index;
+    const arrayLength = array.length;
+    const finalArray: any = [];
+    for (index = 0; index < arrayLength; index += chunkSize) {
+      let chunk = array.slice(index, index + chunkSize);
+      if (chunk.length < chunkSize) {
+        console.log(`chunk size ${chunkSize} < length ${chunk.length} `);
+        chunk = this.fillArrayOfFields(chunk, chunkSize);
+      }
+      finalArray.push(chunk);
+    }
+    return finalArray;
+  }
+
+  fillArrayOfFields(array: any[], chunkSize) {
+    while (array.length < chunkSize) {
+      array.push({type: -1, mappedField: ''});
+    }
+    console.log(`chunk size now ${chunkSize} equal array length ${array.length}`);
+    return array;
+  }
+
+
 }

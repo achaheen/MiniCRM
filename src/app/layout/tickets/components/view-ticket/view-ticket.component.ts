@@ -8,6 +8,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {utils} from 'protractor';
 import {TicketLock} from '../../../../shared/model/ticket-lock';
 import {TicketsComponent} from '../../tickets.component';
+import {Configuration} from "../../../../shared/model/configuration";
 
 @Component({
   selector: 'app-view-ticket',
@@ -25,6 +26,7 @@ export class ViewTicketComponent implements OnInit {
   ticketActionList: TicketActions[] = [];
   selectedTicketAction: TicketActions;
   ticketLock: TicketLock;
+  mainCatConfigurations: Configuration;
 
   constructor(public utils: UtilsService, private ticketHttp: TicketsService) {
   }
@@ -34,6 +36,7 @@ export class ViewTicketComponent implements OnInit {
       this.ticketHttp.getTicketByID(this.ticketID).subscribe(value => {
         this.ticket = value;
         this.getAuthorizedActions();
+        this.getConfigurations();
       }, error1 => {
         console.log(JSON.stringify(error1));
       });
@@ -99,4 +102,21 @@ export class ViewTicketComponent implements OnInit {
     this.actionItem.items = this.actionsItems;
     this.items.push(this.actionItem);
   }
+
+  getConfigurations() {
+    if (this.ticket.topic.subCategory.mainCategory.configuration != null && this.ticket.topic.subCategory.mainCategory.id != null) {
+      this.mainCatConfigurations = this.ticket.topic.subCategory.mainCategory.configuration;
+      if (this.mainCatConfigurations != null && this.mainCatConfigurations.fields != null) {
+        this.mainCatConfigurations.slicedFields = [[]];
+        if (this.mainCatConfigurations.fields.length <= 4) {
+          this.mainCatConfigurations.slicedFields = [this.mainCatConfigurations.fields];
+        } else {
+          this.mainCatConfigurations.slicedFields = this.utils.chunkArray(this.mainCatConfigurations.fields, 3);
+        }
+      }
+    } else {
+      this.mainCatConfigurations = null;
+    }
+  }
+
 }

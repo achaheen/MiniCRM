@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Field} from '../../../../shared/model/configuration';
 import {TicketExtData} from '../../../../shared/model/ticketExtData';
 import {SelectItem} from 'primeng/api';
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'div[app-dynamic-fields]',
@@ -11,10 +12,11 @@ import {SelectItem} from 'primeng/api';
 export class DynamicFieldsComponent implements OnInit {
 
   @Input() dynamicListValue: Field[];
-  extData: TicketExtData = {};
+  @Input() extData: TicketExtData[];
   @Input() rowSize: number;
   @Output() emitter: EventEmitter<any> = new EventEmitter();
-
+  @Input() viewType: string;
+  hideFields :boolean = false;
 
   field: Field;
 
@@ -23,7 +25,7 @@ export class DynamicFieldsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.mapExDataToConfiguration();
   }
 
 
@@ -38,5 +40,19 @@ export class DynamicFieldsComponent implements OnInit {
     return selections;
   }
 
+
+  mapExDataToConfiguration() {
+
+    console.log(this.viewType + "   " + this.hideFields)
+    if(this.viewType === 'viewTicket' && (this.extData === undefined ||this.extData.length === 0 )){
+      this.hideFields = true;
+    }
+
+    if (this.extData != null && this.extData != undefined && this.extData.length != 0) {
+      this.dynamicListValue.forEach(field => {
+        field.value = this.extData[0][field.mappedField]
+      })
+    }
+  }
 
 }
