@@ -3,16 +3,8 @@ import {Escalationhistory} from './escalationhistory';
 import {TopicSla} from './topicSla';
 
 
-export interface Sla extends  BasicModelWithIDInt {
-
+export interface Sla extends BasicModelWithIDInt {
   time?: number;
-  creationDate?: Date;
-  createdBy?: string;
-  modifiedBy?: string;
-  modificationDate?: Date;
-  slaname?: string;
   catID?: number;
-  topicslaList?: TopicSla[];
-  escalationhistoryList?: Escalationhistory[];
-
+  slaname?: string;
 }

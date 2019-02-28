@@ -3,7 +3,6 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Topic} from '../model/topic';
 import {BasicHttpService} from './basicHttp.service';
-import {Subcategory} from '../model/subcategory';
 
 @Injectable({
   providedIn: 'root'

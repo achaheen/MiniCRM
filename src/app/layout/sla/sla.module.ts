@@ -1,6 +1,9 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TopicsSelectionComponent} from './topics-selection.component';
+
+import {SlaRoutingModule} from './sla-routing.module';
+import {SlaComponent} from './sla.component';
+import {TopicsSelectionModule} from '../topics-selection/topics-selection.module';
 import {
   AccordionModule,
   BlockUIModule,
@@ -10,9 +13,12 @@ import {
   DialogModule,
   DropdownModule,
   FieldsetModule,
+  FileUploadModule,
+  InputTextareaModule,
   InputTextModule,
   ListboxModule,
   MessageModule,
+  MessagesModule,
   MultiSelectModule,
   PanelModule,
   PasswordModule,
@@ -20,22 +26,24 @@ import {
   TabViewModule,
   TriStateCheckboxModule
 } from 'primeng/primeng';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {MenubarModule} from 'primeng/menubar';
 import {TableModule} from 'primeng/table';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
-  providers: [TranslateService],
-  exports: [TopicsSelectionComponent],
-  declarations: [TopicsSelectionComponent],
+  declarations: [SlaComponent],
   imports: [
-    CommonModule, TranslateModule, TableModule,
+    CommonModule,
+    SlaRoutingModule,
+    TopicsSelectionModule,
     TabViewModule,
     TableModule,
     ButtonModule,
     DialogModule,
     BlockUIModule,
+    MessageModule,
     PanelModule,
     InputTextModule,
     DataGridModule,
@@ -43,7 +51,7 @@ import {ToastModule} from 'primeng/toast';
     TriStateCheckboxModule,
     CheckboxModule,
     ReactiveFormsModule,
-    MessageModule,
+    MessagesModule,
     ToastModule,
     RadioButtonModule,
     MultiSelectModule,
@@ -51,8 +59,10 @@ import {ToastModule} from 'primeng/toast';
     FieldsetModule,
     PasswordModule,
     AccordionModule, TranslateModule,
-    DropdownModule
+    DropdownModule,
+    InputTextareaModule, MessageModule,
+    FileUploadModule, MenubarModule,
   ]
 })
-export class TopicsSelectionModule {
+export class SlaModule {
 }

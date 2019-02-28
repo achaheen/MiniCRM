@@ -3,11 +3,8 @@ import {Topic} from './topic';
 import {User} from './user';
 
 export interface GeneratedTopicPermissions extends BasicModelWithIDInt {
-
   topic?: Topic;
   userName?: string;
-  creationDate?: Date;
-  createdBy?: string;
   inheritedFrom?: string;
   admin?: boolean;
   canCreate?: boolean;
@@ -23,6 +20,4 @@ export interface GeneratedTopicPermissions extends BasicModelWithIDInt {
   canRunReport?: boolean;
   canSubscribe?: boolean;
   userID?: User;
-
-
 }
