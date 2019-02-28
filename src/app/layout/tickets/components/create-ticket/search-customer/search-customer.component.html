@@ -17,7 +17,7 @@
                                 [(ngModel)]="customerEmail"></div>
 </div>
 
-<p-panel class="btnPanel no_style">
+<p-panel class="no_style">
     <p-button label="{{'Search'|translate}}" (onClick)="search()"></p-button>
 
     <p-button label="{{'clear'|translate}}" (onClick)="clear()"></p-button>
@@ -52,7 +52,7 @@
     </tr>
   </ng-template>
 </p-table>
-<p-panel class="btnPanel no_style">
+<p-panel class="no_style">
 <p-button (onClick)="doSelection()" *ngIf="selectedAccount!=null"
           [label]="'SelectAcctBTN'|translate"></p-button>
 </p-panel>
