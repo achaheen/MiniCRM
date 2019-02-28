@@ -26,13 +26,13 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
     this.enableAdminSelection = true;
     this.cols = [
       {field: 'id', header: 'ID'},
-      {field: 'mainCategory', header: this.utils.translateService.instant('MainCat'), sort: false},
-      {field: 'subCategory', header: this.utils.translateService.instant('SubCat'), sort: false},
-      {field: 'topic', header: this.utils.translateService.instant('Topic'), sort: true},
-      {field: 'slaName', header: this.utils.translateService.instant('slaName'), sort: false},
-      {field: 'slaUnit', header: this.utils.translateService.instant('slaUnit'), sort: false},
+      {field: 'mainCategory', header: this.utils.translateService.instant('MainCat'), sort: false, topic: true},
+      {field: 'subCategory', header: this.utils.translateService.instant('SubCat'), sort: false, topic: true},
+      {field: 'topic', header: this.utils.translateService.instant('Topic'), sort: true, topic: false},
+      {field: 'slaName', header: this.utils.translateService.instant('slaName'), sort: false, sla: true},
+      {field: 'slaUnit', header: this.utils.translateService.instant('slaUnit'), sort: false, sla: true},
       {field: 'slaLevel', header: this.utils.translateService.instant('slaLevel'), sort: true},
-      {field: 'slaTime', header: this.utils.translateService.instant('slaTime'), sort: true},
+      {field: 'slaTime', header: this.utils.translateService.instant('slaTime'), sort: true, sla: true},
       {field: 'createdBy', header: this.utils.translateService.instant('createdBy'), sort: true},
       {field: 'creationDate', header: this.utils.translateService.instant('creationDate'), sort: true},
       {field: 'modifiedBy', header: this.utils.translateService.instant('modifiedBy'), sort: true},
@@ -42,7 +42,7 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
 
   ngOnInit() {
 
-
   }
+
 
 }
