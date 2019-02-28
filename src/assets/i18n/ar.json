@@ -59,6 +59,7 @@
   "creationDateEnd" : "إلي تاريخ",
   "nan" : "رقم الهوية / الإقامة",
   "Reply" : "الرد",
+  "replies" : "الردود",
   "attachments" : "المرفقات",
   "Title": "العنوان",
   "CreateTicket": "طلب جديد",
@@ -74,6 +75,9 @@
   "MainCatList": "قائمة الأقسام الرئيسية",
   "SubCatList": "قائمة الأقسام الفرعية",
   "TopicList": "قائمة الموضوعات",
-  "login": "الدخول"
+  "login": "الدخول",
+  "notesDetails": " حالة الطلب سوف تكون : ",
+  "SaveReply": "حفظ الرد",
+  "SelectAcctBTN": "إختيار حساب العميل"
 }
 

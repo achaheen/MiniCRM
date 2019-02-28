@@ -67,8 +67,8 @@ body .ui-table .ui-table-caption {
   padding: 0px 8px;
 }
 .p-grid{
-  margin-bottom: 6px !important;
-  margin-top: auto !important;
+  margin-bottom: 0px !important;
+  margin-top: 0px !important;
 }
 
 .dt-selection tr.ui-state-highlight{
@@ -127,6 +127,21 @@ legend{
   min-width: 200px;
 }
 
+.p-grid .minWidth .ui-dropdown{
+  min-width: 100% !important;
+}
+.p-grid .minWidth .ui-inputtext{
+  min-width: 100% !important;
+}
+.p-grid .minWidth .ui-calendar{
+  min-width: 100% !important;
+}
+.p-grid .minWidth textarea.ui-inputtext{
+    min-height: 100px;}
+
+.p-grid .grid-label{
+  padding: 8px !important;
+}
 
 body .ui-accordion .ui-accordion-header:not(.ui-state-disabled).ui-state-active a {
   border: 1px solid #007ad9;

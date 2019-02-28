@@ -1,31 +1,30 @@
-<table class="minWidth">
-  <tr>
-    <td class="grid-label">{{'CustomerBasic' | translate}}</td>
-    <td class="grid-input"><input id="customerBasic" type="text" pInputText name="customerBasic"
-                                  [(ngModel)]="customerBasic"></td>
-    <td class="grid-label">{{'nan' | translate}}</td>
-    <td class="grid-input"><input id="nan" type="text" pInputText name="customerBasic"
-                                  [(ngModel)]="nin"></td>
+<div style="padding: 0px 8px;">
+<div class="p-grid p-justify-start ">
+  <div class="p-col-1 grid-label">{{'CustomerBasic' | translate}}</div>
+  <div class="p-col-3 minWidth"><input id="customerBasic" type="text" pInputText name="customerBasic"
+                                [(ngModel)]="customerBasic"></div>
+  <div class="p-col-1 grid-label">{{'nan' | translate}}</div>
+  <div class="p-col-3 minWidth"><input id="nan" type="text" pInputText name="customerBasic"
+                                [(ngModel)]="nin"></div>
 
-  </tr>
-  <tr>
-    <td class="grid-label">{{'CustomerMobile' | translate}}</td>
-    <td class="grid-input"><input id="customerMobile" type="text" pInputText name="customerMobile"
-                                  [(ngModel)]="customerMobile"></td>
-    <td class="grid-label">{{'CustomerEmail' | translate}}</td>
-    <td class="grid-input"><input id="customerEmail" type="text" pInputText name="customerEmail"
-                                  [(ngModel)]="customerEmail"></td>
-  </tr>
-  <tr>
-    <td>
-      <p-button label="{{'Search'|translate}}" (onClick)="search()"></p-button>
+</div>
+<div class="p-grid p-justify-start ">
+  <div class="p-col-1 grid-label">{{'CustomerMobile' | translate}}</div>
+  <div class="p-col-3 minWidth"><input id="customerMobile" type="text" pInputText name="customerMobile"
+                                [(ngModel)]="customerMobile"></div>
+  <div class="p-col-1 grid-label">{{'CustomerEmail' | translate}}</div>
+  <div class="p-col-3 minWidth"><input id="customerEmail" type="text" pInputText name="customerEmail"
+                                [(ngModel)]="customerEmail"></div>
+</div>
 
-    </td>
-    <td>
-      <p-button label="{{'Clear'|translate}}" (onClick)="clear()"></p-button>
-    </td>
-  </tr>
-</table>
+<p-panel class="btnPanel no_style">
+    <p-button label="{{'Search'|translate}}" (onClick)="search()"></p-button>
+
+    <p-button label="{{'clear'|translate}}" (onClick)="clear()"></p-button>
+</p-panel>
+
+  <div style="clear: both"></div>
+</div>
 <p-table *ngIf="accountsList!=null&& accountsList.length>0" [columns]="cols"
          [dataKey]="id" [value]="accountsList"
          [paginator]="true"
@@ -53,5 +52,8 @@
     </tr>
   </ng-template>
 </p-table>
+<p-panel class="btnPanel no_style">
 <p-button (onClick)="doSelection()" *ngIf="selectedAccount!=null"
           [label]="'SelectAcctBTN'|translate"></p-button>
+</p-panel>
+<div style="clear: both"></div>

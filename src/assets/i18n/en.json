@@ -116,6 +116,7 @@
   "NewTopic": "New Topic",
   "title": "Title",
   "reply": "Reply",
+  "replies": "Replies",
   "notes": "Notes",
   "CreateTicket": "Create New Ticket",
   "ViewTicket": "View Ticket",
@@ -215,5 +216,8 @@
   "sla": "SLA",
   "topicSLA": "Topic SLA",
   "slaUnit": "Unit",
-  "slaName": "Name"
+  "slaName": "Name",
+  "UpdateUserSuccess": "Update User success",
+  "SaveReply": "Save Reply"
+
 }

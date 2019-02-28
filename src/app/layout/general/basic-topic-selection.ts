@@ -34,7 +34,7 @@ export class BasicTopicSelection {
         this.authorizedTopicsRequest.subCat = this.selectedSubCategory.id;
         this.topicService.authorized(this.authorizedTopicsRequest).subscribe(
           result => {
-            const topic: Topic = {id: null, arabicLabel: 'اختر الموضوع', englishLabel: 'Select Topic'};
+            const topic: Topic = {id: null, arabicLabel: 'اختيار الموضوع', englishLabel: 'Select Topic'};
             this.topics = result;
             this.topics.unshift(topic);
             this.buildTopicSelectItems();
@@ -49,7 +49,7 @@ export class BasicTopicSelection {
       if (this.selectedSubCategory != null && this.selectedSubCategory.id != null) {
         this.topicService.active(this.selectedSubCategory.id).subscribe(
           result => {
-            const topic: Topic = {id: null, arabicLabel: 'اختر الموضوع', englishLabel: 'Select Topic'};
+            const topic: Topic = {id: null, arabicLabel: 'اختيار الموضوع', englishLabel: 'Select Topic'};
             this.topics = result;
             this.topics.unshift(topic);
             this.buildTopicSelectItems();
@@ -85,7 +85,7 @@ export class BasicTopicSelection {
         this.subCategoryService.authorized(this.authorizedTopicsRequest).subscribe(
           result => {
             this.subCategories = result;
-            const subcategory: Subcategory = {arabicLabel: 'اختر التصنيف الفرعي', englishLabel: 'Select Sub Category', id: null};
+            const subcategory: Subcategory = {arabicLabel: 'اختيار التصنيف الفرعي', englishLabel: 'Select Sub Category', id: null};
             this.subCategories.unshift(subcategory);
             this.buildSubcategoriesSelectItems();
           }
@@ -103,7 +103,7 @@ export class BasicTopicSelection {
         this.subCategoryService.active(this.selectedMainCategory.id).subscribe(
           result => {
             this.subCategories = result;
-            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'اختر التصنيف الفرعي', id: null};
+            const subcategory: Subcategory = {englishLabel: 'Select Sub Category', arabicLabel: 'اختيار التصنيف الفرعي', id: null};
             this.subCategories.unshift(subcategory);
             this.buildSubcategoriesSelectItems();
           }
@@ -130,7 +130,7 @@ export class BasicTopicSelection {
     if (!this.enableAdminSelection) {
       this.mainCatService.authorized(this.authorizedTopicsRequest).subscribe(
         result => {
-          const mainCat: MainCategory = {id: null, arabicLabel: 'اختر القسم الرئيسي', englishLabel: 'Select Main Category'};
+          const mainCat: MainCategory = {id: null, arabicLabel: 'اختيار القسم الرئيسي', englishLabel: 'Select Main Category'};
           this.mainCategories = result;
           this.mainCategories.unshift(mainCat);
           this.buildMainCategoriesSelectItems();
@@ -143,7 +143,7 @@ export class BasicTopicSelection {
     } else {
       this.mainCatService.active().subscribe(
         result => {
-          const mainCat: MainCategory = {id: null, arabicLabel: 'اختر القسم الرئيسي', englishLabel: 'Select Main Category'};
+          const mainCat: MainCategory = {id: null, arabicLabel: 'اختيار القسم الرئيسي', englishLabel: 'Select Main Category'};
           this.mainCategories = result;
           this.mainCategories.unshift(mainCat);
           this.buildMainCategoriesSelectItems();
@@ -176,7 +176,7 @@ export class BasicTopicSelection {
           if (this.mainCatConfigurations.fields.length <= 4) {
             this.mainCatConfigurations.slicedFields = [this.mainCatConfigurations.fields];
           } else {
-            this.mainCatConfigurations.slicedFields = this.chunkArray(this.mainCatConfigurations.fields, 3);
+            this.mainCatConfigurations.slicedFields = this.utils.chunkArray(this.mainCatConfigurations.fields, 3);
           }
         }
       } else {
@@ -185,27 +185,5 @@ export class BasicTopicSelection {
     }
   }
 
-  chunkArray(array, chunkSize) {
-    let index;
-    const arrayLength = array.length;
-    const finalArray: any = [];
-    for (index = 0; index < arrayLength; index += chunkSize) {
-      let chunk = array.slice(index, index + chunkSize);
-      if (chunk.length < chunkSize) {
-        console.log(`chunk size ${chunkSize} < length ${chunk.length} `);
-        chunk = this.fillArrayOfFields(chunk, chunkSize);
-      }
-      finalArray.push(chunk);
-    }
-    return finalArray;
-  }
-
-  fillArrayOfFields(array: any[], chunkSize) {
-    while (array.length < chunkSize) {
-      array.push({type: -1, mappedField: ''});
-    }
-    console.log(`chunk size now ${chunkSize} equal array length ${array.length}`);
-    return array;
-  }
 
 }

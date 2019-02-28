@@ -33,11 +33,11 @@ export class UtilsService {
     this.statusList = JSON.parse(localStorage.getItem(environment.ticketStatusList)) as Status[];
     this.actionList = JSON.parse(localStorage.getItem(environment.ticketActionsList)) as TicketActions[];
     this.typesList = JSON.parse(localStorage.getItem(environment.ticketTypeList)) as Type[];
-    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type', arabicLabel: 'برجاء اختيار نوع الطلب'});
+    this.typesList.unshift({'typeID': null, 'englishLabel': 'Select Ticket Type', arabicLabel: 'اختيار نوع الطلب'});
     this.priorityList = JSON.parse(localStorage.getItem(environment.ticketPriorityList)) as Priority[];
     this.priorityList.unshift({'priorityValue': null, 'priority': 'Select Priority'});
     this.channelList = JSON.parse(localStorage.getItem(environment.ticketChannelList)) as SourceChannel[];
-    this.channelList.unshift({channelID: null, arabicLabel: 'برجاء اختبار المصدر', englishLabel: 'Select Source Channel'});
+    this.channelList.unshift({channelID: null, arabicLabel: 'اختبار المصدر', englishLabel: 'Select Source Channel'});
 
     this.initSelectItemLists();
   }
@@ -167,4 +167,31 @@ export class UtilsService {
     }
     return null;
   }
+
+
+
+  chunkArray(array, chunkSize) {
+    let index;
+    const arrayLength = array.length;
+    const finalArray: any = [];
+    for (index = 0; index < arrayLength; index += chunkSize) {
+      let chunk = array.slice(index, index + chunkSize);
+      if (chunk.length < chunkSize) {
+        console.log(`chunk size ${chunkSize} < length ${chunk.length} `);
+        chunk = this.fillArrayOfFields(chunk, chunkSize);
+      }
+      finalArray.push(chunk);
+    }
+    return finalArray;
+  }
+
+  fillArrayOfFields(array: any[], chunkSize) {
+    while (array.length < chunkSize) {
+      array.push({type: -1, mappedField: ''});
+    }
+    console.log(`chunk size now ${chunkSize} equal array length ${array.length}`);
+    return array;
+  }
+
+
 }
