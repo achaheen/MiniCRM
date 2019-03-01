@@ -15,6 +15,7 @@ export class BasicTopicSelection {
     , public subCategoryService: SubCategoryService,
               public mainCatService: MainCategoryService, public utils: UtilsService) {
   }
+
   @Input() public mainCategories: MainCategory[] = [];
   public mainCategoriesSelectItems: SelectItem[] = [];
   @Input() public selectedMainCategory: MainCategory;
@@ -117,6 +118,7 @@ export class BasicTopicSelection {
       }
     }
   }
+
   private buildSubcategoriesSelectItems() {
     if (this.subCategories != null) {
       this.subCategoriesSelectItems = [];
@@ -126,6 +128,7 @@ export class BasicTopicSelection {
       });
     }
   }
+
   public listAllMainCategories() {
     if (!this.enableAdminSelection) {
       this.mainCatService.authorized(this.authorizedTopicsRequest).subscribe(
@@ -185,5 +188,7 @@ export class BasicTopicSelection {
     }
   }
 
-
+  topicSelected(event) {
+    
+  }
 }

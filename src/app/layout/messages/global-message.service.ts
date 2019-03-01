@@ -3,6 +3,7 @@ import {Observable, Subject} from 'rxjs';
 import {Message} from 'primeng/api';
 import {ResponseCode} from '../../shared/model/response-code';
 import {UtilsService} from '../../shared/services/utils.service';
+import {ResponseError} from '../../shared/model/response-error';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +36,15 @@ export class GlobalMessageService {
   printError(error) {
     if (error !== null) {
       try {
-        const resCode: ResponseCode = error as ResponseCode;
-        this.error(resCode.code, resCode.msg);
+        if (error.error !== undefined && error.error.status !== undefined) {
+          const errorMessage: ResponseError = error.error as ResponseError;
+          this.error('Critical Error', JSON.stringify(errorMessage));
+        } else if (error.msg !== undefined) {
+          const resCode: ResponseCode = error as ResponseCode;
+          this.error(resCode.code, resCode.msg);
+        } else {
+          this.error('Error', JSON.stringify(error));
+        }
       } catch (e) {
         this.error('Error', JSON.stringify(error));
       }

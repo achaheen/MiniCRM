@@ -8,3 +8,8 @@ export interface Sla extends BasicModelWithIDInt {
   catID?: number;
   slaname?: string;
 }
+
+export interface TopisSlaHolder {
+  topicsla: TopicSla;
+  usersList?: string[];
+}

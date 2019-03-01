@@ -1,0 +1,36 @@
+<ng-container *ngIf="topicSla!=null">
+  <div class="p-grid">
+    <div class="p-col">{{'Topic'|translate}}</div>
+    <div class="p-col">{{utils.printLocLabel(topicSla.topicID)}}</div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col">{{'slaLevel'|translate}}</div>
+    <div class="p-col">
+      <p-dropdown [options]="availableSLA" [(ngModel)]="topicSla.slalevel" appendTo="body"
+      ></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col">{{'sla'|translate}}</div>
+    <div class="p-col">
+      <p-dropdown [options]="slaList" [(ngModel)]="topicSla.slaid" appendTo="body"></p-dropdown>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col">{{'slaUsers'|translate}}</div>
+    <div class="p-col">
+      <p-multiSelect [options]="activeUsers" [(ngModel)]="selectedUsers"
+                     appendTo="body"
+                     filterBy="label,value.userID,value.firstName,value.lastName"></p-multiSelect>
+    </div>
+  </div>
+  <div class="p-grid">
+
+    <div class="p-col">
+      <p-button label="create" (onClick)="create()"></p-button>
+    </div>
+    <div class="p-col">
+      <p-button label="cancel" (onClick)="eventEmitter.emit(null)"></p-button>
+    </div>
+  </div>
+</ng-container>

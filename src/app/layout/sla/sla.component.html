@@ -1,6 +1,9 @@
 <div><br/></div>
 <app-topics-selection [parent]="this" [skipTable]="false"></app-topics-selection>
-<p-table *ngIf="topicSlaList!=null && topicSlaList.length>0" #dt [value]="topicSlaList" [paginator]="true"
+<br/>
+<p-table *ngIf="topicSlaList!=null && topicSlaList.length>0 && !enableCreateEdit" #dt [value]="topicSlaList"
+         [paginator]="true"
+
          class="dt-selection" selectionMode="single"
          [rows]="10"
          [columns]="cols"
@@ -9,7 +12,6 @@
          [resizableColumns]="true" columnResizeMode="expand"
          [responsive]="true"
          dataKey="id">
-
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 43px;"></th>
@@ -31,24 +33,30 @@
         <ng-container
           *ngIf="col.topic!==undefined && col.topic">
           <div *ngIf="col.field ==='mainCategory'">
-            {{utils.printLocLabel(sla['topic'].subCategory.mainCategory) }}
+            {{utils.printLocLabel(sla['topicID'].subCategory.mainCategory) }}
           </div>
 
           <div *ngIf="col.field ==='subCategory'">
-            {{utils.printLocLabel(sla['topic'].subCategory)}}
+            {{utils.printLocLabel(sla['topicID'].subCategory)}}
           </div>
         </ng-container>
         <ng-container
           *ngIf="col.sla!==undefined && col.sla">
           <div>
-            {{sla[col.field]}}
+            {{sla['slaid'][col.field]}}
           </div>
         </ng-container>
         <div *ngIf="col.field ==='topic'">
-          {{utils.printLocLabel(sla[col.field]) }}
+          {{utils.printLocLabel(sla['topicID']) }}
         </div>
-
+        <ng-container
+          *ngIf="col.main!==undefined && col.main"> {{ sla[col.field] }}</ng-container>
       </td>
     </tr>
   </ng-template>
 </p-table>
+<p-button label="create" (onClick)="create()" *ngIf="!enableCreateEdit"></p-button>
+
+<app-create-sla #create_edit *ngIf="enableCreateEdit" [topicSla]="selectedTopicSla"
+                (eventEmitter)="handleEvent($event)"
+                [existingSLA]="existingSla"></app-create-sla>

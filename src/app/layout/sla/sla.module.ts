@@ -31,9 +31,10 @@ import {TableModule} from 'primeng/table';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ToastModule} from 'primeng/toast';
 import {TranslateModule} from '@ngx-translate/core';
+import { CreateSlaComponent } from './create-sla/create-sla.component';
 
 @NgModule({
-  declarations: [SlaComponent],
+  declarations: [SlaComponent, CreateSlaComponent],
   imports: [
     CommonModule,
     SlaRoutingModule,
