@@ -213,6 +213,21 @@
   "CreateUserSuccess": "Create User success",
   "UpdateUserFailed": "Update User failed",
   "UpdateUserSuccess": "Update User success",
-  "SaveReply": "Save Reply"
+  "SaveReply": "Save Reply",
+  "UserID" : "User ID",
+  "StaffNo" : "Staff No",
+  "firstName" : "First Name",
+  "lastName" : "Last Name",
+  "dept": "Department",
+  "userType" : "User Type",
+  "UpdateUser" : "Update User",
+  "CreateUser" : "Create New User",
+  "userRolesGroups" : "User Roles And Groups",
+  "Roles" : "Roles",
+  "saveBTN": "Save",
+  "systemUser" : "System User",
+  "UserName" : "Username"
+
+
 
 }
