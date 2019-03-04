@@ -3,14 +3,14 @@
     <div class="p-col">{{'Topic'|translate}}</div>
     <div class="p-col">{{utils.printLocLabel(topicSla.topicID)}}</div>
   </div>
-  <div class="p-grid">
+  <div class="p-grid" *ngIf="!editMode">
     <div class="p-col">{{'slaLevel'|translate}}</div>
     <div class="p-col">
       <p-dropdown [options]="availableSLA" [(ngModel)]="topicSla.slalevel" appendTo="body"
       ></p-dropdown>
     </div>
   </div>
-  <div class="p-grid">
+  <div class="p-grid" *ngIf="!editMode">
     <div class="p-col">{{'sla'|translate}}</div>
     <div class="p-col">
       <p-dropdown [options]="slaList" [(ngModel)]="topicSla.slaid" appendTo="body"></p-dropdown>
@@ -26,8 +26,11 @@
   </div>
   <div class="p-grid">
 
-    <div class="p-col">
-      <p-button label="create" (onClick)="create()"></p-button>
+    <div class="p-col" *ngIf="!editMode">
+      <p-button [label]="'createBTN'|translate" (onClick)="create()"></p-button>
+    </div>
+    <div class="p-col" *ngIf="editMode">
+      <p-button [label]="'modifyBTN'|translate" (onClick)="edit()"></p-button>
     </div>
     <div class="p-col">
       <p-button label="cancel" (onClick)="eventEmitter.emit(null)"></p-button>

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BasicTopicSelection} from '../general/basic-topic-selection';
 import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
@@ -8,12 +8,26 @@ import {SlaService} from '../../shared/services/sla.service';
 import {TopicSlaService} from '../../shared/services/topic-sla.service';
 import {TopicSla} from '../../shared/model/topicSla';
 import {Topic} from '../../shared/model/topic';
-import {CreateSlaComponent} from './create-sla/create-sla.component';
+import {User} from '../../shared/model/user';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-sla',
   templateUrl: './sla.component.html',
-  styleUrls: ['./sla.component.scss']
+  styleUrls: ['./sla.component.scss'],
+  animations: [
+    trigger('rowExpansionTrigger', [
+      state('void', style({
+        transform: 'translateX(-10%)',
+        opacity: 0
+      })),
+      state('active', style({
+        transform: 'translateX(0)',
+        opacity: 1
+      })),
+      transition('* <=> *', animate('400ms cubic-bezier(0.86, 0, 0.07, 1)'))
+    ])
+  ]
 })
 export class SlaComponent extends BasicTopicSelection implements OnInit {
 
@@ -24,6 +38,8 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
   selectedTopic: Topic;
   existingSla: number[] = [];
   enableCreateEdit: boolean = false;
+  displayDialog: boolean = false;
+  slaUsersList: User[];
 
   constructor(public slaService: SlaService, public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService, public topicService: TopicService,
@@ -64,6 +80,16 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
     }
   }
 
+  onRowSelect(event) {
+    this.displayDialog = false;
+    this.topicSlaService.getSlaUsers(event.data.id).subscribe(value => {
+      this.slaUsersList = value;
+      if (this.slaUsersList != null && this.slaUsersList.length > 0) {
+        // this.displayDialog = true;
+      }
+    });
+  }
+
   create() {
     if (this.selectedTopic != null) {
       this.selectedTopicSla = {
@@ -81,6 +107,21 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
       }
       this.enableCreateEdit = true;
     }
+  }
+
+  modify() {
+    if (this.selectedTopicSla != null) {
+      this.enableCreateEdit = true;
+    }
+  }
+
+  delete() {
+    this.topicSlaService.delete(this.selectedTopicSla.id).subscribe(value => {
+      this.utils.messageService.success('Deleted', 'Topic SLA Deleted Successfully');
+      this.topicSlaList = value;
+    }, error1 => {
+      this.utils.messageService.printError(error1);
+    });
   }
 
   handleEvent(event) {

@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {BasicHttpService} from './basicHttp.service';
 import {TopicSla} from '../model/topicSla';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +29,13 @@ export class TopicSlaService extends BasicHttpService {
 
   create(request) {
     return this.httpClient.post<TopicSla[]>(this.baseURL + `create`, request);
+  }
+
+  getSlaUsers(topicID) {
+    return this.httpClient.get<User[]>(this.baseURL + 'users/' + topicID);
+  }
+
+  delete(id) {
+    return this.httpClient.post<TopicSla[]>(this.baseURL + `delete/${id}`, null);
   }
 }

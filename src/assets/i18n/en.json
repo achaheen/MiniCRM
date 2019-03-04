@@ -217,5 +217,10 @@
   "topicSLA": "Topic SLA",
   "slaUnit": "Unit",
   "slaName": "Name",
-  "slaUsers": "SLA Users"
+  "slaUsers": "SLA Users",
+  "userID": "User ID",
+  "fullName": "Full Name",
+  "email": "Email Address",
+  "changeUsersBTN": "Change Users",
+  "deleteBTN": "Delete"
 }
