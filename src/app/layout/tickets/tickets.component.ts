@@ -3,16 +3,12 @@ import {SearchTicketsContainer} from '../../shared/model/searchTicketsContainer'
 import {TicketsService} from '../../shared/services/tickets.service';
 import {Ticket} from '../../shared/model/ticket';
 import {SearchTicketsResult} from '../../shared/model/searchTicketsResult';
-import {MainCategory} from '../../shared/model/mainCategory';
-import {Subcategory} from '../../shared/model/subcategory';
-import {Topic} from '../../shared/model/topic';
 import {MainCategoryService} from '../../shared/services/main-category.service';
 import {SubCategoryService} from '../../shared/services/sub-category.service';
 import {TopicService} from '../../shared/services/topic.service';
 import {TranslateService} from '@ngx-translate/core';
 import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
-import {Status} from '../../shared/model/status';
 import {BasicTopicSelection} from '../general/basic-topic-selection';
 import {UtilsService} from '../../shared/services/utils.service';
 

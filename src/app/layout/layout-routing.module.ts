@@ -21,7 +21,8 @@ const routes: Routes = [
       {path: 'groups', loadChildren: './groups/groups.module#GroupsModule'},
       {path: 'tickets', loadChildren: './tickets/tickets.module#TicketsModule'},
       {path: 'tp', loadChildren: './topicspermissions/topicspermissions.module#TopicspermissionsModule'},
-      {path: 'mc', loadChildren: './topics/topics.module#TopicsModule'}
+      {path: 'mc', loadChildren: './topics/topics.module#TopicsModule'},
+      {path: 'sla', loadChildren: './sla/sla.module#SlaModule'}
     ]
   }
 ];

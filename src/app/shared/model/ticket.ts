@@ -2,7 +2,7 @@ import {Topic} from './topic';
 import {CustomerAccounts} from './customerAccounts';
 import {Ticketdata} from './Ticketdata';
 import {Escalationhistory} from './escalationhistory';
-import {SmsHistory} from './smsHistory';
+
 import {TicketExtData} from './ticketExtData';
 import {TicketHistroy} from './ticketHistroy';
 
@@ -48,7 +48,6 @@ export interface Ticket {
   creationDate?: number;
   ticketdataList?: Ticketdata[];
   escalationhistoryList?: Escalationhistory[];
-  smsHistoryList?: SmsHistory[];
   ticketExtData?: TicketExtData[];
   ticketHistoryList?: TicketHistroy[];
   statusLabel?: string;

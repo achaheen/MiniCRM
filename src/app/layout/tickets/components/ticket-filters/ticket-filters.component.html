@@ -2,23 +2,25 @@
   <p-accordionTab header="{{'filters' | translate}}">
 
     <app-topics-selection [parent]="this"></app-topics-selection>
-<hr/>
+    <hr/>
     <table class="searchTable">
       <tr>
         <td class="grid-label">{{'TicketType' | translate}}</td>
         <td class="grid-input">
           <p-dropdown [options]="utils.typesListSelectItems" [(ngModel)]="ticketType"
+                      appendTo="body"
           ></p-dropdown>
         </td>
         <td class="grid-label">{{'Channel' | translate}}</td>
         <td class="grid-input">
           <p-dropdown [options]="utils.channelListSelectItems" [(ngModel)]="ticketSource"
+                      appendTo="body"
           ></p-dropdown>
         </td>
 
         <td class="grid-label">{{'Priority' | translate}}</td>
         <td class="grid-input">
-          <p-dropdown [options]="utils.priorityListSelectItems" [(ngModel)]="ticketPriority"
+          <p-dropdown [options]="utils.priorityListSelectItems" [(ngModel)]="ticketPriority" appendTo="body"
           ></p-dropdown>
         </td>
 

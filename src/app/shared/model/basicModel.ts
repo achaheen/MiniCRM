@@ -1,8 +1,8 @@
 export interface BasicModel  {
 
   createdBy?: string;
-  modificationDate?: Date;
+  modificationDate?: string;
   modifiedBy?: string;
-  creationDate?: Date;
+  creationDate?: string;
 
 }

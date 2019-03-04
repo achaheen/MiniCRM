@@ -3,6 +3,7 @@
     <td class="grid-label">{{'MainCat'|translate}}</td>
     <td class="grid-input ">
       <p-dropdown (onChange)="parent.updateSubCategory()" [options]="parent.mainCategoriesSelectItems"
+                  appendTo="body"
                   [(ngModel)]="parent.selectedMainCategory"
                   [filter]="true"
                   filterBy="label,value.id">
@@ -12,12 +13,15 @@
     <td class="grid-input minWidth">
       <p-dropdown (onChange)="parent.updateTopicList()" [options]="parent.subCategoriesSelectItems"
                   [(ngModel)]="parent.selectedSubCategory" [filter]="true"
+                  appendTo="body"
                   filterBy="label,value.id"
       ></p-dropdown>
     </td>
     <td class="grid-label">{{'Topic'|translate}}</td>
     <td class="grid-input minWidth">
       <p-dropdown [options]="parent.topicsSelectItems" [(ngModel)]="parent.selectedTopic" [filter]="true"
+                  appendTo="body"
+                  (onChange)="parent.topicSelected($event)"
                   filterBy="label,value.id"></p-dropdown>
     </td>
 
@@ -27,26 +31,29 @@
 
 <ng-container *ngIf="skipTable">
   <div class="p-grid p-justify-start">
-  <div class="p-col-1 grid-label">{{'MainCat'|translate}}</div>
-  <div class=" p-col-3 minWidth">
-    <p-dropdown (onChange)="parent.updateSubCategory()" [options]="parent.mainCategoriesSelectItems"
-                [(ngModel)]="parent.selectedMainCategory"
-                [filter]="true"
-                filterBy="label,value.id">
-    </p-dropdown>
-  </div>
-  <div class="p-col-1 grid-label">{{'SubCat'|translate}}</div>
-  <div class="p-col-3 minWidth">
-    <p-dropdown (onChange)="parent.updateTopicList()" [options]="parent.subCategoriesSelectItems"
-                [(ngModel)]="parent.selectedSubCategory" [filter]="true"
-                filterBy="label,value.id">
+    <div class="p-col-1 grid-label">{{'MainCat'|translate}}</div>
+    <div class=" p-col-3 minWidth">
+      <p-dropdown (onChange)="parent.updateSubCategory()" [options]="parent.mainCategoriesSelectItems"
+                  [(ngModel)]="parent.selectedMainCategory"
+                  appendTo="body"
+                  [filter]="true"
+                  filterBy="label,value.id">
+      </p-dropdown>
+    </div>
+    <div class="p-col-1 grid-label">{{'SubCat'|translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-dropdown (onChange)="parent.updateTopicList()" [options]="parent.subCategoriesSelectItems"
+                  [(ngModel)]="parent.selectedSubCategory" [filter]="true"
+                  appendTo="body"
+                  filterBy="label,value.id">
 
-    </p-dropdown>
-  </div>
-  <div class="p-col-1 grid-label">{{'Topic'|translate}}</div>
-  <div class="p-col-3 minWidth">
-    <p-dropdown [options]="parent.topicsSelectItems" [(ngModel)]="parent.selectedTopic" [filter]="true"
-                filterBy="label,value.id"></p-dropdown>
-  </div>
+      </p-dropdown>
+    </div>
+    <div class="p-col-1 grid-label">{{'Topic'|translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-dropdown [options]="parent.topicsSelectItems" [(ngModel)]="parent.selectedTopic" [filter]="true"
+                  appendTo="body"
+                  filterBy="label,value.id"></p-dropdown>
+    </div>
   </div>
 </ng-container>

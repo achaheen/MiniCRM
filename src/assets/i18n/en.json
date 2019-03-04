@@ -226,8 +226,11 @@
   "Roles" : "Roles",
   "saveBTN": "Save",
   "systemUser" : "System User",
-  "UserName" : "Username"
-
-
+  "UserName" : "Username",
+  "sla": "SLA",
+  "topicSLA": "Topic SLA",
+  "slaUnit": "Unit",
+  "slaName": "Name",
+  "slaUsers": "SLA Users"
 
 }

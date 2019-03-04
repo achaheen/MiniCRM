@@ -27,9 +27,9 @@ export class TicketMessagesComponent implements OnInit, OnDestroy {
       console.log(`message received ${JSON.stringify(value)}`);
       this.msgs = [];
       this.msgs.push(value);
-      setTimeout(() => {
+      /*setTimeout(() => {
         this.msgs = [];
-      }, 10000);
+      }, 10000);*/
     });
   }
 

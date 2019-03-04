@@ -50,6 +50,7 @@
             <p-dropdown
               placeholder="{{'selectUsers'|translate}}"
               [filter]="true"
+              appendTo="body"
               filterBy="label,value.firstName,value.lastName"
               (onChange)="applyFilter()"
               [(ngModel)]="selectedUser" [options]="basicUserSelection.usersOptions"
@@ -74,6 +75,7 @@
             <p-dropdown
               placeholder="{{'selectGroups'|translate}}"
               (onChange)="applyFilter()"
+              appendTo="body"
               [filter]="true"
               filterBy="label"
               [(ngModel)]="selectedGroup" [options]="basicGroupSelection.groupsOptions"
