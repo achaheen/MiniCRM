@@ -1,0 +1,117 @@
+<p-panel #editDialog header="{{this.editMood != 'New' ? ('UpdateUser' | translate) : ('CreateUser' | translate)}}">
+  <form [formGroup]="this.userForm" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div class="p-grid">
+      <div class="p-col-12">
+        <p-message severity="error" text="userID is required"
+                   *ngIf="!userForm.controls['userID'].valid&&userForm.controls['userID'].dirty"></p-message>
+        <p-message severity="error" text="staffID is required"
+                   *ngIf="!userForm.controls['staffID'].valid&&userForm.controls['staffID'].dirty"></p-message>
+        <!--    <p-message severity="error" text="title is required" *ngIf="!userForm.controls['title'].valid&&userForm.controls['title'].dirty"></p-message>-->
+        <p-message severity="error" text="firstName is required"
+                   *ngIf="!userForm.controls['firstName'].valid&&userForm.controls['firstName'].dirty"></p-message>
+        <!--<p-message severity="error" text="department is required" *ngIf="!userForm.controls['department'].valid&&userForm.controls['department'].dirty"></p-message>-->
+        <p-message severity="error" text="userType is required"
+                   *ngIf="!userForm.controls['userType'].valid&&userForm.controls['userType'].dirty"></p-message>
+        <!--  <p-message severity="error" text="Enabled is required" *ngIf="!userForm.controls['enabled'].valid&&userForm.controls['enabled'].dirty"></p-message>-->
+        <p-message severity="error" text="email is required"
+                   *ngIf="!userForm.controls['email'].valid&&userForm.controls['email'].dirty"></p-message>
+        <p-message severity="error" text="password is required"
+                   *ngIf="!userForm.controls['password'].valid&&userForm.controls['password'].dirty"></p-message>
+
+      </div>
+    </div>
+
+
+    <div class="p-grid">
+
+      <div class="p-col-1 grid-label">{{'UserID' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="userID" type="text" pInputText name="userID"
+                                    [attr.disabled]="this.disableForEdit ? '' : null" formControlName="userID"
+                                    placeholder="Required" autocomplete="off"></div>
+      <div class="p-col-1 grid-label">{{'StaffNo' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="staffID" type="text" pInputText name="staffID"
+                                    [attr.disabled]="this.disableForEdit ? '' : null" formControlName="staffID"
+                                    placeholder="Required"></div>
+      <div class="p-col-1 grid-label">{{'title' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="title" type="text" pInputText name="title"
+                                    [attr.disabled]="this.disableForEdit ? '' : null" formControlName="title"></div>
+    </div>
+
+    <div class="p-grid">
+
+      <div class="p-col-1 grid-label">{{'firstName' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="firstName" type="text" size="20" pInputText name="firstName"
+                                    formControlName="firstName" placeholder="Required"></div>
+      <div class="p-col-1 grid-label">{{'lastName' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="lastName" type="text" size="20" pInputText name="lastName"
+                                    formControlName="lastName" placeholder="Required"></div>
+      <div class="p-col-1 grid-label">{{'Email' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="email" type="text" size="20" pInputText name="email" formControlName="email"
+                                    placeholder="Required"></div>
+    </div>
+
+    <div class="p-grid">
+
+      <div class="p-col-1 grid-label">{{'dept' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="department" type="text" size="20" pInputText name="department"
+                                    formControlName="department"></div>
+      <div class="p-col-1 grid-label">{{'userType' | translate}}</div>
+      <div class="p-col-3 minWidth userTypesRadio">
+        <div >
+          <p-radioButton name="groupname" value="ldap" (onClick)="togglePassword()" [disabled]="this.disableForEdit"
+                         formControlName="userType" placeholder="Required"></p-radioButton> &nbsp; Ldap
+        </div>
+        <div >
+          <p-radioButton name="groupname" value="system" (onClick)="togglePassword()" [disabled]="this.disableForEdit"
+                         formControlName="userType" placeholder="Required"></p-radioButton> &nbsp; System
+        </div>
+      </div>
+      <div class="p-col-1 grid-label">{{'enabled' | translate}}</div>
+      <div class="p-col-3 minWidth">
+        <p-checkbox binary="true" name="enabled" formControlName="enabled" placeholder="Required"></p-checkbox>
+      </div>
+    </div>
+    <div class="p-grid">
+      <div class="p-col-1 grid-label" [hidden]="disablePassword">Password</div>
+      <div class="p-col-3 minWidth"><input type="password" pPassword [hidden]="disablePassword" formControlName="password"
+                                    placeholder="******"/></div>
+
+
+    </div>
+
+
+    <p-fieldset legend="{{'userRolesGroups' | translate}}" id="userRolesFS">
+      <table>
+        <tr>
+          <div class="p-col-1 grid-label">{{'Roles' | translate}}</div>
+          <td colspan="4">
+            <p-listbox id="rolesListBox" [options]="userRoles" [(ngModel)]="selectedUserRoles" multiple="multiple"
+                       filter="filter" checkbox="checkbox" optionLabel="role" [ngModelOptions]="{standalone: true}">
+            </p-listbox>
+          </td>
+
+          <div class="p-col-1 grid-label">{{'Groups' | translate}}</div>
+          <td colspan="4">
+            <p-listbox id="groupsListBox" [options]="userGroups" [(ngModel)]="selectedUserGroups" multiple="multiple"
+                       filter="filter" checkbox="checkbox" optionLabel="groupName"
+                       [ngModelOptions]="{standalone: true}">
+            </p-listbox>
+          </tr>
+      </table>
+      <div id="fieldSetFooter"></div>
+    </p-fieldset>
+
+    <div class="btnPanel no_style">
+      <button type="submit" pButton icon="{{this.editMood != 'New' ? 'pi pi-pencil' : 'pi pi-user-plus'}}"
+              class="ui-button-rounded" label="{{'saveBTN' | translate}}"
+              [disabled]="!this.userForm.valid"></button>
+
+      <button type="button"
+              pButton class="ui-button-rounded"
+              (click)="parent.enableCreateEditMode=false;"
+              label="{{'backBTN' | translate}}"></button>
+    </div>
+<div style="clear: both"></div>
+  </form>
+
+</p-panel>

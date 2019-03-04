@@ -1,4 +1,10 @@
 .rtl {
+
+  .userTypesRadio div{
+    float: right;
+    padding-left: 15px;
+    padding-right: initial;
+  }
   .ui-listbox .ui-chkbox{
     margin: 0 0 0 0.5em !important;
   }

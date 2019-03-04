@@ -19,9 +19,11 @@ import {MultiSelectModule} from 'primeng/primeng';
 import {ListboxModule} from 'primeng/listbox';
 import {FieldsetModule} from 'primeng/fieldset';
 import {PasswordModule} from 'primeng/password';
+import { CreateUserComponent } from './create-user/create-user.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, CreateUserComponent],
   imports: [
     CommonModule,
     UsersRoutingModule,
@@ -42,7 +44,8 @@ import {PasswordModule} from 'primeng/password';
     MultiSelectModule,
     ListboxModule,
     FieldsetModule,
-    PasswordModule
+    PasswordModule,
+    TranslateModule
   ]
 })
 export class UsersModule { }
