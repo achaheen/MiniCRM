@@ -91,6 +91,6 @@
 
 </ng-container>
 
-<app-create-sla #create_edit *ngIf="enableCreateEdit" [topicSla]="selectedTopicSla"
+<app-create-sla *ngIf="enableCreateEdit" [topicSla]="selectedTopicSla"
                 (eventEmitter)="handleEvent($event)"
                 [existingSLA]="existingSla"></app-create-sla>

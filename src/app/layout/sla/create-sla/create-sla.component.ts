@@ -22,7 +22,6 @@ export class CreateSlaComponent implements OnInit {
   availableSLA: SelectItem[];
   slaList: SelectItem[] = [{value: null, label: ''}];
   activeUsers: SelectItem[] = [{value: null, label: ''}];
-  selectedSla: number;
   selectedUsers: User[];
 
   constructor(private utils: UtilsService, private  slaService: SlaService,
@@ -30,8 +29,9 @@ export class CreateSlaComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Topic SLA : \n' + JSON.stringify(this.topicSla));
-    this.selectedUsers = null;
+    // console.log('Topic SLA : \n' + JSON.stringify(this.topicSla));
+    this.selectedUsers = [];
+    this.activeUsers = [];
     this.slaService.all().subscribe(value => {
       if (value != null && value.length > 0) {
         value.forEach(value1 => {
@@ -46,6 +46,7 @@ export class CreateSlaComponent implements OnInit {
     });
     if (this.topicSla.id != null) {
       this.editMode = true;
+
       this.topicSlaService.getSlaUsers(this.topicSla.id).subscribe(value => {
         if (value != null && value.length > 0) {
           this.selectedUsers = value;
@@ -80,6 +81,7 @@ export class CreateSlaComponent implements OnInit {
       }, error1 => this.utils.messageService.printError(error1));
     }
   }
+
   edit() {
     if (this.topicSla == null || this.topicSla.slaid === null || this.topicSla.slalevel === null) {
       this.utils.messageService.error('Error', 'Please fill mandatory fields');
@@ -89,6 +91,8 @@ export class CreateSlaComponent implements OnInit {
         this.selectedUsers.forEach(value => {
           users.push(value.userID);
         });
+      } else {
+        this.selectedUsers = [];
       }
       const holder: TopisSlaHolder = {topicsla: this.topicSla, usersList: users};
       this.topicSlaService.edit(holder).subscribe(value => {
