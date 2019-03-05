@@ -1,39 +1,41 @@
 <ng-container *ngIf="topicSla!=null">
+  <p-panel #createDialog header="{{'SLA'| translate}}">
   <div class="p-grid">
-    <div class="p-col">{{'Topic'|translate}}</div>
-    <div class="p-col">{{utils.printLocLabel(topicSla.topicID)}}</div>
+    <div class="p-col-1">{{'Topic'|translate}}</div>
+    <div class="p-col-3 minWidth">{{utils.printLocLabel(topicSla.topicID)}}</div>
   </div>
   <div class="p-grid" *ngIf="!editMode">
-    <div class="p-col">{{'slaLevel'|translate}}</div>
-    <div class="p-col">
+    <div class="p-col-1">{{'slaLevel'|translate}}</div>
+    <div class="p-col-3 minWidth">
       <p-dropdown [options]="availableSLA" [(ngModel)]="topicSla.slalevel" appendTo="body"
       ></p-dropdown>
     </div>
   </div>
   <div class="p-grid" *ngIf="!editMode">
-    <div class="p-col">{{'sla'|translate}}</div>
-    <div class="p-col">
+    <div class="p-col-1">{{'sla'|translate}}</div>
+    <div class="p-col-3 minWidth">
       <p-dropdown [options]="slaList" [(ngModel)]="topicSla.slaid" appendTo="body"></p-dropdown>
     </div>
   </div>
   <div class="p-grid">
-    <div class="p-col">{{'slaUsers'|translate}}</div>
-    <div class="p-col">
+    <div class="p-col-1">{{'slaUsers'|translate}}</div>
+    <div class="p-col-3 minWidth">
       <p-multiSelect [options]="activeUsers" [(ngModel)]="selectedUsers"
                      appendTo="body"
                      filterBy="label,value.userID,value.firstName,value.lastName"></p-multiSelect>
     </div>
   </div>
-  <div class="p-grid">
 
-    <div class="p-col" *ngIf="!editMode">
-      <p-button [label]="'createBTN'|translate" (onClick)="create()"></p-button>
+  <div class="btnPanel no_style">
+
+    <button type="button"
+            pButton class="ui-button-rounded" *ngIf="!editMode" [label]="'createBTN'|translate" (click)="create()"></button>
+    <button type="button"
+            pButton class="ui-button-rounded" *ngIf="editMode" [label]="'modifyBTN'|translate" (click)="edit()"></button>
+    <button type="button"
+            pButton class="ui-button-rounded" label="cancel" (click)="eventEmitter.emit(null)"></button>
     </div>
-    <div class="p-col" *ngIf="editMode">
-      <p-button [label]="'modifyBTN'|translate" (onClick)="edit()"></p-button>
-    </div>
-    <div class="p-col">
-      <p-button label="cancel" (onClick)="eventEmitter.emit(null)"></p-button>
-    </div>
-  </div>
+
+  <div style="clear: both"></div>
+  </p-panel>
 </ng-container>

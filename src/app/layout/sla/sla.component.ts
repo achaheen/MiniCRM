@@ -91,6 +91,8 @@ export class SlaComponent extends BasicTopicSelection implements OnInit {
   }
 
   create() {
+
+    this.existingSla = [];
     if (this.selectedTopic != null) {
       this.selectedTopicSla = {
         id: null,

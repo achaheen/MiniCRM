@@ -2,32 +2,36 @@
   <div class="list-group">
 
     <a [routerLink]="['/users']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-user-circle "></i>&nbsp;
+      <i class="fa fa-users"></i>&nbsp;
       <span>{{ 'Users' | translate }}</span>
     </a>
 
     <a [routerLink]="['/tickets']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-ticket  "></i>&nbsp;
+      <i class="fa fa-ticket  "></i>&nbsp;
       <span>{{ 'Tickets' | translate }}</span>
     </a>
 
-    <a [routerLink]="['/roles']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-address-card"></i>&nbsp;
-      <span>{{ 'Roles' | translate }}</span>
-    </a>
+    <!--<a [routerLink]="['/roles']" [routerLinkActive]="['router-link-active']" class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-address-card"></i>&nbsp;-->
+      <!--<span>{{ 'Roles' | translate }}</span>-->
+    <!--</a>-->
 
-    <a [routerLink]="['/groups']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-users"></i>&nbsp;
-      <span>{{ 'Groups' | translate }}</span>
-    </a>
+    <!--<a [routerLink]="['/groups']" [routerLinkActive]="['router-link-active']" class="list-group-item">-->
+      <!--<i class="fa fa-fw fa-users"></i>&nbsp;-->
+      <!--<span>{{ 'Groups' | translate }}</span>-->
+    <!--</a>-->
 
     <a [routerLink]="['/tp']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-fw fa-table"></i>&nbsp;
-      <span>{{ 'TopicPermissions' | translate }}</span>
+      <i class="fa fa-lock"></i>&nbsp;
+      <span>{{ 'Permissions' | translate }}</span>
     </a>
     <a [routerLink]="['/mc']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-      <i class="fa fa-align-justify"></i>&nbsp;
-      <span>{{ 'MainCat' | translate }}</span>
+      <i class="fa fa-list-alt"></i>&nbsp;
+      <span>{{ 'Categories' | translate }}</span>
+    </a>
+    <a [routerLink]="['/sla']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-bell-o"></i>&nbsp;
+      <span>{{ 'sla' | translate }}</span>
     </a>
     <!--
       <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
