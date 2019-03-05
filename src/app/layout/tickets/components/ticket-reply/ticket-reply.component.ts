@@ -1,18 +1,16 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {TicketActions} from '../../../../shared/model/ticketActions';
 import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {UtilsService} from '../../../../shared/services/utils.service';
-import {MessageService} from 'primeng/api';
+import {MessageService, SelectItem} from 'primeng/api';
 import {MainCategoryService} from '../../../../shared/services/main-category.service';
 import {SubCategoryService} from '../../../../shared/services/sub-category.service';
 import {TopicService} from '../../../../shared/services/topic.service';
 import {FileUploadService} from '../../../../shared/services/file-upload.service';
 import {Ticketdata} from '../../../../shared/model/Ticketdata';
 import {TicketHolder} from '../../../../shared/model/ticketHolder';
-import {Ticket} from '../../../../shared/model/ticket';
-import {TicketLock} from '../../../../shared/model/ticket-lock';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {ViewTicketComponent} from '../view-ticket/view-ticket.component';
+import {TicketLock} from '../../../../shared/model/ticket-lock';
 
 @Component({
   selector: 'app-ticket-reply',
@@ -22,6 +20,7 @@ import {ViewTicketComponent} from '../view-ticket/view-ticket.component';
 })
 export class TicketReplyComponent extends BasicTopicSelection implements OnInit {
 
+  @ViewChild('timer') timer: any;
 
   @Input() parent: ViewTicketComponent;
   ticketData: Ticketdata = {};
@@ -29,6 +28,9 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
   maxUploadFiles = 10;
   uploadedFiles: any[] = [];
   attachments: any[] = [];
+  lockTimeValue: number = 0;
+  disableReplyBTN: boolean;
+  actionsList: SelectItem[];
 
   constructor(public utils: UtilsService,
               public mainCategoryService: MainCategoryService,
@@ -41,8 +43,27 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
   }
 
   ngOnInit() {
-
+    this.initData();
   }
+
+  initData() {
+    this.lockTimeValue = 0;
+    if (this.parent != null) {
+      const lock: TicketLock = this.parent.ticketLock;
+      if (lock != null && lock.expiresOn != null && lock.expiresOn > 0) {
+        this.lockTimeValue = lock.expiresOn - Date.now();
+        this.lockTimeValue = this.lockTimeValue / 1000;
+      }
+      if (this.parent.ticketActionList != null) {
+        this.actionsList = [];
+        this.parent.ticketActionList.forEach(action => {
+          this.actionsList.push({value: action, label: this.utils.printLocLabel(action)});
+        });
+      }
+    }
+  }
+
+
 
   addReply() {
 
@@ -95,6 +116,13 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
       }, error1 => {
         this.utils.messageService.error('', this.utils.translateService.instant('FileUploadFailed'));
       });
+    }
+  }
+
+  onTimerExpires(event) {
+    if (event) {
+      this.disableReplyBTN = true;
+      this.utils.messageService.error('', this.utils.translateService.instant('LockExpired'));
     }
   }
 }

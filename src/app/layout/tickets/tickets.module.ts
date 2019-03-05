@@ -17,7 +17,7 @@ import {
   MessagesModule,
   MultiSelectModule,
   PanelModule,
-  PasswordModule,
+  PasswordModule, ProgressBarModule,
   RadioButtonModule,
   TabViewModule,
   TriStateCheckboxModule
@@ -44,14 +44,16 @@ import {TopicsSelectionModule} from '../topics-selection/topics-selection.module
 import {TopicspermissionsModule} from '../topicspermissions/topicspermissions.module';
 import {SearchCustomerComponent} from './components/create-ticket/search-customer/search-customer.component';
 import {TicketingMessagesModule} from '../messages/messages.module';
-import { DynamicFieldsComponent } from './components/dynamic-fields/dynamic-fields.component';
-import { DynamicFieldComponent } from './components/dynamic-fields/dynamic-field/dynamic-field.component';
+import {DynamicFieldsComponent} from './components/dynamic-fields/dynamic-fields.component';
+import {DynamicFieldComponent} from './components/dynamic-fields/dynamic-field/dynamic-field.component';
+import { TimerComponent } from './components/timer/timer.component';
 
 @NgModule({
   providers: [],
   declarations: [TicketsComponent, DyTicketTableComponent, ViewTicketComponent,
     CreateTicketComponent, ViewTicketExtraListsComponent, ViewAttachmentComponent,
-    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent, DynamicFieldsComponent, DynamicFieldComponent],
+    ViewTicketDataComponent, TicketReplyComponent, TicketFiltersComponent, SearchCustomerComponent,
+    DynamicFieldsComponent, DynamicFieldComponent, TimerComponent],
   imports: [
     CommonModule,
     TicketsRoutingModule,
@@ -77,7 +79,7 @@ import { DynamicFieldComponent } from './components/dynamic-fields/dynamic-field
     PasswordModule,
     AccordionModule, TranslateModule,
     DropdownModule,
-    InputTextareaModule, MessageModule,
+    InputTextareaModule, MessageModule, ProgressBarModule,
     FileUploadModule, MenubarModule,
     SidebarModule, CalendarModule,
     TopicsSelectionModule,

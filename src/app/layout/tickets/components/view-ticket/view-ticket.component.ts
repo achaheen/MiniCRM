@@ -8,7 +8,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 import {utils} from 'protractor';
 import {TicketLock} from '../../../../shared/model/ticket-lock';
 import {TicketsComponent} from '../../tickets.component';
-import {Configuration} from "../../../../shared/model/configuration";
+import {Configuration} from '../../../../shared/model/configuration';
 
 @Component({
   selector: 'app-view-ticket',
@@ -53,8 +53,9 @@ export class ViewTicketComponent implements OnInit {
   }
 
   onSelectAction(menuItem) {
-    console.log(JSON.stringify(menuItem));
+    // console.log(JSON.stringify(menuItem));
     if (menuItem != null) {
+      this.ticketLock = null;
       try {
         const actionID = Number(menuItem.item['id']);
         console.log('action ID ' + actionID);
@@ -62,12 +63,23 @@ export class ViewTicketComponent implements OnInit {
         this.ticketHttp.validateAuthorizedAction(this.ticket.id, actionID).subscribe(value => {
           if (value) {
             if (this.selectedTicketAction != null) {
-              this.ticketHttp.getLock(this.ticket.id, this.selectedTicketAction.actionID).subscribe(value => {
-                this.ticketLock = value;
+              this.ticketHttp.getLock(this.ticket.id, this.selectedTicketAction.actionID).subscribe(value1 => {
+                this.ticketLock = value1;
                 this.ticket = this.ticketLock.ticketID;
               }, error1 => {
                 this.ticketLock = null;
                 console.log(JSON.stringify(error1));
+
+                if (error1.error.lockID !== undefined) {
+                  this.utils.translateService.get(['TicketIsLocked', 'ErrorMSG'], {
+                    'user': error1.error.userID, 'date': new Date(error1.error.expiresOn)
+                  }).subscribe(langs => {
+                    this.utils.messageService.error(langs['ErrorMSG'], langs['TicketIsLocked']);
+                  });
+                } else {
+                  this.utils.messageService.printError(error1);
+                }
+
               });
             }
           } else {
@@ -76,6 +88,7 @@ export class ViewTicketComponent implements OnInit {
         });
       } catch (e) {
         console.log(e);
+        this.utils.messageService.printError(e);
       }
     }
   }
