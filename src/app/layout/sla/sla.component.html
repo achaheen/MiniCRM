@@ -1,5 +1,6 @@
-<div><br/></div>
 <ng-container *ngIf="!enableCreateEdit">
+  <p-panel #createDialog header="{{'SLA'| translate}}">
+
   <app-topics-selection [parent]="this" [skipTable]="false"></app-topics-selection>
   <br/>
   <p-table *ngIf="topicSlaList!=null && topicSlaList.length>0 && !enableCreateEdit" #dt [value]="topicSlaList"
@@ -88,7 +89,7 @@
       </ng-template>
     </p-table>
   </p-dialog>
-
+  </p-panel>
 </ng-container>
 
 <app-create-sla *ngIf="enableCreateEdit" [topicSla]="selectedTopicSla"

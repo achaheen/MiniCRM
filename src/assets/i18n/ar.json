@@ -53,6 +53,8 @@
   "OldTopic": "الموضوع القديم",
   "NewTopic": "الموضوع الجديد",
   "TopicPermissions" : "صلاحيات الموضوع",
+  "Permissions" : "الصلاحيات",
+  "Categories" : "الأقسام",
   "Groups" : "المجموعات",
   "Tickets" : "الطلبات",
   "Users" : "المستخدمين",
@@ -103,6 +105,7 @@
   "Roles" : "الصلاحيات",
   "saveBTN": "حفظ",
   "systemUser" : "مستخدم النظام",
-  "UserName" : "اسم المستخدم"
+  "UserName" : "اسم المستخدم",
+  "sla" : "التصعيد"
 }
 

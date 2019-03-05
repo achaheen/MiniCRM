@@ -7,6 +7,7 @@ import {UsersService} from '../../../shared/services/users.service';
 import {User} from '../../../shared/model/user';
 import {Sla, TopisSlaHolder} from '../../../shared/model/sla';
 import {TopicSlaService} from '../../../shared/services/topic-sla.service';
+import {environment} from "../../../../environments/environment";
 
 @Component({
   selector: 'app-create-sla',
@@ -53,7 +54,10 @@ export class CreateSlaComponent implements OnInit {
         }
       });
     }
+
+
     if (this.topicSla.id == null) {
+      console.log("Update SLA Levels ")
       const allSla: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
       this.availableSLA = [{label: '', value: null}];
       allSla.forEach(value => {
@@ -94,6 +98,7 @@ export class CreateSlaComponent implements OnInit {
       } else {
         this.selectedUsers = [];
       }
+
       const holder: TopisSlaHolder = {topicsla: this.topicSla, usersList: users};
       this.topicSlaService.edit(holder).subscribe(value => {
         this.utils.messageService.success('Success', 'Topic SLA Modified');
