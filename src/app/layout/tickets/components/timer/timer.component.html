@@ -1,7 +1,18 @@
 <div class="ui-g text-center" *ngIf="timerObject!=null">
   <div class="ui-g-12 timeStyle">
-    {{timerObject.hours}} {{'Hours'|translate}}:
-    {{timerObject.minutes}} {{'Minutes'|translate}} :
-    {{timerObject.seconds}} {{'Seconds'|translate}}
+    <div class="timerHeader">Lock Countdown</div>
+    <div style="clear: both"></div>
+    <div class="hoursDiv">
+      <div class="timeNumber">{{(timerObject.hours < 10) ? ('0' +  timerObject.hours) : timerObject.hours}}</div>
+      <div class="timeLabel">{{'Hours'|translate}}</div>
+    </div>
+    <div class="hoursDiv">
+      <div class="timeNumber">{{(timerObject.minutes < 10) ? ('0' +  timerObject.minutes) : timerObject.minutes}}</div>
+      <div class="timeLabel">{{'Minutes'|translate}}</div>
+    </div>
+   <div class="hoursDiv">
+      <div class="timeNumber">{{(timerObject.seconds < 10) ? ('0' +  timerObject.seconds) : timerObject.seconds}}</div>
+      <div class="timeLabel"> {{'Seconds'|translate}}</div>
+    </div>
   </div>
 </div>

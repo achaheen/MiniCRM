@@ -460,3 +460,35 @@ button.btn.btn-primary.loginBTN:hover {
   float: left;
   padding-right: 15px;
 }
+
+body .ui-multiselect .ui-multiselect-label{
+
+  height: 30px;
+}
+
+.hoursDiv {
+  width: 45px;
+  float: left;
+  background: #3061a1;
+  color: #fff;
+  border: solid 1px #fff;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.timeNumber {
+  border-bottom: 1px solid #aba8a8;
+}
+
+.timerHeader {
+  text-align: center;
+  font-weight: bold;
+  color: #2f609f;
+  float: left;
+  margin-left: 22px;
+}
+.timeStyle{
+  margin-top: 44px;
+}

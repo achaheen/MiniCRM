@@ -122,6 +122,7 @@ export class TicketReplyComponent extends BasicTopicSelection implements OnInit 
   onTimerExpires(event) {
     if (event) {
       this.disableReplyBTN = true;
+      this.lockTimeValue = 0;
       this.utils.messageService.error('', this.utils.translateService.instant('LockExpired'));
     }
   }

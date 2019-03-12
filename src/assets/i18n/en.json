@@ -238,9 +238,9 @@
   "email": "Email Address",
   "changeUsersBTN": "Change Users",
   "deleteBTN": "Delete",
-  "Hours": "Hours",
-  "Minutes": "Minutes",
-  "Seconds": "Seconds",
+  "Hours": "HH",
+  "Minutes": "MM",
+  "Seconds": "SS",
   "LockExpired": "Your lock has expired, please save your work and re-lock the ticket again",
   "TicketIsLocked": "Ticket is being locked for editing by user {{user}} and it will expire on {{date}} ",
   "ErrorMSG": "Error Message"

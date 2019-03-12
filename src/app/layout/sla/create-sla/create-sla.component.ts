@@ -33,6 +33,7 @@ export class CreateSlaComponent implements OnInit {
     // console.log('Topic SLA : \n' + JSON.stringify(this.topicSla));
     this.selectedUsers = [];
     this.activeUsers = [];
+
     this.slaService.all().subscribe(value => {
       if (value != null && value.length > 0) {
         value.forEach(value1 => {
@@ -40,20 +41,23 @@ export class CreateSlaComponent implements OnInit {
         });
       }
     });
-    this.userServices.activeUsers().subscribe(value => {
-      value.forEach(v => {
-        this.activeUsers.push({label: v.firstName + ' ' + v.lastName + ' ( ' + v.userID + ' )', value: v});
-      });
-    });
+
     if (this.topicSla.id != null) {
       this.editMode = true;
 
       this.topicSlaService.getSlaUsers(this.topicSla.id).subscribe(value => {
         if (value != null && value.length > 0) {
           this.selectedUsers = value;
+          console.log("init selected users : " + JSON.stringify(this.selectedUsers));
+          this.prepareActiveUsers();
         }
       });
+    }else{
+      this.prepareActiveUsers()
+
     }
+
+
 
 
     if (this.topicSla.id == null) {
@@ -66,6 +70,16 @@ export class CreateSlaComponent implements OnInit {
         }
       });
     }
+  }
+
+
+  prepareActiveUsers(){
+
+    this.userServices.activeUsers().subscribe(value => {
+      value.forEach(v => {
+        this.activeUsers.push({label: v.firstName + ' ' + v.lastName + ' ( ' + v.userID + ' )', value: v});
+      });
+    });
   }
 
   create() {

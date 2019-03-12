@@ -1,49 +1,62 @@
 <div style="padding: 0px 8px;">
+
   <div class="p-grid p-justify-start">
-    <app-timer #timer *ngIf="lockTimeValue>0" [inputTime]="lockTimeValue"
-               (emitter)="onTimerExpires($event)"></app-timer>
-  </div>
-  <div class="p-grid p-justify-start">
-    <div class="p-col-1 grid-label">{{'Action'| translate}}</div>
-    <div class="p-col-8 grid-label">
-      <div>{{utils.printLocLabel(parent.selectedTicketAction)}}</div>
+    <div class="p-col-9">
+
+      <div class="p-grid p-justify-start">
+        <div class="p-col-1 grid-label">{{'Action'| translate}}</div>
+        <div class="p-col-8 grid-label">
+          <div>{{utils.printLocLabel(parent.selectedTicketAction)}}</div>
+        </div>
+        <div class="p-col-1"></div>
+        <div class="p-col-8 grid-label" *ngIf="parent.selectedTicketAction.setStatusTo != null"
+             style="color: #e02365">{{'notesDetails'| translate}} {{ utils.printLocLabel(parent.selectedTicketAction.setStatusTo)}}</div>
+      </div>
+      <ng-container *ngIf="parent.selectedTicketAction.actionID ===8">
+        <br/>
+        <app-topics-selection [parent]="this"></app-topics-selection>
+        <br/>
+      </ng-container>
+      <div class="p-grid p-justify-start ">
+        <div class="p-col-1 grid-label">{{'Title'| translate}}</div>
+        <div class="p-col-5 minWidth" colspan="3"><input id="userID" type="text" pInputText name="userID" [(ngModel)]="ticketData.title"></div>
+      </div>
+      <div class="p-grid p-justify-start ">
+        <div class="p-col-1 grid-label">{{'Reply'| translate}}</div>
+        <div class="p-col-5 minWidth" colspan="5"><textarea id="details" type="text" pInputTextarea name="details" [(ngModel)]="ticketData.ticketData"></textarea></div>
+      </div>
+      <div class="p-grid p-justify-start ">
+        <div class="p-col-1 grid-label">{{'attachments'| translate}}</div>
+        <div class="p-col-7 minWidth">
+          <p-fileUpload name="files" #uploadFile multiple="multiple"
+                        (onUpload)="onUploadFiles($event)"
+                        auto="true"
+                        [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
+                        [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
+                        (uploadHandler)="customUploader($event,uploadFile)"
+                        customUpload="true"
+                        accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
+            <ng-template pTemplate="content">
+              <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
+              </ul>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+      </div>
+
+
     </div>
-    <div class="p-col-1"></div>
-    <div class="p-col-8 grid-label" *ngIf="parent.selectedTicketAction.setStatusTo != null"
-         style="color: #e02365">{{'notesDetails'| translate}} {{ utils.printLocLabel(parent.selectedTicketAction.setStatusTo)}}</div>
-  </div>
-  <ng-container *ngIf="parent.selectedTicketAction.actionID ===8">
-    <br/>
-    <app-topics-selection [parent]="this"></app-topics-selection>
-    <br/>
-  </ng-container>
-  <div class="p-grid p-justify-start ">
-    <div class="p-col-1 grid-label">{{'Title'| translate}}</div>
-    <div class="p-col-5 minWidth" colspan="3"><input id="userID" type="text" pInputText name="userID" [(ngModel)]="ticketData.title"></div>
-  </div>
-  <div class="p-grid p-justify-start ">
-    <div class="p-col-1 grid-label">{{'Reply'| translate}}</div>
-    <div class="p-col-5 minWidth" colspan="5"><textarea id="details" type="text" pInputTextarea name="details" [(ngModel)]="ticketData.ticketData"></textarea></div>
-  </div>
-  <div class="p-grid p-justify-start ">
-    <div class="p-col-1 grid-label">{{'attachments'| translate}}</div>
-    <div class="p-col-7 minWidth">
-      <p-fileUpload name="files" #uploadFile multiple="multiple"
-                    (onUpload)="onUploadFiles($event)"
-                    auto="true"
-                    [invalidFileTypeMessageDetail]="'InvalidFileType'|translate"
-                    [invalidFileSizeMessageSummary]="'InvalidFileSize'|translate"
-                    (uploadHandler)="customUploader($event,uploadFile)"
-                    customUpload="true"
-                    accept=".csv,.xlsx,.pdf,.zip,.rar,xls,.msg" [maxFileSize]="maxFileSize">
-        <ng-template pTemplate="content">
-          <ul *ngIf="uploadedFiles.length">
-            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{(file.size * 0.000001).toFixed(2)}} MB</li>
-          </ul>
-        </ng-template>
-      </p-fileUpload>
+    <div class="p-col-3" *ngIf="lockTimeValue>0">
+
+      <app-timer #timer  [inputTime]="10"
+                 (emitter)="onTimerExpires($event)"></app-timer>
+
     </div>
   </div>
+
+
+
   <p-panel class="btnPanel no_style">
     <button
       [disabled]="disableReplyBTN"

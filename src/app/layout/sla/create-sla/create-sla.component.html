@@ -20,8 +20,7 @@
   <div class="p-grid">
     <div class="p-col-1">{{'slaUsers'|translate}}</div>
     <div class="p-col-3 minWidth">
-      <p-multiSelect [options]="activeUsers" [(ngModel)]="selectedUsers"
-                     appendTo="body"
+      <p-multiSelect [options]="activeUsers" [(ngModel)]="selectedUsers" appendTo="body"
                      filterBy="label,value.userID,value.firstName,value.lastName"></p-multiSelect>
     </div>
   </div>
