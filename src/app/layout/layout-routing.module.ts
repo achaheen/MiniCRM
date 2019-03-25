@@ -22,7 +22,8 @@ const routes: Routes = [
       {path: 'tickets', loadChildren: './tickets/tickets.module#TicketsModule'},
       {path: 'tp', loadChildren: './topicspermissions/topicspermissions.module#TopicspermissionsModule'},
       {path: 'mc', loadChildren: './topics/topics.module#TopicsModule'},
-      {path: 'sla', loadChildren: './sla/sla.module#SlaModule'}
+      {path: 'sla', loadChildren: './sla/sla.module#SlaModule'},
+      {path: 'userProfile', loadChildren: './user-profile/user-profile.module#UserProfileModule'}
     ]
   }
 ];

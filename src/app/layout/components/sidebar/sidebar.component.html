@@ -33,6 +33,10 @@
       <i class="fa fa-bell-o"></i>&nbsp;
       <span>{{ 'sla' | translate }}</span>
     </a>
+    <a [routerLink]="['/userProfile']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+      <i class="fa fa-user-circle-o"></i>&nbsp;
+      <span>{{ 'userProfile' | translate }}</span>
+    </a>
     <!--
       <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
           <i class="fa fa-fw fa-edit"></i>&nbsp;

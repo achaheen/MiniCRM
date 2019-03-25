@@ -460,3 +460,11 @@ button.btn.btn-primary.loginBTN:hover {
   float: left;
   padding-right: 15px;
 }
+
+
+.customerProfileContainer .ui-state-disabled,.customerProfileContainer .ui-widget:disabled{
+  opacity: initial !important;
+}
+
+
+.userProfileContainer .ui-panel-content { height: -webkit-fill-available;}
