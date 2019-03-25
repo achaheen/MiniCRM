@@ -1,0 +1,53 @@
+<p-blockUI [blocked]="blocked">
+  <i class="fa fa-spinner fa-spin fa-4x fa-fw" aria-hidden="true" style="position:absolute;top:50%;left:50%"></i>
+</p-blockUI>
+
+<p-panel #userProfilePanel header="{{'userProfile' | translate}}" class="userProfileContainer">
+  <div class="p-grid p-justify-start">
+    <div class="p-col-2 minWidth">
+      <p-dropdown  [options]="searchTypes"
+                  [(ngModel)]="selectedSearchType"></p-dropdown>
+    </div>
+
+    <div class="p-col-4" *ngIf="(selectedSearchType == '1')">
+      <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic" >
+      <button type="button" style="margin: 0 10px !important;"
+              pButton class="ui-button-rounded"
+              (click)="search()"
+              label="{{'search' | translate}}"></button>
+    </div>
+    <div class="p-col-7" style="padding:0px" *ngIf="(selectedSearchType == '2')">
+      <div class="p-grid">
+        <div class="p-col-3 minWidth">
+          <p-dropdown [options]="nationalIdTypes" [(ngModel)]="selectedNationalType"></p-dropdown>
+        </div>
+        <div class="p-col-5"><input id="nationalID" type="text" pInputText name="nationalID" [(ngModel)]="nationalID">
+          <button type="button" style="margin: 0 10px !important;"
+                  pButton class="ui-button-rounded"
+                  (click)="search()" *ngIf="selectedNationalType != ''"
+                  label="{{'search' | translate}}"></button>
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+    <div class="p-col-4" *ngIf="(selectedSearchType == '3')">
+
+      <input id="mobileNo" type="text" pInputText name="mobileNo" [(ngModel)]="mobileNo" pTooltip="0501234567" tooltipPosition="top">
+
+      <button type="button" style="margin: 0 10px !important;"
+              pButton class="ui-button-rounded"
+              (click)="search()"
+              label="{{'search' | translate}}"></button>
+    </div>
+<!--
+    <div class="p-col-1" *ngIf="selectedSearchType != undefined">
+
+    </div>-->
+  </div>
+
+<app-view-user-profile [customerProfile]= "customerProfile" *ngIf="customerProfile.idNumber != undefined"></app-view-user-profile>
+</p-panel>
