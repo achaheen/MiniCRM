@@ -7,11 +7,13 @@ import {TransactionDetails} from "./TransactionDetails";
 import {ExtendData} from "./ExtendData";
 import {SegmentDetails} from "./SegmentDetails";
 import {OTPMobileList} from "./OTPMobileList";
+import {Caa} from "./Caa";
 
 export interface CustomerProfile{
 
   customerType?: String;
   idNumber?: String;
+  basicNumber?: String;
   name?: String;
   shortName?: String;
   firstName?: String;
@@ -47,5 +49,9 @@ export interface CustomerProfile{
   transactionDetails?: TransactionDetails;
   extendData?: ExtendData;
   segmentDetails?: SegmentDetails;
+  caa?:Caa;
+  iqamaProfession?:String;
+  branchNo?:String;
+
 
 }

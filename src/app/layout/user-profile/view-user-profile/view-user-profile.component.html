@@ -1,121 +1,188 @@
 
 
-
 <hr/>
 <div class="customerProfileContainer">
-<div class="p-grid p-justify-start">
-  <div class="p-col-1">{{'BasicNumber' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="idNumber" type="text" pInputText name="idNumber" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.idNumber"></div>
 
-  <div class="p-col-1">{{'title' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="title" type="text" pInputText name="title" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.title"></div>
+  <p-panel class="customerProfileIntern" header="{{'PersonalInfo' | translate}}">
 
-  <div class="p-col-1">{{'EnglishName' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="englishName" type="text" pInputText name="englishName" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.fullName.descriptionList[0].value"></div>
-  <div class="p-col-1">{{'ArabicName' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="arabicName" type="text" pInputText name="arabicName" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.fullName.descriptionList[1].value.trim()"></div>
+    <div class="p-grid p-justify-start">
+      <div class="p-col-1">{{'BasicNumber' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="customerBasic" type="text" pInputText name="customerBasic" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.caa.customerNo"></div>
 
-  <div class="p-col-1">{{'nationality' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="nationality" type="text" pInputText name="nationality" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.nationality"></div>
+      <div class="p-col-1">{{'CustomerID' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="idNumber" type="text" pInputText name="idNumber" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.idNumber"></div>
 
-  <div class="p-col-1">{{'gender' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="gender" type="text" pInputText name="gender" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.gender"></div>
+      <div class="p-col-1">{{'nationality' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="nationality" type="text" pInputText name="nationality"
+                                           [attr.disabled]="true"
+                                           [ngModel]="customerProfile.nationality"></div>
 
-  <div class="p-col-1">{{'branch' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="branch" type="text" pInputText name="branch" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.branch"></div>
+      <div class="p-col-1">{{'bajCustomer' | translate}}</div>
+      <div class="p-col-2 minWidth">
+        <p-checkbox name="bajCustomer" value="val1" [ngModel]="customerProfile.bajCustomer" binary="true"
+                    disabled="true"></p-checkbox>
 
-  <div class="p-col-1">{{'customerType' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="customerType" type="text" pInputText name="customerType" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.customerType"></div>
+      </div>
 
-  <div class="p-col-1">{{'telephone' | translate}}</div>
-  <div class="p-col-2 minWidth"><input id="telephone" type="text" pInputText name="telephone" [attr.disabled]="true"
-                                       [ngModel]="customerProfile.telephone"></div>
+      <div class="p-col-1" [pTooltip]="customerProfile.fullName.descriptionList[0].value">{{'EnglishName' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="englishName" type="text" pInputText name="englishName"
+                                           [attr.disabled]="true"
+                                           [ngModel]="customerProfile.fullName.descriptionList[0].value" ></div>
+      <div class="p-col-1">{{'ArabicName' | translate}}</div>
+      <div class="p-col-2 minWidth" [pTooltip]="customerProfile.fullName.descriptionList[1].value.trim()"><input id="arabicName" type="text" pInputText name="arabicName"
+                                           [attr.disabled]="true"
+                                           [ngModel]="customerProfile.fullName.descriptionList[1].value.trim()"></div>
 
-  <ng-container *ngFor="let mobile of customerProfile.otpMobileList.otpMobile; let i = index">
-  <div class="p-col-1">{{'mobile' | translate}}</div>
-  <div class="p-col-2 minWidth" pTooltip="{{mobile.otpType}}">
-  <input id="mobileNo" type="text" pInputText name="mobileNo" disabled="disabled"
-                                       [ngModel]="mobile.mobileNo" ></div>
-  </ng-container>
 
-  <div class="p-col-1">{{'bajCustomer' | translate}}</div>
-  <div class="p-col-2 minWidth">
-  <p-checkbox name="bajCustomer" value="val1" [ngModel]="customerProfile.bajCustomer"  binary="true" disabled="true"></p-checkbox>
+      <div class="p-col-1">{{'gender' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="gender" type="text" pInputText name="gender" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.gender"></div>
 
-</div>
+      <div class="p-col-1">{{'branch' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="branch" type="text" pInputText name="branch" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.branch.concat(' / ',  customerProfile.branchNo)"></div>
 
-</div>
+      <div class="p-col-1">{{'customerType' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="customerType" type="text" pInputText name="customerType"
+                                           [attr.disabled]="true"
+                                           [ngModel]="customerProfile.customerType"></div>
 
-  <div class="p-grid p-justify-start">
-    <div class="p-col-1">{{'address1' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="address1" type="text" pInputText name="address1" [attr.disabled]="true"
-                                         [ngModel]="customerProfile.address.address1"></div>
-    <div class="p-col-1">{{'address2' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="address2" type="text" pInputText name="address2" [attr.disabled]="true"
-                                         [ngModel]="customerProfile.address.address2"></div>
-    <div class="p-col-1">{{'address3' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="address3" type="text" pInputText name="address3" [attr.disabled]="true"
-                                         [ngModel]="customerProfile.address.address3"></div>
-    <div class="p-col-1" *ngIf="customerProfile.address.address4 != ''">{{'address4' | translate}}</div>
-    <div class="p-col-2 minWidth"*ngIf="customerProfile.address.address4 != ''"><input id="address4" type="text" pInputText name="address4" [attr.disabled]="true"
-                                                                                       [ngModel]="customerProfile.address.address4"></div>
 
-  </div>
+      <div class="p-col-1">{{'segment' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="segment" type="text" pInputText name="segment" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.segmentDetails.customerCurrentSegmentEn"></div>
 
+      <div class="p-col-1">{{'segmentCode' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="segmentCode" type="text" pInputText name="segmentCode" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.segmentDetails.customerCurrentSegmentCode"></div>
+
+
+      <div class="p-col-1">{{'profession' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="profession" type="text" pInputText name="profession" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.iqamaProfession"></div>
+
+
+      <div class="p-col-1">{{'kycUpdateDate' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="kycUpdateDate" type="text" pInputText name="kycUpdateDate" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.transactionDetails.kycUpdateDate | date:'yyyy/MM/dd'" (ngModelChange)="$event"></div>
+
+    </div>
+  </p-panel>
+
+  <p-panel class="customerProfileIntern" header="{{'ContactInfo' | translate}}">
+
+    <div class="p-grid p-justify-start">
+
+
+      <div class="p-col-1">{{'address1' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="address1" type="text" pInputText name="address1" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.address.address1"></div>
+      <div class="p-col-1">{{'address2' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="address2" type="text" pInputText name="address2" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.address.address2"></div>
+      <div class="p-col-1">{{'address3' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="address3" type="text" pInputText name="address3" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.address.address3"></div>
+      <div class="p-col-1" *ngIf="customerProfile.address.address4 != ''">{{'address4' | translate}}</div>
+      <div class="p-col-2 minWidth" *ngIf="customerProfile.address.address4 != ''"><input id="address4" type="text"
+                                                                                          pInputText name="address4"
+                                                                                          [attr.disabled]="true"
+                                                                                          [ngModel]="customerProfile.address.address4"> </div>
+
+        <div class="p-col-1" *ngIf="customerProfile.address.address5 != ''">{{'address5' | translate}}</div>
+        <div class="p-col-2 minWidth" *ngIf="customerProfile.address.address5 != ''"><input id="address5" type="text"
+                                                                                            pInputText name="address5"
+                                                                                            [attr.disabled]="true"
+                                                                                            [ngModel]="customerProfile.address.address5">
+        </div>
+
+      <ng-container *ngFor="let mobile of customerProfile.otpMobileList.otpMobile; let i = index">
+        <div class="p-col-1">{{'mobile' | translate}}</div>
+        <div class="p-col-2 minWidth" pTooltip="{{mobile.otpType}}">
+          <input id="mobileNo" type="text" pInputText name="mobileNo" disabled="disabled"
+                 [ngModel]="mobile.mobileNo"></div>
+      </ng-container>
+
+
+      <div class="p-col-1">{{'telephone' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="telephone" type="text" pInputText name="telephone" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.telephone"></div>
+
+
+      <div class="p-col-1">{{'email' | translate}}</div>
+      <div class="p-col-2 minWidth"><input id="email" type="text" pInputText name="email" [attr.disabled]="true"
+                                           [ngModel]="customerProfile.eMail"></div>
+
+
+    </div>
+
+  </p-panel>
+
+
+  <p-panel class="customerProfileIntern" header="{{'EmployementInfo' | translate}}">
   <div class="p-grid p-justify-start">
 
     <div class="p-col-1">{{'employerName' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="employerName" type="text" pInputText name="employerName" [attr.disabled]="true"
+    <div class="p-col-2 minWidth" *ngIf="customerProfile.extendData.employerName != 'OTHERS'"><input id="employerName" type="text" pInputText name="employerName"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.employerName"></div>
 
+    <div class="p-col-2 minWidth" *ngIf="customerProfile.extendData.employerName === 'OTHERS'"><input id="employerName2" type="text" pInputText name="employerName2"
+                                                                                                     [attr.disabled]="true"
+                                                                                                     [ngModel]="customerProfile.extendData.employerOthers"></div>
+
     <div class="p-col-1">{{'empAreaAddr' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="employerAreaAddress" type="text" pInputText name="employerAreaAddress" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="employerAreaAddress" type="text" pInputText name="employerAreaAddress"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.employerAreaAddress"></div>
 
     <div class="p-col-1">{{'empStreetAddr' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="employerStreetAddress" type="text" pInputText name="employerStreetAddress" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="employerStreetAddress" type="text" pInputText name="employerStreetAddress"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.employerStreetAddress"></div>
 
     <div class="p-col-1">{{'empStatusCode' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="employmentStatusCode" type="text" pInputText name="employmentStatusCode" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="employmentStatusCode" type="text" pInputText name="employmentStatusCode"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.employmentStatusCode"></div>
 
     <div class="p-col-1">{{'eduLevelCode' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="educationLevelCode" type="text" pInputText name="educationLevelCode" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="educationLevelCode" type="text" pInputText name="educationLevelCode"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.educationLevelCode"></div>
 
     <div class="p-col-1">{{'currIncomeLevel' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="currentIncomeLevel" type="text" pInputText name="currentIncomeLevel" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="currentIncomeLevel" type="text" pInputText name="currentIncomeLevel"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.currentIncomeLevel"></div>
 
     <div class="p-col-1">{{'monthlyIncome' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="monthlyIncome" type="text" pInputText name="monthlyIncome" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="monthlyIncome" type="text" pInputText name="monthlyIncome"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.monthlyIncome"></div>
 
     <div class="p-col-1">{{'sourceOfIncome' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="sourceOfIncome" type="text" pInputText name="sourceOfIncome" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="sourceOfIncome" type="text" pInputText name="sourceOfIncome"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.sourceOfIncome"></div>
 
     <div class="p-col-1">{{'estimatedNet' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="estimatedNetworth" type="text" pInputText name="estimatedNetworth" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="estimatedNetworth" type="text" pInputText name="estimatedNetworth"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.estimatedNetworth"></div>
 
     <div class="p-col-1">{{'maritalStatus' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="maritalStatusCode" type="text" pInputText name="maritalStatusCode" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="maritalStatusCode" type="text" pInputText name="maritalStatusCode"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.maritalStatusCode"></div>
 
     <div class="p-col-1">{{'noOfDependents' | translate}}</div>
-    <div class="p-col-2 minWidth"><input id="numberOfDependents" type="text" pInputText name="numberOfDependents" [attr.disabled]="true"
+    <div class="p-col-2 minWidth"><input id="numberOfDependents" type="text" pInputText name="numberOfDependents"
+                                         [attr.disabled]="true"
                                          [ngModel]="customerProfile.extendData.numberOfDependents"></div>
 
   </div>
-
+  </p-panel>
 </div>

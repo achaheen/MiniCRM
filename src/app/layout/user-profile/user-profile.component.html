@@ -10,7 +10,7 @@
     </div>
 
     <div class="p-col-4" *ngIf="(selectedSearchType == '1')">
-      <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic" >
+      <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic" (keyup.enter) ="search()">
       <button type="button" style="margin: 0 10px !important;"
               pButton class="ui-button-rounded"
               (click)="search()"
@@ -21,7 +21,7 @@
         <div class="p-col-3 minWidth">
           <p-dropdown [options]="nationalIdTypes" [(ngModel)]="selectedNationalType"></p-dropdown>
         </div>
-        <div class="p-col-5"><input id="nationalID" type="text" pInputText name="nationalID" [(ngModel)]="nationalID">
+        <div class="p-col-5"><input id="nationalID" type="text" pInputText name="nationalID" [(ngModel)]="nationalID" (keyup.enter) ="search()">
           <button type="button" style="margin: 0 10px !important;"
                   pButton class="ui-button-rounded"
                   (click)="search()" *ngIf="selectedNationalType != ''"
@@ -36,7 +36,7 @@
     </div>
     <div class="p-col-4" *ngIf="(selectedSearchType == '3')">
 
-      <input id="mobileNo" type="text" pInputText name="mobileNo" [(ngModel)]="mobileNo" pTooltip="0501234567" tooltipPosition="top">
+      <input id="mobileNo" type="text" pInputText name="mobileNo" [(ngModel)]="mobileNo" pTooltip="0501234567" tooltipPosition="top" (keyup.enter) ="search()">
 
       <button type="button" style="margin: 0 10px !important;"
               pButton class="ui-button-rounded"
@@ -48,6 +48,6 @@
 
     </div>-->
   </div>
-
+<div *ngIf="customerProfile.idNumber === undefined" style="height:150px"></div>
 <app-view-user-profile [customerProfile]= "customerProfile" *ngIf="customerProfile.idNumber != undefined"></app-view-user-profile>
 </p-panel>

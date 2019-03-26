@@ -13,5 +13,6 @@ export interface ExtendData {
   sourceOfIncome?: String;
   monthlyIncome?: String;
   numberOfDependents?: String;
+  employerOthers?: String;
 
 }

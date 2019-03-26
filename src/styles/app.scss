@@ -461,10 +461,15 @@ button.btn.btn-primary.loginBTN:hover {
   padding-right: 15px;
 }
 
-
 .customerProfileContainer .ui-state-disabled,.customerProfileContainer .ui-widget:disabled{
   opacity: initial !important;
 }
 
-
-.userProfileContainer .ui-panel-content { height: -webkit-fill-available;}
+.userProfileContainer .ui-panel-content { height: auto;}
+.customerProfileIntern .ui-panel-content { height: auto!important;margin-bottom: 5px;}
+.customerProfileIntern .ui-panel-titlebar {
+  border: 1px solid #979797 !important;
+  padding: 1px  10px !important;
+  background-color: #d5d5d5 !important;
+  color: #000000 !important;
+}
