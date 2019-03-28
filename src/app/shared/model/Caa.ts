@@ -1,3 +1,3 @@
 export interface Caa {
-  customerNo?: String;
+  customerNo?: string;
 }

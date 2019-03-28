@@ -21,10 +21,13 @@ import {PasswordModule} from 'primeng/password';
 import {TranslateModule} from "@ngx-translate/core";
 import {DropdownModule} from "primeng/primeng";
 import {InputMaskModule} from "primeng/primeng";
+import {TabViewModule} from "primeng/primeng";
 import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
+import {AccountsComponent} from "../accounts/accounts.component";
+import {TableModule} from "primeng/table";
 
 @NgModule({
-  declarations: [UserProfileComponent, ViewUserProfileComponent],
+  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
@@ -48,7 +51,9 @@ import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.
     TranslateModule,
     DropdownModule,
     InputMaskModule,
-    TooltipModule
+    TooltipModule,
+    TabViewModule,
+    TableModule
   ]
 })
 export class UserProfileModule { }

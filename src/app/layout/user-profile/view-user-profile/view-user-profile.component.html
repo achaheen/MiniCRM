@@ -26,12 +26,12 @@
 
       </div>
 
-      <div class="p-col-1" [pTooltip]="customerProfile.fullName.descriptionList[0].value">{{'EnglishName' | translate}}</div>
-      <div class="p-col-2 minWidth"><input id="englishName" type="text" pInputText name="englishName"
+      <div class="p-col-1">{{'EnglishName' | translate}}</div>
+      <div class="p-col-2 minWidth" tooltipPosition="top" [pTooltip]="customerProfile.fullName.descriptionList[0].value"><input id="englishName" type="text" pInputText name="englishName"
                                            [attr.disabled]="true"
                                            [ngModel]="customerProfile.fullName.descriptionList[0].value" ></div>
       <div class="p-col-1">{{'ArabicName' | translate}}</div>
-      <div class="p-col-2 minWidth" [pTooltip]="customerProfile.fullName.descriptionList[1].value.trim()"><input id="arabicName" type="text" pInputText name="arabicName"
+      <div class="p-col-2 minWidth" tooltipPosition="top" [pTooltip]="customerProfile.fullName.descriptionList[1].value.trim()"><input id="arabicName" type="text" pInputText name="arabicName"
                                            [attr.disabled]="true"
                                            [ngModel]="customerProfile.fullName.descriptionList[1].value.trim()"></div>
 
@@ -100,7 +100,7 @@
 
       <ng-container *ngFor="let mobile of customerProfile.otpMobileList.otpMobile; let i = index">
         <div class="p-col-1">{{'mobile' | translate}}</div>
-        <div class="p-col-2 minWidth" pTooltip="{{mobile.otpType}}">
+        <div class="p-col-2 minWidth" pTooltip="{{mobile.otpType}}" tooltipPosition="top">
           <input id="mobileNo" type="text" pInputText name="mobileNo" disabled="disabled"
                  [ngModel]="mobile.mobileNo"></div>
       </ng-container>

@@ -43,7 +43,6 @@ export class UsersComponent implements OnInit {
         this.users = users;
         this.blocked = false;
       });
-
   }
 
   handleCreateEditEvent(event) {

@@ -1,8 +1,8 @@
 export interface SegmentDetails {
 
-  customerCurrentSegmentCode?: String;
-  customerCurrentSegmentEn?: String;
-  customerCurrentSegmentAr?: String;
-  customerCurrentSegmentEnAr?: String;
+  customerCurrentSegmentCode?: string;
+  customerCurrentSegmentEn?: string;
+  customerCurrentSegmentAr?: string;
+  customerCurrentSegmentEnAr?: string;
 
 }

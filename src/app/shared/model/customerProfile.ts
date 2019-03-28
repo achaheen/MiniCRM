@@ -11,33 +11,33 @@ import {Caa} from "./Caa";
 
 export interface CustomerProfile{
 
-  customerType?: String;
-  idNumber?: String;
-  basicNumber?: String;
-  name?: String;
-  shortName?: String;
-  firstName?: String;
-  fatherName?: String;
-  grandFatherName?: String;
-  familyName?: String;
-  firstNameArabic?: String;
-  fatherNameArabic?: String;
-  grandFatherNameArabic?: String;
-  familyNameArabic?: String;
-  eMail?: String;
-  telephone?: String;
-  fax?: String;
-  branch?: String;
-  issueDateHijri?: String;
-  expiryDateHijri?: String;
-  nationality?: String;
-  gender?: String;
-  dataEnteredBy?: String;
-  dataEnteredDate?: String;
-  title?: String;
-  language?: String;
-  olpIdAlias?: String;
-  olpStatus?: String;
+  customerType?: string;
+  idNumber?: string;
+  basicNumber?: string;
+  name?: string;
+  shortName?: string;
+  firstName?: string;
+  fatherName?: string;
+  grandFatherName?: string;
+  familyName?: string;
+  firstNameArabic?: string;
+  fatherNameArabic?: string;
+  grandFatherNameArabic?: string;
+  familyNameArabic?: string;
+  eMail?: string;
+  telephone?: string;
+  fax?: string;
+  branch?: string;
+  issueDateHijri?: string;
+  expiryDateHijri?: string;
+  nationality?: string;
+  gender?: string;
+  dataEnteredBy?: string;
+  dataEnteredDate?: string;
+  title?: string;
+  language?: string;
+  olpIdAlias?: string;
+  olpStatus?: string;
   otpMobileList?: OTPMobileList;
   issueDateGC?: Date;
   expiryDateGC?: Date;
@@ -50,8 +50,8 @@ export interface CustomerProfile{
   extendData?: ExtendData;
   segmentDetails?: SegmentDetails;
   caa?:Caa;
-  iqamaProfession?:String;
-  branchNo?:String;
+  iqamaProfession?:string;
+  branchNo?:string;
 
 
 }

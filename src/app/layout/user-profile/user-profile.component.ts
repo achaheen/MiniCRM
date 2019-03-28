@@ -52,7 +52,7 @@ export class UserProfileComponent implements OnInit {
 
   search() {
     this.blocked = true;
-
+    this.customerProfile = {};
     switch (Number(this.selectedSearchType)) {
       case 1: {
         this.inputValue = this.customerBasic;
@@ -80,5 +80,11 @@ export class UserProfileComponent implements OnInit {
           // this.utils.messageService.printError(error);
           this.blocked = false;
         });
+  }
+
+  clear(){
+
+    this.customerProfile = {};
+
   }
 }
