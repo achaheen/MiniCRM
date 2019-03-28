@@ -1,0 +1,36 @@
+<p-blockUI [blocked]="blocked">
+  <i class="fa fa-spinner fa-spin fa-4x fa-fw" aria-hidden="true" style="position:absolute;top:50%;left:50%"></i>
+</p-blockUI>
+
+<p-table [value]="this.customerAccounts.accountList.account" dataKey="accountNostring">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 40px"></th>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-account let-expanded="expanded">
+    <tr>
+
+      <td>
+        <a href="#" [pRowToggler]="account">
+          <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+        </a>
+      </td>
+
+      <td *ngFor="let col of cols">
+          {{account[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-account>
+    <tr>
+      <td [attr.colspan]="cols.length + 1">
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
