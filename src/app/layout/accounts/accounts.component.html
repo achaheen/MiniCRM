@@ -21,13 +21,60 @@
       </td>
 
       <td *ngFor="let col of cols">
-          {{account[col.field]}}
+        {{account[col.field]}}
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-account>
     <tr>
       <td [attr.colspan]="cols.length + 1">
+
+
+        <p-tabView id="CustomerProfileTabsView"
+                   [(activeIndex)]="selectedTabIndex">
+          <p-tabPanel [header]="'accountInfo' | translate">
+            <div class="customerProfileContainer">
+              <div class="p-grid p-justify-start customerProfileIntern">
+                <div class="p-col-2 la">{{'IBAN' | translate}}</div>
+                <div class="p-col-2 minWidth"><input id="iban" type="text" pInputText name="iabn" [attr.disabled]="true"
+                                                     [ngModel]="account.iban"></div>
+
+                <div class="p-col-2">{{'accountOpenedDate' | translate}}</div>
+                <div class="p-col-2 minWidth"><input id="accountOpenedDate" type="text" pInputText
+                                                     name="accountOpenedDate" [attr.disabled]="true"
+                                                     [ngModel]="account.accountOpenedDate | date"></div>
+
+                <div class="p-col-2">{{'valuationDate' | translate}}</div>
+                <div class="p-col-2 minWidth"><input id="valuationDate" type="text" pInputText name="valuationDate"
+                                                     [attr.disabled]="true"
+                                                     [ngModel]="account.valuationDate | date"></div>
+
+                <div class="p-col-2">{{'isJointAccount' | translate}}</div>
+                <div class="p-col-2 minWidth">
+
+                  <p-checkbox name="isJointAccount" value="val1" [ngModel]="account.isJointAccount" binary="true"
+                              disabled="true"></p-checkbox>
+                </div>
+
+                <ng-container *ngFor="let accountBalance of account.accountBalanceList.accountBalance; let i = index">
+                  <div class="p-col-2">{{accountBalance.balanceType | translate}}</div>
+                  <div class="p-col-2 minWidth">
+                    <input id="accountBalance+i" type="text" pInputText name="accountBalance" disabled="disabled"
+                           [ngModel]="accountBalance.amount"></div>
+                </ng-container>
+              </div>
+            </div>
+
+
+          </p-tabPanel>
+          <p-tabPanel [header]="'AccountTransactions' | translate">
+            <app-account-transactions [accountNo]="account.accountNo" [customerBasic]="customerProfile.basicNumber"
+                                      [idNumber]="customerProfile.idNumber"
+                                      [segment]="customerProfile.segmentDetails.customerCurrentSegmentCode"></app-account-transactions>
+          </p-tabPanel>
+        </p-tabView>
+
+
       </td>
     </tr>
   </ng-template>

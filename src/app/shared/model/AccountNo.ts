@@ -1,10 +1,10 @@
 export interface AccountNo {
 
 
-  branch?: String;
+  branch?: string;
 
-  customerNo?: String;
+  customerNo?: string;
 
-  suffix?: String;
+  suffix?: string;
 
 }

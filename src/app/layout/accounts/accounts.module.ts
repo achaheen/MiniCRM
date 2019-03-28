@@ -25,6 +25,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {DropdownModule} from "primeng/primeng";
 import {InputMaskModule} from "primeng/primeng";
 import {TableModule} from "primeng/table";
+import { AccountTransactionsComponent } from './account-transactions/account-transactions.component';
 
 @NgModule({
   declarations: [ViewAccountComponent],

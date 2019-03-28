@@ -13,7 +13,7 @@ import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
-import {RadioButtonModule, TooltipModule} from 'primeng/primeng';
+import {CalendarModule, RadioButtonModule, TooltipModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import {ListboxModule} from 'primeng/listbox';
 import {FieldsetModule} from 'primeng/fieldset';
@@ -25,9 +25,10 @@ import {TabViewModule} from "primeng/primeng";
 import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.component';
 import {AccountsComponent} from "../accounts/accounts.component";
 import {TableModule} from "primeng/table";
+import {AccountTransactionsComponent} from "../accounts/account-transactions/account-transactions.component";
 
 @NgModule({
-  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent],
+  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
@@ -53,7 +54,8 @@ import {TableModule} from "primeng/table";
     InputMaskModule,
     TooltipModule,
     TabViewModule,
-    TableModule
+    TableModule,
+    CalendarModule
   ]
 })
 export class UserProfileModule { }
