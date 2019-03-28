@@ -1,8 +1,8 @@
 import {AccountNo} from "./AccountNo";
 
 export interface AccountTransactionsRequest{
-  customerNo?:string;
-  idNumber?:string;
+  customerBasic?:string;
+  idnumber?:string;
   segment?:string;
   lang?:string;
   accountNo?:AccountNo;

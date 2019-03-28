@@ -68,9 +68,8 @@
 
           </p-tabPanel>
           <p-tabPanel [header]="'AccountTransactions' | translate">
-            <app-account-transactions [accountNo]="account.accountNo" [customerBasic]="customerProfile.basicNumber"
-                                      [idNumber]="customerProfile.idNumber"
-                                      [segment]="customerProfile.segmentDetails.customerCurrentSegmentCode"></app-account-transactions>
+
+            <app-account-transactions [accountNo]="account.accountNo"></app-account-transactions>
           </p-tabPanel>
         </p-tabView>
 

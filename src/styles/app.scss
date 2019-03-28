@@ -473,3 +473,7 @@ button.btn.btn-primary.loginBTN:hover {
   background-color: #d5d5d5 !important;
   color: #000000 !important;
 }
+
+.wordWrapTable td{
+  word-break: break-all;
+}

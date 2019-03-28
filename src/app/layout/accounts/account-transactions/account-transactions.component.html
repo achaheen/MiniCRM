@@ -1,15 +1,17 @@
 <div class="p-grid p-justify-start">
   <div class="p-col-1">{{'startDate' | translate}}</div>
-  <div class="p-col-2 minWidth"> <p-calendar [(ngModel)]="startDate" ></p-calendar></div>
+  <div class="p-col-3 minWidth"> <p-calendar [(ngModel)]="startDate" ></p-calendar></div>
   <div class="p-col-1">{{'endDate' | translate}}</div>
-  <div class="p-col-2 minWidth"> <p-calendar [(ngModel)]="endDate"></p-calendar></div>
+  <div class="p-col-3 minWidth"> <p-calendar [(ngModel)]="endDate"></p-calendar></div>
   <div class="p-col-1">
   <button type="button" style="margin: 0 10px !important;"
-          pButton class="ui-button-rounded"
+          pButton icon="fa fa-search"
           (click)="search()"
-          label="{{'search' | translate}}"></button>
+          ></button>
   </div>
 
-  <app-account-transactions-list></app-account-transactions-list>
-
 </div>
+
+
+<app-account-transactions-list [transactionsList]="transactionsDataList"></app-account-transactions-list>
+

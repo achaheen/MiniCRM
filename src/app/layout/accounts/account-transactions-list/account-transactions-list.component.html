@@ -1,4 +1,4 @@
-<p-table [value]="this.transactionsList" dataKey="referenceNo" [paginator]="true" [rows]="10">
+<p-table [value]="this.transactionsList" dataKey="referenceNo" [paginator]="true" [rows]="10" class="wordWrapTable">
   <ng-template pTemplate="header">
     <tr>
       <th style="width: 40px"></th>
@@ -17,25 +17,15 @@
       </td>
 
       <td *ngFor="let col of cols">
-        {{account[col.field]}}
+        {{transaction[col.field]}}
       </td>
     </tr>
   </ng-template>
-  <ng-template pTemplate="rowexpansion" let-account>
+  <ng-template pTemplate="rowexpansion" let-transaction>
     <tr>
       <td [attr.colspan]="cols.length + 1">
         <div class="customerProfileContainer">
           <div class="p-grid p-justify-start customerProfileIntern">
-
-            <div class="p-col-2 la">{{'referenceNo' | translate}}</div>
-            <div class="p-col-2 minWidth"><input id="referenceNo" type="text" pInputText name="referenceNo"
-                                                 [attr.disabled]="true"
-                                                 [ngModel]="transaction.referenceNo"></div>
-
-            <div class="p-col-2 la">{{'description' | translate}}</div>
-            <div class="p-col-2 minWidth"><input id="description" type="text" pInputText name="description"
-                                                 [attr.disabled]="true"
-                                                 [ngModel]="transaction.description"></div>
 
             <div class="p-col-2 la">{{'amount' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="amount" type="text" pInputText name="amount" [attr.disabled]="true"
@@ -45,11 +35,6 @@
             <div class="p-col-2 minWidth"><input id="availableBalance" type="text" pInputText name="availableBalance"
                                                  [attr.disabled]="true"
                                                  [ngModel]="transaction.availableBalance"></div>
-
-            <div class="p-col-2 la">{{'channel' | translate}}</div>
-            <div class="p-col-2 minWidth"><input id="channel" type="text" pInputText name="channel"
-                                                 [attr.disabled]="true"
-                                                 [ngModel]="transaction.referenceNo"></div>
 
             <div class="p-col-2 la">{{'groupId' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="groupId" type="text" pInputText name="groupId"

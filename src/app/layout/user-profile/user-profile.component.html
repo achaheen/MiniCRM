@@ -14,14 +14,12 @@
       <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic"
              (keyup.enter)="search()">
       <button type="button" style="margin: 0 10px !important;"
-              pButton class="ui-button-rounded"
-              (click)="search()"
-              label="{{'search' | translate}}"></button>
+              pButton  icon="fa fa-search"
+              (click)="search()" ></button>
 
       <button type="button" style="margin: 0 10px !important;"
-              pButton class="ui-button-rounded"
-              (click)="clear()"
-              label="{{'clear' | translate}}"></button>
+              pButton
+              (click)="clear()" icon="fa fa-times"></button>
 
     </div>
     <div class="p-col-9" style="padding:0px" *ngIf="(selectedSearchType == '2')">
@@ -32,14 +30,14 @@
         <div class="p-col-6"><input id="nationalID" type="text" pInputText name="nationalID"
                                     [(ngModel)]="nationalID" (keyup.enter)="search()">
           <button type="button" style="margin: 0 10px !important;"
-                  pButton class="ui-button-rounded"
+                  pButton
                   (click)="search()" *ngIf="selectedNationalType != ''"
-                  label="{{'search' | translate}}"></button>
+                  icon="fa fa-search"></button>
 
           <button type="button" style="margin: 0 10px !important;"
-                  pButton class="ui-button-rounded"
+                  pButton
                   (click)="clear()"
-                  label="{{'clear' | translate}}"></button>
+                  icon="fa fa-times"></button>
         </div>
 
 
@@ -53,14 +51,14 @@
              tooltipPosition="top" (keyup.enter)="search()">
 
       <button type="button" style="margin: 0 10px !important;"
-              pButton class="ui-button-rounded"
+              pButton
               (click)="search()"
-              label="{{'search' | translate}}"></button>
+              icon="fa fa-search"></button>
 
       <button type="button" style="margin: 0 10px !important;"
-              pButton class="ui-button-rounded"
+              pButton
               (click)="clear()"
-              label="{{'clear' | translate}}"></button>
+              icon="fa fa-times"></button>
     </div>
 
 
