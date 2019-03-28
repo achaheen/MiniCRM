@@ -1,0 +1,79 @@
+<p-table [value]="this.transactionsList" dataKey="referenceNo" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 40px"></th>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-transaction let-expanded="expanded">
+    <tr>
+
+      <td>
+        <a href="#" [pRowToggler]="transaction">
+          <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+        </a>
+      </td>
+
+      <td *ngFor="let col of cols">
+        {{account[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-account>
+    <tr>
+      <td [attr.colspan]="cols.length + 1">
+        <div class="customerProfileContainer">
+          <div class="p-grid p-justify-start customerProfileIntern">
+
+            <div class="p-col-2 la">{{'referenceNo' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="referenceNo" type="text" pInputText name="referenceNo"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.referenceNo"></div>
+
+            <div class="p-col-2 la">{{'description' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="description" type="text" pInputText name="description"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.description"></div>
+
+            <div class="p-col-2 la">{{'amount' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="amount" type="text" pInputText name="amount" [attr.disabled]="true"
+                                                 [ngModel]="transaction.amount"></div>
+
+            <div class="p-col-2 la">{{'availableBalance' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="availableBalance" type="text" pInputText name="availableBalance"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.availableBalance"></div>
+
+            <div class="p-col-2 la">{{'channel' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="channel" type="text" pInputText name="channel"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.referenceNo"></div>
+
+            <div class="p-col-2 la">{{'groupId' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="groupId" type="text" pInputText name="groupId"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.groupId"></div>
+
+            <div class="p-col-2 la">{{'code' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="code" type="text" pInputText name="code" [attr.disabled]="true"
+                                                 [ngModel]="transaction.code"></div>
+
+            <div class="p-col-2 la">{{'postingDate' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="postingDate" type="text" pInputText name="postingDate"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.postingDate | date"></div>
+            <div class="p-col-2 la">{{'postingDate' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="valueDate" type="text" pInputText name="valueDate"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.valueDate | date"></div>
+
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>

@@ -26,9 +26,10 @@ import { ViewUserProfileComponent } from './view-user-profile/view-user-profile.
 import {AccountsComponent} from "../accounts/accounts.component";
 import {TableModule} from "primeng/table";
 import {AccountTransactionsComponent} from "../accounts/account-transactions/account-transactions.component";
+import {AccountTransactionsListComponent} from "../accounts/account-transactions-list/account-transactions-list.component";
 
 @NgModule({
-  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent],
+  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent,AccountTransactionsListComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

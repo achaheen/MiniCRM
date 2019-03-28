@@ -26,6 +26,7 @@ import {DropdownModule} from "primeng/primeng";
 import {InputMaskModule} from "primeng/primeng";
 import {TableModule} from "primeng/table";
 import { AccountTransactionsComponent } from './account-transactions/account-transactions.component';
+import { AccountTransactionsListComponent } from './account-transactions-list/account-transactions-list.component';
 
 @NgModule({
   declarations: [ViewAccountComponent],
