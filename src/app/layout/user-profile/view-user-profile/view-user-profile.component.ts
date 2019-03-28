@@ -1,18 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CustomerProfile} from "../../../shared/model/customerProfile";
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {CustomerProfile} from '../../../shared/model/customerProfile';
+import {SharedCustomerInfoService} from '../../../shared/services/shared-customer-info.service';
+import {Observable, Subscription} from 'rxjs';
+import {AbstractSharedDataClass} from '../abstract-shared-data-class';
 
 @Component({
   selector: 'app-view-user-profile',
   templateUrl: './view-user-profile.component.html',
   styleUrls: ['./view-user-profile.component.scss']
 })
-export class ViewUserProfileComponent implements OnInit {
+export class ViewUserProfileComponent extends AbstractSharedDataClass {
 
-  @Input() customerProfile:CustomerProfile;
+  constructor(public sharedInfoService: SharedCustomerInfoService) {
+    super();
 
-  constructor() { }
-
-  ngOnInit() {
   }
 
 }

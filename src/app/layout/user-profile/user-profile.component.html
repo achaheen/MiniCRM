@@ -73,7 +73,7 @@
              [(activeIndex)]="selectedTab"
              *ngIf="customerProfile.idNumber != undefined">
     <p-tabPanel [header]="'customerProfile' | translate">
-      <app-view-user-profile [customerProfile]="customerProfile"></app-view-user-profile>
+      <app-view-user-profile></app-view-user-profile>
     </p-tabPanel>
     <p-tabPanel [header]="'customerAccounts' | translate">
       <ng-template pTemplate="content">
@@ -82,11 +82,6 @@
 
     </p-tabPanel>
   </p-tabView>
-
-
-
-
-
 
 
 </p-panel>
