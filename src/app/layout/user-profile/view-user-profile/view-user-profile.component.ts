@@ -1,7 +1,5 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CustomerProfile} from '../../../shared/model/customerProfile';
+import {Component} from '@angular/core';
 import {SharedCustomerInfoService} from '../../../shared/services/shared-customer-info.service';
-import {Observable, Subscription} from 'rxjs';
 import {AbstractSharedDataClass} from '../abstract-shared-data-class';
 
 @Component({

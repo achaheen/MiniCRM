@@ -7,6 +7,7 @@ import {CustomerAccount} from '../../shared/model/CustomerAccount';
 import {AccountList} from '../../shared/model/AccountList';
 import {Account} from '../../shared/model/Account';
 import {SharedCustomerInfoService} from '../../shared/services/shared-customer-info.service';
+import {AbstractSharedDataClass} from '../user-profile/abstract-shared-data-class';
 
 
 @Component({
@@ -15,7 +16,7 @@ import {SharedCustomerInfoService} from '../../shared/services/shared-customer-i
   styleUrls: ['./accounts.component.scss']
 })
 
-export class AccountsComponent implements OnInit {
+export class AccountsComponent extends AbstractSharedDataClass {
 
   customerAccounts: CustomerAccount = {};
   accountList: AccountList = {};
@@ -26,10 +27,12 @@ export class AccountsComponent implements OnInit {
   blocked = false;
 
 
-  constructor(private messageService: MessageService, private accoutService: MWAccountService, public utils: UtilsService, private sharedInfo: SharedCustomerInfoService) {
+  constructor(private messageService: MessageService, private accoutService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
+    super();
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.accountList.account = this.accounts;
     this.customerAccounts.accountList = this.accountList;
 
@@ -47,6 +50,9 @@ export class AccountsComponent implements OnInit {
   }
 
   getCustomerAccountsList() {
+    if (this.customerProfile == null) {
+      return;
+    }
     this.blocked = true;
     const customerBasic = this.customerProfile.caa.customerNo;
     const segment = this.customerProfile.segmentDetails.customerCurrentSegmentCode;
