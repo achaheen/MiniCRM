@@ -47,7 +47,7 @@
 
 
     </div>
-    <div class="p-col-4" *ngIf="(selectedSearchType == '3')">
+    <div class="p-col-4" *ngIf="(selectedSearchType === '3')">
 
       <input id="mobileNo" type="text" pInputText name="mobileNo" [(ngModel)]="mobileNo" pTooltip="0501234567"
              tooltipPosition="top" (keyup.enter)="search()">
@@ -73,20 +73,15 @@
              [(activeIndex)]="selectedTab"
              *ngIf="customerProfile.idNumber != undefined">
     <p-tabPanel [header]="'customerProfile' | translate">
-      <app-view-user-profile [customerProfile]="customerProfile"></app-view-user-profile>
+      <app-view-user-profile></app-view-user-profile>
     </p-tabPanel>
     <p-tabPanel [header]="'customerAccounts' | translate">
       <ng-template pTemplate="content">
-        <app-accounts [customerProfile]="customerProfile"></app-accounts>
+        <app-accounts></app-accounts>
       </ng-template>
 
     </p-tabPanel>
   </p-tabView>
-
-
-
-
-
 
 
 </p-panel>

@@ -1,11 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {MWUsersService} from "../../shared/services/mwusers.service";
-import {MessageService} from "../../shared/services/message.service";
-import {UtilsService} from "../../shared/services/utils.service";
-import {utils} from "protractor";
-import {CustomerProfile} from "../../shared/model/customerProfile";
-import {OTPMobile} from "../../shared/model/OTPMobile";
-import {OTPMobileType} from "../../shared/model/OTPMobileType";
+import {MWUsersService} from '../../shared/services/mwusers.service';
+import {MessageService} from '../../shared/services/message.service';
+import {UtilsService} from '../../shared/services/utils.service';
+import {CustomerProfile} from '../../shared/model/customerProfile';
+import {SharedCustomerInfoService} from '../../shared/services/shared-customer-info.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +12,8 @@ import {OTPMobileType} from "../../shared/model/OTPMobileType";
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private mwUserServices: MWUsersService, public utils: UtilsService) {
+  constructor(private messageService: MessageService, private mwUserServices: MWUsersService, public utils: UtilsService, private sharedInfo: SharedCustomerInfoService) {
+
   }
 
   searchTypes = [];
@@ -24,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   customerBasic: String = '516124';
   customerProfile: CustomerProfile = {};
   mobileNo: String;
-  inputValue: String = "";
+  inputValue: String = '';
   nationalID: String;
   blocked = false;
 
@@ -34,7 +33,7 @@ export class UserProfileComponent implements OnInit {
       {label: 'Select Search Type', value: ''},
       {label: 'Customer Basic', value: '1'},
       {label: 'National ID', value: '2'},
-      {label: 'Mobile', value: '3'}]
+      {label: 'Mobile', value: '3'}];
     this.selectedSearchType = null;
     this.nationalIdTypes = [
       {label: 'Select Type', value: ''},
@@ -47,7 +46,7 @@ export class UserProfileComponent implements OnInit {
       {label: 'HAFEEZA', value: 'HN'},
       {label: 'BUSINESS_LICENSE', value: 'BL'}
 
-    ]
+    ];
   }
 
   search() {
@@ -72,6 +71,7 @@ export class UserProfileComponent implements OnInit {
     this.mwUserServices.getCustomerProfileByInput(this.inputValue, Number(this.selectedSearchType), 'ar')
       .subscribe(returnedCustomerProfile => {
           this.customerProfile = returnedCustomerProfile;
+          this.sharedInfo.setValue(this.customerProfile);
           this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'Customer Profile Success', this.utils, 'success');
           this.blocked = false;
         }
@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
         });
   }
 
-  clear(){
+  clear() {
 
     this.customerProfile = {};
 
