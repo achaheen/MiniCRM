@@ -25,31 +25,31 @@
     <tr>
       <td [attr.colspan]="cols.length + 1">
         <div class="customerProfileContainer">
-          <div class="p-grid p-justify-start customerProfileIntern">
+          <div class="p-grid p-justify-start">
 
-            <div class="p-col-2 la">{{'amount' | translate}}</div>
+            <div class="p-col-1 la">{{'amount' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="amount" type="text" pInputText name="amount" [attr.disabled]="true"
                                                  [ngModel]="transaction.amount"></div>
 
-            <div class="p-col-2 la">{{'availableBalance' | translate}}</div>
+            <div class="p-col-1 la">{{'availableBalance' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="availableBalance" type="text" pInputText name="availableBalance"
                                                  [attr.disabled]="true"
                                                  [ngModel]="transaction.availableBalance"></div>
 
-            <div class="p-col-2 la">{{'groupId' | translate}}</div>
+            <div class="p-col-1 la">{{'groupId' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="groupId" type="text" pInputText name="groupId"
                                                  [attr.disabled]="true"
                                                  [ngModel]="transaction.groupId"></div>
 
-            <div class="p-col-2 la">{{'code' | translate}}</div>
+            <div class="p-col-1 la">{{'code' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="code" type="text" pInputText name="code" [attr.disabled]="true"
                                                  [ngModel]="transaction.code"></div>
 
-            <div class="p-col-2 la">{{'postingDate' | translate}}</div>
+            <div class="p-col-1 la">{{'postingDate' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="postingDate" type="text" pInputText name="postingDate"
                                                  [attr.disabled]="true"
                                                  [ngModel]="transaction.postingDate | date"></div>
-            <div class="p-col-2 la">{{'postingDate' | translate}}</div>
+            <div class="p-col-1 la">{{'valueDate' | translate}}</div>
             <div class="p-col-2 minWidth"><input id="valueDate" type="text" pInputText name="valueDate"
                                                  [attr.disabled]="true"
                                                  [ngModel]="transaction.valueDate | date"></div>

@@ -9,7 +9,9 @@
       <th *ngFor="let col of cols">
         {{col.header}}
       </th>
+      <th style="width: 415px;"></th>
     </tr>
+
   </ng-template>
   <ng-template pTemplate="body" let-account let-expanded="expanded">
     <tr>
@@ -23,6 +25,14 @@
       <td *ngFor="let col of cols">
         {{account[col.field]}}
       </td>
+
+      <td class="accountsBTN">
+        <p-button label="IBAN SMS" (onClick)="handleClick($event)"></p-button>
+        <p-button label="Order ChequeBook" (onClick)="handleClick($event)"></p-button>
+        <p-button label="Chequebook Status" (onClick)="handleClick($event)"></p-button>
+        <p-button label="Statement" (onClick)="handleClick($event)"></p-button>
+      </td>
+
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-account>
@@ -35,21 +45,21 @@
           <p-tabPanel [header]="'accountInfo' | translate">
             <div class="customerProfileContainer">
               <div class="p-grid p-justify-start customerProfileIntern">
-                <div class="p-col-2 la">{{'IBAN' | translate}}</div>
+                <div class="p-col-1 la">{{'IBAN' | translate}}</div>
                 <div class="p-col-2 minWidth"><input id="iban" type="text" pInputText name="iabn" [attr.disabled]="true"
                                                      [ngModel]="account.iban"></div>
 
-                <div class="p-col-2">{{'accountOpenedDate' | translate}}</div>
+                <div class="p-col-1">{{'accountOpenedDate' | translate}}</div>
                 <div class="p-col-2 minWidth"><input id="accountOpenedDate" type="text" pInputText
                                                      name="accountOpenedDate" [attr.disabled]="true"
                                                      [ngModel]="account.accountOpenedDate | date"></div>
 
-                <div class="p-col-2">{{'valuationDate' | translate}}</div>
+                <div class="p-col-1">{{'valuationDate' | translate}}</div>
                 <div class="p-col-2 minWidth"><input id="valuationDate" type="text" pInputText name="valuationDate"
                                                      [attr.disabled]="true"
                                                      [ngModel]="account.valuationDate | date"></div>
 
-                <div class="p-col-2">{{'isJointAccount' | translate}}</div>
+                <div class="p-col-1">{{'isJointAccount' | translate}}</div>
                 <div class="p-col-2 minWidth">
 
                   <p-checkbox name="isJointAccount" value="val1" [ngModel]="account.isJointAccount" binary="true"
@@ -57,8 +67,8 @@
                 </div>
 
                 <ng-container *ngFor="let accountBalance of account.accountBalanceList.accountBalance; let i = index">
-                  <div class="p-col-2">{{accountBalance.balanceType | translate}}</div>
-                  <div class="p-col-2 minWidth">
+                  <div class="p-col-1" *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">{{accountBalance.balanceType | translate}}</div>
+                  <div class="p-col-2 minWidth" *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">
                     <input id="accountBalance+i" type="text" pInputText name="accountBalance" disabled="disabled"
                            [ngModel]="accountBalance.amount"></div>
                 </ng-container>

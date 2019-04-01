@@ -37,12 +37,11 @@ export class AccountsComponent extends AbstractSharedDataClass {
     this.customerAccounts.accountList = this.accountList;
 
     this.cols = [
-      {field: 'accountNostring', header: 'accountNo'},
-      {field: 'accountTypeCode', header: 'accountTypeCode'},
-      {field: 'status', header: 'status'},
-      {field: 'shortName', header: 'shortName'},
-      {field: 'currency', header: 'status'},
-      {field: 'valuationDate', header: 'shortName'}
+      {field: 'accountNostring', header: this.utils.translateService.instant('accountNo')},
+      {field: 'accountTypeCode', header: this.utils.translateService.instant('accountTypeCode')},
+      {field: 'status', header: this.utils.translateService.instant('Status')},
+      {field: 'shortName', header: this.utils.translateService.instant('shortName')},
+      {field: 'currency', header: this.utils.translateService.instant('currency')}
     ];
 
     this.getCustomerAccountsList();

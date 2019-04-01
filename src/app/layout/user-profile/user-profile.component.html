@@ -10,7 +10,7 @@
                   [(ngModel)]="selectedSearchType"></p-dropdown>
     </div>
 
-    <div class="p-col-4" *ngIf="(selectedSearchType == '1')">
+    <div class="p-col-4" *ngIf="(selectedSearchType != '2' && selectedSearchType != '3')">
       <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic"
              (keyup.enter)="search()">
       <button type="button" style="margin: 0 10px !important;"
