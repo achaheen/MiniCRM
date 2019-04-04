@@ -1,5 +1,7 @@
-<ng-container *ngFor="let creditCard of creditCardList">
+<ng-container *ngFor="let creditCard of creditCardList" >
+
 <div class="creditCardContainer">
+  <a href="#" (click)="showCreditCardDetails(creditCard)" >
   <div class="CCLogo"><img src="assets/images/BAJ_logo-trans.png" style="width: 125px;"></div>
   <div class="CCType">{{creditCard.creditCardClass.description.descriptionList[0].value}}</div>
   <div class="CCSim"><img src="assets/images/credit-chip.png" style="width: 45px;"></div>
@@ -13,8 +15,15 @@
   <div class="CCToDate">{{creditCard.expiryDate | date:'MM/yy'}}</div>
   <div class="CCHolderName">{{creditCard.cardHolderName}}</div>
   <div class="CCVisaLogo"><img src="assets/images/visa-logo.png" style="width: 80px;"></div>
+  </a>
 </div>
+
 </ng-container>
 
 
 <div style="clear: both"></div>
+
+
+<p-dialog header="Title" [(visible)]="display">
+  {{selectedCreditCard.cardHolderName}}
+</p-dialog>

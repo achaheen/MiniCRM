@@ -516,8 +516,9 @@ button.btn.btn-primary.loginBTN:hover {
 
 }
 .CCNumber{
+  font-family: kredit;
   clear: both;
-  font-weight: bold;
+ // font-weight: bold;
   margin-left: 102px;
   margin-top: -37px;
   font-size: large;
@@ -547,3 +548,8 @@ button.btn.btn-primary.loginBTN:hover {
 }
 
 
+
+@font-face {
+  font-family: "kredit";
+  src: url("fonts/Kreditback.ttf");
+}

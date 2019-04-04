@@ -9,9 +9,16 @@ import {CreditCard} from "../../../shared/model/CreditCard";
 export class ViewCreditCardComponent implements OnInit {
 
   @Input() creditCardList:CreditCard[];
+  display:boolean = false;
+  selectedCreditCard:CreditCard ={};
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showCreditCardDetails(creditCard:CreditCard){
+    this.display = true;
+    this.selectedCreditCard = creditCard;
   }
 
 }
