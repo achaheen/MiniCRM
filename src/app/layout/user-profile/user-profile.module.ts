@@ -13,7 +13,7 @@ import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
-import {CalendarModule, RadioButtonModule, TooltipModule} from 'primeng/primeng';
+import {CalendarModule, ConfirmDialogModule, RadioButtonModule, TooltipModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import {ListboxModule} from 'primeng/listbox';
 import {FieldsetModule} from 'primeng/fieldset';
@@ -27,9 +27,11 @@ import {AccountsComponent} from "../accounts/accounts.component";
 import {TableModule} from "primeng/table";
 import {AccountTransactionsComponent} from "../accounts/account-transactions/account-transactions.component";
 import {AccountTransactionsListComponent} from "../accounts/account-transactions-list/account-transactions-list.component";
+import {CreditCardsComponent} from "../credit-cards/credit-cards.component";
+import {ViewCreditCardComponent} from "../credit-cards/view-credit-card/view-credit-card.component";
 
 @NgModule({
-  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent,AccountTransactionsListComponent],
+  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent,AccountTransactionsListComponent,CreditCardsComponent,ViewCreditCardComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
@@ -56,7 +58,8 @@ import {AccountTransactionsListComponent} from "../accounts/account-transactions
     TooltipModule,
     TabViewModule,
     TableModule,
-    CalendarModule
+    CalendarModule,
+    ConfirmDialogModule
   ]
 })
 export class UserProfileModule { }

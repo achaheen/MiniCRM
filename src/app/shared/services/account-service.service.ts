@@ -27,4 +27,21 @@ export class MWAccountService {
 
   }
 
+  sendAccountStatement(accountTransactionsRequest : AccountTransactionsRequest){
+    return this.httpClient.post<AccountTransactionsResponse>(this.baseURL + 'sendAccountStatement',accountTransactionsRequest);
+
+  }
+  sendIBANSMS(accountTransactionsRequest : AccountTransactionsRequest){
+    return this.httpClient.post<AccountTransactionsResponse>(this.baseURL + 'sendIBANSMS',accountTransactionsRequest);
+
+  }
+  chequeBookStatus(accountTransactionsRequest : AccountTransactionsRequest){
+    return this.httpClient.post<AccountTransactionsResponse>(this.baseURL + 'chequeBookStatus',accountTransactionsRequest);
+
+  }
+  chequeBookRequest(accountTransactionsRequest : AccountTransactionsRequest){
+    return this.httpClient.post<AccountTransactionsResponse>(this.baseURL + 'chequeBookRequest',accountTransactionsRequest);
+
+  }
+
 }

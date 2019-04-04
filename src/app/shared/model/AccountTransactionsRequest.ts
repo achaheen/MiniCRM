@@ -8,4 +8,6 @@ export interface AccountTransactionsRequest{
   accountNo?:AccountNo;
   fromDate?:number;
   toDate?:number;
+  statementType?:number;
+  email?:string;
 }

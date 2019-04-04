@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   selectedSearchType = {};
   nationalIdTypes = [];
   selectedNationalType = {};
-  customerBasic: String = '516124';
+  customerBasic: String = '80001719';
   customerProfile: CustomerProfile = {};
   mobileNo: String;
   inputValue: String = '';

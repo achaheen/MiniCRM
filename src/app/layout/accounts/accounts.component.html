@@ -27,17 +27,17 @@
       </td>
 
       <td class="accountsBTN">
-        <p-button label="IBAN SMS" (onClick)="handleClick($event)"></p-button>
-        <p-button label="Order ChequeBook" (onClick)="handleClick($event)"></p-button>
-        <p-button label="Chequebook Status" (onClick)="handleClick($event)"></p-button>
-        <p-button label="Statement" (onClick)="handleClick($event)"></p-button>
+        <p-button label="IBAN SMS" (onClick)="sendIbanSMS(account)"></p-button>
+        <p-button label="Order ChequeBook" (onClick)="orderChequeBook(account)"></p-button>
+        <p-button label="Chequebook Status" (onClick)="statusChequeBook(account)"></p-button>
+        <p-button label="Statement" (onClick)="showStatementDialog(account)"></p-button>
       </td>
 
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-account>
     <tr>
-      <td [attr.colspan]="cols.length + 1">
+      <td [attr.colspan]="cols.length + 2">
 
 
         <p-tabView id="CustomerProfileTabsView"
@@ -88,5 +88,35 @@
     </tr>
   </ng-template>
 </p-table>
+
+<p-dialog header="statementDialog" [(visible)]="display" [style]="{width: '70%'}" positionTop="150">
+  <div class="p-grid p-justify-start"  appendTo="body">
+
+    <div class="p-col-2">{{'email' | translate}}</div>
+    <div class="p-col-3 minWidth"><input id="email" type="text" pInputText name="email"
+                                         [ngModel]="customerProfile.eMail"></div>
+    <div class="p-col-2">{{'statementType' | translate}}</div>
+    <div class="p-col-3 minWidth" >  <p-dropdown [options]="statementTypes"
+                                       [(ngModel)]="selectedStatementType"  appendTo="body"></p-dropdown></div>
+  </div>
+    <div class="p-grid p-justify-start" appendTo="body">
+    <div class="p-col-2">{{'startDate' | translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-calendar [(ngModel)]="startDate"  appendTo="body"></p-calendar>
+    </div>
+    <div class="p-col-2">{{'endDate' | translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-calendar [(ngModel)]="endDate"  appendTo="body"></p-calendar>
+    </div>
+
+    <div class="p-col-2">
+      <button type="button" pButton style="margin: 0 10px !important;" icon="pi pi-check"  label="SendStatement" (click)="statementRequest(account)"></button>
+    <!--  <p-confirmDialog [style]="{width: '50vw'}" header="Confirmation" icon="pi pi-exclamation-triangle" [appendTo]="body"></p-confirmDialog>-->
+    </div>
+
+
+  </div>
+
+</p-dialog>
 
 

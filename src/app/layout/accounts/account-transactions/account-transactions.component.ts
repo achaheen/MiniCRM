@@ -21,12 +21,11 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
   @Input() customerProfile: CustomerProfile = {};
   startDate: Date;
   endDate: Date;
-
+  blocked:boolean = false;
   accountTransactionsReq: AccountTransactionsRequest = {};
   accountTransactionsRes: AccountTransactionsResponse;
   transactionsDataList: AccountTransaction[];
   totalRecords: number;
-
   constructor(private messageService: MessageService, private accountService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
     super();
   }
@@ -37,7 +36,7 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
   }
 
   search() {
-
+    this.blocked = true;
 
     this.accountTransactionsReq.accountNo = this.accountNo;
     this.accountTransactionsReq.fromDate = this.startDate.getTime();
@@ -55,8 +54,19 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
         this.accountTransactionsRes = result;
         this.transactionsDataList = this.accountTransactionsRes.accountTransactionList.accountTransaction;
         this.totalRecords = this.accountTransactionsRes.totalRecordCount;
+        this.blocked = false;
       }
     );
+  }
+
+  getAccountTransactionsPeriod(month:number){
+
+    const currentDate = new Date();
+    this.startDate = new Date();
+
+    this.startDate.setMonth(currentDate.getMonth() - month);
+    this.endDate = new Date();
+    this.search();
   }
 
 }

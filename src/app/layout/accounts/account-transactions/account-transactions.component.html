@@ -1,15 +1,33 @@
+<p-blockUI [blocked]="blocked">
+  <i class="fa fa-spinner fa-spin fa-4x fa-fw" aria-hidden="true" style="position:absolute;top:50%;left:50%"></i>
+</p-blockUI>
+
+
 <div class="p-grid p-justify-start">
+
   <div class="p-col-1">{{'startDate' | translate}}</div>
-  <div class="p-col-3 minWidth"> <p-calendar [(ngModel)]="startDate" ></p-calendar></div>
+  <div class="p-col-3 minWidth">
+    <p-calendar [(ngModel)]="startDate"></p-calendar>
+  </div>
   <div class="p-col-1">{{'endDate' | translate}}</div>
-  <div class="p-col-3 minWidth"> <p-calendar [(ngModel)]="endDate"></p-calendar></div>
+  <div class="p-col-3 minWidth">
+    <p-calendar [(ngModel)]="endDate"></p-calendar>
+  </div>
   <div class="p-col-1">
-  <button type="button" style="margin: 0 10px !important;"
-          pButton icon="fa fa-search"
-          (click)="search()"
-          ></button>
+
+    <button type="button" style="margin: 0 10px !important;"
+            pButton icon="fa fa-search"
+            (click)="search()" [disabled]="!startDate || !endDate"
+    ></button>
   </div>
 
+  <div class="p-col-1">
+    <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="3month" (click)="getAccountTransactionsPeriod(3)"></button>
+  </div>
+
+  <div class="p-col-1">
+    <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="6month" (click)="getAccountTransactionsPeriod(6)"></button>
+  </div>
 </div>
 
 
