@@ -67,8 +67,10 @@
                 </div>
 
                 <ng-container *ngFor="let accountBalance of account.accountBalanceList.accountBalance; let i = index">
-                  <div class="p-col-1" *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">{{accountBalance.balanceType | translate}}</div>
-                  <div class="p-col-2 minWidth" *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">
+                  <div class="p-col-1"
+                       *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">{{accountBalance.balanceType | translate}}</div>
+                  <div class="p-col-2 minWidth"
+                       *ngIf="accountBalance.balanceType != 'STATUS_BALANCE' && accountBalance.balanceType != 'PREVIOUS_CLEARED_BALANCE'">
                     <input id="accountBalance+i" type="text" pInputText name="accountBalance" disabled="disabled"
                            [ngModel]="accountBalance.amount"></div>
                 </ng-container>
@@ -90,28 +92,34 @@
 </p-table>
 
 <p-dialog header="statementDialog" [(visible)]="display" [style]="{width: '70%'}" positionTop="150">
-  <div class="p-grid p-justify-start"  appendTo="body">
-
-    <div class="p-col-2">{{'email' | translate}}</div>
-    <div class="p-col-3 minWidth"><input id="email" type="text" pInputText name="email"
-                                         [ngModel]="customerProfile.eMail"></div>
+  <div class="p-grid p-justify-start" appendTo="body">
     <div class="p-col-2">{{'statementType' | translate}}</div>
-    <div class="p-col-3 minWidth" >  <p-dropdown [options]="statementTypes"
-                                       [(ngModel)]="selectedStatementType"  appendTo="body"></p-dropdown></div>
+    <div class="p-col-3 minWidth">
+      <p-dropdown [options]="statementTypes"
+                  [(ngModel)]="selectedStatementType" appendTo="body"></p-dropdown>
+    </div>
+    <ng-container *ngIf="selectedStatementType==='1'">
+      <div class="p-col-2">{{'email' | translate}}</div>
+      <div class="p-col-3 minWidth"><input id="email" type="text" pInputText name="email"
+                                           [ngModel]="customerProfile.eMail"></div>
+    </ng-container>
+
+
   </div>
-    <div class="p-grid p-justify-start" appendTo="body">
+  <div class="p-grid p-justify-start" appendTo="body">
     <div class="p-col-2">{{'startDate' | translate}}</div>
     <div class="p-col-3 minWidth">
-      <p-calendar [(ngModel)]="startDate"  appendTo="body"></p-calendar>
+      <p-calendar [(ngModel)]="startDate" appendTo="body"></p-calendar>
     </div>
     <div class="p-col-2">{{'endDate' | translate}}</div>
     <div class="p-col-3 minWidth">
-      <p-calendar [(ngModel)]="endDate"  appendTo="body"></p-calendar>
+      <p-calendar [(ngModel)]="endDate" appendTo="body"></p-calendar>
     </div>
 
     <div class="p-col-2">
-      <button type="button" pButton style="margin: 0 10px !important;" icon="pi pi-check"  label="SendStatement" (click)="statementRequest(account)"></button>
-    <!--  <p-confirmDialog [style]="{width: '50vw'}" header="Confirmation" icon="pi pi-exclamation-triangle" [appendTo]="body"></p-confirmDialog>-->
+      <button type="button" pButton style="margin: 0 10px !important;" icon="pi pi-check" label="SendStatement"
+              (click)="statementRequest(account)"></button>
+      <!--  <p-confirmDialog [style]="{width: '50vw'}" header="Confirmation" icon="pi pi-exclamation-triangle" [appendTo]="body"></p-confirmDialog>-->
     </div>
 
 

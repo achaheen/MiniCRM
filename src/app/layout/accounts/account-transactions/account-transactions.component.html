@@ -4,30 +4,46 @@
 
 
 <div class="p-grid p-justify-start">
+  <ng-container *ngIf="transactionsSearchType===1">
+    <div class="p-col-2">
+      <button type="button" style="margin: 0  !important;" pButton icon="fa fa-search" label="1 Months"
+              (click)="getAccountTransactionsPeriod(1)"></button>
+    </div>
 
-  <div class="p-col-1">{{'startDate' | translate}}</div>
-  <div class="p-col-3 minWidth">
-    <p-calendar [(ngModel)]="startDate"></p-calendar>
-  </div>
-  <div class="p-col-1">{{'endDate' | translate}}</div>
-  <div class="p-col-3 minWidth">
-    <p-calendar [(ngModel)]="endDate"></p-calendar>
-  </div>
-  <div class="p-col-1">
+    <div class="p-col-2">
+      <button type="button" style="margin: 0  !important;" pButton icon="fa fa-search" label="3 Months"
+              (click)="getAccountTransactionsPeriod(3)"></button>
+    </div>
+    <div class="p-col-2">
+      <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="6 Months"
+              (click)="getAccountTransactionsPeriod(6)"></button>
+    </div>
 
-    <button type="button" style="margin: 0 10px !important;"
-            pButton icon="fa fa-search"
-            (click)="search()" [disabled]="!startDate || !endDate"
-    ></button>
-  </div>
+  </ng-container>
 
-  <div class="p-col-1">
-    <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="3month" (click)="getAccountTransactionsPeriod(3)"></button>
+  <div class="p-col-2">
+    <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="Other"
+            (click)="transactionsSearchType===1?transactionsSearchType=2:transactionsSearchType=1;"></button>
   </div>
+  <ng-container *ngIf="transactionsSearchType===2">
+    <div class="p-col-1">{{'startDate' | translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-calendar [(ngModel)]="startDate"></p-calendar>
+    </div>
+    <div class="p-col-1">{{'endDate' | translate}}</div>
+    <div class="p-col-3 minWidth">
+      <p-calendar [(ngModel)]="endDate"></p-calendar>
+    </div>
 
-  <div class="p-col-1">
-    <button type="button" style="margin: 0 10px !important;" pButton icon="fa fa-search" label="6month" (click)="getAccountTransactionsPeriod(6)"></button>
-  </div>
+    <div class="p-col-1">
+
+      <button type="button" style="margin: 0 10px !important;"
+              pButton icon="fa fa-search"
+              (click)="search()" [disabled]="!startDate || !endDate"
+      ></button>
+    </div>
+  </ng-container>
+
 </div>
 
 

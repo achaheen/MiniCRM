@@ -8,9 +8,9 @@ import {AccountList} from '../../shared/model/AccountList';
 import {Account} from '../../shared/model/Account';
 import {SharedCustomerInfoService} from '../../shared/services/shared-customer-info.service';
 import {AbstractSharedDataClass} from '../user-profile/abstract-shared-data-class';
-import {AccountTransactionsRequest} from "../../shared/model/AccountTransactionsRequest";
-import {AccountTransactionsResponse} from "../../shared/model/AccountTransactionsResponse";
-import {ConfirmationService} from "primeng/api";
+import {AccountTransactionsRequest} from '../../shared/model/AccountTransactionsRequest';
+import {AccountTransactionsResponse} from '../../shared/model/AccountTransactionsResponse';
+import {ConfirmationService} from 'primeng/api';
 
 
 @Component({
@@ -28,17 +28,17 @@ export class AccountsComponent extends AbstractSharedDataClass {
 
   @Input() customerProfile: CustomerProfile = {};
   cols: any[];
-  blocked:boolean = false;
-  display:boolean = false;
+  blocked = false;
+  display = false;
   accountTransactionsReq: AccountTransactionsRequest = {};
   accountTransactionsRes: AccountTransactionsResponse;
-  statementTypes:any[];
-  selectedStatementType:{};
-  startDate:Date;
-  endDate:Date;
-  selectedAccount:Account;
+  statementTypes: any[];
+  selectedStatementType: {};
+  startDate: Date;
+  endDate: Date;
+  selectedAccount: Account;
 
-  constructor(private confirmationService: ConfirmationService,private messageService: MessageService ,private accountService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
+  constructor(private confirmationService: ConfirmationService, private messageService: MessageService, private accountService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
     super();
   }
 
@@ -47,8 +47,9 @@ export class AccountsComponent extends AbstractSharedDataClass {
     this.accountList.account = this.accounts;
     this.customerAccounts.accountList = this.accountList;
     this.statementTypes = [
-      {label:this.utils.translateService.instant('Email'),value:'1'},
-      {label:this.utils.translateService.instant('mail'),value:'2'}]
+      {label: '', value: null},
+      {label: this.utils.translateService.instant('Email'), value: '1'},
+      {label: this.utils.translateService.instant('mail'), value: '2'}];
     this.cols = [
       {field: 'accountNostring', header: this.utils.translateService.instant('accountNo')},
       {field: 'accountTypeCode', header: this.utils.translateService.instant('accountTypeCode')},
@@ -94,14 +95,14 @@ export class AccountsComponent extends AbstractSharedDataClass {
   }
 
 
-  sendIbanSMS(account:Account){
+  sendIbanSMS(account: Account) {
     this.blocked = true;
     this.accountTransactionsReq.accountNo = account.accountNo;
     this.accountTransactionsReq.customerBasic = this.customerProfile.caa.customerNo;
     this.accountTransactionsReq.idnumber = this.customerProfile.idNumber;
-    this.accountTransactionsReq.lang = "ar";
+    this.accountTransactionsReq.lang = 'ar';
 
-    console.log("this.accountTransactionsReq " + JSON.stringify(this.accountTransactionsReq))
+    console.log('this.accountTransactionsReq ' + JSON.stringify(this.accountTransactionsReq));
     this.accountService.sendIBANSMS(this.accountTransactionsReq).subscribe(
       result => {
         this.accountTransactionsRes = result;
@@ -111,14 +112,15 @@ export class AccountsComponent extends AbstractSharedDataClass {
     );
 
   }
-  orderChequeBook(account:Account){
+
+  orderChequeBook(account: Account) {
     this.blocked = true;
     this.accountTransactionsReq.accountNo = account.accountNo;
     this.accountTransactionsReq.customerBasic = this.customerProfile.caa.customerNo;
     this.accountTransactionsReq.idnumber = this.customerProfile.idNumber;
-    this.accountTransactionsReq.lang = "ar";
+    this.accountTransactionsReq.lang = 'ar';
 
-    console.log("this.accountTransactionsReq " + JSON.stringify(this.accountTransactionsReq))
+    console.log('this.accountTransactionsReq ' + JSON.stringify(this.accountTransactionsReq));
     this.accountService.chequeBookRequest(this.accountTransactionsReq).subscribe(
       result => {
         this.accountTransactionsRes = result;
@@ -127,14 +129,15 @@ export class AccountsComponent extends AbstractSharedDataClass {
       }
     );
   }
-  statusChequeBook(account:Account){
+
+  statusChequeBook(account: Account) {
     this.blocked = true;
     this.accountTransactionsReq.accountNo = account.accountNo;
     this.accountTransactionsReq.customerBasic = this.customerProfile.caa.customerNo;
     this.accountTransactionsReq.idnumber = this.customerProfile.idNumber;
-    this.accountTransactionsReq.lang = "ar";
+    this.accountTransactionsReq.lang = 'ar';
 
-    console.log("this.accountTransactionsReq " + JSON.stringify(this.accountTransactionsReq))
+    console.log('this.accountTransactionsReq ' + JSON.stringify(this.accountTransactionsReq));
     this.accountService.chequeBookStatus(this.accountTransactionsReq).subscribe(
       result => {
         this.accountTransactionsRes = result;
@@ -144,16 +147,17 @@ export class AccountsComponent extends AbstractSharedDataClass {
     );
 
   }
-  statementRequest(account:Account){
+
+  statementRequest(account: Account) {
     this.blocked = true;
     this.accountTransactionsReq.accountNo = this.selectedAccount.accountNo;
     this.accountTransactionsReq.customerBasic = this.customerProfile.caa.customerNo;
     this.accountTransactionsReq.idnumber = this.customerProfile.idNumber;
-    this.accountTransactionsReq.lang = "ar";
-    this.accountTransactionsReq.statementType=+this.selectedStatementType;
-    this.accountTransactionsReq.toDate=this.startDate.getTime();
-    this.accountTransactionsReq.fromDate=this.endDate.getTime();
-    this.accountTransactionsReq.email=this.customerProfile.eMail;
+    this.accountTransactionsReq.lang = 'ar';
+    this.accountTransactionsReq.statementType = +this.selectedStatementType;
+    this.accountTransactionsReq.toDate = this.startDate.getTime();
+    this.accountTransactionsReq.fromDate = this.endDate.getTime();
+    this.accountTransactionsReq.email = this.customerProfile.eMail;
 
     this.accountService.sendAccountStatement(this.accountTransactionsReq).subscribe(
       result => {
@@ -165,16 +169,16 @@ export class AccountsComponent extends AbstractSharedDataClass {
 
   }
 
-  showStatementDialog(account:Account) {
+  showStatementDialog(account: Account) {
     this.display = true;
     this.selectedAccount = account;
   }
 
-  confirm(account:Account) {
+  confirm(account: Account) {
     this.confirmationService.confirm({
       message: 'Are you sure that you want to perform this action?',
       accept: () => {
-        //statementRequest
+        // statementRequest
         this.statementRequest(account);
       }
     });

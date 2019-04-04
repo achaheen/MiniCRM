@@ -1,14 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AccountNo} from "../../../shared/model/AccountNo";
-import {AccountTransactionsResponse} from "../../../shared/model/AccountTransactionsResponse";
-import {AccountTransactionsRequest} from "../../../shared/model/AccountTransactionsRequest";
-import {MWAccountService} from "../../../shared/services/account-service.service";
-import {UtilsService} from "../../../shared/services/utils.service";
-import {MessageService} from "../../../shared/services/message.service";
-import {AccountTransaction} from "../../../shared/model/AccountTransaction";
-import {AbstractSharedDataClass} from "../../user-profile/abstract-shared-data-class";
-import {SharedCustomerInfoService} from "../../../shared/services/shared-customer-info.service";
-import {CustomerProfile} from "../../../shared/model/customerProfile";
+import {AccountNo} from '../../../shared/model/AccountNo';
+import {AccountTransactionsResponse} from '../../../shared/model/AccountTransactionsResponse';
+import {AccountTransactionsRequest} from '../../../shared/model/AccountTransactionsRequest';
+import {MWAccountService} from '../../../shared/services/account-service.service';
+import {UtilsService} from '../../../shared/services/utils.service';
+import {MessageService} from '../../../shared/services/message.service';
+import {AccountTransaction} from '../../../shared/model/AccountTransaction';
+import {AbstractSharedDataClass} from '../../user-profile/abstract-shared-data-class';
+import {SharedCustomerInfoService} from '../../../shared/services/shared-customer-info.service';
+import {CustomerProfile} from '../../../shared/model/customerProfile';
 
 @Component({
   selector: 'app-account-transactions',
@@ -21,11 +21,13 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
   @Input() customerProfile: CustomerProfile = {};
   startDate: Date;
   endDate: Date;
-  blocked:boolean = false;
+  blocked = false;
   accountTransactionsReq: AccountTransactionsRequest = {};
   accountTransactionsRes: AccountTransactionsResponse;
   transactionsDataList: AccountTransaction[];
   totalRecords: number;
+  transactionsSearchType: number = 1;
+
   constructor(private messageService: MessageService, private accountService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
     super();
   }
@@ -43,11 +45,11 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
     this.accountTransactionsReq.toDate = this.endDate.getTime();
     this.accountTransactionsReq.customerBasic = this.customerProfile.caa.customerNo;
     this.accountTransactionsReq.idnumber = this.customerProfile.idNumber;
-    this.accountTransactionsReq.lang = "ar";
+    this.accountTransactionsReq.lang = 'ar';
     this.accountTransactionsReq.segment = this.customerProfile.customerType;
 
 
-    console.log("this.accountTransactionsReq " + JSON.stringify(this.accountTransactionsReq))
+    console.log('this.accountTransactionsReq ' + JSON.stringify(this.accountTransactionsReq));
 
     this.accountService.getAccountTransactions(this.accountTransactionsReq).subscribe(
       result => {
@@ -59,7 +61,7 @@ export class AccountTransactionsComponent extends AbstractSharedDataClass {
     );
   }
 
-  getAccountTransactionsPeriod(month:number){
+  getAccountTransactionsPeriod(month: number) {
 
     const currentDate = new Date();
     this.startDate = new Date();
