@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   selectedSearchType = {};
   nationalIdTypes = [];
   selectedNationalType = {};
-  customerBasic: String = '516124';
+  customerBasic: String = '80001719';
   customerProfile: CustomerProfile = {};
   mobileNo: String;
   inputValue: String = '';
@@ -30,21 +30,20 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.searchTypes = [
-      {label: 'Select Search Type', value: ''},
-      {label: 'Customer Basic', value: '1'},
-      {label: 'National ID', value: '2'},
-      {label: 'Mobile', value: '3'}];
-    this.selectedSearchType = null;
+      {label: this.utils.translateService.instant('CustomerBasic'), value: '1'},
+      {label: this.utils.translateService.instant('CustomerID'), value: '2'},
+      {label: this.utils.translateService.instant('mobile'), value: '3'}];
+    this.selectedSearchType = 1;
     this.nationalIdTypes = [
-      {label: 'Select Type', value: ''},
-      {label: 'NAT_ID', value: 'ID'},
-      {label: 'IQAMA', value: 'IQ'},
-      {label: 'GCC_PASSPORT', value: 'GP'},
-      {label: 'FAMILY_BOOK', value: 'FB'},
-      {label: 'DIPLOMATIC_CARD', value: 'DC'},
-      {label: 'REGISTERATION_BOOK', value: 'RG'},
-      {label: 'HAFEEZA', value: 'HN'},
-      {label: 'BUSINESS_LICENSE', value: 'BL'}
+      {label: this.utils.translateService.instant('SelectType'), value: ''},
+      {label: this.utils.translateService.instant('NAT_ID'), value: 'ID'},
+      {label: this.utils.translateService.instant('IQAMA'), value: 'IQ'},
+      {label: this.utils.translateService.instant('GCC_PASSPORT'), value: 'GP'},
+      {label: this.utils.translateService.instant('FAMILY_BOOK'), value: 'FB'},
+      {label: this.utils.translateService.instant('DIPLOMATIC_CARD'), value: 'DC'},
+      {label: this.utils.translateService.instant('REGISTERATION_BOOK'), value: 'RG'},
+      {label: this.utils.translateService.instant('HAFEEZA'), value: 'HN'},
+      {label: this.utils.translateService.instant('BUSINESS_LICENSE'), value: 'BL'}
 
     ];
   }

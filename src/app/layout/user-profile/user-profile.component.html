@@ -6,11 +6,11 @@
 
   <div class="p-grid p-justify-start">
     <div class="p-col-2 minWidth">
-      <p-dropdown [options]="searchTypes"
+      <p-dropdown [options]="searchTypes" appendTo="body"
                   [(ngModel)]="selectedSearchType"></p-dropdown>
     </div>
 
-    <div class="p-col-4" *ngIf="(selectedSearchType == '1')">
+    <div class="p-col-4" *ngIf="(selectedSearchType != '2' && selectedSearchType != '3')">
       <input id="customerBasic" type="text" pInputText name="customerBasic" [(ngModel)]="customerBasic"
              (keyup.enter)="search()">
       <button type="button" style="margin: 0 10px !important;"
@@ -25,7 +25,7 @@
     <div class="p-col-9" style="padding:0px" *ngIf="(selectedSearchType == '2')">
       <div class="p-grid">
         <div class="p-col-3 minWidth">
-          <p-dropdown [options]="nationalIdTypes" [(ngModel)]="selectedNationalType"></p-dropdown>
+          <p-dropdown [options]="nationalIdTypes" [(ngModel)]="selectedNationalType" appendTo="body"></p-dropdown>
         </div>
         <div class="p-col-6"><input id="nationalID" type="text" pInputText name="nationalID"
                                     [(ngModel)]="nationalID" (keyup.enter)="search()">
@@ -64,7 +64,7 @@
 
   </div>
 
-  <div *ngIf="customerProfile.idNumber === undefined" style="height:150px"></div>
+  <div *ngIf="customerProfile.idNumber === undefined" ></div>
 
 
   <p-tabView id="CustomerProfileTabsView"
@@ -79,6 +79,13 @@
       </ng-template>
 
     </p-tabPanel>
+
+    <p-tabPanel [header]="'CreditCards' | translate">
+      <ng-template pTemplate="content">
+        <app-credit-cards></app-credit-cards>
+      </ng-template>
+    </p-tabPanel>
+
   </p-tabView>
 
 

@@ -16,7 +16,7 @@ import {TriStateCheckboxModule} from 'primeng/tristatecheckbox';
 import {CheckboxModule} from 'primeng/checkbox';
 import {ToastModule} from 'primeng/toast';
 import {MessageModule} from 'primeng/message';
-import {RadioButtonModule, TooltipModule} from 'primeng/primeng';
+import {ConfirmDialogModule, RadioButtonModule, TooltipModule} from 'primeng/primeng';
 import {MultiSelectModule} from 'primeng/primeng';
 import {ListboxModule} from 'primeng/listbox';
 import {FieldsetModule} from 'primeng/fieldset';
@@ -54,7 +54,8 @@ import { AccountTransactionsListComponent } from './account-transactions-list/ac
     DropdownModule,
     InputMaskModule,
     TooltipModule,
-    TableModule
+    TableModule,
+    ConfirmDialogModule
 
   ]
 })

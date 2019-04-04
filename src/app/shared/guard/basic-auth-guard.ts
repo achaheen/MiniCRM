@@ -12,11 +12,13 @@ export abstract class BasicAuthGuard {
 
   protected isLoggedIn(): boolean {
     const token: string = localStorage.getItem(environment.tokenName);
-   // console.log(this.jwtHelper.decodeToken(token));
-    console.log(this.jwtHelper.getTokenExpirationDate(token));
+    if (token === undefined || token === null)
+      return false;
+    // console.log(this.jwtHelper.decodeToken(token));
+    //console.log(this.jwtHelper.getTokenExpirationDate(token));
     // console.log('Checking if current user is logged in using token : '+token);
     const isExpired: boolean = this.jwtHelper.isTokenExpired(token);
-    console.log('is token expired? ' + isExpired);
+    //console.log('is token expired? ' + isExpired);
     return !isExpired;
   }
 
