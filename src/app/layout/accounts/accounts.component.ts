@@ -26,11 +26,9 @@ export class AccountsComponent extends AbstractSharedDataClass {
   cols: any[];
   blocked = false;
 
-
   constructor(private messageService: MessageService, private accoutService: MWAccountService, public utils: UtilsService, public sharedInfoService: SharedCustomerInfoService) {
     super();
   }
-
   ngOnInit() {
     super.ngOnInit();
     this.accountList.account = this.accounts;
