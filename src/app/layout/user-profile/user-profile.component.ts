@@ -90,7 +90,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   clear() {
-
     this.customerProfile = {};
 
   }

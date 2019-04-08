@@ -98,6 +98,7 @@ export class DyTicketTableComponent implements OnInit {
     const sortField: SearchTicketsSorting = {sortBy: event.sortField, sortType: event.sortOrder};
     this.ticketFilters.sorting = sortField;
     this.eventEmitter.emit(this.ticketFilters);
+    console.log('Current Filters ' + JSON.stringify(this.ticketFilters));
   }
 
 }

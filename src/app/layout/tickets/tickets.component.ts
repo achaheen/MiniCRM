@@ -77,7 +77,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
       if (value !== null && value !== '') {
         this.customerProfile = value as CustomerProfile;
         const customerContainer: CustomerSearchContainer = {
-          customerBasic: this.customerProfile.basicNumber,
+          customerBasic: this.customerProfile.caa.customerNo,
           nan: this.customerProfile.idNumber
         };
         this.customerTicketFilter.customerContainer = customerContainer;
@@ -85,7 +85,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
           {
             header: this.utils.translateService.instant('CustomerTickets'),
             content: '',
-            closable: true,
+            closable: false,
             type: 'filters',
             ticketFilter: this.customerTicketFilter
             , ticketsTab: true
@@ -93,7 +93,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
         this.selectedFilter = this.customerTicketFilter;
       }
       this.buildTabs();
-      if (this.selectedFilter == null) {
+      if (this.selectedFilter === null) {
         this.selectedFilter = this.nonFilteredTickets;
       }
       this.getTicketList(this.selectedFilter);
@@ -105,7 +105,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
       {
         header: this.utils.translateService.instant('NonFilteredTicketTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.nonFilteredTickets
         , ticketsTab: true
@@ -113,14 +113,14 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
       {
         header: this.utils.translateService.instant('WorkOnProgressTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.workOnProgressTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('EscalatedTicketsTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.escalatedTicketFilter, ticketsTab: true
       },
@@ -128,7 +128,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
       {
         header: this.utils.translateService.instant('OpenedTicketsTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.openTicketFilter, ticketsTab: true
       },
@@ -136,14 +136,14 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
       {
         header: this.utils.translateService.instant('ClosedTicketsTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.closedTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('CreatedTicketsTab'),
         content: '',
-        closable: true,
+        closable: false,
         type: 'filters',
         ticketFilter: this.createdTicketsFilter, ticketsTab: true
       }
@@ -242,7 +242,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
 
     if (!itemAlreadyFound) {
       this.items.push({
-        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: true,
+        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: false,
         type: 'viewTicket',
         ticketFilter: null
       });
@@ -273,7 +273,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit, OnD
 
     if (!itemAlreadyFound) {
       this.items.push({
-        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: true,
+        header: this.selectedTicketId, content: 'Dynamic Tab Content', closable: false,
         type: 'viewTicket',
         ticketFilter: null
       });

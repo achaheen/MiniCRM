@@ -6,7 +6,6 @@
   <app-search-customer [parent]="this"></app-search-customer>
 </ng-container>
 <ng-container *ngIf="selectedAccount!=null">
-
   <form [formGroup]="this.ticketForm" (ngSubmit)="SaveTicket()">
     <div class="p-grid" *ngIf="ticket">
 
@@ -110,6 +109,9 @@
       <div class="p-col-1 grid-label">{{'CustomerBasic' | translate}}</div>
       <div class="p-col-3 minWidth"><input id="customerBasic" type="text" pInputText name="customerBasic"
                                              formControlName="CustomerBasic"></div>
+        <div class="p-col-1 grid-label">{{'nan' | translate}}</div>
+        <div class="p-col-3 minWidth"><input id="CustomerNationalID" type="text" pInputText name="CustomerNationalID"
+                                             formControlName="CustomerNationalID"></div>
       <div class="p-col-1 grid-label">{{'CustomerNameEn' | translate}}</div>
       <div class="p-col-3 minWidth"><input id="customerNameEn" type="text" pInputText name="customerNameEn"
                                              formControlName="CustomerNameEn"></div>

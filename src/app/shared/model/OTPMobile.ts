@@ -1,8 +1,7 @@
-import {OTPMobileType} from "./OTPMobileType";
 
 export interface OTPMobile {
-  mobileNo?: String;
-  otpType: OTPMobileType;
-  updatedBy?: String;
+  mobileNo?: string;
+  otpType: string;
+  updatedBy?: string;
   lastUpdate: Date;
 }
