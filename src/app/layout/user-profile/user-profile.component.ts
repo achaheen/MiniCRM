@@ -12,7 +12,8 @@ import {SharedCustomerInfoService} from '../../shared/services/shared-customer-i
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private mwUserServices: MWUsersService, public utils: UtilsService, private sharedInfo: SharedCustomerInfoService) {
+  constructor(private messageService: MessageService, private mwUserServices: MWUsersService,
+              public utils: UtilsService, private sharedInfo: SharedCustomerInfoService) {
 
   }
 
@@ -29,6 +30,13 @@ export class UserProfileComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.sharedInfo.currentSubject.subscribe(value => {
+      if (value != null && value !== '') {
+        this.customerProfile = value as CustomerProfile;
+      }
+    });
+
     this.searchTypes = [
       {label: this.utils.translateService.instant('CustomerBasic'), value: '1'},
       {label: this.utils.translateService.instant('CustomerID'), value: '2'},

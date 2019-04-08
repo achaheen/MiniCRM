@@ -50,6 +50,7 @@ export class DyTicketTableComponent implements OnInit {
 // Class Init
   ngOnInit() {
 //  this.getTicketList()
+    console.log('Selected ticket filter ' + JSON.stringify(this.ticketFilters));
     this.initDataTable();
     this.initFormBuilder();
   }

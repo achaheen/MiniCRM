@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
   providedIn: 'root'
 })
 export class SharedCustomerInfoService {
-  private subject = new BehaviorSubject('Init');
+  private subject = new BehaviorSubject('');
   currentSubject = this.subject.asObservable();
 
   setValue(value) {

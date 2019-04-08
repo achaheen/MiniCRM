@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {SearchTicketsContainer} from '../../shared/model/searchTicketsContainer';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {CustomerSearchContainer, SearchTicketsContainer} from '../../shared/model/searchTicketsContainer';
 import {TicketsService} from '../../shared/services/tickets.service';
 import {Ticket} from '../../shared/model/ticket';
 import {SearchTicketsResult} from '../../shared/model/searchTicketsResult';
@@ -11,6 +11,10 @@ import {User} from '../../shared/model/user';
 import {environment} from '../../../environments/environment';
 import {BasicTopicSelection} from '../general/basic-topic-selection';
 import {UtilsService} from '../../shared/services/utils.service';
+import {AbstractSharedDataClass} from '../user-profile/abstract-shared-data-class';
+import {Subscription} from 'rxjs';
+import {SharedCustomerInfoService} from '../../shared/services/shared-customer-info.service';
+import {CustomerProfile} from '../../shared/model/customerProfile';
 
 
 @Component({
@@ -18,7 +22,9 @@ import {UtilsService} from '../../shared/services/utils.service';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.scss']
 })
-export class TicketsComponent extends BasicTopicSelection implements OnInit {
+export class TicketsComponent extends BasicTopicSelection implements OnInit, OnDestroy {
+  public subscription: Subscription;
+
   defaultPageSize = 10;
   openTicketFilter: SearchTicketsContainer = {
     'status': [1, 6],
@@ -31,10 +37,16 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   workOnProgressTicketFilter: SearchTicketsContainer = {'status': [3], 'size': this.defaultPageSize, page: 0};
   nonFilteredTickets: SearchTicketsContainer = {'size': this.defaultPageSize, page: 0};
   createdTicketsFilter: SearchTicketsContainer = {createdBy: [this.getCurrentUserID()], size: this.defaultPageSize, page: 0};
+  customerTicketFilter: SearchTicketsContainer = {
+    'size': this.defaultPageSize,
+    page: 0,
+    customerContainer: {}
+    , sorting: {sortType: 1, sortBy: 'creationDate'}
+  };
   ticketList: Ticket[];
   totalRecords = 0;
   ticketsResult: SearchTicketsResult;
-  selectedFilter: SearchTicketsContainer = this.openTicketFilter;
+  selectedFilter: SearchTicketsContainer;
   previousTab = 0;
   items: any[];
   selectedTab = 0;
@@ -42,25 +54,58 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
   disableViewTicketBTN = true;
   disableEditTicketBTN = true;
   disableCreateTicketBTN = false;
+  customerProfile: CustomerProfile = null;
 
   constructor(public ticketService: TicketsService, public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService, public topicService: TopicService,
+              public sharedInfoService: SharedCustomerInfoService,
               public  translate: TranslateService, public utils: UtilsService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
-
     this.enableAdminSelection = false;
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   ngOnInit() {
-
-    this.getTicketList(this.openTicketFilter);
     this.listAllMainCategories();
+    this.items = [];
+    this.subscription = this.sharedInfoService.currentSubject.subscribe(value => {
+      if (value !== null && value !== '') {
+        this.customerProfile = value as CustomerProfile;
+        const customerContainer: CustomerSearchContainer = {
+          customerBasic: this.customerProfile.basicNumber,
+          nan: this.customerProfile.idNumber
+        };
+        this.customerTicketFilter.customerContainer = customerContainer;
+        this.items.push(
+          {
+            header: this.utils.translateService.instant('CustomerTickets'),
+            content: '',
+            closable: true,
+            type: 'filters',
+            ticketFilter: this.customerTicketFilter
+            , ticketsTab: true
+          });
+        this.selectedFilter = this.customerTicketFilter;
+      }
+      this.buildTabs();
+      if (this.selectedFilter == null) {
+        this.selectedFilter = this.nonFilteredTickets;
+      }
+      this.getTicketList(this.selectedFilter);
+    });
+  }
 
-    this.items = [
+  buildTabs() {
+    this.items.push(
       {
         header: this.utils.translateService.instant('NonFilteredTicketTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.nonFilteredTickets
         , ticketsTab: true
@@ -68,14 +113,14 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
       {
         header: this.utils.translateService.instant('WorkOnProgressTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.workOnProgressTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('EscalatedTicketsTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.escalatedTicketFilter, ticketsTab: true
       },
@@ -83,7 +128,7 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
       {
         header: this.utils.translateService.instant('OpenedTicketsTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.openTicketFilter, ticketsTab: true
       },
@@ -91,50 +136,27 @@ export class TicketsComponent extends BasicTopicSelection implements OnInit {
       {
         header: this.utils.translateService.instant('ClosedTicketsTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.closedTicketFilter, ticketsTab: true
       },
       {
         header: this.utils.translateService.instant('CreatedTicketsTab'),
         content: '',
-        closable: false,
+        closable: true,
         type: 'filters',
         ticketFilter: this.createdTicketsFilter, ticketsTab: true
       }
-
-    ];
-
+    );
   }
 
   handleChange(e) {
-    console.log(JSON.stringify(e));
+    // console.log(JSON.stringify(e));
     const index = e.index;
 
     if (index != null && index < this.items.length) {
       this.previousTab = index;
       this.selectedFilter = this.items[index].ticketFilter;
-      /**
-       switch (index) {
-      case 0:
-        this.selectedFilter = this.openTicketFilter;
-        break;
-      case 1:
-        this.selectedFilter = this.assignedTicketFilter;
-        break;
-      case 2:
-        this.selectedFilter = this.openTicketFilter;
-        break;
-      case 3:
-        this.selectedFilter = this.workOnProgressTicketFilter;
-        break;
-      case 4:
-        this.selectedFilter = this.closedTicketFilter;
-        break;
-      case 6:
-        this.selectedFilter = this.escalatedTicketFilter;
-        break;
-    }**/
       this.getTicketList(this.selectedFilter);
     }
   }
