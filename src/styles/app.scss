@@ -486,7 +486,7 @@ button.btn.btn-primary.loginBTN:hover {
 .creditCardContainer{
   background-color: #104789;
   width: 357px;
-  height: 182px;
+  height: 200px;
   border-radius: 15px;
   color: #fff;
   padding: 10px;
@@ -512,7 +512,7 @@ button.btn.btn-primary.loginBTN:hover {
   margin: 7px;
 }
 .CCSim{
-  margin: 60px 20px 0px 25px;
+  margin: 65px 20px 0px 20px;
 
 }
 .CCNumber{
@@ -521,7 +521,7 @@ button.btn.btn-primary.loginBTN:hover {
  // font-weight: bold;
   margin-left: 102px;
   margin-top: -37px;
-  font-size: large;
+  //font-size: large;
 }
 .numSlice{
   float: left;
@@ -529,7 +529,7 @@ button.btn.btn-primary.loginBTN:hover {
 }
 .CCVisaLogo{
   float: right;
-  margin-top: 16px;
+  margin-top: 25px;
 }
 
 .CCToDate{
@@ -542,7 +542,7 @@ button.btn.btn-primary.loginBTN:hover {
   margin-left: 26px;
   font-size: large;
   word-spacing: 10px;
-  margin-top: 16px;
+  margin-top: 25px;
   font-weight: bold;
   float: left;
 }
@@ -552,4 +552,9 @@ button.btn.btn-primary.loginBTN:hover {
 @font-face {
   font-family: "kredit";
   src: url("fonts/Kreditback.ttf");
+}
+
+
+.creditCardDetails .ui-state-disabled,.creditCardDetails .ui-widget:disabled{
+  opacity: initial !important;
 }

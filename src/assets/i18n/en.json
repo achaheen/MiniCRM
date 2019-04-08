@@ -318,7 +318,26 @@
   "SHADOW_DEBIT":"SHADOW DEBIT",
   "SHADOW_CREDIT":"SHADOW CREDIT",
   "RESERVED_BALANCE":"RESERVED BALANCE",
-  "CURRENT_CLEARED_BALANCE":"CURRENT BALANCE"
+  "CURRENT_CLEARED_BALANCE":"CURRENT BALANCE",
+
+  "CreditCardDetails":"Credit Card Details",
+  "maskedCardNo":"Masked Card No",
+  "cardRefNo":"Card Ref No",
+  "sadadRefNo":"Sadad Ref No",
+  "accountNo":"Account No",
+  "cardHolderName":"Card Holder Name",
+  "creditLimit":"Credit Limit",
+  "cashLimit":"Cash Limit",
+  "availableLimit":"Available Limit",
+  "dueAmount":"Due Amount",
+  "dueDate":"Due Date",
+  "outstandingBalance":"Outstanding Balance",
+  "lastStatementOutstandingBalance":"Last Statement Outstanding Balance",
+  "statementDate":"Statement Date",
+  "redemableBalance":"Redemable Balance",
+  "lastLoyaltyBalanceUpdate":"Last Loyalty Balance Update",
+  "lastPurchaseDate":"Last Purchase Date"
+
 
 
 }

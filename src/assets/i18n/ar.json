@@ -183,6 +183,23 @@
   "SHADOW_CREDIT":"الرصيد المخفي",
   "RESERVED_BALANCE":"الرصيد المحجوز",
   "PREVIOUS_CLEARED_BALANCE":"PREVIOUS CLEARED BALANCE",
-  "CURRENT_CLEARED_BALANCE":"الرصيد الحالي"
+  "CURRENT_CLEARED_BALANCE":"الرصيد الحالي",
+  "CreditCardDetails":"Credit Card Details",
+  "maskedCardNo":"Masked Card No",
+  "cardRefNo":"Card Ref No",
+  "sadadRefNo":"Sadad Ref No",
+  "accountNo":"Account No",
+  "cardHolderName":"Card Holder Name",
+  "creditLimit":"Credit Limit",
+  "cashLimit":"Cash Limit",
+  "availableLimit":"Available Limit",
+  "dueAmount":"Due Amount",
+  "dueDate":"Due Date",
+  "outstandingBalance":"Outstanding Balance",
+  "lastStatementOutstandingBalance":"Last Statement Outstand Balance",
+  "statementDate":"Statement Date",
+  "redemableBalance":"Redemable Balance",
+  "lastLoyaltyBalanceUpdate":"Last Loyalty Balance Update",
+  "lastPurchaseDate":"Last Purchase Date"
 }
 

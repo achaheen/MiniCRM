@@ -11,7 +11,11 @@ export class ViewCreditCardComponent implements OnInit {
   @Input() creditCardList:CreditCard[];
   display:boolean = false;
   selectedCreditCard:CreditCard ={};
-  constructor() { }
+  constructor() {
+
+    this.selectedCreditCard.creditCardClass = {};
+    this.selectedCreditCard.creditCardClass.rewardInfo = {};
+  }
 
   ngOnInit() {
   }

@@ -63,7 +63,11 @@ export class CreditCardsComponent extends AbstractSharedDataClass implements OnI
 
     this.creditCardService.getCreditCardsList(customerBasic, CreditCardStatus[0].toString(), IDNumber, lang).subscribe(customerCreditCards => {
         this.customerCreditCards = customerCreditCards;
-        this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'CreditCards Success', this.utils, 'success');
+        if (this.customerCreditCards != null){
+           this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'CreditCards Success', this.utils, 'success');
+        }else{
+          this.utils.messageService.printLocalizedMessage('SuccessFullMsg', 'No Credit Cards Found', this.utils, 'success');
+        }
         this.blocked = false;
       }
       , error => {
