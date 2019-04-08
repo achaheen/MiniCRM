@@ -1,20 +1,119 @@
 <ng-container *ngFor="let creditCard of creditCardList">
-<div class="creditCardContainer">
-  <div class="CCLogo"><img src="assets/images/BAJ_logo-trans.png" style="width: 125px;"></div>
-  <div class="CCType">{{creditCard.creditCardClass.description.descriptionList[0].value}}</div>
-  <div class="CCSim"><img src="assets/images/credit-chip.png" style="width: 45px;"></div>
 
-  <div class="CCNumber">
-    <div class="numSlice">{{creditCard.maskedCardNo | slice:0:4}}</div>
-    <div class="numSlice">{{creditCard.maskedCardNo | slice:4:8}}</div>
-    <div class="numSlice">{{creditCard.maskedCardNo | slice:8:12}}</div>
-    <div class="numSlice">{{creditCard.maskedCardNo | slice:12:16}}</div>
+  <div class="creditCardContainer" (click)="showCreditCardDetails(creditCard)">
+
+    <div class="CCLogo"><img src="assets/images/BAJ_logo-trans.png" style="width: 125px;"></div>
+    <div class="CCType">{{creditCard.creditCardClass.description.descriptionList[0].value}}</div>
+    <div class="CCSim"><img src="assets/images/credit-chip.png" style="width: 45px;"></div>
+
+    <div class="CCNumber">
+      <div class="numSlice">{{creditCard.maskedCardNo | slice:0:4  | uppercase}}</div>
+      <div class="numSlice">{{creditCard.maskedCardNo | slice:4:8 | uppercase}}</div>
+      <div class="numSlice">{{creditCard.maskedCardNo | slice:8:12 | uppercase}}</div>
+      <div class="numSlice">{{creditCard.maskedCardNo | slice:12:16 | uppercase}}</div>
+    </div>
+    <div class="CCToDate">{{creditCard.expiryDate | date:'MM/yy'}}</div>
+    <div class="CCHolderName">{{creditCard.cardHolderName}}</div>
+    <div class="CCVisaLogo"><img src="assets/images/visa-logo.png" style="width: 80px;"></div>
+
   </div>
-  <div class="CCToDate">{{creditCard.expiryDate | date:'MM/yy'}}</div>
-  <div class="CCHolderName">{{creditCard.cardHolderName}}</div>
-  <div class="CCVisaLogo"><img src="assets/images/visa-logo.png" style="width: 80px;"></div>
-</div>
+
 </ng-container>
 
 
 <div style="clear: both"></div>
+
+
+<p-dialog header="{{'CreditCardDetails' | translate}}" [(visible)]="display" [style]="{width: '80%'}" >
+  <div class="p-grid creditCardDetails" >
+
+
+    <div class="p-col-2 ">{{'maskedCardNo' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="maskedCardNo" type="text" pInputText name="maskedCardNo"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.maskedCardNo"></div>
+
+    <div class="p-col-2 ">{{'cardRefNo' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="cardRefNo" type="text" pInputText name="cardRefNo" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.cardRefNo"></div>
+
+    <div class="p-col-2 ">{{'sadadRefNo' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="sadadRefNo" type="text" pInputText name="sadadRefNo" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.sadadRefNo"></div>
+
+  </div>
+  <div class="p-grid creditCardDetails">
+    <div class="p-col-2 ">{{'accountNo' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="accountNo" type="text" pInputText name="accountNo" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.accountNo"></div>
+
+
+    <div class="p-col-2 ">{{'cardHolderName' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="cardHolderName" type="text" pInputText name="cardHolderName"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.cardHolderName"></div>
+
+
+    <div class="p-col-2 ">{{'creditLimit' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="creditLimit" type="text" pInputText name="creditLimit"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.creditLimit"></div>
+
+  </div>
+  <div class="p-grid creditCardDetails">
+    <div class="p-col-2 ">{{'cashLimit' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="cashLimit" type="text" pInputText name="cashLimit" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.cashLimit"></div>
+
+
+    <div class="p-col-2 ">{{'availableLimit' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="availableLimit" type="text" pInputText name="availableLimit"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.availableLimit"></div>
+
+
+    <div class="p-col-2 ">{{'dueAmount' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="dueAmount" type="text" pInputText name="dueAmount" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.dueAmount"></div>
+
+  </div>
+  <div class="p-grid creditCardDetails">
+    <div class="p-col-2 ">{{'dueDate' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="dueDate" type="text" pInputText name="dueDate" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.dueDate | date "></div>
+
+    <div class="p-col-2 ">{{'outstandingBalance' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="outstandingBalance" type="text" pInputText name="outstandingBalance"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.outstandingBalance"></div>
+
+    <div class="p-col-2 ">{{'lastStatementOutstandingBalance' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="lastStatementOutstandingBalance" type="text" pInputText
+                                         name="lastStatementOutstandingBalance" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.lastStatementOutstandingBalance"></div>
+  </div>
+  <div class="p-grid creditCardDetails">
+    <div class="p-col-2 ">{{'statementDate' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="statementDate" type="text" pInputText name="statementDate"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.statementDate | date "></div>
+
+    <div class="p-col-2 ">{{'redemableBalance' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="redemableBalance" type="text" pInputText name="redemableBalance"
+                                         [attr.disabled]="true"
+                                         value="{{this.selectedCreditCard.redemableBalance}} / {{this.selectedCreditCard.creditCardClass.rewardInfo.rewardTypeValue}}"></div>
+
+
+    <div class="p-col-2 ">{{'lastLoyaltyBalanceUpdate' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="lastLoyaltyBalanceUpdate" type="text" pInputText
+                                         name="lastLoyaltyBalanceUpdate" [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.lastLoyaltyBalanceUpdate | date "></div>
+  </div>
+  <div class="p-grid creditCardDetails">
+    <div class="p-col-2 ">{{'lastPurchaseDate' | translate}}</div>
+    <div class="p-col-2 minWidth"><input id="lastPurchaseDate" type="text" pInputText name="lastPurchaseDate"
+                                         [attr.disabled]="true"
+                                         [ngModel]="this.selectedCreditCard.lastPurchaseDate | date "></div>
+
+  </div>
+</p-dialog>
