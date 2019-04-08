@@ -318,8 +318,8 @@
   "SHADOW_DEBIT":"SHADOW DEBIT",
   "SHADOW_CREDIT":"SHADOW CREDIT",
   "RESERVED_BALANCE":"RESERVED BALANCE",
-  "CURRENT_CLEARED_BALANCE":"CURRENT BALANCE",
-
+  "CURRENT_CLEARED_BALANCE":"CURRENT BALANCE"
+  "CustomerTickets": "Customer Tickets"
   "CreditCardDetails":"Credit Card Details",
   "maskedCardNo":"Masked Card No",
   "cardRefNo":"Card Ref No",
@@ -337,6 +337,7 @@
   "redemableBalance":"Redemable Balance",
   "lastLoyaltyBalanceUpdate":"Last Loyalty Balance Update",
   "lastPurchaseDate":"Last Purchase Date"
+
 
 
 

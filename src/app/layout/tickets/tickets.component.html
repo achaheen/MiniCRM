@@ -14,7 +14,7 @@
     <app-ticket-filters [selectedFilter]="item.ticketFilter" [parent]="this"
                         *ngIf="item.ticketsTab!==undefined &&item.ticketsTab "></app-ticket-filters>
     <ng-template pTemplate="content">
-      <app-dy-ticket-table *ngIf="item.type == 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
+      <app-dy-ticket-table *ngIf="item.type === 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
                            [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"
                            (selectTicketEmitter)="setSelectedTicket($event)"
                            (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
