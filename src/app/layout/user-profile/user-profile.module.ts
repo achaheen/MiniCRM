@@ -29,9 +29,11 @@ import {AccountTransactionsComponent} from "../accounts/account-transactions/acc
 import {AccountTransactionsListComponent} from "../accounts/account-transactions-list/account-transactions-list.component";
 import {CreditCardsComponent} from "../credit-cards/credit-cards.component";
 import {ViewCreditCardComponent} from "../credit-cards/view-credit-card/view-credit-card.component";
+import {CreditCardTransactionsComponent} from "../credit-cards/credit-card-transactions/credit-card-transactions.component";
+import {CreditCardTransactionsListComponent} from "../credit-cards/credit-card-transactions-list/credit-card-transactions-list.component";
 
 @NgModule({
-  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent,AccountTransactionsListComponent,CreditCardsComponent,ViewCreditCardComponent],
+  declarations: [UserProfileComponent, ViewUserProfileComponent,AccountsComponent,AccountTransactionsComponent,AccountTransactionsListComponent,CreditCardsComponent,ViewCreditCardComponent,CreditCardTransactionsComponent,CreditCardTransactionsListComponent],
   imports: [
     CommonModule,
     UserProfileRoutingModule,

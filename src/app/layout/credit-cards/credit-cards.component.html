@@ -2,7 +2,7 @@
   <i class="fa fa-spinner fa-spin fa-4x fa-fw" aria-hidden="true" style="position:absolute;top:50%;left:50%"></i>
 </p-blockUI>
 
- <app-view-credit-card [creditCardList]="this.customerCreditCards.creditCardList.creditCard"></app-view-credit-card>
+<app-view-credit-card [creditCardList]="this.customerCreditCards.creditCardList.creditCard" *ngIf="this.customerCreditCards.creditCardList != null"></app-view-credit-card>
 
 
 

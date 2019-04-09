@@ -1,0 +1,94 @@
+<p-table [value]="this.transactionsList" dataKey="referenceNo" [paginator]="true" [rows]="10" class="wordWrapTable">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 40px"></th>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-transaction let-expanded="expanded">
+    <tr>
+
+      <td>
+        <a href="#" [pRowToggler]="transaction">
+          <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></i>
+        </a>
+      </td>
+
+      <td *ngFor="let col of cols">
+        {{transaction[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-transaction>
+    <tr>
+      <td [attr.colspan]="cols.length + 1">
+        <div class="customerProfileContainer">
+          <div class="p-grid p-justify-start">
+
+            <div class="p-col-1 la">{{'cardRefNo' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="amount" type="text" pInputText name="cardRefNo" [attr.disabled]="true"
+                                                 [ngModel]="transaction.cardRefNo"></div>
+
+            <div class="p-col-1 la">{{'postingDate' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="postingDate" type="text" pInputText name="postingDate"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.postingDate | date"></div>
+
+            <div class="p-col-1 la">{{'description' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="description" type="text" pInputText name="description"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.description"></div>
+
+            <div class="p-col-1 la">{{'valueDate' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="valueDate" type="text" pInputText name="valueDate" [attr.disabled]="true"
+                                                 [ngModel]="transaction.valueDate | date"></div>
+
+            <div class="p-col-1 la">{{'orgAmount' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="orgAmount" type="text" pInputText name="orgAmount"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.orgAmount"></div>
+            <div class="p-col-1 la">{{'eqvAmount' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="eqvAmount" type="text" pInputText name="eqvAmount"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.eqvAmount"></div>
+
+            <div class="p-col-1 la">{{'currency' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="currency" type="text" pInputText name="currency"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.currency"></div>
+
+
+            <div class="p-col-1 la">{{'transactionCode' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="transactionCode" type="text" pInputText name="transactionCode"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.transactionCode"></div>
+
+
+            <div class="p-col-1 la">{{'status' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="status" type="text" pInputText name="status"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.status"></div>
+
+
+            <div class="p-col-1 la">{{'authorizationCode' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="authorizationCode" type="text" pInputText name="authorizationCode"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.authorizationCode"></div>
+
+
+            <div class="p-col-1 la">{{'transactionType' | translate}}</div>
+            <div class="p-col-2 minWidth"><input id="transactionType" type="text" pInputText name="transactionType"
+                                                 [attr.disabled]="true"
+                                                 [ngModel]="transaction.transactionType"></div>
+
+
+          </div>
+        </div>
+
+      </td>
+    </tr>
+  </ng-template>
+
+</p-table>
