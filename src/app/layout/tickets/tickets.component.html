@@ -10,15 +10,16 @@
            (onClose)="handleClose($event)">
   <p-tabPanel [header]="item.header" *ngFor="let item of items; let i = index"
               [headerStyleClass]="item.type"
-              [selected]="i===0" [closable]="item.closable">
+               [closable]="item.closable">
     <app-ticket-filters [selectedFilter]="item.ticketFilter" [parent]="this"
                         *ngIf="item.ticketsTab!==undefined &&item.ticketsTab "></app-ticket-filters>
-    <ng-template pTemplate="content">
+    <ng-template pTemplate="content" >
       <app-dy-ticket-table *ngIf="item.type === 'filters' && item.ticketFilter != null" [ticketList]="ticketList"
                            [ticketFilters]="item.ticketFilter" [totalRecords]="totalRecords"
                            (selectTicketEmitter)="setSelectedTicket($event)"
                            (eventEmitter)="getTicketList($event)"></app-dy-ticket-table>
       <app-view-ticket *ngIf="item.type == 'viewTicket'" [ticketID]="this.selectedTicketId"
+
                        [ticketListParent]="this"></app-view-ticket>
       <app-create-ticket *ngIf="item.type == 'NewTicket'"></app-create-ticket>
     </ng-template>

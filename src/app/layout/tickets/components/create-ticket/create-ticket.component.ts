@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TicketsService} from '../../../../shared/services/tickets.service';
 import {Ticket} from '../../../../shared/model/ticket';
 import {UtilsService} from '../../../../shared/services/utils.service';
@@ -15,6 +15,10 @@ import {BasicTopicSelection} from '../../../general/basic-topic-selection';
 import {SourceChannel} from '../../../../shared/model/source-channel';
 import {DynamicFieldsComponent} from '../dynamic-fields/dynamic-fields.component';
 import {TicketExtData} from '../../../../shared/model/ticketExtData';
+import {Subscription} from 'rxjs';
+import {SharedCustomerInfoService} from '../../../../shared/services/shared-customer-info.service';
+import {CustomerProfile} from '../../../../shared/model/customerProfile';
+import {OTPMobileType} from '../../../../shared/model/OTPMobileType';
 
 @Component({
   selector: 'app-create-ticket',
@@ -22,7 +26,7 @@ import {TicketExtData} from '../../../../shared/model/ticketExtData';
   styleUrls: ['./create-ticket.component.scss']
 
 })
-export class CreateTicketComponent extends BasicTopicSelection implements OnInit {
+export class CreateTicketComponent extends BasicTopicSelection implements OnInit, OnDestroy {
 
   ticket: Ticket = {};
   ticketHolder: TicketHolder = {};
@@ -39,22 +43,38 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
   attachments: any[] = [];
   lockAfterSave = false;
   @ViewChild('dynFields') dynFieldsComp: DynamicFieldsComponent;
+  public subscription: Subscription;
+  customerProfile: CustomerProfile;
 
   constructor(public utils: UtilsService,
               public ticketHttp: TicketsService,
               public mainCategoryService: MainCategoryService,
               public subCategoryService: SubCategoryService,
               public topicService: TopicService,
+              public sharedInfoService: SharedCustomerInfoService,
               public fb: FormBuilder, public fileUploadService: FileUploadService) {
     super(topicService, subCategoryService, mainCategoryService, utils);
     this.enableAdminSelection = false;
     this.authorizedTopicsRequest = {permissions: ['create']};
   }
 
+  ngOnDestroy(): void {
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+    }
+  }
+
   ngOnInit() {
-    this.initTicketForm();
-    this.initValueLists();
-    this.updateCustomerAccountFields();
+    this.subscription = this.sharedInfoService.currentSubject.subscribe(value => {
+      if (value !== null && value !== '') {
+        this.customerProfile = value as CustomerProfile;
+        this.copySelectedAccountFromProfile();
+      }
+      this.initTicketForm();
+      this.initValueLists();
+      this.updateCustomerAccountFields();
+    });
+
   }
 
   updateCustomerAccountFields() {
@@ -73,6 +93,8 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       this.ticketForm.controls['CustomerEmail'].updateValueAndValidity();
       this.ticketForm.controls['CustomerSegment'].setValue(this.selectedAccount.segment);
       this.ticketForm.controls['CustomerSegment'].updateValueAndValidity();
+      this.ticketForm.controls['CustomerNationalID'].setValue(this.selectedAccount.nin);
+      this.ticketForm.controls['CustomerNationalID'].updateValueAndValidity();
     }
   }
 
@@ -80,6 +102,28 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
     this.listAllMainCategories();
   }
 
+  copySelectedAccountFromProfile() {
+    if (this.customerProfile != null) {
+      console.log('Customer Profile ' + JSON.stringify(this.customerProfile));
+      this.selectedAccount = {};
+      this.selectedAccount.nin = this.customerProfile.idNumber;
+      this.selectedAccount.segment = this.customerProfile.customerType;
+      this.selectedAccount.email = this.customerProfile.eMail;
+      this.customerProfile.otpMobileList.otpMobile.forEach(value => {
+        if (value.otpType === 'PRIMARY') {
+          this.selectedAccount.mobile = value.mobileNo;
+        }
+      });
+      this.selectedAccount.branchName = this.customerProfile.customerBranchAddressEnAr;
+      try {
+        this.selectedAccount.customerCIF = this.customerProfile.caa.customerNo;
+        this.selectedAccount.customerNameAR = this.customerProfile.fullName.descriptionList[1].value;
+        this.selectedAccount.customerNameEn = this.customerProfile.fullName.descriptionList[0].value;
+      } catch (e) {
+        console.log(JSON.stringify(e));
+      }
+    }
+  }
 
   initTicketForm() {
 
@@ -92,6 +136,7 @@ export class CreateTicketComponent extends BasicTopicSelection implements OnInit
       'Priority': new FormControl(''),
       'Details': new FormControl('', Validators.required),
       'CustomerBasic': new FormControl(''),
+      'CustomerNationalID': new FormControl(''),
       'CustomerNameEn': new FormControl(''),
       'CustomerNameAr': new FormControl(''),
       'CustomerMobile': new FormControl('', Validators.compose([Validators.pattern('[05][0-9]{9}')])),

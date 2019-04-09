@@ -52,6 +52,8 @@ export interface CustomerProfile{
   caa?:Caa;
   iqamaProfession?:string;
   branchNo?:string;
-
+  customerBranchAddressEn?: string;
+  customerBranchAddressAr?: string;
+  customerBranchAddressEnAr?: string;
 
 }

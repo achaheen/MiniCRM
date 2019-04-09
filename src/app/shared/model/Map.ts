@@ -1,4 +1,4 @@
 export interface Map {
-  key?: String;
-  value?: String;
+  key?: string;
+  value?: string;
 }
